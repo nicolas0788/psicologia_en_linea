@@ -1,0 +1,225 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- BLOQUE 1: MARCA -->
+    <div class="footer-block footer-brand row--bottom">
+      <h2 class="footer-title">Logo</h2>
+      <p class="footer-description">
+        Atención online desde cualquier lugar del mundo y presencial en CABA.
+      </p>
+      <p class="footer-description">
+        Red de psicólogos y psicólogas matriculados en Argentina.
+      </p>
+    </div>
+
+    <!--DIV LINKS Y CONTACTO -->
+    <div class="footer-block__container row--bottom">
+      <!-- BLOQUE 2: NAVEGACIÓN -->
+      <nav class="footer-block footer-nav" aria-label="Enlaces del sitio">
+        <h3 class="footer-title">Links útiles</h3>
+        <ul>
+          <li>
+            <a href="#"> Inicio </a>
+          </li>
+          <li>
+            <a href="#"> Servicios </a>
+          </li>
+          <li>
+            <a href="#"> Sobre mí </a>
+          </li>
+          <li>
+            <a href="#"> Contacto </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- BLOQUE 3: CONTACTO -->
+      <div class="footer-block footer-contact">
+        <h3 class="footer-title">Contacto</h3>
+        <ul>
+          <li>
+            <span class="footer-icon">📧</span>
+            contacto@email.com
+          </li>
+          <li>
+            <span class="footer-icon">📞</span>
+            +54 11 1234-5678
+          </li>
+          <li>
+            <span class="footer-icon">📍</span>
+            Buenos Aires, Argentina
+          </li>
+        </ul>
+      </div>
+
+      <!-- BLOQUE 4: REDES -->
+      <div class="footer-block">
+        <h3 class="footer-title">Seguinos</h3>
+        <div class="footer-social">
+          <a href="#"><span class="footer-icon">🌐</span>Instagrm</a>
+          <a href="#"><span class="footer-icon">📷</span>Facebook</a>
+          <a href="#"><span class="footer-icon">💼</span>Otro</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Psicología Online. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --gap-title: 1rem;
+    --gap-block--horizontal: clamp(5rem, 5rem + 6vw, 7rem);
+    --gap-block--vertical: 1.5rem;
+
+    --color-footer: #1f4e79;
+    --color-txt: #fff;
+    --row: 0.8px solid gray;
+    --row-padding: 2rem;
+  }
+  /* ================= FOOTER ================= */
+
+  .site-footer {
+    background: var(--color-footer);
+    color: var(--color-txt);
+    padding-top: 3rem;
+    font-size: 0.95rem;
+  }
+
+  /* CONTENEDOR */
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .footer-block__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-block--vertical);
+  }
+
+  /* BLOQUES */
+
+  .footer-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-title);
+  }
+
+  /* TITULOS */
+
+  .footer-title {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* BRAND */
+
+  .footer-logo {
+    font-size: 1.4rem;
+  }
+
+  .footer-description {
+    opacity: 0.7;
+    line-height: 1.5;
+  }
+
+  /* LISTAS */
+
+  .footer-block ul,
+  .footer-social {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ITEMS CON ICONO */
+
+  .footer-block li,
+  .footer-block a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* ICONOS */
+
+  .footer-icon {
+    font-size: 1rem;
+    width: 20px;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  /* LINKS */
+
+  .footer-nav a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    opacity: 1;
+  }
+
+  /* BOTTOM */
+
+  .footer-bottom {
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
+
+  /* ROW */
+
+  .row--bottom,
+  .footer-nav,
+  .footer-contact {
+    border-bottom: var(--row);
+    padding-bottom: var(--row-padding);
+  }
+
+  /* ================= RESPONSIVE ================= */
+
+  @media (min-width: 1024px) {
+    .footer-block ul,
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+    }
+
+    .footer-block__container {
+      flex-direction: row;
+      align-items: start;
+      justify-content: center;
+      gap: var(--gap-block--horizontal);
+    }
+
+    .footer-nav,
+    .footer-contact {
+      border-bottom: none;
+      padding-bottom: none;
+    }
+  }
+</style>

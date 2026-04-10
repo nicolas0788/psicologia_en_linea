@@ -1,0 +1,81 @@
+<button
+  id="menu-toggle"
+  class="menu-toggle"
+  type="button"
+  aria-label="Abrir menú"
+  aria-controls="menu-panel"
+  aria-expanded="false"
+>
+  <span id="menu-icon" class="menu-icon">
+    <span id="line-top" class="line"></span>
+    <span id="line-middle" class="line"></span>
+    <span id="line-bottom" class="line"></span>
+  </span>
+</button>
+
+<style>
+  .menu-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  /* ICONO 28x28 */
+  .menu-icon {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    display: block;
+  }
+
+  /* LÍNEAS MÁS GRUESAS */
+  .line {
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background: #111;
+    border-radius: 2px;
+    transform-origin: center;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+  }
+
+  /* DISTRIBUCIÓN BALANCEADA */
+  .line:nth-child(1) {
+    top: 3px;
+  }
+
+  .line:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .line:nth-child(3) {
+    bottom: 3px;
+  }
+
+  /* ESTADO ABIERTO (CRUZ PERFECTA) */
+  .menu-toggle.is-open .line:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .menu-toggle.is-open .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.is-open .line:nth-child(3) {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  @media (min-width: 1024px) {
+    .menu-toggle {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+/* =========================
+   RESET CSS MODERNO
+   ========================= */
+
+/* 1. Box sizing universal */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Eliminar márgenes por defecto */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Mejora tipografía base */
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 4. Body base */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* 5. Elementos multimedia responsivos */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inputs y botones heredan fuente */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Evitar overflow en textos */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Links sin estilos por defecto */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 9. Listas sin estilos */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 10. Tablas limpias */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 11. Scroll suave opcional */
+html:focus-within {
+  scroll-behavior: smooth;
+}

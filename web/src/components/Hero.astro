@@ -1,0 +1,135 @@
+<section class="section">
+  <div class="forma-sup"></div>
+  <h1 class="h1">
+    Plataforma de derivación creada por psicólogos y psicólogas
+  </h1>
+  <div class="hero-info__container">
+    <p>Atencion presencial en CABA</p>
+    <p>Modalidad online en todo el mundo</p>
+  </div>
+  <div class="hero-img__container">
+    <img
+      src="../../src/assets/img/hero/hero-img.svg"
+      alt="sdsd"
+      class="hero-img"
+    />
+  </div>
+  <div class="btn-container">
+    <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
+  </div>
+</section>
+
+<style is:global>
+  .section {
+    position: relative;
+    height: 100vh;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .forma-sup {
+    width: 150%;
+    height: 130px;
+    margin-left: -25%;
+
+    background-color: blueviolet;
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+  }
+
+  /* .forma__container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+  }
+  .forma-img {
+    width: 100%;
+    height: auto;
+  }*/
+
+  .hero-info__container {
+    top: calc(10rem + var(--height-desktop));
+    left: 10%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 2rem;
+    width: 20rem;
+    z-index: 1;
+  }
+  .h1 {
+    left: 10%;
+    position: absolute;
+    top: calc(2rem + var(--height-desktop));
+    font-size: 1rem;
+  }
+  .hero-info__container p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .hero-img__container {
+    position: absolute;
+    top: calc(2rem + var(--height-desktop));
+    right: 0;
+    width: auto;
+    height: 30rem;
+  }
+
+  .hero-img {
+    height: 100%;
+    width: auto;
+  }
+  .btn-container {
+    position: absolute;
+    bottom: 8rem;
+    left: 10%;
+  }
+
+  /* ================= BOTÓN BASE ================= */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    border: none;
+  }
+
+  /* ================= BOTÓN LLENO ================= */
+  .btn-primary {
+    background: #1e3a8a;
+    color: #fff;
+  }
+
+  /* ================= HOVER ================= */
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ================= ACTIVE ================= */
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  /* ================= FOCUS (accesibilidad) ================= */
+  .btn:focus-visible {
+    outline: 2px solid #60d9ff;
+    outline-offset: 3px;
+  }
+</style>
