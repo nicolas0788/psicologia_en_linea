@@ -15,6 +15,7 @@ export class MenuController {
 
     this.breakpoint = breakpoint;
     this.isOpen = false;
+    this.isAnimating = false;
 
     this.mediaQuery = window.matchMedia(`(min-width: ${breakpoint}px)`);
 
@@ -24,54 +25,65 @@ export class MenuController {
     this.handleResize = this.handleResize.bind(this);
     this.handleLinkClick = this.handleLinkClick.bind(this);
     this.handleNavOnScroll = this.handleNavOnScroll.bind(this);
-
-    this.isAnimating = false;
+    this.handleWindowLoad = this.handleWindowLoad.bind(this);
   }
 
   init() {
+    if (
+      !this.header ||
+      !this.nav ||
+      !this.toggle ||
+      !this.menu ||
+      !this.overlay
+    ) {
+      return;
+    }
+
     this.toggle.addEventListener("click", this.handleToggle);
     document.addEventListener("keydown", this.handleKey);
-    window.addEventListener("scroll", this.handleNavOnScroll);
     this.overlay.addEventListener("click", this.handleOverlay);
     this.menu.addEventListener("click", this.handleLinkClick);
     this.mediaQuery.addEventListener("change", this.handleResize);
-    window.addEventListener("scroll", this.handleNavOnScroll);
+    window.addEventListener("scroll", this.handleNavOnScroll, {
+      passive: true,
+    });
+    window.addEventListener("load", this.handleWindowLoad);
 
-    this.reset();
+    this.resetImmediate();
+    this.handleNavOnScroll();
+
+    requestAnimationFrame(() => {
+      this.handleNavOnScroll();
+    });
   }
 
   /* ================= CORE ================= */
 
   open() {
-    if (this.isAnimating) return;
+    if (this.isAnimating || this.isDesktop()) return;
 
     this.isAnimating = true;
-
-    setTimeout(() => {
-      this.isAnimating = false;
-    }, 800);
-
     this.isOpen = true;
 
     this.header.classList.add("is-open");
-
     this.overlay.hidden = false;
+
     requestAnimationFrame(() => {
       this.overlay.classList.add("is-active");
     });
 
     this.updateAria(true);
     document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+      this.isAnimating = false;
+    }, 800);
   }
 
   close() {
     if (this.isAnimating) return;
 
     this.isAnimating = true;
-
-    setTimeout(() => {
-      this.isAnimating = false;
-    }, 890);
     this.isOpen = false;
 
     this.header.classList.remove("is-open");
@@ -82,6 +94,7 @@ export class MenuController {
 
     setTimeout(() => {
       this.overlay.hidden = true;
+      this.isAnimating = false;
     }, 850);
   }
 
@@ -91,6 +104,19 @@ export class MenuController {
 
   reset() {
     this.close();
+  }
+
+  resetImmediate() {
+    this.isOpen = false;
+    this.isAnimating = false;
+
+    this.header.classList.remove("is-open");
+    this.overlay.classList.remove("is-active");
+    this.overlay.hidden = true;
+
+    document.body.style.overflow = "";
+
+    this.updateAria(false);
   }
 
   /* ================= EVENTS ================= */
@@ -105,33 +131,37 @@ export class MenuController {
   }
 
   handleKey(e) {
-    if (e.key === "Escape") this.close();
+    if (e.key === "Escape") {
+      this.close();
+    }
   }
 
   handleResize() {
-    if (this.isDesktop()) this.reset();
+    if (this.isDesktop()) {
+      this.resetImmediate();
+    }
+
+    this.handleNavOnScroll();
   }
 
   handleLinkClick(e) {
-    if (e.target.tagName === "A") {
+    if (e.target.closest("a")) {
       this.close();
     }
   }
 
   handleNavOnScroll() {
-    if (window.scrollY > 0) {
-      nav.classList.add("is-scrolled");
-    } else {
-      nav.classList.remove("is-scrolled");
-    }
+    if (!this.nav) return;
+
+    this.nav.classList.toggle("is-scrolled", window.scrollY > 0);
   }
 
-  handleNavOnScroll() {
-    if (window.scrollY > 0) {
-      this.nav.classList.add("is-scrolled");
-    } else {
-      this.nav.classList.remove("is-scrolled");
-    }
+  handleWindowLoad() {
+    this.handleNavOnScroll();
+
+    requestAnimationFrame(() => {
+      this.handleNavOnScroll();
+    });
   }
 
   /* ================= HELPERS ================= */
@@ -141,12 +171,12 @@ export class MenuController {
   }
 
   updateAria(isOpen) {
-    this.toggle.setAttribute("aria-expanded", isOpen);
+    this.toggle.setAttribute("aria-expanded", String(isOpen));
     this.toggle.setAttribute(
       "aria-label",
       isOpen ? "Cerrar menú" : "Abrir menú",
     );
 
-    this.menu.setAttribute("aria-hidden", !isOpen);
+    this.menu.setAttribute("aria-hidden", String(!isOpen));
   }
 }

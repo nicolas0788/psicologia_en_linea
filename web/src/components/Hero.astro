@@ -1,30 +1,36 @@
-<section class="section">
+<section class="section-hero">
   <div class="forma-sup"></div>
-  <h1 class="h1">
-    Plataforma de derivación creada por psicólogos y psicólogas
-  </h1>
-  <div class="hero-info__container">
-    <p>Atencion presencial en CABA</p>
-    <p>Modalidad online en todo el mundo</p>
-  </div>
-  <div class="hero-img__container">
-    <img
-      src="../../src/assets/img/hero/hero-img.svg"
-      alt="sdsd"
-      class="hero-img"
-    />
-  </div>
-  <div class="btn-container">
-    <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
+  <div class="container-general hero-container">
+    <h1 class="h1">
+      Plataforma de derivación creada por psicólogos y psicólogas
+    </h1>
+    <div class="hero-info__container">
+      <p>Atencion presencial en CABA</p>
+      <p>Modalidad online en todo el mundo</p>
+    </div>
+    <div class="hero-img__container">
+      <img
+        src="../../src/assets/img/hero/hero-img.svg"
+        alt="sdsd"
+        class="hero-img"
+      />
+    </div>
+    <div class="btn-container">
+      <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
+    </div>
   </div>
 </section>
 
 <style is:global>
-  .section {
+  .section-hero {
+    width: 100%;
     position: relative;
     height: 100vh;
     background: #fff;
     overflow: hidden;
+  }
+  .hero-container {
+    position: relative;
   }
 
   .forma-sup {
@@ -32,7 +38,7 @@
     height: 130px;
     margin-left: -25%;
 
-    background-color: blueviolet;
+    background-color: rgb(81, 45, 114);
     border-bottom-left-radius: 50% 100%;
     border-bottom-right-radius: 50% 100%;
   }
@@ -51,7 +57,7 @@
 
   .hero-info__container {
     top: calc(10rem + var(--height-desktop));
-    left: 10%;
+    left: 0;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -62,7 +68,7 @@
     z-index: 1;
   }
   .h1 {
-    left: 10%;
+    left: 0;
     position: absolute;
     top: calc(2rem + var(--height-desktop));
     font-size: 1rem;
@@ -87,7 +93,7 @@
   .btn-container {
     position: absolute;
     bottom: 8rem;
-    left: 10%;
+    left: 0;
   }
 
   /* ================= BOTÓN BASE ================= */

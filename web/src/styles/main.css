@@ -4,3 +4,12 @@
 
 /* 1. Reset */
 @import "./reset.css";
+
+/* 2. Layout */
+@import "./layout.css";
+
+/* 3. Recursos */
+@import "./sources.css";
+
+/* 4. TEXTOS */
+@import "./typography.css";

@@ -1,0 +1,85 @@
+<section
+  class="section-general team-network-section"
+  aria-labelledby="team-network-title"
+>
+  <div class="container-general team-network-container">
+    <h3 class="title-general">Atención profesional</h3>
+    <article class="card-container team-network-article">
+      <div class="team-network-content">
+        <p class="team-network-text">
+          Trabajamos con profesionales matriculados en Argentina, con formación
+          en distintas áreas de la psicología. Cada solicitud se revisa de
+          manera individual para sugerir un profesional acorde a tu solicitud y
+          preferencias.
+        </p>
+      </div>
+
+      <div class="team-network-highlights">
+        <div class="highlight-card">
+          <strong>+30</strong>
+          <span>profesionales matriculados</span>
+        </div>
+
+        <div class="highlight-card">
+          <strong>Derivación personalizada</strong>
+          <span>según tu necesidad y motivo de consulta</span>
+        </div>
+
+        <div class="highlight-card">
+          <strong>Todas las edades</strong>
+          <span>niños, adolescentes y adultos</span>
+        </div>
+
+        <div class="highlight-card">
+          <strong>Enfoques terapéuticos</strong>
+          <span
+            >Psicoanálisis · Terapia Cognitivo-Conductual (TCC) · ACT/DBT
+            Sistémica · Integrativa</span
+          >
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .team-network-section {
+    background: #f7f4ef;
+  }
+
+  .team-network-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: var(--gap-section-column);
+  }
+  .team-network-article {
+    background: #ffffff;
+  }
+
+  .team-network-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .team-network-text {
+    color: #4b5a5a;
+  }
+
+  .team-network-highlights {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .team-network-highlights {
+      grid-template-columns: 1fr;
+    }
+
+    .team-network-section {
+      padding-inline: 1rem;
+    }
+  }
+</style>

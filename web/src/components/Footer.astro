@@ -1,8 +1,17 @@
-<footer class="site-footer">
-  <div class="footer-container">
+<footer class="section-general site-footer">
+  <div class="container-general footer-container">
     <!-- BLOQUE 1: MARCA -->
     <div class="footer-block footer-brand row--bottom">
-      <h2 class="footer-title">Logo</h2>
+      <div class="footer-logo__container">
+        <a href="/" class="footer-logo"
+          ><img
+            src="../../src/assets/img/logo2.png"
+            alt="Logo Psicología en Línea"
+            class="footer-logo--img"
+          /></a
+        >
+      </div>
+
       <p class="footer-description">
         Atención online desde cualquier lugar del mundo y presencial en CABA.
       </p>
@@ -83,17 +92,12 @@
   .site-footer {
     background: var(--color-footer);
     color: var(--color-txt);
-    padding-top: 3rem;
     font-size: 0.95rem;
   }
 
   /* CONTENEDOR */
 
   .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -102,6 +106,7 @@
   }
 
   .footer-block__container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -198,6 +203,23 @@
     padding-bottom: var(--row-padding);
   }
 
+  /* LOGO */
+
+  .footer-logo__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-logo {
+    height: 60px;
+    width: auto;
+  }
+  .footer-logo--img {
+    height: 100%;
+    width: auto;
+  }
+
   /* ================= RESPONSIVE ================= */
 
   @media (min-width: 1024px) {
@@ -212,7 +234,7 @@
     .footer-block__container {
       flex-direction: row;
       align-items: start;
-      justify-content: center;
+      justify-content: space-between;
       gap: var(--gap-block--horizontal);
     }
 

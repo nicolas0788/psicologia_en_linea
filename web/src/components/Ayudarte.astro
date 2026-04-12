@@ -1,0 +1,66 @@
+---
+
+---
+
+<section class="section-general help-section">
+  <div class="container-general help-container">
+    <h3 class="title-general">¿En qué podemos ayudarte?</h3>
+    <article class="card-container">
+      <p class="help-text">
+        Un espacio profesional y confidencial para acompañarte en los momentos
+        que hoy te están costando más.
+      </p>
+
+      <ul class="help-grid">
+        <li class="highlight-card">Ansiedad y estrés</li>
+        <li class="highlight-card">Ataques de pánico</li>
+        <li class="highlight-card">Depresión o tristeza</li>
+        <li class="highlight-card">Problemas para dormir</li>
+        <li class="highlight-card">Problemas de pareja</li>
+        <li class="highlight-card">Baja autoestima e inseguridad</li>
+        <li class="highlight-card">Estrés laboral o agotamiento</li>
+        <li class="highlight-card">Conflictos familiares</li>
+        <li class="highlight-card">Sentirte abrumado/a</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  .help-section {
+    background: linear-gradient(180deg, #f7fbff 0%, #eef6f8 100%);
+  }
+  .help-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: var(--gap-section-column);
+  }
+
+  .help-text {
+    color: #4b5a5a;
+  }
+
+  .help-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .help-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .help-section {
+      padding: 3.5rem 1rem;
+    }
+
+    .help-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

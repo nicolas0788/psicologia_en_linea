@@ -1,0 +1,108 @@
+<section class="coffee-demo">
+  <div class="coffee-illustration">
+    <img
+      src="../../src/assets/img/hero/hero-img.svg"
+      alt="Taza de café ilustrada"
+      class="coffee-cup"
+    />
+
+    <div class="steam" aria-hidden="true">
+      <span class="steam-line steam-1"></span>
+      <span class="steam-line steam-2"></span>
+      <span class="steam-line steam-3"></span>
+      <span class="steam-line steam-4"></span>
+      <span class="steam-line steam-5"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .coffee-demo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background: #e9e1d4;
+  }
+
+  .coffee-illustration {
+    position: relative;
+    width: 420px;
+    max-width: 80vw;
+  }
+
+  .coffee-cup {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* =========================
+   HUMO DE PRUEBA
+========================= */
+
+  .steam {
+    position: absolute;
+    left: 50%;
+    bottom: 52%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 180px;
+    z-index: 3;
+    pointer-events: none;
+
+    /* temporal para debug */
+    /* background: rgba(255, 0, 0, 0.08); */
+  }
+
+  .steam-line {
+    position: absolute;
+    bottom: 0;
+    width: 26px;
+    height: 110px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+    filter: blur(12px);
+    opacity: 0;
+    animation: steamFloat 3.6s ease-in-out infinite;
+  }
+
+  .steam-1 {
+    left: 10px;
+    animation-delay: 0s;
+  }
+
+  .steam-2 {
+    left: 45px;
+    animation-delay: 1s;
+  }
+
+  .steam-3 {
+    left: 80px;
+    animation-delay: 2s;
+  }
+
+  @keyframes steamFloat {
+    0% {
+      opacity: 0;
+      transform: translateY(0) translateX(0) scale(0.9);
+    }
+
+    20% {
+      opacity: 0.7;
+    }
+
+    50% {
+      opacity: 0.45;
+      transform: translateY(-40px) translateX(10px) scale(1.1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-95px) translateX(-8px) scale(1.35);
+    }
+  }
+</style>
