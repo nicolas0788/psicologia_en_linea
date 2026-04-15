@@ -1,59 +1,73 @@
+---
+import Reloj from "./reloj.astro";
+---
+
 <section class="section-hero">
   <div class="forma-sup"></div>
   <div class="container-general hero-container">
-    <h1 class="h1">
-      Plataforma de derivación creada por psicólogos y psicólogas
-    </h1>
+    <h1 class="title-general">Plataforma de derivación</h1>
+    <h2 class="title-general">Creada por psicólogos y psicólogas</h2>
     <div class="hero-info__container">
       <p>Atencion presencial en CABA</p>
       <p>Modalidad online en todo el mundo</p>
     </div>
     <div class="hero-img__container">
       <img
-        src="../../src/assets/img/hero/hero-img.svg"
+        src="../../src/assets/img/hero/heroImg2.png"
         alt="sdsd"
         class="hero-img"
       />
+
+      <div class="steam" aria-hidden="true">
+        <span class="steam-line steam-1"></span>
+        <span class="steam-line steam-2"></span>
+        <span class="steam-line steam-3"></span>
+        <span class="steam-line steam-4"></span>
+        <span class="steam-line steam-5"></span>
+      </div>
     </div>
-    <div class="btn-container">
-      <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
-    </div>
+  </div>
+  <div class="btn-container">
+    <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
   </div>
 </section>
 
 <style is:global>
   .section-hero {
     width: 100%;
-    position: relative;
     height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: #fff;
     overflow: hidden;
   }
   .hero-container {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .hero-container h1,
+  .hero-container h2 {
+    text-align: center;
   }
 
   .forma-sup {
+    position: absolute;
+    top: 0;
     width: 150%;
-    height: 130px;
+    height: 6.25rem;
     margin-left: -25%;
 
     background-color: rgb(81, 45, 114);
     border-bottom-left-radius: 50% 100%;
     border-bottom-right-radius: 50% 100%;
   }
-
-  /* .forma__container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
-  }
-  .forma-img {
-    width: 100%;
-    height: auto;
-  }*/
 
   .hero-info__container {
     top: calc(10rem + var(--height-desktop));
@@ -66,11 +80,9 @@
     gap: 2rem;
     width: 20rem;
     z-index: 1;
+    display: none;
   }
   .h1 {
-    left: 0;
-    position: absolute;
-    top: calc(2rem + var(--height-desktop));
     font-size: 1rem;
   }
   .hero-info__container p {
@@ -79,21 +91,20 @@
   }
 
   .hero-img__container {
-    position: absolute;
-    top: calc(2rem + var(--height-desktop));
-    right: 0;
-    width: auto;
-    height: 30rem;
+    position: relative;
+    width: min(90%, 500px);
+    height: auto;
   }
 
   .hero-img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
   }
   .btn-container {
     position: absolute;
-    bottom: 8rem;
-    left: 0;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   /* ================= BOTÓN BASE ================= */
@@ -101,6 +112,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    white-space: nowrap;
+    min-width: fit-content;
 
     font-size: 1rem;
     font-weight: 600;
@@ -137,5 +151,87 @@
   .btn:focus-visible {
     outline: 2px solid #60d9ff;
     outline-offset: 3px;
+  }
+
+  /* =========================
+   PENDULO
+========================= */
+  .pendulo {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    height: 3rem;
+  }
+  /* =========================
+   HUMO
+========================= */
+
+  .steam {
+    position: absolute;
+    left: 50%;
+    bottom: 52%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 180px;
+    z-index: 3;
+    pointer-events: none;
+
+    /* temporal para debug */
+    /* background: rgba(255, 0, 0, 0.08); */
+  }
+
+  .steam-line {
+    position: absolute;
+    bottom: 0;
+    width: 26px;
+    height: 110px;
+    background: rgba(199, 197, 197, 0.65);
+    border-radius: 999px;
+    filter: blur(12px);
+    opacity: 0;
+    animation: steamFloat 3.6s ease-in-out infinite;
+  }
+
+  .steam-1 {
+    left: 10px;
+    animation-delay: 0s;
+  }
+
+  .steam-2 {
+    left: 45px;
+    animation-delay: 1s;
+  }
+
+  .steam-3 {
+    left: 80px;
+    animation-delay: 2s;
+  }
+
+  @keyframes steamFloat {
+    0% {
+      opacity: 0;
+      transform: translateY(0) translateX(0) scale(0.9);
+    }
+
+    20% {
+      opacity: 0.6;
+    }
+
+    50% {
+      opacity: 0.45;
+      transform: translateY(-40px) translateX(10px) scale(1.1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-95px) translateX(-8px) scale(1.35);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .forma-sup {
+      height: 8.1rem;
+    }
   }
 </style>
