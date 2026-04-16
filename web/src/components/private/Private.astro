@@ -1,0 +1,478 @@
+---
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+const privacySections = [
+  {
+    title: "1. Responsable del tratamiento de los datos",
+    paragraphs: [
+      "Psicología en Línea es una plataforma digital que opera desde la República Argentina, cuya finalidad exclusiva es facilitar el contacto y la derivación entre usuarios que solicitan orientación para iniciar atención psicológica y profesionales de la psicología con matrícula profesional vigente en la República Argentina.",
+      "La Plataforma no presta servicios de atención psicológica, ni realiza evaluaciones clínicas, diagnósticas o terapéuticas, ni interviene en la práctica profesional.",
+    ],
+  },
+  {
+    title: "2. Datos personales recopilados",
+    paragraphs: [
+      "Los datos personales que podrán ser solicitados incluyen, de manera enunciativa y no limitativa: nombre y apellido, dirección de correo electrónico, número de contacto e información general vinculada al motivo de consulta.",
+      "No se solicitan ni recaban datos sensibles innecesarios ni información ajena a la finalidad de la Plataforma.",
+    ],
+  },
+  {
+    title: "3. Finalidad del tratamiento de los datos",
+    paragraphs: [
+      "Los datos personales proporcionados por los usuarios serán utilizados exclusivamente para gestionar el contacto inicial, orientar la consulta recibida, facilitar la derivación a profesionales de la psicología con matrícula vigente y realizar, de manera voluntaria y confidencial, evaluaciones breves de seguimiento del proceso de derivación con fines exclusivos de mejora del funcionamiento de la plataforma.",
+      "Estas evaluaciones son de carácter operativo dentro del proceso de derivación de la plataforma, no constituyen supervisión clínica, no implican intervención terapéutica, no suponen acceso al contenido de las sesiones y no interfieren en el vínculo entre el/la usuario/a y el/la profesional interviniente.",
+      "En ningún caso los datos serán utilizados con fines comerciales ajenos a la finalidad del servicio, ni para publicidad no relacionada, ni cedidos a terceros fuera del objeto de la Plataforma.",
+    ],
+  },
+  {
+    title: "4. Compartición de datos",
+    paragraphs: [
+      "Los datos personales podrán ser compartidos únicamente con profesionales de la psicología con matrícula profesional vigente que ejerzan en la República Argentina, y solo en la medida necesaria para evaluar la posibilidad de contacto y eventual atención profesional.",
+      "La Plataforma no vende, alquila ni cede datos personales a terceros ajenos a dicha finalidad.",
+    ],
+  },
+  {
+    title: "5. Rol de la Plataforma – Alcance del servicio",
+    paragraphs: [
+      "Psicología en Línea actúa exclusivamente como plataforma de intermediación, contacto y derivación.",
+      "El uso de la Plataforma no constituye una evaluación diagnóstica, no implica el inicio automático de una relación terapéutica y no genera obligación profesional alguna hasta tanto exista un acuerdo expreso entre el/la usuario/a y el/la profesional interviniente.",
+      "La Plataforma no supervisa, dirige ni controla la práctica profesional, ni interviene en el encuadre clínico o terapéutico.",
+    ],
+  },
+  {
+    title: "6. Responsabilidad profesional",
+    paragraphs: [
+      "Toda relación que eventualmente se establezca entre el/la usuario/a y un/a profesional de la psicología será directa y exclusiva entre dichas partes.",
+      "Psicología en Línea no asume responsabilidad alguna, directa ni indirecta, respecto de la práctica clínica, el encuadre terapéutico, la evolución, continuidad o interrupción de la atención, los honorarios profesionales y los resultados del proceso terapéutico.",
+    ],
+  },
+  {
+    title: "7. Confidencialidad y seguridad de la información",
+    paragraphs: [
+      "La información brindada será tratada de manera confidencial y protegida mediante medidas de seguridad razonables, de acuerdo con los estándares habituales para este tipo de servicios y conforme a la normativa vigente en materia de protección de datos personales.",
+      "La confidencialidad propia del vínculo terapéutico, en caso de iniciarse, es responsabilidad exclusiva del/la profesional interviniente.",
+    ],
+  },
+  {
+    title: "8. Derechos del titular de los datos",
+    paragraphs: [
+      "El/la usuario/a titular de los datos personales tiene derecho a acceder, rectificar, actualizar y suprimir su información, así como a revocar el consentimiento otorgado, conforme a lo dispuesto por la Ley 25.326 de Protección de Datos Personales.",
+      "Estos derechos podrán ejercerse mediante comunicación fehaciente a la dirección indicada en el punto 11.",
+    ],
+  },
+  {
+    title: "9. Alcance territorial y jurisdicción",
+    paragraphs: [
+      "La Plataforma opera desde la República Argentina. El acceso desde otros países no implica la prestación de servicios profesionales bajo legislaciones extranjeras ni genera obligación alguna para la Plataforma fuera del marco legal de la República Argentina.",
+      "La interpretación y aplicación de la presente Política se rige por las leyes de la República Argentina.",
+    ],
+  },
+  {
+    title: "10. Uso por personas mayores de edad",
+    paragraphs: [
+      "El uso de la Plataforma y el envío de datos personales se encuentra destinado exclusivamente a personas mayores de 18 años.",
+      "En caso de consultas vinculadas a personas menores de edad, el contacto y consentimiento deberá ser otorgado por sus representantes legales.",
+    ],
+  },
+  {
+    title: "11. Contacto",
+    paragraphs: [
+      "Para cualquier consulta relacionada con la presente Política de Privacidad o con el tratamiento de datos personales, puede comunicarse a:",
+    ],
+  },
+];
+
+const emergencyLines = [
+  {
+    title: "Emergencias generales",
+    items: [
+      "911 – Policía",
+      "107 SAME (Sistema de Atención Médica de Emergencia)",
+    ],
+  },
+  {
+    title: "Salud Mental Responde (CABA)",
+    items: ["0800-333-1665", "Funciona las 24 horas, los 365 días del año."],
+  },
+  {
+    title: "Línea de Prevención del Suicidio – Ayuda a Personas en Crisis",
+    items: [
+      "135 (línea gratuita desde Capital y Gran Buenos Aires)",
+      "(011) 5275-1135",
+      "0800-345-1435 (desde todo el país)",
+    ],
+  },
+  {
+    title: "Orientación y Apoyo en la Urgencia de Salud Mental (Nación)",
+    items: ["0800-999-0091", "Disponible las 24 horas, los 365 días del año."],
+  },
+];
+
+const hospitals = [
+  {
+    name: "Hospital General de Agudos Dr. Teodoro Álvarez",
+    address: "Aranguren 2701",
+    detail:
+      "Tel.: 4612-0326 · Salud Mental: Int. 2987 · Guardia: 4612-0326 Int. 2947",
+  },
+  {
+    name: "Hospital de Emergencias Psiquiátricas Dr. Torcuato de Alvear",
+    address: "Av. Warnes 2630",
+    detail: "Tel.: 4521-0273 / 0983 / 0090 / 8457",
+  },
+  {
+    name: "Hospital General de Agudos Dr. Cosme Argerich",
+    address: "Pi y Margall 750",
+    detail:
+      "Tel.: 4121-0700 / 0800 · Salud Mental: Int. 2742 · Guardia: 4121-0701 / 0702",
+  },
+  {
+    name: "Hospital Psicoasistencial Dr. José T. Borda",
+    address: "Av. Ramón Carrillo 375",
+    detail: "Tel.: 4305-6485 / 4304-6365 · Guardia: 4305-6666",
+  },
+  {
+    name: "Hospital General de Agudos Dr. Carlos Durand",
+    address: "Av. Díaz Vélez 5044",
+    detail: "Tel.: 4982-5555 / 5655 · Guardia: 4982-0457 / 5555 / 5655",
+  },
+  {
+    name: "Hospital de Niños Dr. Pedro de Elizalde",
+    address: "Av. Montes de Oca 40",
+    detail:
+      "Tel.: 4307-5442 / 5553 / 4300-1700 · Guardia: 4307-7491 / 5842 / 4989",
+  },
+  {
+    name: "Hospital General de Agudos Dr. Juan A. Fernández",
+    address: "Cerviño 3356",
+    detail: "Tel.: 4808-2600 · Salud Mental: Int. 2220",
+  },
+];
+---
+
+<section class="section-general legal-page">
+  <ArcoSuperior />
+  <div class="container-general legal-shell">
+    <header class="legal-hero">
+      <h1>Privacidad y Condiciones</h1>
+      <p class="legal-lead">
+        Política de privacidad y tratamiento de datos personales para usuarios y
+        consultantes.
+      </p>
+      <p class="legal-update">Última actualización: febrero 2026</p>
+    </header>
+
+    <div class="legal-grid">
+      <main class="legal-main">
+        <article class="legal-card">
+          <h2>Política de Privacidad – Consultantes</h2>
+          <p>
+            La presente Política de Privacidad regula el tratamiento de los
+            datos personales brindados por las personas que utilizan la
+            plataforma Psicología en Línea, mediante el completado de
+            formularios de contacto y consulta.
+          </p>
+          <p>
+            El acceso, uso y/o envío de información a través de la Plataforma
+            implica la aceptación expresa, libre e informada de los términos de
+            la presente Política.
+          </p>
+
+          {
+            privacySections.map((section) => (
+              <section class="legal-section">
+                <h3>{section.title}</h3>
+                {section.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </section>
+            ))
+          }
+
+          <p class="legal-contact">
+            <a href="mailto:contacto@psicologiaenlinea.ar"
+              >contacto@psicologiaenlinea.ar</a
+            >
+          </p>
+        </article>
+
+        <article class="legal-card legal-card--emergency">
+          <h2>Información de Emergencia (Argentina)</h2>
+          <p class="legal-warning">
+            Psicología en Línea no es un servicio de urgencias ni reemplaza la
+            atención médica o de emergencia. Ante una situación de riesgo o
+            urgencia, contactá inmediatamente a los servicios de emergencia de
+            tu localidad.
+          </p>
+
+          {
+            emergencyLines.map((group) => (
+              <section class="legal-section">
+                <h3>{group.title}</h3>
+                <ul class="legal-list">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            ))
+          }
+
+          <section class="legal-section">
+            <h3>Asistencia al Suicida</h3>
+            <p>
+              <a
+                href="https://www.asistenciaalsuicida.org.ar/ayuda"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                www.asistenciaalsuicida.org.ar/ayuda
+              </a>
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h3>
+              Hospitales y dispositivos de urgencia en salud mental (CABA)
+            </h3>
+            <div class="hospital-list">
+              {
+                hospitals.map((hospital) => (
+                  <article class="hospital-item">
+                    <h4>{hospital.name}</h4>
+                    <p>{hospital.address}</p>
+                    <p>{hospital.detail}</p>
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="legal-section">
+            <h3>Información orientativa</h3>
+            <p>
+              Los números de emergencia listados corresponden a servicios
+              oficiales de atención en Argentina y se brindan con fines
+              informativos.
+            </p>
+          </section>
+        </article>
+      </main>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --legal-bg: #f7f4ef;
+    --legal-surface: #ffffff;
+    --legal-text: #1f2937;
+    --legal-muted: #5b6472;
+    --legal-border: rgba(31, 41, 55, 0.12);
+    --legal-accent: #8a6f5a;
+    --legal-accent-soft: #efe5db;
+    --legal-warning-bg: #f8ede8;
+    --legal-shadow: 0 18px 40px rgba(31, 41, 55, 0.08);
+    --legal-maring-top: 9rem;
+
+    --legal-shell-width: 1200px;
+    --legal-radius: 24px;
+    --legal-radius-sm: 16px;
+
+    --legal-space-xs: 0.75rem;
+    --legal-space-sm: 1rem;
+    --legal-space-md: 1.5rem;
+    --legal-space-lg: 2rem;
+    --legal-space-xl: 3rem;
+
+    --legal-title: clamp(2rem, 4vw, 3.25rem);
+    --legal-h2: clamp(1.35rem, 2vw, 1.8rem);
+    --legal-h3: clamp(1.05rem, 1.3vw, 1.2rem);
+    --legal-text-size: clamp(0.98rem, 0.3vw + 0.92rem, 1.05rem);
+    --legal-line: 1.75;
+  }
+
+  .legal-page {
+    background: var(--legal-bg);
+    color: var(--legal-text);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .legal-shell {
+    margin-top: var(--legal-maring-top);
+  }
+
+  .legal-hero {
+    margin-bottom: var(--legal-space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .legal-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--legal-accent);
+  }
+
+  .legal-hero h1 {
+    margin: 0 0 1.5rem 0;
+    font-size: var(--legal-title);
+    line-height: 1.1;
+  }
+
+  .legal-lead {
+    margin: 0;
+    color: var(--legal-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    width: 100%;
+    text-align: start;
+  }
+
+  .legal-update {
+    color: var(--legal-muted);
+    font-size: 0.95rem;
+    width: 100%;
+    text-align: start;
+  }
+
+  .legal-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .legal-main {
+    display: grid;
+    gap: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  .legal-card {
+    background: var(--legal-surface);
+    border: 1px solid var(--legal-border);
+    border-radius: var(--legal-radius);
+    padding: clamp(1.25rem, 2vw, 2.25rem);
+    box-shadow: var(--legal-shadow);
+  }
+
+  .legal-card h2 {
+    margin: 0 0 1rem;
+    font-size: var(--legal-h2);
+    line-height: 1.2;
+  }
+
+  .legal-section + .legal-section {
+    margin-top: 1.5rem;
+  }
+
+  .legal-section h3 {
+    margin: 0 0 0.75rem;
+    font-size: var(--legal-h3);
+    line-height: 1.3;
+  }
+
+  .legal-section:first-of-type {
+    margin-top: 1.5rem;
+  }
+
+  .legal-card p,
+  .legal-card li {
+    margin: 0;
+    font-size: var(--legal-text-size);
+    line-height: var(--legal-line);
+    color: var(--legal-text);
+  }
+
+  .legal-card p + p {
+    margin-top: 0.9rem;
+  }
+
+  .legal-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .legal-warning {
+    background: var(--legal-warning-bg);
+    border: 1px solid rgba(138, 111, 90, 0.18);
+    border-radius: var(--legal-radius-sm);
+    padding: 1rem 1.1rem;
+  }
+
+  .hospital-list {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .hospital-item {
+    border: 1px solid var(--legal-border);
+    border-radius: var(--legal-radius-sm);
+    padding: 1rem;
+    background: #fcfbf9;
+  }
+
+  .hospital-item h4 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .hospital-item p + p {
+    margin-top: 0.35rem;
+  }
+
+  .legal-aside {
+    position: relative;
+  }
+
+  .legal-meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .legal-meta li {
+    line-height: 1.6;
+    color: var(--legal-text);
+  }
+
+  .legal-contact a,
+  .legal-meta a,
+  .legal-card a {
+    color: var(--legal-accent);
+    text-decoration: none;
+  }
+
+  .legal-contact a:hover,
+  .legal-meta a:hover,
+  .legal-card a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 960px) {
+    .legal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .legal-page {
+      padding-inline: 1rem;
+    }
+
+    .legal-card {
+      border-radius: 20px;
+      padding: 1.15rem;
+    }
+  }
+</style>

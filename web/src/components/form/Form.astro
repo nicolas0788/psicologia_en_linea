@@ -1,0 +1,707 @@
+---
+import ArcoSuperior from "./../assets/ArcoSuperior.astro";
+
+const therapyOptions = ["Individual", "Pareja"];
+
+const modalityOptions = ["Presencial", "Virtual", "Indistinto"];
+
+const orientationOptions = [
+  "No tengo preferencia",
+  "Psicoanálisis",
+  "Cognitivo conductual (TCC)",
+  "Otra",
+];
+
+const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
+---
+
+<section class="section-general intake-section" aria-labelledby="intake-title">
+  <ArcoSuperior />
+  <div class="container-general intake-shell">
+    <form class="intake-form" action="#" method="post">
+      <header class="intake-header">
+        <h2 id="intake-title" class="intake-title">Comenzá tu proceso</h2>
+
+        <p class="intake-alert">
+          <span class="intake-alert__icon" aria-hidden="true">⛔</span>
+          <span>Este servicio no atiende urgencias ni emergencias.</span>
+        </p>
+
+        <p class="intake-description">
+          Este formulario permite sugerirte un/a <strong
+            >psicólogo/a matriculado/a</strong
+          >
+          acorde a la información que compartas.
+        </p>
+
+        <ul class="intake-highlights" aria-label="Características del servicio">
+          <li>Confidencial</li>
+          <li>Atención online (Argentina y exterior)</li>
+          <li>Atención presencial en CABA</li>
+          <li>Honorario por sesión (abril 2026): $30.000 ARS</li>
+          <li>Terapia de pareja: $45.000 ARS</li>
+        </ul>
+      </header>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label class="form-label" for="tipo-consulta">
+            Tipo de consulta <span aria-hidden="true">*</span>
+          </label>
+
+          <div class="choice-group choice-group--compact" id="tipo-consulta">
+            {
+              therapyOptions.map((option, index) => (
+                <label class="choice-card choice-card--compact">
+                  <input
+                    type="radio"
+                    name="tipo_consulta"
+                    value={option}
+                    checked={index === 0}
+                  />
+                  <span class="choice-card__box" aria-hidden="true">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="preferencia-modalidad">
+            Preferencia de modalidad <span aria-hidden="true">*</span>
+          </label>
+
+          <div class="choice-group" id="preferencia-modalidad">
+            {
+              modalityOptions.map((option, index) => (
+                <label class="choice-card choice-card--full">
+                  <input
+                    type="radio"
+                    name="modalidad"
+                    value={option}
+                    checked={index === 0}
+                  />
+                  <span class="choice-card__box" aria-hidden="true">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="zona-referencia">
+            Zona de referencia (sólo para atención presencial)
+          </label>
+          <p class="form-helper">
+            Zona cercana que te resulte cómoda (barrio o referencia)
+          </p>
+          <textarea
+            id="zona-referencia"
+            name="zona_referencia"
+            rows="4"
+            placeholder="Ej.: Microcentro - Recoleta"></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="motivo-consulta">
+            ¿Qué te trae a consultar en este momento? <span aria-hidden="true"
+              >*</span
+            >
+          </label>
+          <textarea
+            id="motivo-consulta"
+            name="motivo_consulta"
+            rows="4"
+            placeholder="Podés escribir una frase breve si te resulta más cómodo."
+          ></textarea>
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="ciudad-pais">
+            Ciudad y país de residencia <span aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="ciudad-pais"
+            name="ciudad_pais"
+            placeholder="Buenos Aires, Argentina"
+          />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="disponibilidad">
+            Disponibilidad horaria <span aria-hidden="true">*</span>
+          </label>
+          <p class="form-helper">
+            Indicá días y horarios habituales según el horario de tu lugar de
+            residencia actual.
+          </p>
+          <textarea
+            id="disponibilidad"
+            name="disponibilidad"
+            rows="4"
+            placeholder="Ej.: lunes a viernes de 9 a 18 hs. (hora local)"
+          ></textarea>
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="nombre-apellido">
+            Nombre y Apellido <span aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="nombre-apellido"
+            name="nombre_apellido"
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="edad">
+            Edad <span aria-hidden="true">*</span>
+          </label>
+          <input
+            type="number"
+            id="edad"
+            name="edad"
+            min="1"
+            max="120"
+            inputmode="numeric"
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="email">
+            Email <span aria-hidden="true">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            placeholder="tucorreo@email.com"
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="whatsapp">
+            WhatsApp (con prefijo internacional). <span aria-hidden="true"
+              >*</span
+            >
+          </label>
+          <p class="form-helper">Ej.: +54 9 11 4947-4689</p>
+          <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="preferencia-terapia">
+            Preferencia respecto del tipo de terapia <span aria-hidden="true"
+              >*</span
+            >
+          </label>
+
+          <div
+            class="choice-group choice-group--compact"
+            id="preferencia-terapia"
+          >
+            {
+              orientationOptions.map((option, index) => (
+                <label class="choice-card choice-card--compact">
+                  <input
+                    type="radio"
+                    name="tipo_terapia"
+                    value={option}
+                    checked={index === 0}
+                  />
+                  <span class="choice-card__box" aria-hidden="true">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+
+          <input
+            class="input-conditional"
+            type="text"
+            name="tipo_terapia_otra"
+            placeholder="¿Cuál?"
+          />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="genero-profesional">
+            Preferencia respecto al género del/la profesional <span
+              aria-hidden="true">*</span
+            >
+          </label>
+
+          <div
+            class="choice-group choice-group--compact"
+            id="genero-profesional"
+          >
+            {
+              genderOptions.map((option, index) => (
+                <label class="choice-card choice-card--compact">
+                  <input
+                    type="radio"
+                    name="genero_profesional"
+                    value={option}
+                    checked={index === 0}
+                  />
+                  <span class="choice-card__box" aria-hidden="true">
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="form-field form-field--notice">
+          <h3 class="subheading">
+            Próximos pasos <span aria-hidden="true">*</span>
+          </h3>
+
+          <p>
+            En breve revisaremos la información que nos compartiste y te
+            contactaremos por <strong
+              >WhatsApp en los próximos días hábiles</strong
+            > para sugerirte un/a profesional según la información brindada.
+          </p>
+
+          <p>
+            Uso exclusivo para gestionar la derivación. Ver <a
+              href="/politica-de-privacidad">Política de Privacidad</a
+            >
+          </p>
+
+          <p class="form-emergency">
+            Importante: Si te encontrás en una situación de riesgo inmediato,
+            comunicate con servicios de emergencia o acudí al hospital más
+            cercano.
+          </p>
+
+          <p class="form-emergency-lines">
+            Línea de Prevención del Suicidio:<br />
+            0800-345-1435 (todo el país)<br />
+            135 (CABA y GBA)
+          </p>
+
+          <label class="checkbox-field">
+            <input type="checkbox" name="privacy_policy" required />
+            <span>Acepto la Política de Privacidad</span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">
+            Enviar solicitud
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  :root {
+    --intake-section-bg: transparent;
+    --intake-card-bg: #ffffff;
+    --intake-card-border: #e5e7eb;
+    --intake-card-radius: 1.5rem;
+    --intake-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+
+    --intake-max-width: 760px;
+    --intake-padding-inline: clamp(1rem, 2vw, 1.5rem);
+    --intake-padding-block: clamp(1.25rem, 2.4vw, 2rem);
+    --intake-gap: 1.25rem;
+    --intake-maring-top: 9rem;
+
+    --intake-font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+
+    --intake-title-color: #1f2937;
+    --intake-text-color: #374151;
+    --intake-muted-color: #6b7280;
+    --intake-helper-color: #7b8190;
+    --intake-link-color: #4f46e5;
+
+    --intake-danger-color: #ef476f;
+    --intake-accent-color: #f59e0b;
+    --intake-button-bg: #111111;
+    --intake-button-bg-hover: #222222;
+    --intake-button-color: #ffffff;
+
+    --intake-input-bg: #ffffff;
+    --intake-input-border: #d1d5db;
+    --intake-input-border-focus: #8b5cf6;
+    --intake-input-radius: 0.65rem;
+    --intake-input-height: 2.9rem;
+    --intake-textarea-min-height: 7rem;
+
+    --intake-choice-bg: #ffffff;
+    --intake-choice-border: #d1d5db;
+    --intake-choice-hover-border: #9ca3af;
+    --intake-choice-selected-bg: #f8f7ff;
+    --intake-choice-selected-border: #8b5cf6;
+
+    --intake-choice-box-bg: #f3f4f6;
+    --intake-choice-box-color: #4b5563;
+    --intake-choice-box-size: 1.15rem;
+
+    --intake-label-size: 0.98rem;
+    --intake-text-size: 0.94rem;
+    --intake-helper-size: 0.8rem;
+    --intake-title-size: clamp(1.9rem, 4vw, 2.6rem);
+
+    --intake-transition: 180ms ease;
+
+    --highlight-dot-size: 0.45rem;
+    --highlight-dot-color: #6b7280; /* gris profesional */
+    --highlight-gap: 0.6rem;
+  }
+
+  .intake-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: var(--intake-section-bg);
+    font-family: var(--intake-font-family);
+    color: var(--intake-text-color);
+  }
+
+  .intake-shell {
+    max-width: var(--intake-max-width);
+    margin-top: var(--intake-maring-top);
+  }
+
+  .intake-form {
+    background: var(--intake-card-bg);
+    border: 1px solid var(--intake-card-border);
+    border-radius: var(--intake-card-radius);
+    box-shadow: var(--intake-card-shadow);
+    padding: var(--intake-padding-block) var(--intake-padding-inline);
+  }
+
+  .intake-header {
+    display: grid;
+    gap: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .intake-title {
+    margin: 0;
+    font-size: var(--intake-title-size);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--intake-title-color);
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .intake-alert {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--intake-title-color);
+    font-weight: 600;
+  }
+
+  .intake-alert__icon {
+    color: var(--intake-danger-color);
+    font-size: 0.92rem;
+  }
+
+  .intake-description {
+    margin: 0;
+    font-size: var(--intake-text-size);
+    line-height: 1.6;
+    color: var(--intake-text-color);
+  }
+
+  .intake-highlights {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.88rem;
+    color: var(--intake-text-color);
+  }
+
+  .intake-highlights li {
+    position: relative;
+    padding-left: calc(var(--highlight-dot-size) + var(--highlight-gap));
+    font-size: var(--intake-text-size);
+    line-height: 1.5;
+    color: var(--intake-text-color);
+  }
+
+  /* círculo */
+  .intake-highlights li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+
+    width: var(--highlight-dot-size);
+    height: var(--highlight-dot-size);
+
+    border-radius: 50%;
+    background-color: var(--highlight-dot-color);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: var(--intake-gap);
+  }
+
+  .form-field {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .form-field--half {
+    max-width: 360px;
+  }
+
+  .form-label,
+  .subheading {
+    margin: 0;
+    font-size: var(--intake-label-size);
+    line-height: 1.35;
+    font-weight: 700;
+    color: var(--intake-title-color);
+  }
+
+  .form-helper {
+    margin: -0.15rem 0 0;
+    font-size: var(--intake-helper-size);
+    line-height: 1.5;
+    color: var(--intake-helper-color);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    border: 1px solid var(--intake-input-border);
+    background: var(--intake-input-bg);
+    border-radius: var(--intake-input-radius);
+    color: var(--intake-text-color);
+    font: inherit;
+    transition:
+      border-color var(--intake-transition),
+      box-shadow var(--intake-transition),
+      background-color var(--intake-transition);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"] {
+    min-height: var(--intake-input-height);
+    padding: 0.75rem 0.9rem;
+  }
+
+  textarea {
+    min-height: var(--intake-textarea-min-height);
+    padding: 0.85rem 0.9rem;
+    resize: vertical;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--intake-input-border-focus);
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+  }
+
+  .choice-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .choice-group--compact {
+    gap: 0.55rem;
+  }
+
+  .choice-card {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.2rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--intake-choice-border);
+    background: var(--intake-choice-bg);
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition:
+      border-color var(--intake-transition),
+      background-color var(--intake-transition),
+      transform var(--intake-transition);
+    user-select: none;
+  }
+
+  .choice-card--compact {
+    width: fit-content;
+  }
+
+  .choice-card--full {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .choice-card:hover {
+    border-color: var(--intake-choice-hover-border);
+  }
+
+  .choice-card input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .choice-card__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--intake-choice-box-size);
+    height: var(--intake-choice-box-size);
+    border-radius: 0.25rem;
+    background: var(--intake-choice-box-bg);
+    color: var(--intake-choice-box-color);
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .choice-card__text {
+    font-size: 0.88rem;
+    line-height: 1.3;
+    color: var(--intake-text-color);
+  }
+
+  .choice-card:has(input:checked) {
+    background: var(--intake-choice-selected-bg);
+    border-color: var(--intake-choice-selected-border);
+  }
+
+  .choice-card:has(input:checked) .choice-card__box {
+    background: var(--intake-choice-selected-border);
+    color: #ffffff;
+  }
+
+  .input-conditional {
+    max-width: 320px;
+    margin-top: 0.15rem;
+  }
+
+  .form-field--notice {
+    gap: 0.75rem;
+  }
+
+  .form-field--notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--intake-text-color);
+  }
+
+  .form-field--notice a {
+    color: var(--intake-link-color);
+    text-decoration: underline;
+    text-underline-offset: 0.14em;
+  }
+
+  .form-emergency,
+  .form-emergency-lines {
+    color: var(--intake-muted-color);
+  }
+
+  .checkbox-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
+    color: var(--intake-text-color);
+    cursor: pointer;
+  }
+
+  .checkbox-field input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--intake-input-border-focus);
+  }
+
+  .form-actions {
+    padding-top: 0.2rem;
+  }
+
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 2.6rem;
+    padding: 0.72rem 1rem;
+    border: none;
+    border-radius: 0.55rem;
+    background: var(--intake-button-bg);
+    color: var(--intake-button-color);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color var(--intake-transition),
+      transform var(--intake-transition),
+      opacity var(--intake-transition);
+  }
+
+  .submit-btn:hover {
+    background: var(--intake-button-bg-hover);
+  }
+
+  .submit-btn:active {
+    transform: translateY(1px);
+  }
+  @media (max-width: 640px) {
+    .intake-form {
+      padding: 1.2rem 1rem;
+      border-radius: 1rem;
+    }
+
+    .form-field--half {
+      max-width: 100%;
+    }
+
+    .choice-card--full {
+      min-height: 2.7rem;
+    }
+  }
+</style>

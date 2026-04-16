@@ -1,9 +1,9 @@
 ---
-import Reloj from "./reloj.astro";
+import ArcoSuperior from "./assets/ArcoSuperior.astro";
 ---
 
 <section class="section-hero">
-  <div class="forma-sup"></div>
+  <ArcoSuperior />
   <div class="container-general hero-container">
     <h1 class="title-general">Plataforma de derivación</h1>
     <h2 class="title-general">Creada por psicólogos y psicólogas</h2>
@@ -55,18 +55,6 @@ import Reloj from "./reloj.astro";
   .hero-container h1,
   .hero-container h2 {
     text-align: center;
-  }
-
-  .forma-sup {
-    position: absolute;
-    top: 0;
-    width: 150%;
-    height: 6.25rem;
-    margin-left: -25%;
-
-    background-color: rgb(81, 45, 114);
-    border-bottom-left-radius: 50% 100%;
-    border-bottom-right-radius: 50% 100%;
   }
 
   .hero-info__container {
@@ -154,16 +142,6 @@ import Reloj from "./reloj.astro";
   }
 
   /* =========================
-   PENDULO
-========================= */
-  .pendulo {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    height: 3rem;
-  }
-  /* =========================
    HUMO
 ========================= */
 
@@ -226,12 +204,6 @@ import Reloj from "./reloj.astro";
     100% {
       opacity: 0;
       transform: translateY(-95px) translateX(-8px) scale(1.35);
-    }
-  }
-
-  @media (min-width: 768px) {
-    .forma-sup {
-      height: 8.1rem;
     }
   }
 </style>
