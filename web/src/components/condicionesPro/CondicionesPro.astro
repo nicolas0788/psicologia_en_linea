@@ -1,0 +1,452 @@
+---
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+const privacySections = [
+  {
+    title: "1. Objeto de la Plataforma",
+    paragraphs: [
+      "Psicología en Línea es una plataforma digital de intermediación y derivación cuya finalidad es facilitar el contacto entre personas que solicitan atención psicológica y profesionales de la psicología con título habilitante y matrícula profesional vigente en la República Argentina.",
+      "La Plataforma no presta servicios de atención psicológica ni interviene en la práctica clínica, diagnóstica o terapéutica.",
+    ],
+  },
+  {
+    title: "2. Naturaleza del vínculo – Ausencia de relación laboral",
+    paragraphs: [
+      "La postulación, registro y/o participación del/la profesional en la Plataforma no genera, bajo ninguna circunstancia, relación laboral, de dependencia, societaria, asociativa, de mandato, representación, franquicia ni exclusividad con Psicología en Línea.",
+      "El/la profesional actúa en todo momento de manera autónoma, independiente y bajo su exclusiva responsabilidad, organizando su práctica profesional conforme a su criterio, formación y marco ético-legal aplicable.",
+    ],
+  },
+  {
+    title: "3. Servicio brindado por la Plataforma",
+    paragraphs: [
+      "La Plataforma brinda al/la profesional un servicio de intermediación y derivación.",
+      "El/la profesional accede voluntariamente al servicio de intermediación y derivación brindado por la Plataforma, aceptando las condiciones establecidas en los presentes Términos y Condiciones.",
+      "Las condiciones económicas y operativas específicas del proceso de derivación serán informadas de manera confidencial a los/as profesionales postulantes, de forma previa a su incorporación a la Plataforma.",
+    ],
+  },
+  {
+    title: '4 "Honorario de referencia operativo" y condiciones económicas',
+    paragraphs: [
+      "Psicología en Línea podrá establecer un honorario de referencia operativo aplicable a las primeras sesiones de los consultantes derivados, con fines organizativos y de calidad del servicio.",
+      "El/la profesional que acepte una derivación deberá respetar dicho honorario durante el período inicial definido, actualmente correspondiente a los primeros dos (2) meses desde la primera sesión.",
+      "Transcurrido ese período, los honorarios pasan a ser definidos de manera autónoma por el/la profesional.",
+      "La Plataforma podrá modificar este valor en función de criterios organizativos, lo cual será comunicado oportunamente.",
+      "Este encuadre aplica únicamente a derivaciones de la Plataforma y no regula la práctica profesional general.",
+      "Aceptar derivaciones implica la conformidad con estas condiciones durante el período inicial.",
+    ],
+  },
+  {
+    title: "5. Autonomía profesional y responsabilidad clínica",
+    paragraphs: [
+      "El/la profesional declara contar con título habilitante y matrícula vigente, cumplir normas éticas y legales, poseer seguro de responsabilidad profesional y asumir plena responsabilidad por la atención brindada.",
+      "Se establece como criterio operativo que las sesiones tengan una duración mínima sugerida de 45 minutos, sin implicar supervisión clínica.",
+      "La relación terapéutica será directa entre profesional y paciente, siendo la Plataforma ajena a dicho vínculo.",
+    ],
+  },
+  {
+    title: "6. Responsabilidad respecto de los pacientes",
+    paragraphs: [
+      "Los pacientes derivados son atendidos bajo exclusiva responsabilidad del/la profesional.",
+      "Psicología en Línea no asume responsabilidad sobre el encuadre terapéutico, la práctica clínica, la evolución del tratamiento, los honorarios posteriores ni los resultados del proceso terapéutico.",
+    ],
+  },
+  {
+    title: "7. Atención en situaciones de urgencia o emergencia",
+    paragraphs: [
+      "La Plataforma no brinda servicios de atención de urgencias ni emergencias.",
+      "El/la profesional es responsable de actuar ante situaciones de riesgo conforme a su criterio clínico, formación y normativa vigente.",
+    ],
+  },
+  {
+    title: "8. No exclusividad",
+    paragraphs: [
+      "La participación en la Plataforma no implica exclusividad.",
+      "El/la profesional puede ejercer su actividad por otros medios sin restricciones.",
+    ],
+  },
+  {
+    title: "9. Confidencialidad y datos personales",
+    paragraphs: [
+      "El tratamiento de datos se rige por la Política de Privacidad y la Ley 25.326 de la República Argentina.",
+      "La Plataforma implementa medidas de seguridad razonables, sin perjuicio de las responsabilidades del ejercicio profesional.",
+    ],
+  },
+  {
+    title: "10. Aceptación expresa",
+    paragraphs: [
+      "El/la profesional declara haber leído y aceptado los Términos y Condiciones.",
+      "Reconoce que la Plataforma es intermediaria, no existe relación laboral y asume responsabilidad total por su práctica.",
+    ],
+  },
+  {
+    title: "11. Modificaciones",
+    paragraphs: [
+      "Psicología en Línea podrá modificar los Términos y Condiciones, los cuales serán comunicados oportunamente.",
+    ],
+  },
+  {
+    title: "12. Ley aplicable y jurisdicción",
+    paragraphs: [
+      "Los Términos se rigen por las leyes de la República Argentina.",
+      "Las controversias serán resueltas por tribunales ordinarios competentes del país.",
+    ],
+  },
+  {
+    title: "12. Contacto",
+    paragraphs: [],
+  },
+];
+---
+
+<section class="section-general legal-page">
+  <ArcoSuperior />
+  <div class="container-general legal-shell">
+    <header class="legal-hero">
+      <h1 class="legal-hero-title">Términos y Condiciones – Profesionales</h1>
+      <h3 class="legal-update">
+        Política de privacidad y tratamiento de datos personales para
+        profesionales
+      </h3>
+      <p class="legal-update">Última actualización: marzo 2026</p>
+    </header>
+
+    <main class="legal-main">
+      <article class="legal-card">
+        <h2>Política de Privacidad – Profesionales</h2>
+        <p>
+          El presente documento establece los Términos y Condiciones aplicables
+          a los/as profesionales de la psicología que se postulan, registran y/o
+          reciben derivaciones a través de la plataforma Psicología en Línea, en
+          adelante, “la Plataforma”.
+        </p>
+        <p>
+          El acceso, uso y/o registro en la Plataforma implica la aceptación
+          expresa, íntegra y sin reservas de los presentes Términos y
+          Condiciones, así como de la Política de Privacidad correspondiente.
+        </p>
+
+        {
+          privacySections.map((section) => (
+            <section class="legal-section">
+              <h3>{section.title}</h3>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </section>
+          ))
+        }
+
+        <address class="legal-contact">
+          <a href="mailto:contacto@psicologiaenlinea.ar"
+            >contacto@psicologiaenlinea.ar</a
+          >
+        </address>
+      </article>
+    </main>
+
+    <style>
+      :root {
+        /* =========================================
+     LEGAL | TOKENS DE COMPONENTE
+     Layout, superficies, color y excepciones
+  ========================================= */
+
+        --legal-bg: #f7f4ef;
+        --legal-surface: #ffffff;
+        --legal-text: var(--color-text);
+        --legal-muted: #5b6472;
+        --legal-border: rgba(31, 41, 55, 0.12);
+
+        --legal-accent: #8a6f5a;
+        --legal-accent-soft: #efe5db;
+        --legal-warning-bg: #f8ede8;
+
+        --legal-shadow: 0 18px 40px rgba(31, 41, 55, 0.08);
+
+        --legal-margin-top: 9rem;
+        --legal-shell-width: 1200px;
+
+        --legal-radius: 24px;
+        --legal-radius-sm: 16px;
+
+        --legal-space-xs: 0.75rem;
+        --legal-space-sm: 1rem;
+        --legal-space-md: 1.5rem;
+        --legal-space-lg: 2rem;
+        --legal-space-xl: 3rem;
+
+        --legal-card-padding: clamp(1.25rem, 2vw, 2.25rem);
+        --legal-card-gap: clamp(1.25rem, 2vw, 2rem);
+
+        --legal-section-gap: 1.5rem;
+        --legal-paragraph-gap: 0.9rem;
+        --legal-list-gap: 0.5rem;
+        --legal-hospital-gap: 0.9rem;
+        --legal-hospital-padding: 1rem;
+
+        /* =========================================
+     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
+     Todas referencian al sistema general
+  ========================================= */
+
+        --legal-hero-title-font-weight: var(--font-weight-bold);
+
+        --legal-lead-font-size: var(--font-size-body-lg);
+        --legal-lead-line-height: var(--line-height-body);
+
+        --legal-update-font-size: var(--font-size-body-sm);
+        --legal-update-line-height: 1.5;
+
+        --legal-h2-font-size: var(--font-size-h2);
+        --legal-h2-font-weight: var(--font-weight-semibold);
+
+        --legal-h3-font-size: var(--font-size-h4);
+        --legal-h3-font-weight: var(--font-weight-semibold);
+
+        --legal-h4-font-size: var(--font-size-h5);
+        --legal-h4-font-weight: var(--font-weight-semibold);
+
+        --legal-eyebrow-font-size: var(--font-size-overline);
+        --legal-eyebrow-font-weight: var(--font-weight-semibold);
+        --legal-eyebrow-letter-spacing: 0.08em;
+
+        --legal-warning-font-size: var(--font-size-body);
+        --legal-warning-line-height: var(--line-height-body);
+      }
+
+      /* =========================================
+   PAGE
+========================================= */
+
+      .legal-page {
+        position: relative;
+        overflow: hidden;
+        background: var(--legal-bg);
+        color: var(--legal-text);
+      }
+
+      .legal-shell {
+        margin-top: var(--legal-margin-top);
+        max-width: var(--legal-shell-width);
+      }
+
+      /* =========================================
+   HERO
+========================================= */
+
+      .legal-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: var(--legal-space-xl);
+      }
+
+      .legal-eyebrow {
+        color: var(--legal-accent);
+        font-size: var(--legal-eyebrow-font-size);
+        font-weight: var(--legal-eyebrow-font-weight);
+        letter-spacing: var(--legal-eyebrow-letter-spacing);
+        text-transform: uppercase;
+      }
+
+      .legal-hero-title {
+        margin-bottom: 0.5rem;
+        font-weight: var(--legal-hero-title-font-weight);
+      }
+
+      .legal-lead {
+        width: 100%;
+        text-align: start;
+        color: var(--legal-muted);
+        font-size: var(--legal-lead-font-size);
+        line-height: var(--legal-lead-line-height);
+      }
+
+      .legal-update {
+        width: 100%;
+        text-align: start;
+        color: var(--legal-muted);
+      }
+
+      /* =========================================
+   STRUCTURE
+========================================= */
+
+      .legal-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .legal-main {
+        display: grid;
+        gap: var(--legal-card-gap);
+      }
+
+      /* =========================================
+   CARDS
+========================================= */
+
+      .legal-card {
+        background: var(--legal-surface);
+        border: 1px solid var(--legal-border);
+        border-radius: var(--legal-radius);
+        padding: var(--legal-card-padding);
+        box-shadow: var(--legal-shadow);
+      }
+
+      .legal-card--emergency {
+        background: var(--legal-surface);
+      }
+
+      /* =========================================
+   HEADINGS INSIDE CARDS
+========================================= */
+
+      .legal-card h2,
+      .legal-card .h2,
+      .legal-card .subtitle-general {
+        margin-bottom: 1rem;
+        font-size: var(--legal-h2-font-size);
+        font-weight: var(--legal-h2-font-weight);
+      }
+
+      .legal-section h3,
+      .legal-section .h3 {
+        margin-bottom: 0.75rem;
+        font-size: var(--legal-h3-font-size);
+        font-weight: var(--legal-h3-font-weight);
+      }
+
+      .hospital-item h4,
+      .hospital-item .h4 {
+        margin-bottom: 0.4rem;
+        font-size: var(--legal-h4-font-size);
+        font-weight: var(--legal-h4-font-weight);
+      }
+
+      /* =========================================
+   SECTIONS / FLOW
+========================================= */
+
+      .legal-section + .legal-section {
+        margin-top: var(--legal-section-gap);
+      }
+
+      .legal-section:first-of-type {
+        margin-top: var(--legal-section-gap);
+      }
+
+      .legal-card p,
+      .legal-card li {
+        color: var(--legal-text);
+      }
+
+      .legal-card p + p {
+        margin-top: var(--legal-paragraph-gap);
+      }
+
+      /* =========================================
+   LISTS
+========================================= */
+
+      .legal-list {
+        display: grid;
+        gap: var(--legal-list-gap);
+        padding-left: 1.2rem;
+      }
+
+      /* =========================================
+   WARNING BLOCK
+========================================= */
+
+      .legal-warning {
+        padding: 1rem 1.1rem;
+        background: var(--legal-warning-bg);
+        border: 1px solid rgba(138, 111, 90, 0.18);
+        border-radius: var(--legal-radius-sm);
+        font-size: var(--legal-warning-font-size);
+        line-height: var(--legal-warning-line-height);
+      }
+
+      /* =========================================
+   HOSPITALS
+========================================= */
+
+      .hospital-list {
+        display: grid;
+        gap: var(--legal-hospital-gap);
+      }
+
+      .hospital-item {
+        padding: var(--legal-hospital-padding);
+        border: 1px solid var(--legal-border);
+        border-radius: var(--legal-radius-sm);
+        background: #fcfbf9;
+      }
+
+      .hospital-item p + p {
+        margin-top: 0.35rem;
+      }
+
+      /* =========================================
+   LINKS
+========================================= */
+
+      .legal-contact a,
+      .legal-meta a,
+      .legal-card a {
+        color: var(--legal-accent);
+        text-decoration: none;
+      }
+
+      .legal-contact a:hover,
+      .legal-meta a:hover,
+      .legal-card a:hover {
+        text-decoration: underline;
+      }
+
+      /* =========================================
+   UNUSED / OPTIONAL BLOCKS
+   Los dejo prolijos por si después los usás
+========================================= */
+
+      .legal-aside {
+        position: relative;
+      }
+
+      .legal-meta {
+        display: grid;
+        gap: 0.9rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .legal-meta li {
+        color: var(--legal-text);
+      }
+
+      /* =========================================
+   RESPONSIVE
+========================================= */
+
+      @media (max-width: 960px) {
+        .legal-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .legal-page {
+          padding-inline: 1rem;
+        }
+
+        .legal-card {
+          padding: 1.15rem;
+          border-radius: 20px;
+        }
+      }
+    </style>
+  </div>
+</section>

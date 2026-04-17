@@ -153,128 +153,132 @@ const hospitals = [
   <ArcoSuperior />
   <div class="container-general legal-shell">
     <header class="legal-hero">
-      <h1>Privacidad y Condiciones</h1>
-      <p class="legal-lead">
+      <h1 class="legal-hero-title">Privacidad y Condiciones</h1>
+      <h3 class="legal-lead">
         Política de privacidad y tratamiento de datos personales para usuarios y
         consultantes.
-      </p>
+      </h3>
       <p class="legal-update">Última actualización: febrero 2026</p>
     </header>
 
-    <div class="legal-grid">
-      <main class="legal-main">
-        <article class="legal-card">
-          <h2>Política de Privacidad – Consultantes</h2>
-          <p>
-            La presente Política de Privacidad regula el tratamiento de los
-            datos personales brindados por las personas que utilizan la
-            plataforma Psicología en Línea, mediante el completado de
-            formularios de contacto y consulta.
-          </p>
-          <p>
-            El acceso, uso y/o envío de información a través de la Plataforma
-            implica la aceptación expresa, libre e informada de los términos de
-            la presente Política.
-          </p>
+    <main class="legal-main">
+      <article class="legal-card">
+        <h2>Política de Privacidad – Consultantes</h2>
+        <p>
+          La presente Política de Privacidad regula el tratamiento de los datos
+          personales brindados por las personas que utilizan la plataforma
+          Psicología en Línea, mediante el completado de formularios de contacto
+          y consulta.
+        </p>
+        <p>
+          El acceso, uso y/o envío de información a través de la Plataforma
+          implica la aceptación expresa, libre e informada de los términos de la
+          presente Política.
+        </p>
 
-          {
-            privacySections.map((section) => (
-              <section class="legal-section">
-                <h3>{section.title}</h3>
-                {section.paragraphs.map((paragraph) => (
-                  <p>{paragraph}</p>
+        {
+          privacySections.map((section) => (
+            <section class="legal-section">
+              <h3>{section.title}</h3>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </section>
+          ))
+        }
+
+        <address class="legal-contact">
+          <a href="mailto:contacto@psicologiaenlinea.ar"
+            >contacto@psicologiaenlinea.ar</a
+          >
+        </address>
+      </article>
+
+      <article class="legal-card legal-card--emergency">
+        <h2>Información de Emergencia (Argentina)</h2>
+        <p class="legal-warning">
+          Psicología en Línea no es un servicio de urgencias ni reemplaza la
+          atención médica o de emergencia. Ante una situación de riesgo o
+          urgencia, contactá inmediatamente a los servicios de emergencia de tu
+          localidad.
+        </p>
+
+        {
+          emergencyLines.map((group) => (
+            <section class="legal-section">
+              <h3>{group.title}</h3>
+              <ul class="legal-list">
+                {group.items.map((item) => (
+                  <li>{item}</li>
                 ))}
-              </section>
-            ))
-          }
+              </ul>
+            </section>
+          ))
+        }
 
-          <p class="legal-contact">
-            <a href="mailto:contacto@psicologiaenlinea.ar"
-              >contacto@psicologiaenlinea.ar</a
+        <section class="legal-section">
+          <h3>Asistencia al Suicida</h3>
+          <p>
+            <a
+              href="https://www.asistenciaalsuicida.org.ar/ayuda"
+              target="_blank"
+              rel="noopener noreferrer"
             >
+              www.asistenciaalsuicida.org.ar/ayuda
+            </a>
           </p>
-        </article>
+        </section>
 
-        <article class="legal-card legal-card--emergency">
-          <h2>Información de Emergencia (Argentina)</h2>
-          <p class="legal-warning">
-            Psicología en Línea no es un servicio de urgencias ni reemplaza la
-            atención médica o de emergencia. Ante una situación de riesgo o
-            urgencia, contactá inmediatamente a los servicios de emergencia de
-            tu localidad.
+        <section class="legal-section">
+          <h3>Hospitales y dispositivos de urgencia en salud mental (CABA)</h3>
+          <div class="hospital-list">
+            {
+              hospitals.map((hospital) => (
+                <article class="hospital-item">
+                  <h4>{hospital.name}</h4>
+                  <p>{hospital.address}</p>
+                  <p>{hospital.detail}</p>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="legal-section">
+          <h3>Información orientativa</h3>
+          <p>
+            Los números de emergencia listados corresponden a servicios
+            oficiales de atención en Argentina y se brindan con fines
+            informativos.
           </p>
-
-          {
-            emergencyLines.map((group) => (
-              <section class="legal-section">
-                <h3>{group.title}</h3>
-                <ul class="legal-list">
-                  {group.items.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              </section>
-            ))
-          }
-
-          <section class="legal-section">
-            <h3>Asistencia al Suicida</h3>
-            <p>
-              <a
-                href="https://www.asistenciaalsuicida.org.ar/ayuda"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                www.asistenciaalsuicida.org.ar/ayuda
-              </a>
-            </p>
-          </section>
-
-          <section class="legal-section">
-            <h3>
-              Hospitales y dispositivos de urgencia en salud mental (CABA)
-            </h3>
-            <div class="hospital-list">
-              {
-                hospitals.map((hospital) => (
-                  <article class="hospital-item">
-                    <h4>{hospital.name}</h4>
-                    <p>{hospital.address}</p>
-                    <p>{hospital.detail}</p>
-                  </article>
-                ))
-              }
-            </div>
-          </section>
-
-          <section class="legal-section">
-            <h3>Información orientativa</h3>
-            <p>
-              Los números de emergencia listados corresponden a servicios
-              oficiales de atención en Argentina y se brindan con fines
-              informativos.
-            </p>
-          </section>
-        </article>
-      </main>
-    </div>
+        </section>
+      </article>
+    </main>
   </div>
 </section>
 
 <style>
   :root {
+    /* =========================================
+     LEGAL | TOKENS DE COMPONENTE
+     Layout, superficies, color y excepciones
+  ========================================= */
+
     --legal-bg: #f7f4ef;
     --legal-surface: #ffffff;
-    --legal-text: #1f2937;
+    --legal-text: var(--color-text);
     --legal-muted: #5b6472;
     --legal-border: rgba(31, 41, 55, 0.12);
+
     --legal-accent: #8a6f5a;
     --legal-accent-soft: #efe5db;
     --legal-warning-bg: #f8ede8;
-    --legal-shadow: 0 18px 40px rgba(31, 41, 55, 0.08);
-    --legal-maring-top: 9rem;
 
+    --legal-shadow: 0 18px 40px rgba(31, 41, 55, 0.08);
+
+    --legal-margin-top: 9rem;
     --legal-shell-width: 1200px;
+
     --legal-radius: 24px;
     --legal-radius-sm: 16px;
 
@@ -284,167 +288,223 @@ const hospitals = [
     --legal-space-lg: 2rem;
     --legal-space-xl: 3rem;
 
-    --legal-title: clamp(2rem, 4vw, 3.25rem);
-    --legal-h2: clamp(1.35rem, 2vw, 1.8rem);
-    --legal-h3: clamp(1.05rem, 1.3vw, 1.2rem);
-    --legal-text-size: clamp(0.98rem, 0.3vw + 0.92rem, 1.05rem);
-    --legal-line: 1.75;
+    --legal-card-padding: clamp(1.25rem, 2vw, 2.25rem);
+    --legal-card-gap: clamp(1.25rem, 2vw, 2rem);
+
+    --legal-section-gap: 1.5rem;
+    --legal-paragraph-gap: 0.9rem;
+    --legal-list-gap: 0.5rem;
+    --legal-hospital-gap: 0.9rem;
+    --legal-hospital-padding: 1rem;
+
+    /* =========================================
+     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
+     Todas referencian al sistema general
+  ========================================= */
+
+    --legal-hero-title-font-weight: var(--font-weight-bold);
+
+    --legal-lead-font-size: var(--font-size-body-lg);
+    --legal-lead-line-height: var(--line-height-body);
+
+    --legal-update-font-size: var(--font-size-body-sm);
+    --legal-update-line-height: 1.5;
+
+    --legal-h2-font-size: var(--font-size-h2);
+    --legal-h2-font-weight: var(--font-weight-semibold);
+
+    --legal-h3-font-size: var(--font-size-h4);
+    --legal-h3-font-weight: var(--font-weight-semibold);
+
+    --legal-h4-font-size: var(--font-size-h5);
+    --legal-h4-font-weight: var(--font-weight-semibold);
+
+    --legal-eyebrow-font-size: var(--font-size-overline);
+    --legal-eyebrow-font-weight: var(--font-weight-semibold);
+    --legal-eyebrow-letter-spacing: 0.08em;
+
+    --legal-warning-font-size: var(--font-size-body);
+    --legal-warning-line-height: var(--line-height-body);
   }
 
+  /* =========================================
+   PAGE
+========================================= */
+
   .legal-page {
-    background: var(--legal-bg);
-    color: var(--legal-text);
     position: relative;
     overflow: hidden;
+    background: var(--legal-bg);
+    color: var(--legal-text);
   }
 
   .legal-shell {
-    margin-top: var(--legal-maring-top);
+    margin-top: var(--legal-margin-top);
+    max-width: var(--legal-shell-width);
   }
 
+  /* =========================================
+   HERO
+========================================= */
+
   .legal-hero {
-    margin-bottom: var(--legal-space-xl);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    margin-bottom: var(--legal-space-xl);
   }
 
   .legal-eyebrow {
-    margin: 0 0 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--legal-accent);
+    font-size: var(--legal-eyebrow-font-size);
+    font-weight: var(--legal-eyebrow-font-weight);
+    letter-spacing: var(--legal-eyebrow-letter-spacing);
+    text-transform: uppercase;
   }
 
-  .legal-hero h1 {
-    margin: 0 0 1.5rem 0;
-    font-size: var(--legal-title);
-    line-height: 1.1;
+  .legal-hero-title {
+    margin-bottom: 0.5rem;
+    font-weight: var(--legal-hero-title-font-weight);
   }
 
   .legal-lead {
-    margin: 0;
-    color: var(--legal-muted);
-    font-size: 1.05rem;
-    line-height: 1.7;
     width: 100%;
     text-align: start;
+    color: var(--legal-muted);
   }
 
   .legal-update {
-    color: var(--legal-muted);
-    font-size: 0.95rem;
     width: 100%;
     text-align: start;
+    color: var(--legal-muted);
   }
+
+  /* =========================================
+   STRUCTURE
+========================================= */
 
   .legal-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .legal-main {
     display: grid;
-    gap: clamp(1.25rem, 2vw, 2rem);
+    gap: var(--legal-card-gap);
   }
+
+  /* =========================================
+   CARDS
+========================================= */
 
   .legal-card {
     background: var(--legal-surface);
     border: 1px solid var(--legal-border);
     border-radius: var(--legal-radius);
-    padding: clamp(1.25rem, 2vw, 2.25rem);
+    padding: var(--legal-card-padding);
     box-shadow: var(--legal-shadow);
   }
 
-  .legal-card h2 {
-    margin: 0 0 1rem;
-    font-size: var(--legal-h2);
-    line-height: 1.2;
+  .legal-card--emergency {
+    background: var(--legal-surface);
   }
+
+  /* =========================================
+   HEADINGS INSIDE CARDS
+========================================= */
+
+  .legal-card h2,
+  .legal-card .h2,
+  .legal-card .subtitle-general {
+    margin-bottom: 1rem;
+    font-size: var(--legal-h2-font-size);
+    font-weight: var(--legal-h2-font-weight);
+  }
+
+  .legal-section h3,
+  .legal-section .h3 {
+    margin-bottom: 0.75rem;
+    font-size: var(--legal-h3-font-size);
+    font-weight: var(--legal-h3-font-weight);
+  }
+
+  .hospital-item h4,
+  .hospital-item .h4 {
+    margin-bottom: 0.4rem;
+    font-size: var(--legal-h4-font-size);
+    font-weight: var(--legal-h4-font-weight);
+  }
+
+  /* =========================================
+   SECTIONS / FLOW
+========================================= */
 
   .legal-section + .legal-section {
-    margin-top: 1.5rem;
-  }
-
-  .legal-section h3 {
-    margin: 0 0 0.75rem;
-    font-size: var(--legal-h3);
-    line-height: 1.3;
+    margin-top: var(--legal-section-gap);
   }
 
   .legal-section:first-of-type {
-    margin-top: 1.5rem;
+    margin-top: var(--legal-section-gap);
   }
 
   .legal-card p,
   .legal-card li {
-    margin: 0;
-    font-size: var(--legal-text-size);
-    line-height: var(--legal-line);
     color: var(--legal-text);
   }
 
   .legal-card p + p {
-    margin-top: 0.9rem;
+    margin-top: var(--legal-paragraph-gap);
   }
+
+  /* =========================================
+   LISTS
+========================================= */
 
   .legal-list {
-    margin: 0;
-    padding-left: 1.2rem;
     display: grid;
-    gap: 0.5rem;
+    gap: var(--legal-list-gap);
+    padding-left: 1.2rem;
   }
 
+  /* =========================================
+   WARNING BLOCK
+========================================= */
+
   .legal-warning {
+    padding: 1rem 1.1rem;
     background: var(--legal-warning-bg);
     border: 1px solid rgba(138, 111, 90, 0.18);
     border-radius: var(--legal-radius-sm);
-    padding: 1rem 1.1rem;
+    font-size: var(--legal-warning-font-size);
+    line-height: var(--legal-warning-line-height);
   }
+
+  /* =========================================
+   HOSPITALS
+========================================= */
 
   .hospital-list {
     display: grid;
-    gap: 0.9rem;
+    gap: var(--legal-hospital-gap);
   }
 
   .hospital-item {
+    padding: var(--legal-hospital-padding);
     border: 1px solid var(--legal-border);
     border-radius: var(--legal-radius-sm);
-    padding: 1rem;
     background: #fcfbf9;
-  }
-
-  .hospital-item h4 {
-    margin: 0 0 0.4rem;
-    font-size: 1rem;
-    line-height: 1.35;
   }
 
   .hospital-item p + p {
     margin-top: 0.35rem;
   }
 
-  .legal-aside {
-    position: relative;
-  }
-
-  .legal-meta {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.9rem;
-  }
-
-  .legal-meta li {
-    line-height: 1.6;
-    color: var(--legal-text);
-  }
+  /* =========================================
+   LINKS
+========================================= */
 
   .legal-contact a,
   .legal-meta a,
@@ -459,6 +519,30 @@ const hospitals = [
     text-decoration: underline;
   }
 
+  /* =========================================
+   UNUSED / OPTIONAL BLOCKS
+   Los dejo prolijos por si después los usás
+========================================= */
+
+  .legal-aside {
+    position: relative;
+  }
+
+  .legal-meta {
+    display: grid;
+    gap: 0.9rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal-meta li {
+    color: var(--legal-text);
+  }
+
+  /* =========================================
+   RESPONSIVE
+========================================= */
+
   @media (max-width: 960px) {
     .legal-grid {
       grid-template-columns: 1fr;
@@ -471,8 +555,8 @@ const hospitals = [
     }
 
     .legal-card {
-      border-radius: 20px;
       padding: 1.15rem;
+      border-radius: 20px;
     }
   }
 </style>

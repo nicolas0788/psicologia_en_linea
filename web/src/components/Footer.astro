@@ -12,38 +12,36 @@
         >
       </div>
 
-      <p class="footer-description">
+      <p>
         Atención online desde cualquier lugar del mundo y presencial en CABA.
       </p>
-      <p class="footer-description">
-        Red de psicólogos y psicólogas matriculados en Argentina.
-      </p>
+      <p>Red de psicólogos y psicólogas matriculados en Argentina.</p>
     </div>
 
     <!--DIV LINKS Y CONTACTO -->
     <div class="footer-block__container row--bottom">
       <!-- BLOQUE 2: NAVEGACIÓN -->
       <nav class="footer-block footer-nav" aria-label="Enlaces del sitio">
-        <h3 class="footer-title">Links útiles</h3>
+        <h3>Links útiles</h3>
         <ul>
           <li>
-            <a href="#"> Inicio </a>
+            <a href="#">Inicio</a>
           </li>
           <li>
-            <a href="#"> Servicios </a>
+            <a href="#">Servicios</a>
           </li>
           <li>
-            <a href="#"> Sobre mí </a>
+            <a href="#">Sobre mí</a>
           </li>
           <li>
-            <a href="#"> Contacto </a>
+            <a href="#">Contacto</a>
           </li>
         </ul>
       </nav>
 
       <!-- BLOQUE 3: CONTACTO -->
       <div class="footer-block footer-contact">
-        <h3 class="footer-title">Contacto</h3>
+        <h3>Contacto</h3>
         <ul>
           <li>
             <span class="footer-icon">📧</span>
@@ -62,9 +60,9 @@
 
       <!-- BLOQUE 4: REDES -->
       <div class="footer-block">
-        <h3 class="footer-title">Seguinos</h3>
+        <h3>Seguinos</h3>
         <div class="footer-social">
-          <a href="#"><span class="footer-icon">🌐</span>Instagrm</a>
+          <a href="#"><span class="footer-icon">🌐</span>Instagram</a>
           <a href="#"><span class="footer-icon">📷</span>Facebook</a>
           <a href="#"><span class="footer-icon">💼</span>Otro</a>
         </div>
@@ -82,17 +80,20 @@
     --gap-block--horizontal: clamp(5rem, 5rem + 6vw, 7rem);
     --gap-block--vertical: 1.5rem;
 
-    --color-footer: #1f4e79;
-    --color-txt: #fff;
+    --footer-color-bg: #1e2e3a;
+    --footer-color-txt: #fff;
     --row: 0.8px solid gray;
     --row-padding: 2rem;
   }
+
   /* ================= FOOTER ================= */
 
   .site-footer {
-    background: var(--color-footer);
-    color: var(--color-txt);
-    font-size: 0.95rem;
+    background: var(--footer-color-bg);
+  }
+
+  .site-footer * {
+    color: var(--footer-color-txt);
   }
 
   /* CONTENEDOR */
@@ -121,24 +122,13 @@
     gap: var(--gap-title);
   }
 
-  /* TITULOS */
+  /* TITULOS NORMALIZADOS */
 
-  .footer-title {
-    font-size: 1rem;
-    font-weight: 600;
+  .footer-block h3 {
     text-align: center;
   }
 
-  /* BRAND */
-
-  .footer-logo {
-    font-size: 1.4rem;
-  }
-
-  .footer-description {
-    opacity: 0.7;
-    line-height: 1.5;
-  }
+  /* TEXTOS DE MARCA NORMALIZADOS */
 
   /* LISTAS */
 
@@ -175,12 +165,12 @@
   .footer-nav a {
     text-decoration: none;
     color: inherit;
-    opacity: 0.8;
+    opacity: 1;
     transition: opacity 0.2s ease;
   }
 
   .footer-nav a:hover {
-    opacity: 1;
+    opacity: 0.8;
   }
 
   /* BOTTOM */
@@ -190,8 +180,6 @@
     padding: 1rem;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
-    opacity: 0.6;
   }
 
   /* ROW */
@@ -211,10 +199,12 @@
     justify-content: center;
     align-items: center;
   }
+
   .footer-logo {
     height: 60px;
     width: auto;
   }
+
   .footer-logo--img {
     height: 100%;
     width: auto;
@@ -238,10 +228,14 @@
       gap: var(--gap-block--horizontal);
     }
 
+    .footer-block h3 {
+      text-align: left;
+    }
+
     .footer-nav,
     .footer-contact {
       border-bottom: none;
-      padding-bottom: none;
+      padding-bottom: 0;
     }
   }
 </style>

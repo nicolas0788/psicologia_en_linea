@@ -1,0 +1,726 @@
+---
+/**
+ * ============================================================================
+ * COMPONENTE: Button
+ * ============================================================================
+ *
+ * DESCRIPCIÓN
+ * ----------------------------------------------------------------------------
+ * Componente reutilizable de botón/enlace para Astro.
+ *
+ * Este componente permite renderizar:
+ * - un <a> cuando se recibe la prop `href`
+ * - un <button> cuando no se recibe `href`
+ *
+ * Está pensado para funcionar como una base escalable de sistema de diseño,
+ * permitiendo personalización por props y por variables CSS.
+ *
+ *
+ * OBJETIVOS DEL COMPONENTE
+ * ----------------------------------------------------------------------------
+ * - Reutilizar un mismo botón en distintas secciones del proyecto
+ * - Evitar repetir clases y estilos en cada vista
+ * - Mantener consistencia visual y de interacción
+ * - Permitir variantes visuales sin reescribir HTML
+ * - Facilitar accesibilidad y mantenimiento
+ *
+ *
+ * COMPORTAMIENTO GENERAL
+ * ----------------------------------------------------------------------------
+ * - Si recibe `href`, renderiza un <a>
+ * - Si NO recibe `href`, renderiza un <button>
+ * - Si `target="_blank"`, agrega automáticamente `rel="noopener noreferrer"`
+ *   si no se pasó `rel`
+ * - Permite contenido por `label` o por <slot>
+ * - Soporta estados hover, focus-visible, active y disabled
+ * - Soporta variantes:
+ *   - solid
+ *   - outline
+ *   - ghost
+ *
+ *
+ * ============================================================================
+ * PROPS DISPONIBLES
+ * ============================================================================
+ *
+ * ESTRUCTURA Y NAVEGACIÓN
+ * ----------------------------------------------------------------------------
+ * @prop {string} href
+ * URL de destino. Si existe, el componente renderiza un <a>.
+ *
+ * @prop {string} label
+ * Texto del botón si no se usa slot.
+ * Default: "Botón"
+ *
+ * @prop {"button" | "submit" | "reset"} type
+ * Tipo del botón cuando se renderiza un <button>.
+ * Default: "button"
+ *
+ * @prop {"solid" | "outline" | "ghost"} variant
+ * Variante visual del botón.
+ * Default: "solid"
+ *
+ * @prop {string} target
+ * Target del enlace. Ejemplo: "_blank"
+ *
+ * @prop {string} rel
+ * Rel del enlace. Si target es "_blank" y no se pasa rel,
+ * se usa automáticamente "noopener noreferrer".
+ *
+ *
+ * ESTADO Y COMPORTAMIENTO
+ * ----------------------------------------------------------------------------
+ * @prop {boolean} fullWidth
+ * Si es true, el botón ocupa todo el ancho disponible.
+ * Default: false
+ *
+ * @prop {boolean} disabled
+ * Desactiva interacción visual y funcional.
+ * En <button> usa atributo disabled.
+ * En <a> evita navegación y aplica aria-disabled.
+ * Default: false
+ *
+ *
+ * IDENTIFICACIÓN Y ACCESIBILIDAD
+ * ----------------------------------------------------------------------------
+ * @prop {string} id
+ * ID opcional del elemento.
+ *
+ * @prop {string} ariaLabel
+ * Etiqueta accesible personalizada.
+ * Recomendado cuando el contenido visual no describe completamente la acción.
+ *
+ * @prop {string} className
+ * Clase extra para extender o ajustar estilos desde fuera.
+ *
+ *
+ * PERSONALIZACIÓN VISUAL
+ * ----------------------------------------------------------------------------
+ * @prop {string} bg
+ * Color/fondo base del botón.
+ *
+ * @prop {string} color
+ * Color del texto base.
+ *
+ * @prop {string} borderColor
+ * Color del borde base.
+ *
+ * @prop {string} hoverBg
+ * Fondo en hover/focus-visible.
+ *
+ * @prop {string} hoverColor
+ * Color del texto en hover/focus-visible.
+ *
+ * @prop {string} hoverBorderColor
+ * Color del borde en hover/focus-visible.
+ *
+ * @prop {string} focusColor
+ * Color del outline de accesibilidad.
+ *
+ *
+ * ESPACIADO Y FORMA
+ * ----------------------------------------------------------------------------
+ * @prop {string} paddingY
+ * Padding vertical.
+ *
+ * @prop {string} paddingX
+ * Padding horizontal.
+ *
+ * @prop {string} radius
+ * Radio de borde.
+ *
+ * @prop {string} minWidth
+ * Ancho mínimo.
+ *
+ * @prop {string} justify
+ * Alineación horizontal interna del contenido.
+ * Ejemplo: "center", "flex-start", "space-between"
+ *
+ *
+ * TIPOGRAFÍA
+ * ----------------------------------------------------------------------------
+ * @prop {string} fontSize
+ * Tamaño de fuente.
+ *
+ * @prop {string} fontWeight
+ * Peso tipográfico.
+ *
+ * @prop {string} lineHeight
+ * Alto de línea.
+ *
+ *
+ * BORDE Y SOMBRA
+ * ----------------------------------------------------------------------------
+ * @prop {string} borderWidth
+ * Grosor del borde.
+ *
+ * @prop {string} shadow
+ * Sombra base.
+ *
+ * @prop {string} hoverShadow
+ * Sombra en hover/focus-visible.
+ *
+ *
+ * ANIMACIÓN
+ * ----------------------------------------------------------------------------
+ * @prop {string} hoverTranslateY
+ * Desplazamiento vertical en hover.
+ * Ejemplo: "-2px"
+ *
+ * @prop {string} transitionDuration
+ * Duración de transición.
+ *
+ * @prop {string} transitionEase
+ * Curva de aceleración de transición.
+ *
+ *
+ * ============================================================================
+ * PRIORIDAD DE CONTENIDO
+ * ============================================================================
+ *
+ * El componente puede mostrar contenido de dos maneras:
+ *
+ * 1. Por `label`
+ *    <Button label="Comenzar" />
+ *
+ * 2. Por slot
+ *    <Button>Comenzar</Button>
+ *
+ * Si se usa slot, el slot reemplaza visualmente al label.
+ *
+ *
+ * ============================================================================
+ * VARIABLES CSS INTERNAS
+ * ============================================================================
+ *
+ * Estas variables son generadas por props y aplicadas inline en el componente:
+ *
+ * --btn-bg
+ * --btn-color
+ * --btn-border-color
+ * --btn-hover-bg
+ * --btn-hover-color
+ * --btn-hover-border-color
+ * --btn-focus-color
+ * --btn-padding-y
+ * --btn-padding-x
+ * --btn-radius
+ * --btn-font-size
+ * --btn-font-weight
+ * --btn-line-height
+ * --btn-border-width
+ * --btn-shadow
+ * --btn-hover-shadow
+ * --btn-hover-translate-y
+ * --btn-transition-duration
+ * --btn-transition-ease
+ * --btn-min-width
+ * --btn-justify
+ * --btn-width
+ *
+ *
+ * ============================================================================
+ * VARIANTES DISPONIBLES
+ * ============================================================================
+ *
+ * 1. solid
+ * ----------------------------------------------------------------------------
+ * Botón lleno.
+ * Usa fondo principal y color de texto principal.
+ *
+ * 2. outline
+ * ----------------------------------------------------------------------------
+ * Botón con fondo transparente y borde visible.
+ *
+ * 3. ghost
+ * ----------------------------------------------------------------------------
+ * Botón minimalista, sin borde visible por defecto.
+ *
+ *
+ * ============================================================================
+ * ESTADOS VISUALES
+ * ============================================================================
+ *
+ * HOVER
+ * ----------------------------------------------------------------------------
+ * - Cambia fondo, color, borde, sombra y translateY según props
+ *
+ * FOCUS-VISIBLE
+ * ----------------------------------------------------------------------------
+ * - Replica comportamiento visual de hover
+ * - Agrega outline accesible con `focusColor`
+ *
+ * ACTIVE
+ * ----------------------------------------------------------------------------
+ * - Elimina el translateY
+ * - Recupera la sombra base
+ *
+ * DISABLED
+ * ----------------------------------------------------------------------------
+ * - Reduce opacidad
+ * - Desactiva interacción
+ * - Quita efectos hover/active
+ *
+ *
+ * ============================================================================
+ * ACCESIBILIDAD
+ * ============================================================================
+ *
+ * RECOMENDACIONES
+ * ----------------------------------------------------------------------------
+ * - Usar texto claro y orientado a la acción
+ * - Mantener contraste suficiente entre fondo y texto
+ * - No eliminar focus-visible
+ * - Usar `ariaLabel` cuando el contenido no sea suficientemente descriptivo
+ * - Para acciones de formulario, usar <button type="submit">
+ * - Para navegación, usar href y renderizar como <a>
+ *
+ *
+ * DIFERENCIA ENTRE ENLACE Y BOTÓN
+ * ----------------------------------------------------------------------------
+ * Usar <a> cuando:
+ * - el usuario navega a otra URL
+ *
+ * Usar <button> cuando:
+ * - ejecuta una acción en la interfaz
+ * - abre un modal
+ * - envía un formulario
+ * - dispara JS
+ *
+ *
+ * ============================================================================
+ * CASOS DE USO RECOMENDADOS
+ * ============================================================================
+ *
+ * NAVEGACIÓN
+ * ----------------------------------------------------------------------------
+ * <Button href="/contacto" label="Contactar" />
+ *
+ * ENVÍO DE FORMULARIO
+ * ----------------------------------------------------------------------------
+ * <Button type="submit" label="Enviar" />
+ *
+ * BOTÓN SECUNDARIO
+ * ----------------------------------------------------------------------------
+ * <Button
+ *   href="/servicios"
+ *   variant="outline"
+ *   label="Ver servicios"
+ *   color="#1e3a8a"
+ *   borderColor="#1e3a8a"
+ *   hoverBg="#1e3a8a"
+ *   hoverColor="#ffffff"
+ *   hoverBorderColor="#1e3a8a"
+ * />
+ *
+ * BOTÓN DE ANCHO COMPLETO
+ * ----------------------------------------------------------------------------
+ * <Button
+ *   href="/comenzar"
+ *   label="Comenzar ahora"
+ *   fullWidth={true}
+ * />
+ *
+ *
+ * ============================================================================
+ * EJEMPLOS DE USO
+ * ============================================================================
+ *
+ * EJEMPLO 1: BÁSICO
+ * ----------------------------------------------------------------------------
+ * <Button href="/form" label="Comenzar ahora" />
+ *
+ *
+ * EJEMPLO 2: COMO SUBMIT
+ * ----------------------------------------------------------------------------
+ * <Button type="submit" label="Enviar formulario" />
+ *
+ *
+ * EJEMPLO 3: CON SLOT
+ * ----------------------------------------------------------------------------
+ * <Button href="/contacto">Solicitar turno</Button>
+ *
+ *
+ * EJEMPLO 4: OUTLINE
+ * ----------------------------------------------------------------------------
+ * <Button
+ *   href="/servicios"
+ *   variant="outline"
+ *   label="Ver servicios"
+ *   color="#1e3a8a"
+ *   borderColor="#1e3a8a"
+ *   hoverBg="#1e3a8a"
+ *   hoverColor="#ffffff"
+ *   hoverBorderColor="#1e3a8a"
+ * />
+ *
+ *
+ * EJEMPLO 5: TOTALMENTE PERSONALIZADO
+ * ----------------------------------------------------------------------------
+ * <Button
+ *   href="/comenzar"
+ *   label="Comenzar ahora"
+ *   bg="#1e3a8a"
+ *   color="#ffffff"
+ *   hoverBg="#2851c3"
+ *   hoverColor="#ffffff"
+ *   radius="999px"
+ *   paddingY="0.9rem"
+ *   paddingX="1.8rem"
+ *   fontSize="1rem"
+ *   fontWeight="700"
+ *   shadow="0 4px 10px rgba(0,0,0,0.12)"
+ *   hoverShadow="0 10px 24px rgba(0,0,0,0.2)"
+ *   hoverTranslateY="-3px"
+ * />
+ *
+ *
+ * ============================================================================
+ * CRITERIOS DE DISEÑO
+ * ============================================================================
+ *
+ * Este componente está pensado para:
+ *
+ * - centralizar el estilo de botones del proyecto
+ * - reducir duplicación de código
+ * - permitir cambios globales rápidos
+ * - mantener una base coherente para un sistema de UI reutilizable
+ *
+ * El contenedor externo NO forma parte del componente.
+ * El layout debe resolverse fuera del botón.
+ *
+ * Correcto:
+ * <div class="hero__actions">
+ *   <Button href="/form" label="Comenzar ahora" />
+ * </div>
+ *
+ * Evitar:
+ * - meter wrappers fijos dentro del componente
+ * - acoplar el botón a una sola sección
+ * - mezclar navegación y acciones sin criterio semántico
+ *
+ *
+ * ============================================================================
+ * POSIBLES MEJORAS FUTURAS
+ * ============================================================================
+ *
+ * - agregar size: "sm" | "md" | "lg"
+ * - agregar iconos izquierdo/derecho
+ * - agregar loading
+ * - agregar control de solo icono
+ * - agregar data-attributes para integrarlo al sistema general
+ * - agregar variantes de color predefinidas
+ *
+ * ============================================================================
+ */
+
+interface Props {
+  href?: string;
+  label?: string;
+  type?: "button" | "submit" | "reset";
+
+  variant?: "solid" | "outline" | "ghost";
+  target?: string;
+  rel?: string;
+
+  fullWidth?: boolean;
+  disabled?: boolean;
+
+  className?: string;
+
+  bg?: string;
+  color?: string;
+  borderColor?: string;
+
+  hoverBg?: string;
+  hoverColor?: string;
+  hoverBorderColor?: string;
+
+  focusColor?: string;
+
+  paddingY?: string;
+  paddingX?: string;
+  radius?: string;
+
+  fontSize?: string;
+  fontWeight?: string;
+  lineHeight?: string;
+
+  borderWidth?: string;
+
+  shadow?: string;
+  hoverShadow?: string;
+
+  hoverTranslateY?: string;
+  transitionDuration?: string;
+  transitionEase?: string;
+
+  minWidth?: string;
+  justify?: string;
+
+  id?: string;
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  label = "Botón",
+  type = "button",
+
+  variant = "solid",
+  target,
+  rel,
+
+  fullWidth = false,
+  disabled = false,
+
+  className = "",
+
+  bg,
+  color,
+  borderColor,
+
+  hoverBg,
+  hoverColor,
+  hoverBorderColor,
+
+  focusColor,
+
+  paddingY,
+  paddingX,
+  radius,
+
+  fontSize,
+  fontWeight,
+  lineHeight,
+
+  borderWidth,
+
+  shadow,
+  hoverShadow,
+
+  hoverTranslateY,
+  transitionDuration,
+  transitionEase,
+
+  minWidth,
+  justify,
+
+  id,
+  ariaLabel,
+} = Astro.props;
+
+const computedRel = target === "_blank" ? (rel ?? "noopener noreferrer") : rel;
+
+const styleVars = `
+  --btn-bg: ${bg ?? "#1e3a8a"};
+  --btn-color: ${color ?? "#ffffff"};
+  --btn-border-color: ${borderColor ?? "transparent"};
+
+  --btn-hover-bg: ${hoverBg ?? "#16306f"};
+  --btn-hover-color: ${hoverColor ?? "#ffffff"};
+  --btn-hover-border-color: ${hoverBorderColor ?? "transparent"};
+
+  --btn-focus-color: ${focusColor ?? "#60d9ff"};
+
+  --btn-padding-y: ${paddingY ?? "0.75rem"};
+  --btn-padding-x: ${paddingX ?? "1.5rem"};
+  --btn-radius: ${radius ?? "999px"};
+
+  --btn-font-size: ${fontSize ?? "1rem"};
+  --btn-font-weight: ${fontWeight ?? "600"};
+  --btn-line-height: ${lineHeight ?? "1.2"};
+
+  --btn-border-width: ${borderWidth ?? "2px"};
+
+  --btn-shadow: ${shadow ?? "none"};
+  --btn-hover-shadow: ${hoverShadow ?? "0 8px 20px rgba(0, 0, 0, 0.2)"};
+
+  --btn-hover-translate-y: ${hoverTranslateY ?? "-2px"};
+  --btn-transition-duration: ${transitionDuration ?? "0.25s"};
+  --btn-transition-ease: ${transitionEase ?? "ease"};
+
+  --btn-min-width: ${minWidth ?? "fit-content"};
+  --btn-justify: ${justify ?? "center"};
+  --btn-width: ${fullWidth ? "100%" : "auto"};
+`;
+---
+
+{
+  href ? (
+    <a
+      id={id}
+      href={disabled ? undefined : href}
+      target={target}
+      rel={computedRel}
+      aria-label={ariaLabel}
+      aria-disabled={disabled ? "true" : undefined}
+      class={`btn btn--${variant} ${fullWidth ? "btn--full" : ""} ${disabled ? "is-disabled" : ""} ${className}`}
+      style={styleVars}
+    >
+      <slot>{label}</slot>
+    </a>
+  ) : (
+    <button
+      id={id}
+      type={type}
+      aria-label={ariaLabel}
+      disabled={disabled}
+      class={`btn btn--${variant} ${fullWidth ? "btn--full" : ""} ${className}`}
+      style={styleVars}
+    >
+      <slot>{label}</slot>
+    </button>
+  )
+}
+
+<style>
+  :root {
+    --btn-bg: #1e3a8a;
+    --btn-color: #ffffff;
+    --btn-border-color: transparent;
+
+    --btn-hover-bg: #16306f;
+    --btn-hover-color: #ffffff;
+    --btn-hover-border-color: transparent;
+
+    --btn-focus-color: #60d9ff;
+
+    --btn-padding-y: 0.75rem;
+    --btn-padding-x: 1.5rem;
+    --btn-radius: 999px;
+
+    --btn-font-size: 1rem;
+    --btn-font-weight: 600;
+    --btn-line-height: 1.2;
+
+    --btn-border-width: 2px;
+
+    --btn-shadow: none;
+    --btn-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    --btn-hover-translate-y: -2px;
+    --btn-transition-duration: 0.25s;
+    --btn-transition-ease: ease;
+
+    --btn-min-width: fit-content;
+    --btn-justify: center;
+    --btn-width: auto;
+  }
+
+  /* ================= BOTON BASE ================= */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: var(--btn-justify);
+
+    width: var(--btn-width);
+    min-width: var(--btn-min-width);
+
+    white-space: nowrap;
+    text-decoration: none;
+
+    font-size: var(--btn-font-size);
+    font-weight: var(--btn-font-weight);
+    line-height: var(--btn-line-height);
+
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    border-radius: var(--btn-radius);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+
+    cursor: pointer;
+    user-select: none;
+
+    transition:
+      transform var(--btn-transition-duration) var(--btn-transition-ease),
+      box-shadow var(--btn-transition-duration) var(--btn-transition-ease),
+      background-color var(--btn-transition-duration) var(--btn-transition-ease),
+      color var(--btn-transition-duration) var(--btn-transition-ease),
+      border-color var(--btn-transition-duration) var(--btn-transition-ease),
+      opacity var(--btn-transition-duration) var(--btn-transition-ease);
+
+    box-shadow: var(--btn-shadow);
+  }
+
+  /* ================= VARIANTE SOLID ================= */
+
+  .btn--solid {
+    background: var(--btn-bg);
+    color: var(--btn-color);
+  }
+
+  .btn--solid:hover,
+  .btn--solid:focus-visible {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border-color: var(--btn-hover-border-color);
+    transform: translateY(var(--btn-hover-translate-y));
+    box-shadow: var(--btn-hover-shadow);
+  }
+
+  /* ================= VARIANTE OUTLINE ================= */
+
+  .btn--outline {
+    background: transparent;
+    color: var(--btn-color);
+    border-color: var(--btn-border-color);
+  }
+
+  .btn--outline:hover,
+  .btn--outline:focus-visible {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border-color: var(--btn-hover-border-color);
+    transform: translateY(var(--btn-hover-translate-y));
+    box-shadow: var(--btn-hover-shadow);
+  }
+
+  /* ================= VARIANTE GHOST ================= */
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--btn-color);
+    border-color: transparent;
+  }
+
+  .btn--ghost:hover,
+  .btn--ghost:focus-visible {
+    background: var(--btn-hover-bg);
+    color: var(--btn-hover-color);
+    border-color: var(--btn-hover-border-color);
+    transform: translateY(var(--btn-hover-translate-y));
+    box-shadow: var(--btn-hover-shadow);
+  }
+
+  /* ================= ACTIVE ================= */
+
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: var(--btn-shadow);
+  }
+
+  /* ================= FOCUS ================= */
+
+  .btn:focus-visible {
+    outline: 2px solid var(--btn-focus-color);
+    outline-offset: 3px;
+  }
+
+  /* ================= FULL WIDTH ================= */
+
+  .btn--full {
+    width: 100%;
+  }
+
+  /* ================= DISABLED ================= */
+
+  .btn.is-disabled,
+  .btn:disabled {
+    opacity: 0.55;
+    pointer-events: none;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+</style>

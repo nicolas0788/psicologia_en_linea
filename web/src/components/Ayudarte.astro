@@ -1,26 +1,27 @@
----
-
----
-
-<section class="section-general help-section">
+<section
+  class="section-general help-section"
+  aria-labelledby="help-section-title"
+>
   <div class="container-general help-container">
-    <h3 class="title-general">¿En qué podemos ayudarte?</h3>
-    <article class="card-container">
-      <p class="help-text">
+    <div class="help-heading">
+      <h2 id="help-section-title">¿En qué podemos ayudarte?</h2>
+      <p>
         Un espacio profesional y confidencial para acompañarte en los momentos
         que hoy te están costando más.
       </p>
+    </div>
 
+    <article class="help-card" aria-label="Motivos de consulta frecuentes">
       <ul class="help-grid">
-        <li class="highlight-card">Ansiedad y estrés</li>
-        <li class="highlight-card">Ataques de pánico</li>
-        <li class="highlight-card">Depresión o tristeza</li>
-        <li class="highlight-card">Problemas para dormir</li>
-        <li class="highlight-card">Problemas de pareja</li>
-        <li class="highlight-card">Baja autoestima e inseguridad</li>
-        <li class="highlight-card">Estrés laboral o agotamiento</li>
-        <li class="highlight-card">Conflictos familiares</li>
-        <li class="highlight-card">Sentirte abrumado/a</li>
+        <li>Ansiedad y estrés</li>
+        <li>Ataques de pánico</li>
+        <li>Depresión o tristeza</li>
+        <li>Problemas para dormir</li>
+        <li>Problemas de pareja</li>
+        <li>Baja autoestima e inseguridad</li>
+        <li>Estrés laboral o agotamiento</li>
+        <li>Conflictos familiares</li>
+        <li>Sentirte abrumado/a</li>
       </ul>
     </article>
   </div>
@@ -28,24 +29,68 @@
 
 <style>
   .help-section {
-    background: linear-gradient(180deg, #f7fbff 0%, #eef6f8 100%);
-  }
-  .help-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    gap: var(--gap-section-column);
+    background: linear-gradient(180deg, #f8fbfd 0%, #edf5f7 100%);
   }
 
-  .help-text {
-    color: #4b5a5a;
+  .help-container {
+    display: grid;
+    gap: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+  .help-heading {
+    display: grid;
+    gap: 0.85rem;
+    max-width: 52rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .help-heading p {
+    color: var(--color-text-soft);
+  }
+
+  .help-card {
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 1.5rem;
+    box-shadow:
+      0 10px 30px rgba(17, 24, 39, 0.06),
+      0 2px 10px rgba(17, 24, 39, 0.04);
+    backdrop-filter: blur(8px);
+    padding: clamp(1.25rem, 2vw, 2rem);
   }
 
   .help-grid {
+    list-style: none;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
+  }
+
+  .help-grid li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 5.25rem;
+    padding: 1.1rem 1.15rem 1.1rem 3rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fcfd 100%);
+    border: 1px solid rgba(17, 24, 39, 0.07);
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(17, 24, 39, 0.04);
+    color: var(--color-text);
+  }
+
+  .help-grid li::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(180deg, #8fb8c7 0%, #6e97a8 100%);
+    box-shadow: 0 0 0 0.35rem rgba(143, 184, 199, 0.18);
   }
 
   @media (max-width: 900px) {
@@ -55,12 +100,12 @@
   }
 
   @media (max-width: 640px) {
-    .help-section {
-      padding: 3.5rem 1rem;
-    }
-
     .help-grid {
       grid-template-columns: 1fr;
+    }
+
+    .help-grid li {
+      min-height: auto;
     }
   }
 </style>

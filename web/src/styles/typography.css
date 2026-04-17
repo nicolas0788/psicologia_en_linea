@@ -1,11 +1,459 @@
-.title-general {
-  margin: 0;
-  font-size: clamp(1.5rem, calc(1.5rem + 1.5 * (100vw - 320px) / 704), 3rem);
-  line-height: 1.1;
+/* =========================================
+   TIPOGRAFÍA GENERAL DEL PROYECTO
+   Base profesional, escalable y reutilizable
+========================================= */
+
+:root {
+  /* =========================
+     FONT FAMILY
+  ========================= */
+  --font-family-base: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  --font-family-heading: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* =========================
+     COLORS
+  ========================= */
+  --color-text: #1f2937;
+  --color-text-soft: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-heading: #111827;
+  --color-link: inherit;
+
+  /* =========================
+     FONT WEIGHTS
+  ========================= */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* =========================
+     LINE HEIGHTS
+  ========================= */
+  --line-height-tight: 1.1;
+  --line-height-heading: 1.15;
+  --line-height-body: 1.6;
+  --line-height-form: 1.4;
+
+  /* =========================
+     LETTER SPACING
+  ========================= */
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-heading: -0.02em;
+  --letter-spacing-body: 0;
+  --letter-spacing-wide: 0.02em;
+
+  /* =========================
+     RESPONSIVE SCALE
+     Base desktop target: 1024px aprox
+  ========================= */
+  --font-size-h1: clamp(2rem, calc(2rem + 1.2 * (100vw - 320px) / 704), 3.2rem);
+  --font-size-h2: clamp(
+    1.6rem,
+    calc(1.6rem + 0.9 * (100vw - 320px) / 704),
+    2.5rem
+  );
+  --font-size-h3: clamp(
+    1.35rem,
+    calc(1.35rem + 0.65 * (100vw - 320px) / 704),
+    2rem
+  );
+  --font-size-h4: clamp(
+    1.15rem,
+    calc(1.15rem + 0.45 * (100vw - 320px) / 704),
+    1.55rem
+  );
+  --font-size-h5: clamp(
+    1rem,
+    calc(1rem + 0.3 * (100vw - 320px) / 704),
+    1.25rem
+  );
+  --font-size-h6: clamp(
+    0.95rem,
+    calc(0.95rem + 0.2 * (100vw - 320px) / 704),
+    1.1rem
+  );
+
+  --font-size-body-lg: clamp(
+    1.05rem,
+    calc(1.05rem + 0.2 * (100vw - 320px) / 704),
+    1.25rem
+  );
+  --font-size-body: clamp(
+    1rem,
+    calc(1rem + 0.14 * (100vw - 320px) / 704),
+    1.125rem
+  );
+  --font-size-body-sm: clamp(
+    0.92rem,
+    calc(0.92rem + 0.08 * (100vw - 320px) / 704),
+    1rem
+  );
+
+  --font-size-label: clamp(
+    0.95rem,
+    calc(0.95rem + 0.08 * (100vw - 320px) / 704),
+    1rem
+  );
+  --font-size-input: clamp(
+    1rem,
+    calc(1rem + 0.08 * (100vw - 320px) / 704),
+    1.05rem
+  );
+  --font-size-button: clamp(
+    0.98rem,
+    calc(0.98rem + 0.12 * (100vw - 320px) / 704),
+    1.05rem
+  );
+  --font-size-caption: clamp(
+    0.82rem,
+    calc(0.82rem + 0.08 * (100vw - 320px) / 704),
+    0.92rem
+  );
+
+  /* =========================
+     OPTIONAL SPECIAL SIZES
+  ========================= */
+  --font-size-overline: clamp(
+    0.75rem,
+    calc(0.75rem + 0.08 * (100vw - 320px) / 704),
+    0.85rem
+  );
+  --font-size-small: var(--font-size-body-sm);
 }
 
+/* =========================================
+   RESET TIPOGRÁFICO GLOBAL
+========================================= */
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  color: var(--color-text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
 p,
-li {
-  font-size: clamp(1rem, calc(1rem + 0.4 * (100vw - 320px) / 704), 1.4rem);
-  line-height: 1.6;
+.p,
+ul,
+.ol,
+ol,
+li,
+.li,
+a,
+.a,
+span,
+.span,
+small,
+.small,
+strong,
+.strong,
+em,
+.em,
+label,
+.label,
+legend,
+.legend,
+blockquote,
+.blockquote,
+cite,
+.cite,
+figcaption,
+.figcaption,
+input,
+.input,
+textarea,
+.textarea,
+select,
+.select,
+button,
+.button {
+  margin: 0;
+}
+
+/* =========================================
+   HEADINGS
+========================================= */
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-family: var(--font-family-heading);
+  color: var(--color-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-heading);
+  text-wrap: balance;
+}
+
+h1,
+.h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h2,
+.h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3,
+.h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4,
+.h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5,
+.h5 {
+  font-size: var(--font-size-h5);
+}
+
+h6,
+.h6 {
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-medium);
+}
+
+/* =========================================
+   BODY TEXT
+========================================= */
+
+p,
+.p,
+li,
+.li,
+blockquote,
+.blockquote {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-body);
+  color: var(--color-text);
+  text-wrap: pretty;
+}
+
+small,
+.small,
+figcaption,
+.figcaption {
+  font-size: var(--font-size-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+strong,
+.strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+em,
+.em,
+cite,
+.cite {
+  font-style: italic;
+}
+
+/* =========================================
+   LISTS
+========================================= */
+
+ul,
+.ol,
+ol {
+  padding: 0;
+  list-style-position: inside;
+}
+
+li,
+.li {
+  list-style: inherit;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a,
+.a {
+  color: var(--color-link);
+  text-decoration: none;
+  font: inherit;
+}
+
+/* =========================================
+   LABELS Y TEXTOS DE FORMULARIO
+========================================= */
+
+label,
+.label,
+legend,
+.legend {
+  display: inline-block;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-heading);
+}
+
+input,
+.input,
+textarea,
+.textarea,
+select,
+.select,
+button,
+.button {
+  font-family: inherit;
+}
+
+/* =========================================
+   INPUTS / TEXTAREA / SELECT
+========================================= */
+
+input,
+.input,
+textarea,
+.textarea,
+select,
+.select {
+  font-size: var(--font-size-input);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-form);
+  letter-spacing: var(--letter-spacing-body);
+  color: var(--color-text);
+}
+
+input::placeholder,
+.input::placeholder,
+textarea::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+/* Evita estilos raros del navegador */
+input,
+textarea,
+select,
+button {
+  border-radius: 0;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button,
+.button {
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+/* =========================================
+   ELEMENTOS INLINE ÚTILES
+========================================= */
+
+span,
+.span {
+  font: inherit;
+  color: inherit;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+}
+
+/* =========================================
+   CLASES UTILITARIAS TIPOGRÁFICAS
+   para casos especiales
+========================================= */
+
+.text-lg {
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body);
+}
+
+.text-base {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+.text-sm {
+  font-size: var(--font-size-body-sm);
+  line-height: 1.5;
+}
+
+.caption {
+  font-size: var(--font-size-caption);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.overline {
+  font-size: var(--font-size-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.text-soft {
+  color: var(--color-text-soft);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-heading {
+  color: var(--color-heading);
 }

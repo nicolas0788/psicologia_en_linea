@@ -1,12 +1,13 @@
 ---
 import ArcoSuperior from "./assets/ArcoSuperior.astro";
+import Btn from "./assets/Btn.astro";
 ---
 
 <section class="section-hero">
   <ArcoSuperior />
   <div class="container-general hero-container">
-    <h1 class="title-general">Plataforma de derivación</h1>
-    <h2 class="title-general">Creada por psicólogos y psicólogas</h2>
+    <h1 class="subtitle-general">Plataforma de derivación</h1>
+    <h2 class="subtitle-general">Creada por psicólogos y psicólogas</h2>
     <div class="hero-info__container">
       <p>Atencion presencial en CABA</p>
       <p>Modalidad online en todo el mundo</p>
@@ -28,7 +29,7 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
     </div>
   </div>
   <div class="btn-container">
-    <a href="#comenzar" class="btn btn-primary"> Comenzar ahora </a>
+    <Btn href="/form" label="Comenzar ahora" />
   </div>
 </section>
 
@@ -41,7 +42,7 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #fff;
+    background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
     overflow: hidden;
   }
   .hero-container {
@@ -50,7 +51,6 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
   }
   .hero-container h1,
   .hero-container h2 {
@@ -93,52 +93,6 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
-  }
-
-  /* ================= BOTÓN BASE ================= */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    white-space: nowrap;
-    min-width: fit-content;
-
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-
-    padding: 0.75rem 1.5rem;
-    border-radius: 999px;
-
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    border: none;
-  }
-
-  /* ================= BOTÓN LLENO ================= */
-  .btn-primary {
-    background: #1e3a8a;
-    color: #fff;
-  }
-
-  /* ================= HOVER ================= */
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  /* ================= ACTIVE ================= */
-  .btn-primary:active {
-    transform: translateY(0);
-    box-shadow: none;
-  }
-
-  /* ================= FOCUS (accesibilidad) ================= */
-  .btn:focus-visible {
-    outline: 2px solid #60d9ff;
-    outline-offset: 3px;
   }
 
   /* =========================

@@ -20,21 +20,24 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   <div class="container-general intake-shell">
     <form class="intake-form" action="#" method="post">
       <header class="intake-header">
-        <h2 id="intake-title" class="intake-title">Comenzá tu proceso</h2>
+        <h1 id="intake-title" class="intake-title">Comenzá tu proceso</h1>
 
-        <p class="intake-alert">
+        <p class="caption intake-alert">
           <span class="intake-alert__icon" aria-hidden="true">⛔</span>
           <span>Este servicio no atiende urgencias ni emergencias.</span>
         </p>
 
-        <p class="intake-description">
+        <p class="text-sm intake-description">
           Este formulario permite sugerirte un/a <strong
             >psicólogo/a matriculado/a</strong
           >
           acorde a la información que compartas.
         </p>
 
-        <ul class="intake-highlights" aria-label="Características del servicio">
+        <ul
+          class="text-sm intake-highlights"
+          aria-label="Características del servicio"
+        >
           <li>Confidencial</li>
           <li>Atención online (Argentina y exterior)</li>
           <li>Atención presencial en CABA</li>
@@ -315,6 +318,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
 <style>
   :root {
+    /* =========================================
+     INTAKE | TOKENS DE COMPONENTE
+     Solo layout, color, superficie y excepciones
+  ========================================= */
+
     --intake-section-bg: transparent;
     --intake-card-bg: #ffffff;
     --intake-card-border: #e5e7eb;
@@ -322,23 +330,24 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     --intake-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 
     --intake-max-width: 760px;
+    --intake-margin-top: 9rem;
+
     --intake-padding-inline: clamp(1rem, 2vw, 1.5rem);
     --intake-padding-block: clamp(1.25rem, 2.4vw, 2rem);
     --intake-gap: 1.25rem;
-    --intake-maring-top: 9rem;
+    --intake-header-gap: 0.95rem;
+    --intake-field-gap: 0.5rem;
+    --intake-notice-gap: 0.75rem;
 
-    --intake-font-family:
-      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
-
-    --intake-title-color: #1f2937;
-    --intake-text-color: #374151;
-    --intake-muted-color: #6b7280;
+    --intake-title-color: var(--color-heading);
+    --intake-text-color: var(--color-text);
+    --intake-muted-color: var(--color-text-muted);
     --intake-helper-color: #7b8190;
     --intake-link-color: #4f46e5;
 
     --intake-danger-color: #ef476f;
     --intake-accent-color: #f59e0b;
+
     --intake-button-bg: #111111;
     --intake-button-bg-hover: #222222;
     --intake-button-color: #ffffff;
@@ -359,32 +368,65 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     --intake-choice-box-bg: #f3f4f6;
     --intake-choice-box-color: #4b5563;
     --intake-choice-box-size: 1.15rem;
+    --intake-choice-radius: 0.6rem;
+    --intake-choice-min-height: 2.2rem;
+    --intake-choice-padding-y: 0.45rem;
+    --intake-choice-padding-x: 0.7rem;
 
-    --intake-label-size: 0.98rem;
-    --intake-text-size: 0.94rem;
-    --intake-helper-size: 0.8rem;
-    --intake-title-size: clamp(1.9rem, 4vw, 2.6rem);
+    --intake-highlight-dot-size: 0.45rem;
+    --intake-highlight-dot-color: #6b7280;
+    --intake-highlight-gap: 0.6rem;
 
     --intake-transition: 180ms ease;
 
-    --highlight-dot-size: 0.45rem;
-    --highlight-dot-color: #6b7280; /* gris profesional */
-    --highlight-gap: 0.6rem;
+    /* =========================================
+     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
+     Referencian al sistema global
+  ========================================= */
+
+    --intake-title-font-weight: var(--font-weight-bold);
+
+    --intake-label-font-size: var(--font-size-label);
+    --intake-label-font-weight: var(--font-weight-semibold);
+    --intake-label-line-height: 1.35;
+
+    --intake-helper-font-size: var(--font-size-caption);
+    --intake-helper-line-height: 1.5;
+
+    --intake-choice-font-size: var(--font-size-body-sm);
+    --intake-choice-line-height: 1.3;
+
+    --intake-choice-box-font-size: 0.7rem;
+    --intake-choice-box-font-weight: var(--font-weight-bold);
+
+    --intake-alert-font-size: var(--font-size-body-sm);
+    --intake-alert-font-weight: var(--font-weight-semibold);
+
+    --intake-checkbox-font-size: var(--font-size-body-sm);
+    --intake-submit-font-size: var(--font-size-button);
+    --intake-submit-font-weight: var(--font-weight-semibold);
   }
+
+  /* =========================================
+   SECTION
+========================================= */
 
   .intake-section {
     position: relative;
     overflow: hidden;
     width: 100%;
     background: var(--intake-section-bg);
-    font-family: var(--intake-font-family);
     color: var(--intake-text-color);
   }
 
   .intake-shell {
     max-width: var(--intake-max-width);
-    margin-top: var(--intake-maring-top);
+    margin-top: var(--intake-margin-top);
   }
+
+  /* =========================================
+   FORM CARD
+========================================= */
 
   .intake-form {
     background: var(--intake-card-bg);
@@ -396,17 +438,18 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .intake-header {
     display: grid;
-    gap: 0.95rem;
+    gap: var(--intake-header-gap);
     margin-bottom: 1.5rem;
   }
 
+  /* =========================================
+   TYPOGRAPHY INSIDE COMPONENT
+   Solo excepciones locales
+========================================= */
+
   .intake-title {
-    margin: 0;
-    font-size: var(--intake-title-size);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
     color: var(--intake-title-color);
-    font-weight: 800;
+    font-weight: var(--intake-title-font-weight);
     text-align: center;
   }
 
@@ -414,10 +457,9 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0;
-    font-size: 0.88rem;
     color: var(--intake-title-color);
-    font-weight: 600;
+    font-size: var(--intake-alert-font-size);
+    font-weight: var(--intake-alert-font-weight);
   }
 
   .intake-alert__icon {
@@ -426,43 +468,38 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   }
 
   .intake-description {
-    margin: 0;
-    font-size: var(--intake-text-size);
-    line-height: 1.6;
     color: var(--intake-text-color);
   }
 
   .intake-highlights {
-    margin: 0;
     padding: 0;
     list-style: none;
     display: grid;
     gap: 0.45rem;
-    font-size: 0.88rem;
     color: var(--intake-text-color);
   }
 
   .intake-highlights li {
     position: relative;
-    padding-left: calc(var(--highlight-dot-size) + var(--highlight-gap));
-    font-size: var(--intake-text-size);
-    line-height: 1.5;
-    color: var(--intake-text-color);
+    padding-left: calc(
+      var(--intake-highlight-dot-size) + var(--intake-highlight-gap)
+    );
   }
 
-  /* círculo */
   .intake-highlights li::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0.6em;
-
-    width: var(--highlight-dot-size);
-    height: var(--highlight-dot-size);
-
+    width: var(--intake-highlight-dot-size);
+    height: var(--intake-highlight-dot-size);
     border-radius: 50%;
-    background-color: var(--highlight-dot-color);
+    background-color: var(--intake-highlight-dot-color);
   }
+
+  /* =========================================
+   GRID
+========================================= */
 
   .form-grid {
     display: grid;
@@ -471,28 +508,40 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .form-field {
     display: grid;
-    gap: 0.5rem;
+    gap: var(--intake-field-gap);
   }
 
   .form-field--half {
     max-width: 360px;
   }
 
+  .form-field--notice {
+    gap: var(--intake-notice-gap);
+  }
+
+  /* =========================================
+   LABELS / HELPERS
+========================================= */
+
   .form-label,
   .subheading {
-    margin: 0;
-    font-size: var(--intake-label-size);
-    line-height: 1.35;
-    font-weight: 700;
     color: var(--intake-title-color);
+    font-size: var(--intake-label-font-size);
+    font-weight: var(--intake-label-font-weight);
+    line-height: var(--intake-label-line-height);
   }
 
   .form-helper {
-    margin: -0.15rem 0 0;
-    font-size: var(--intake-helper-size);
-    line-height: 1.5;
+    margin-top: -0.15rem;
     color: var(--intake-helper-color);
+    font-size: var(--intake-helper-font-size);
+    line-height: var(--intake-helper-line-height);
   }
+
+  /* =========================================
+   INPUTS / TEXTAREAS
+   La tipografía base ya viene de tu hoja global
+========================================= */
 
   input[type="text"],
   input[type="email"],
@@ -504,7 +553,6 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     background: var(--intake-input-bg);
     border-radius: var(--intake-input-radius);
     color: var(--intake-text-color);
-    font: inherit;
     transition:
       border-color var(--intake-transition),
       box-shadow var(--intake-transition),
@@ -537,6 +585,10 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
   }
 
+  /* =========================================
+   CHOICE GROUPS
+========================================= */
+
   .choice-group {
     display: flex;
     flex-wrap: wrap;
@@ -552,11 +604,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    min-height: 2.2rem;
-    padding: 0.45rem 0.7rem;
+    min-height: var(--intake-choice-min-height);
+    padding: var(--intake-choice-padding-y) var(--intake-choice-padding-x);
     border: 1px solid var(--intake-choice-border);
     background: var(--intake-choice-bg);
-    border-radius: 0.6rem;
+    border-radius: var(--intake-choice-radius);
     cursor: pointer;
     transition:
       border-color var(--intake-transition),
@@ -594,15 +646,15 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     border-radius: 0.25rem;
     background: var(--intake-choice-box-bg);
     color: var(--intake-choice-box-color);
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-size: var(--intake-choice-box-font-size);
+    font-weight: var(--intake-choice-box-font-weight);
     flex-shrink: 0;
   }
 
   .choice-card__text {
-    font-size: 0.88rem;
-    line-height: 1.3;
     color: var(--intake-text-color);
+    font-size: var(--intake-choice-font-size);
+    line-height: var(--intake-choice-line-height);
   }
 
   .choice-card:has(input:checked) {
@@ -620,14 +672,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     margin-top: 0.15rem;
   }
 
-  .form-field--notice {
-    gap: 0.75rem;
-  }
+  /* =========================================
+   NOTICE / LEGAL / EMERGENCY
+========================================= */
 
   .form-field--notice p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.65;
     color: var(--intake-text-color);
   }
 
@@ -642,14 +691,18 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     color: var(--intake-muted-color);
   }
 
+  /* =========================================
+   CHECKBOX
+========================================= */
+
   .checkbox-field {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
     margin-top: 0.2rem;
-    font-size: 0.9rem;
     color: var(--intake-text-color);
     cursor: pointer;
+    font-size: var(--intake-checkbox-font-size);
   }
 
   .checkbox-field input {
@@ -657,6 +710,10 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     height: 1rem;
     accent-color: var(--intake-input-border-focus);
   }
+
+  /* =========================================
+   ACTIONS
+========================================= */
 
   .form-actions {
     padding-top: 0.2rem;
@@ -669,13 +726,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     gap: 0.45rem;
     min-height: 2.6rem;
     padding: 0.72rem 1rem;
-    border: none;
     border-radius: 0.55rem;
     background: var(--intake-button-bg);
     color: var(--intake-button-color);
-    font: inherit;
-    font-size: 0.9rem;
-    font-weight: 700;
+    font-size: var(--intake-submit-font-size);
+    font-weight: var(--intake-submit-font-weight);
     cursor: pointer;
     transition:
       background-color var(--intake-transition),
@@ -690,6 +745,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   .submit-btn:active {
     transform: translateY(1px);
   }
+
+  /* =========================================
+   RESPONSIVE
+========================================= */
+
   @media (max-width: 640px) {
     .intake-form {
       padding: 1.2rem 1rem;

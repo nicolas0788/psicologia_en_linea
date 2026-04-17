@@ -1,0 +1,296 @@
+---
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+import Btn from "../assets/Btn.astro";
+
+const faqItems = [
+  {
+    question: "¿Qué es Psicología en Línea?",
+    content: [
+      "Es una plataforma de derivación que conecta consultantes con psicólogos/as matriculados/as en Argentina.",
+      "Recibimos tu consulta y facilitamos el contacto según modalidad (online o presencial en CABA) y disponibilidad.",
+      "No utilizamos asignaciones automáticas.",
+    ],
+  },
+  {
+    question: "¿Ustedes brindan terapia directamente?",
+    content: [
+      "No. Psicología en Línea no brinda atención clínica.",
+      "La atención psicológica es responsabilidad exclusiva del/la profesional interviniente.",
+    ],
+  },
+  {
+    question: "¿Los profesionales están matriculados?",
+    content: [
+      "Sí. Trabajamos con psicólogos/as matriculados/as en Argentina, que ejercen de manera independiente.",
+    ],
+  },
+  {
+    question: "¿Cómo funciona el proceso?",
+    orderedList: [
+      "Completás el formulario (2 minutos).",
+      "Revisamos la información y te enviamos por WhatsApp los datos del/la profesional sugerido/a (nombre, matrícula, modalidad y honorarios).",
+      "El/la profesional se comunica con vos para coordinar un primer encuentro virtual breve y sin costo.",
+    ],
+    content: [
+      "El primer contacto desde la plataforma puede demorar hasta 5 días hábiles.",
+    ],
+  },
+  {
+    question: "¿La información del formulario es confidencial?",
+    content: [
+      "Sí. La información se utiliza únicamente para gestionar la derivación.",
+    ],
+  },
+  {
+    question: "¿Qué pasa si no me siento cómodo/a con el/la profesional?",
+    content: [
+      "Podés solicitar una nueva revisión de la derivación respondiendo al mismo WhatsApp por el que nos comunicamos anteriormente.",
+    ],
+  },
+  {
+    question: "¿La atención es online o presencial?",
+    content: [
+      "La atención puede ser en modalidad online desde cualquier país o presencial en CABA, según disponibilidad y preferencia.",
+    ],
+  },
+  {
+    question: "¿Quién define los honorarios?",
+    content: [
+      "Durante los primeros dos meses, los honorarios se informan desde la plataforma.",
+      "A partir del tercer mes, son definidos exclusivamente por el/la profesional.",
+    ],
+  },
+  {
+    question: "¿Puedo iniciar terapia si vivo fuera de Argentina?",
+    content: [
+      "Sí. La modalidad online está disponible desde cualquier país, con profesionales matriculados/as en Argentina.",
+    ],
+  },
+  {
+    question: "¿Cómo se realizan los pagos si me encuentro en el exterior?",
+    content: [
+      "El pago puede realizarse de forma simple, segura y clara desde el exterior.",
+      "Se aceptan transferencias bancarias internacionales y medios digitales como DolarApp, Global66, AstroPay u otras opciones disponibles según el país de residencia.",
+      "Los honorarios pueden abonarse en tu moneda local, priorizando siempre la transparencia, la claridad del proceso y la facilidad para el paciente.",
+    ],
+  },
+  {
+    question: "¿Psicología en Línea atiende urgencias o emergencias?",
+    content: [
+      "No. Psicología en Línea no brinda atención de urgencias ni emergencias ni constituye un servicio de asistencia en crisis.",
+      "Si te encontrás en una situación de riesgo inmediato o con pensamientos de hacerte daño, es importante que busques ayuda urgente comunicándote con los servicios de emergencia de tu localidad o acudiendo al hospital más cercano.",
+      "En Argentina podés comunicarte con:",
+    ],
+    emergencyList: [
+      "Policía: 911",
+      "SAME: 107",
+      "Salud Mental Responde (CABA): 0800-333-1665",
+      "Orientación y Apoyo en la Urgencia de Salud Mental (Nación): 0800-999-0091",
+      "Línea de Prevención del Suicidio – Ayuda a Personas en Crisis: 0800-345-1435 (desde todo el país) o 135 (Capital y Gran Buenos Aires).",
+    ],
+    danger: true,
+  },
+];
+---
+
+<section class="section-general faq-section" aria-labelledby="faq-title">
+  <ArcoSuperior />
+  <div class="container-general faq-container">
+    <div class="faq-heading">
+      <h1 id="faq-title">Preguntas frecuentes</h1>
+      <p>
+        Respuestas claras sobre cómo funciona la derivación, la modalidad de
+        atención y aspectos prácticos del proceso.
+      </p>
+    </div>
+
+    <div class="faq-list">
+      {
+        faqItems.map((item, index) => (
+          <details
+            class:list={["faq-item", item.danger && "faq-item-danger"]}
+            open={index === 0}
+          >
+            <summary>
+              <h3>{item.question}</h3>
+              <span class="faq-icon" aria-hidden="true" />
+            </summary>
+
+            <div class="faq-content">
+              {item.orderedList && (
+                <ol>
+                  {item.orderedList.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
+              )}
+
+              {item.content?.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+
+              {item.emergencyList && (
+                <ul>
+                  {item.emergencyList.map((entry) => (
+                    <li>{entry}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+    <div class="btn-container">
+      <Btn href="/form" label="Comenzar ahora" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at top center,
+        rgba(182, 215, 227, 0.32),
+        transparent 55%
+      ),
+      linear-gradient(180deg, #f8fbfd 0%, #edf5f7 100%);
+  }
+
+  .faq-container {
+    margin-top: 9rem;
+    display: grid;
+    gap: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+  .faq-heading {
+    display: grid;
+    gap: 0.85rem;
+    max-width: 48rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .faq-heading p {
+    color: var(--color-text-soft);
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 10px 30px rgba(17, 24, 39, 0.05),
+      0 2px 10px rgba(17, 24, 39, 0.03);
+    overflow: clip;
+  }
+
+  .faq-item-danger {
+    border-color: rgba(124, 45, 18, 0.18);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 248, 246, 0.94) 100%
+    );
+  }
+
+  .faq-item summary {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: clamp(1rem, 1.4vw, 1.35rem) clamp(1rem, 1.8vw, 1.5rem);
+    cursor: pointer;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary h3 {
+    margin: 0;
+  }
+
+  .faq-icon {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 1rem;
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.9rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    transition:
+      transform 0.22s ease,
+      opacity 0.22s ease;
+    opacity: 0.65;
+  }
+
+  .faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq-item[open] .faq-icon::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scaleX(0.2);
+  }
+
+  .faq-content {
+    display: grid;
+    gap: 1rem;
+    padding: 0 clamp(1rem, 1.8vw, 1.5rem) clamp(1rem, 1.4vw, 1.35rem);
+    border-top: 1px solid rgba(17, 24, 39, 0.08);
+  }
+
+  .faq-content p,
+  .faq-content li {
+    color: var(--color-text-soft);
+  }
+
+  .faq-content ol,
+  .faq-content ul {
+    display: grid;
+    gap: 0.65rem;
+    padding-left: 1.25rem;
+    list-style-position: outside;
+  }
+
+  .faq-content ol {
+    counter-reset: item;
+  }
+
+  .faq-content strong {
+    color: var(--color-heading);
+  }
+
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 640px) {
+    .faq-item summary {
+      align-items: start;
+    }
+  }
+</style>

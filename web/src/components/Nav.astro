@@ -1,30 +1,40 @@
 ---
-const menuItems = [
-  { label: "Inicio", href: "/" },
-  { label: "Profesionales", href: "#" },
-  { label: "Cómo trabajamos", href: "#" },
-  { label: "Quiénes somos", href: " #" },
-  { label: "Preguntas frecuentes", href: "#" },
-  { label: "Privacidad y condiciones", href: "#" },
+const menuDesktop = [
+  { href: "/", label: "Inicio", classLi: "" },
+  { href: "/condicionesPro", label: "CondicionesPro", classLi: "" },
+  { href: "/private", label: "Privacidad", classLi: "" },
+  { href: "/preguntas-frecuentes", label: "Preguntas", classLi: "" },
+  { href: "/form", label: "Comenzar", classLi: "menu-desktop__cta" },
+];
+
+const menuMobile = [
+  { href: "/", label: "Inicio", classLi: "" },
+  { href: "/condicionesPro", label: "Condiciones", classLi: "" },
+  { href: "/private", label: "Privacidad", classLi: "" },
+  { href: "/preguntas-frecuentes", label: "Preguntas", classLi: "" },
+  { href: "/form", label: "Comenzar", classLi: "menu-mobile__cta" },
 ];
 ---
 
 <header class="site-header" id="site-header">
   <nav class="site-nav" aria-label="Navegación principal" id="site-nav">
-    <a href="/" class="site-logo"
-      ><img
+    <a href="/" class="site-logo">
+      <img
         src="../../src/assets/img/logo2.png"
         alt="Logo Psicología en Línea"
         class="site-logo--img"
-      /></a
-    >
+      />
+    </a>
 
     <!-- MENU DESKTOP -->
     <ul class="menu-desktop" id="menu-desktop">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="/private">Privacidad</a></li>
-      <li><a href="/form">Formulario</a></li>
+      {
+        menuDesktop.map((item) => (
+          <li class={item.classLi}>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
     </ul>
 
     <!-- TOGGLE MOBILE -->
@@ -34,6 +44,7 @@ const menuItems = [
       aria-expanded="false"
       aria-controls="menu-mobile"
       aria-label="Abrir menú"
+      type="button"
     >
       <span></span>
       <span></span>
@@ -44,10 +55,13 @@ const menuItems = [
   <!-- MENU MOBILE -->
   <div id="menu-mobile" class="menu-mobile" aria-hidden="true">
     <ul>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#sobre">Sobre mí</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      {
+        menuMobile.map((item) => (
+          <li class={item.classLi}>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </header>
@@ -57,33 +71,107 @@ const menuItems = [
 
 <style is:global>
   :root {
-    --color-bg: transparent;
-    --color-text: #fff;
-    --color-overlay: #1f4e79;
-    --color-layer: #1f4e79;
+    /* ================= COLORES BASE ================= */
+    --nav-color-bg: transparent;
+    --nav-color-text: #ffffff;
+    --nav-color-text-hover: #1f4e79;
+    --nav-color-overlay: #1f4e79;
+    --nav-color-layer: #1f4e79;
+    --nav-color-cta-bg-hover: #759deb;
+    --nav-color-cta-text-hover: #0d0e0e;
+    --nav-color-mobile-border: rgba(255, 255, 255, 0.22);
 
-    --height-desktop: 6.5rem;
-    --height-mobile: 5rem;
+    /* ================= ALTURAS ================= */
+    --nav-height-desktop: 6.5rem;
+    --nav-height-mobile: 5rem;
+
+    /* ================= ANCHOS Y ESPACIADOS ================= */
+    --nav-width: 100%;
+    --nav-padding-inline-mobile: 1rem;
+    --nav-padding-inline-desktop: 2rem;
+    --nav-gap-desktop: 2rem;
+    --nav-gap-mobile: 0;
+    --nav-mobile-list-padding-y: 1rem;
+    --nav-mobile-list-padding-x: clamp(1rem, 20vw, 12.8rem);
+    --nav-mobile-item-padding: 1rem;
+    --nav-mobile-link-padding-y: 1rem;
+    --nav-mobile-link-padding-x: 0;
+
+    /* ================= LOGO ================= */
+    --nav-logo-height: 80%;
+    --nav-logo-width: auto;
+
+    /* ================= LINKS ================= */
+    --nav-link-font-size: 1rem;
+    --nav-link-font-weight: 500;
+    --nav-link-line-height: 1.2;
+    --nav-link-text-decoration: none;
+
+    /* ================= UNDERLINE DESKTOP ================= */
+    --nav-underline-height: 1.5px;
+    --nav-underline-offset: -0.25rem;
+    --nav-underline-duration: 0.7s;
+    --nav-underline-ease: ease;
+    --nav-underline-origin: center;
+
+    /* ================= CTA ================= */
+    --nav-cta-border-width: 2px;
+    --nav-cta-padding-y: 0.5rem;
+    --nav-cta-padding-x: 1rem;
+    --nav-cta-radius: 6px;
+    --nav-cta-transition-duration-txt: 1s;
+    --nav-cta-transition-duration-bg: 1.5s;
+
+    /* ================= TOGGLE ================= */
+    --nav-toggle-size: 28px;
+    --nav-toggle-line-width: 28px;
+    --nav-toggle-line-height: 4px;
+    --nav-toggle-gap: 5px;
+    --nav-toggle-line-radius: 999px;
+    --nav-toggle-translate-y: 9px;
+
+    /* ================= CAPAS Y ANIMACIONES ================= */
+    --nav-layer-duration: 0.8s;
+    --nav-layer-ease: ease;
+    --nav-mobile-duration: 0.8s;
+    --nav-mobile-ease: ease;
+    --nav-mobile-item-duration-opacity: 0.3s;
+    --nav-mobile-item-duration-transform: 0.55s;
+    --nav-mobile-item-offset-y: 42px;
+
+    /* ================= BORDES ================= */
+    --nav-mobile-item-border-width: 1px;
+
+    /* ================= Z-INDEX ================= */
+    --nav-z-nav: 1000;
+    --nav-z-content: 1010;
+    --nav-z-overlay: 900;
+    --nav-z-mobile: 910;
+
+    /* ================= BREAKPOINT ================= */
+    --nav-breakpoint-desktop: 1024px;
   }
 
   /* ================= HEADER ================= */
 
   .site-header {
-    position: relative; /* referencia para menu mobile */
+    position: relative;
   }
 
   /* ================= NAV ================= */
 
   .site-nav {
     position: fixed;
-    width: 100%;
-    height: var(--height-mobile);
+    inset: 0 auto auto 0;
+    width: var(--nav-width);
+    height: var(--nav-height-mobile);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    background-color: var(--color-bg);
+    padding-inline: var(--nav-padding-inline-mobile);
+    background-color: var(--nav-color-bg);
     overflow: hidden;
+    z-index: var(--nav-z-nav);
   }
 
   /* ================= LAYER ================= */
@@ -91,17 +179,17 @@ const menuItems = [
   .site-nav::before {
     content: "";
     position: absolute;
-    width: 100%;
-    height: var(--height-mobile);
     inset: 0;
-    background: var(--color-layer);
+    width: 100%;
+    height: var(--nav-height-mobile);
+    background: var(--nav-color-layer);
     transform: translateY(-100%);
     opacity: 0;
     z-index: 0;
     pointer-events: none;
     transition:
-      transform 0.8s ease,
-      opacity 0.8s ease;
+      transform var(--nav-layer-duration) var(--nav-layer-ease),
+      opacity var(--nav-layer-duration) var(--nav-layer-ease);
   }
 
   .site-nav.is-scrolled::before {
@@ -113,98 +201,165 @@ const menuItems = [
 
   .site-logo {
     position: relative;
-    height: 100%;
-    width: auto;
+    display: inline-flex;
+    align-items: center;
+    height: var(--nav-logo-height);
+    width: var(--nav-logo-width);
+    z-index: var(--nav-z-content);
   }
 
   .site-logo--img {
+    display: block;
     height: 100%;
     width: auto;
   }
 
-  /* ================= DESKTOP ================= */
+  /* ================= DESKTOP MENU ================= */
 
   .menu-desktop {
     display: none;
-    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--nav-gap-desktop);
     position: relative;
+    z-index: var(--nav-z-content);
+  }
+
+  .menu-desktop li {
+    list-style: none;
   }
 
   .menu-desktop a {
-    color: var(--color-text);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--nav-link-font-size);
+    font-weight: var(--nav-link-font-weight);
+    line-height: var(--nav-link-line-height);
+    text-decoration: var(--nav-link-text-decoration);
+    color: var(--nav-color-text);
+    transition:
+      color var(--nav-cta-transition-duration-txt) ease,
+      background-color var(--nav-cta-transition-duration-txt) ease,
+      border-color var(--nav-cta-transition-duration-txt) ease;
+  }
+
+  /* ================= DESKTOP UNDERLINE ================= */
+
+  .menu-desktop li:not(.menu-desktop__cta) a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: var(--nav-underline-offset);
+    width: 100%;
+    height: var(--nav-underline-height);
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: var(--nav-underline-origin);
+    transition: transform var(--nav-underline-duration)
+      var(--nav-underline-ease);
+    pointer-events: none;
+  }
+
+  .menu-desktop li:not(.menu-desktop__cta) a:hover::after,
+  .menu-desktop li:not(.menu-desktop__cta) a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* ================= DESKTOP CTA ================= */
+
+  .menu-desktop .menu-desktop__cta a {
+    border: var(--nav-cta-border-width) solid var(--nav-color-text);
+    padding: var(--nav-cta-padding-y) var(--nav-cta-padding-x);
+    border-radius: var(--nav-cta-radius);
+  }
+
+  .menu-desktop .menu-desktop__cta a:hover,
+  .menu-desktop .menu-desktop__cta a:focus-visible {
+    background-color: var(--nav-color-cta-bg-hover);
+    color: var(--nav-color-cta-text-hover);
   }
 
   /* ================= TOGGLE ================= */
 
   .menu-toggle {
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: var(--nav-toggle-size);
+    height: var(--nav-toggle-size);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: var(--nav-toggle-gap);
     background: none;
     border: none;
+    padding: 0;
     cursor: pointer;
+    z-index: var(--nav-z-content);
   }
 
   .menu-toggle span {
-    width: 28px;
-    height: 4px;
-    background: var(--color-text);
-    transition: transform 0.3s;
+    display: block;
+    width: var(--nav-toggle-line-width);
+    height: var(--nav-toggle-line-height);
+    border-radius: var(--nav-toggle-line-radius);
+    background: var(--nav-color-text);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
   }
 
-  /* CRUZ */
   .site-header.is-open .menu-toggle span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(var(--nav-toggle-translate-y)) rotate(45deg);
   }
+
   .site-header.is-open .menu-toggle span:nth-child(2) {
     opacity: 0;
   }
+
   .site-header.is-open .menu-toggle span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(calc(var(--nav-toggle-translate-y) * -1))
+      rotate(-45deg);
   }
 
   /* ================= MOBILE MENU ================= */
 
   .menu-mobile {
     position: fixed;
-    inset: var(--height-mobile) 0 0 0;
+    inset: var(--nav-height-mobile) 0 0 0;
     width: 100%;
     text-align: center;
-
-    /* ESTADO CERRADO */
     transform: translateX(-100%);
     opacity: 0;
+    z-index: var(--nav-z-mobile);
+    transition:
+      transform var(--nav-mobile-duration) var(--nav-mobile-ease),
+      opacity var(--nav-mobile-duration) var(--nav-mobile-ease);
   }
 
-  /* ABIERTO */
   .site-header.is-open .menu-mobile {
     transform: translateX(0);
     opacity: 1;
   }
 
-  /* LINKS */
   .menu-mobile ul {
-    padding: 1rem clamp(1rem, 20vw, 12.8rem);
+    margin: 0;
+    padding: var(--nav-mobile-list-padding-y) var(--nav-mobile-list-padding-x);
   }
 
-  /* ESTADO CERRADO */
   .menu-mobile li {
-    padding: 1rem;
+    list-style: none;
+    padding: var(--nav-mobile-item-padding);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    border-bottom: 1px solid black;
-    transform: translateY(42px);
+    border-bottom: var(--nav-mobile-item-border-width) solid
+      var(--nav-color-mobile-border);
+    transform: translateY(var(--nav-mobile-item-offset-y));
     transition:
-      opacity 0.3s ease,
-      transform 0.55s ease;
+      opacity var(--nav-mobile-item-duration-opacity) ease,
+      transform var(--nav-mobile-item-duration-transform) ease;
   }
 
-  /* ABIERTO */
   .site-header.is-open .menu-mobile li {
     opacity: 1;
     visibility: visible;
@@ -215,41 +370,53 @@ const menuItems = [
   .site-header.is-open .menu-mobile li:nth-child(1) {
     transition-delay: 0.1s;
   }
-
   .site-header.is-open .menu-mobile li:nth-child(2) {
     transition-delay: 0.25s;
   }
-
   .site-header.is-open .menu-mobile li:nth-child(3) {
     transition-delay: 0.4s;
   }
-
   .site-header.is-open .menu-mobile li:nth-child(4) {
     transition-delay: 0.55s;
+  }
+  .site-header.is-open .menu-mobile li:nth-child(5) {
+    transition-delay: 0.7s;
   }
 
   .menu-mobile a {
     display: block;
-    padding: 1rem 0;
-    color: var(--color-text);
+    padding: var(--nav-mobile-link-padding-y) var(--nav-mobile-link-padding-x);
+    font-size: var(--nav-link-font-size);
+    font-weight: var(--nav-link-font-weight);
+    line-height: var(--nav-link-line-height);
+    text-decoration: none;
+    color: var(--nav-color-text);
+  }
+
+  .menu-mobile .menu-mobile__cta a {
+    border: var(--nav-cta-border-width) solid var(--nav-color-text);
+    border-radius: var(--nav-cta-radius);
+  }
+
+  .menu-mobile .menu-mobile__cta a:hover,
+  .menu-mobile .menu-mobile__cta a:focus-visible {
+    background-color: var(--nav-color-cta-bg-hover);
+    color: var(--nav-color-cta-text-hover);
   }
 
   /* ================= OVERLAY ================= */
 
   .menu-overlay {
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-
-    background-color: var(--color-overlay);
+    inset: 0;
+    background-color: var(--nav-color-overlay);
     pointer-events: none;
     opacity: 0;
     transform: translateX(-100%);
+    z-index: var(--nav-z-overlay);
     transition:
-      transform 0.8s ease,
-      opacity 0.8s ease;
+      transform var(--nav-layer-duration) var(--nav-layer-ease),
+      opacity var(--nav-layer-duration) var(--nav-layer-ease);
   }
 
   .menu-overlay.is-active {
@@ -258,26 +425,18 @@ const menuItems = [
     transform: translateX(0);
   }
 
-  /* ================= Z-INDEX ================= */
-  .site-nav {
-    z-index: 1000;
-  }
-  .site-logo,
-  .menu-toggle,
-  .menu-desktop {
-    z-index: 1010;
-  }
-  .menu-overlay {
-    z-index: 900;
-  }
-
-  .menu-mobile {
-    z-index: 910;
-  }
-
-  /* ================= DESKTOP BREAKPOINT ================= */
+  /* ================= DESKTOP ================= */
 
   @media (min-width: 1024px) {
+    .site-nav {
+      height: var(--nav-height-desktop);
+      padding-inline: var(--nav-padding-inline-desktop);
+    }
+
+    .site-nav::before {
+      height: var(--nav-height-desktop);
+    }
+
     .menu-toggle {
       display: none;
     }
@@ -286,20 +445,9 @@ const menuItems = [
       display: flex;
     }
 
-    .menu-mobile {
-      display: none;
-    }
-
+    .menu-mobile,
     .menu-overlay {
       display: none;
-    }
-
-    .site-nav {
-      height: var(--height-desktop);
-    }
-
-    .site-nav::before {
-      height: var(--height-desktop);
     }
   }
 </style>
