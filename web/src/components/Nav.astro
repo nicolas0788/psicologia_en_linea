@@ -14,14 +14,17 @@ const menuMobile = [
   { href: "/preguntas-frecuentes", label: "Preguntas", classLi: "" },
   { href: "/form", label: "Comenzar", classLi: "menu-mobile__cta" },
 ];
+
+import { Image } from "astro:assets";
+import logoImg from "../../src/assets/img/logo2.png";
 ---
 
 <header class="site-header" id="site-header">
   <nav class="site-nav" aria-label="Navegación principal" id="site-nav">
     <a href="/" class="site-logo">
-      <img
-        src="../../src/assets/img/logo2.png"
-        alt="Logo Psicología en Línea"
+      <Image
+        src={logoImg}
+        alt="Logo de Psicología en Linea"
         class="site-logo--img"
       />
     </a>
