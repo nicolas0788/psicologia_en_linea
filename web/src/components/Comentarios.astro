@@ -1,0 +1,189 @@
+---
+// TestimonialsCarousel.astro
+
+const testimonials = [
+  {
+    name: "María L.",
+    comment:
+      "Me ayudaron a encontrar una psicóloga con la que me sentí cómoda desde la primera consulta.",
+    image: "/img/testimonials/persona-1.jpg",
+  },
+  {
+    name: "Juan P.",
+    comment:
+      "El proceso fue claro, rápido y muy cuidado. Me orientaron según lo que necesitaba.",
+    image: "/img/testimonials/persona-2.jpg",
+  },
+  {
+    name: "Camila R.",
+    comment:
+      "Pude empezar terapia online sin vueltas. La atención fue profesional y humana.",
+    image: "/img/testimonials/persona-3.jpg",
+  },
+  {
+    name: "Lato",
+    comment:
+      "Pude empezar terapia online sin vueltas. La atención fue profesional y humana.",
+    image: "/img/testimonials/persona-3.jpg",
+  },
+];
+---
+
+<section class="section-general testimonials-section">
+  <div class="container-general testimonials-container">
+    <header class="testimonials-header">
+      <span>Experiencias reales</span>
+      <h2>Personas que confiaron en nosotros</h2>
+      <p>
+        Acompañamos cada consulta de forma personalizada para ayudarte a
+        encontrar el profesional adecuado.
+      </p>
+    </header>
+
+    <div class="testimonial-carousel" data-testimonial-carousel>
+      <div class="testimonial-track" data-testimonial-track>
+        {
+          testimonials.map((item) => (
+            <div class="testimonial-slide">
+              <article class="testimonial-card">
+                <img
+                  src={item.image}
+                  alt={`Foto de ${item.name}`}
+                  class="testimonial-img"
+                  loading="lazy"
+                />
+
+                <div class="testimonial-content">
+                  <p class="testimonial-comment">“{item.comment}”</p>
+                  <strong>{item.name}</strong>
+                </div>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-section {
+    background: linear-gradient(180deg, #f8fbfd 0%, #eef3fb 100%);
+    overflow: hidden;
+  }
+
+  .testimonials-container {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+
+  .testimonials-header {
+    max-width: 720px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .testimonials-header span {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: #6f7fc8;
+    font-weight: 700;
+  }
+
+  .testimonials-header p {
+    margin-top: 1rem;
+    color: #5f6b7a;
+  }
+
+  .testimonial-carousel {
+    width: 100%;
+    max-width: 760px;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+
+  .testimonial-track {
+    display: flex;
+    transition: transform 1.4s ease-in-out;
+    will-change: transform;
+  }
+
+  .testimonial-slide {
+    flex: 0 0 100%;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+    box-sizing: border-box;
+  }
+
+  .testimonial-card {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    padding: 2rem clamp(1.5rem, 4vw, 3rem);
+
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(120, 135, 190, 0.2);
+    border-radius: 2rem;
+
+    box-shadow: none;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .testimonial-img {
+    width: clamp(72px, 12vw, 120px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff;
+    box-shadow: 0 10px 24px rgba(40, 55, 90, 0.18);
+  }
+
+  .testimonial-content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .testimonial-comment {
+    color: #2f3a4a;
+  }
+
+  .testimonial-content strong {
+    color: #6f7fc8;
+    font-weight: 800;
+  }
+
+  @media (max-width: 520px) {
+    .testimonial-slide {
+      padding-inline: 1rem;
+    }
+
+    .testimonial-card {
+      min-height: 320px;
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>(
+    "[data-testimonial-carousel]",
+  );
+
+  const track = document.querySelector<HTMLElement>("[data-testimonial-track]");
+
+  if (carousel && track) {
+    const slides = track.children as HTMLCollectionOf<HTMLElement>;
+
+    let index: number = 0;
+
+    window.setInterval((): void => {
+      index = (index + 1) % slides.length;
+      track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
+    }, 6000);
+  }
+</script>

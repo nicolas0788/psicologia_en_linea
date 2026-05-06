@@ -13,3 +13,6 @@
 
 /* 4. TEXTOS */
 @import "./typography.css";
+
+/* 5. FONTS */
+@import "./fonts.css";

@@ -1,5 +1,6 @@
 ---
 import ArcoSuperior from "./../assets/ArcoSuperior.astro";
+import Btn from "./../assets/Btn.astro";
 
 const therapyOptions = ["Individual", "Pareja"];
 
@@ -19,6 +20,12 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   <ArcoSuperior />
   <div class="container-general intake-shell">
     <form class="intake-form" action="#" method="post">
+      <div class="intake-decorative">
+        <img
+          src="../../../src/assets/img/form/form-decorative.png"
+          alt="Imagen decorativa"
+        />
+      </div>
       <header class="intake-header">
         <h1 id="intake-title" class="intake-title">Comenzá tu proceso</h1>
 
@@ -270,33 +277,10 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-field form-field--notice">
-          <h3 class="subheading">
-            Próximos pasos <span aria-hidden="true">*</span>
-          </h3>
-
           <p>
-            En breve revisaremos la información que nos compartiste y te
-            contactaremos por <strong
-              >WhatsApp en los próximos días hábiles</strong
-            > para sugerirte un/a profesional según la información brindada.
-          </p>
-
-          <p>
-            Uso exclusivo para gestionar la derivación. Ver <a
-              href="/politica-de-privacidad">Política de Privacidad</a
+            Uso exclusivo para gestionar la derivación. Ver <a href="/private"
+              >Política de Privacidad</a
             >
-          </p>
-
-          <p class="form-emergency">
-            Importante: Si te encontrás en una situación de riesgo inmediato,
-            comunicate con servicios de emergencia o acudí al hospital más
-            cercano.
-          </p>
-
-          <p class="form-emergency-lines">
-            Línea de Prevención del Suicidio:<br />
-            0800-345-1435 (todo el país)<br />
-            135 (CABA y GBA)
           </p>
 
           <label class="checkbox-field">
@@ -306,10 +290,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="submit-btn">
-            Enviar solicitud
-            <span aria-hidden="true">→</span>
-          </button>
+          <Btn type="submit" label="Enviar solicitud" bg="#3C329C" />
         </div>
       </div>
     </form>
@@ -323,8 +304,8 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
      Solo layout, color, superficie y excepciones
   ========================================= */
 
-    --intake-section-bg: transparent;
-    --intake-card-bg: #ffffff;
+    --intake-section-bg: linear-gradient(180deg, #8d9cdb 0%, #edf5f7 100%);
+    --intake-card-bg: #f3f2fc;
     --intake-card-border: #e5e7eb;
     --intake-card-radius: 1.5rem;
     --intake-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
@@ -434,6 +415,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     border-radius: var(--intake-card-radius);
     box-shadow: var(--intake-card-shadow);
     padding: var(--intake-padding-block) var(--intake-padding-inline);
+    position: relative;
   }
 
   .intake-header {
@@ -495,6 +477,22 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     height: var(--intake-highlight-dot-size);
     border-radius: 50%;
     background-color: var(--intake-highlight-dot-color);
+  }
+
+  /* =========================================
+   img decorativa
+========================================= */
+
+  .intake-decorative {
+    position: absolute;
+    top: 8rem;
+    right: 0;
+    width: min(90%, 19rem);
+  }
+
+  .intake-decorative img {
+    height: auto;
+    width: 100%;
   }
 
   /* =========================================
@@ -697,6 +695,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .checkbox-field {
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     gap: 0.6rem;
     margin-top: 0.2rem;
@@ -716,34 +715,8 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 ========================================= */
 
   .form-actions {
-    padding-top: 0.2rem;
-  }
-
-  .submit-btn {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
     justify-content: center;
-    gap: 0.45rem;
-    min-height: 2.6rem;
-    padding: 0.72rem 1rem;
-    border-radius: 0.55rem;
-    background: var(--intake-button-bg);
-    color: var(--intake-button-color);
-    font-size: var(--intake-submit-font-size);
-    font-weight: var(--intake-submit-font-weight);
-    cursor: pointer;
-    transition:
-      background-color var(--intake-transition),
-      transform var(--intake-transition),
-      opacity var(--intake-transition);
-  }
-
-  .submit-btn:hover {
-    background: var(--intake-button-bg-hover);
-  }
-
-  .submit-btn:active {
-    transform: translateY(1px);
   }
 
   /* =========================================
@@ -762,6 +735,12 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
     .choice-card--full {
       min-height: 2.7rem;
+    }
+
+    .intake-decorative {
+      position: static;
+      display: flex;
+      justify-content: center;
     }
   }
 </style>

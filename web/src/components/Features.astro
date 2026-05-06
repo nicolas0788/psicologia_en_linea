@@ -1,0 +1,163 @@
+---
+import { Image } from "astro:assets";
+
+// 👉 Después reemplazás por tus imágenes reales optimizadas
+import icon1 from "../assets/img/features/1.png";
+import icon2 from "../assets/img/features/2.png";
+import icon3 from "../assets/img/features/3.png";
+import icon4 from "../assets/img/features/4.png";
+import icon5 from "../assets/img/features/5.png";
+import icon6 from "../assets/img/features/6.png";
+
+const features = [
+  {
+    title: "Psicólogos/as matriculados/as",
+    text: "Profesionales con matrícula vigente para brindarte seguridad y cuidado.",
+    image: icon1,
+  },
+  {
+    title: "Orientación personalizada",
+    text: "Revisamos tu consulta de forma individual para orientarte mejor.",
+    image: icon2,
+  },
+  {
+    title: "Presencial en CABA u online internacional",
+    text: "Podés acceder al proceso estés donde estés.",
+    image: icon3,
+  },
+  {
+    title: "Honorarios claros desde el inicio",
+    text: "La información importante se comparte con claridad desde el primer contacto.",
+    image: icon4,
+  },
+  {
+    title: "Sin asignaciones automáticas",
+    text: "No te derivamos al azar: primero evaluamos tu caso con atención.",
+    image: icon5,
+  },
+  {
+    title: "Acompañamiento confidencial",
+    text: "Tu información se trata con cuidado, respeto y confidencialidad.",
+    image: icon6,
+  },
+];
+---
+
+<section class="section-general features">
+  <div class="container-general features__container">
+    <div class="features__grid">
+      {
+        features.map((item) => (
+          <article class="feature-card">
+            <div class="feature-card__icon">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={100}
+                height={100}
+                format="webp"
+                quality={100}
+              />
+            </div>
+
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ================= GRID ================= */
+
+  .features {
+    padding: 0 clamp(0.5rem, 3vw, 1rem);
+    background: linear-gradient(180deg, #f8fbfd 0%, #edf5f7 100%);
+  }
+
+  /* DEFAULT: 1 columna (seguridad extrema) */
+  .features__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  /* >= 300px → 2 columnas */
+  @media (min-width: 300px) {
+    .features__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) {
+    .features__grid {
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 1024px) {
+    .features__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* ================= CARD ================= */
+
+  .feature-card {
+    min-width: 0; /* 🔥 CLAVE para que no rompa el grid */
+
+    background: #ffffff;
+    border-radius: 1.5rem;
+    padding: clamp(1rem, 4vw, 1.5rem) clamp(0.4rem, 2vw, 1rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  /* ================= ICON ================= */
+
+  .feature-card__icon {
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .feature-card__icon :global(img) {
+    width: clamp(50px, 20vw, 100px);
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ================= TEXT ================= */
+
+  .feature-card h3 {
+    margin: 0 0 0.4rem;
+    overflow-wrap: anywhere; /* 🔥 evita que rompa por textos largos */
+    text-wrap: balance;
+  }
+
+  .feature-card p {
+    margin: 0;
+    opacity: 0.75;
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+  }
+</style>

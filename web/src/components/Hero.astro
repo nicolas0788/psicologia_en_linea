@@ -6,37 +6,33 @@ import Btn from "./assets/Btn.astro";
 <section class="section-hero">
   <ArcoSuperior />
   <div class="container-general hero-container">
-    <h1 class="subtitle-general">Plataforma de derivación</h1>
-    <h2 class="subtitle-general">Creada por psicólogos y psicólogas</h2>
-    <div class="hero-info__container">
-      <p>Atencion presencial en CABA</p>
-      <p>Modalidad online en todo el mundo</p>
+    <div class="hero-texts">
+      <h1 class="title-general">¿No sabés por dónde empezar?</h1>
+      <h2 class="subtitle-general">
+        Encontrar psicólogo/a puede sentirse difícil
+      </h2>
+      <h2 class="subtitle-general">Lo hicimos <span>más simple</span></h2>
+      <div class="hero-info__container"></div>
+      <div class="btn-container">
+        <Btn href="/form" label="Comenzar ahora" />
+      </div>
     </div>
+
     <div class="hero-img__container">
       <img
-        src="../../src/assets/img/hero/heroImg2.png"
+        src="../../src/assets/img/hero/heroImg3.png"
         alt="sdsd"
         class="hero-img"
       />
-
-      <div class="steam" aria-hidden="true">
-        <span class="steam-line steam-1"></span>
-        <span class="steam-line steam-2"></span>
-        <span class="steam-line steam-3"></span>
-        <span class="steam-line steam-4"></span>
-        <span class="steam-line steam-5"></span>
-      </div>
     </div>
-  </div>
-  <div class="btn-container">
-    <Btn href="/form" label="Comenzar ahora" />
   </div>
 </section>
 
 <style is:global>
   .section-hero {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -45,119 +41,171 @@ import Btn from "./assets/Btn.astro";
     background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
     overflow: hidden;
   }
+
   .hero-container {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .hero-container h1,
-  .hero-container h2 {
-    text-align: center;
+    padding-top: min(5rem, 20vh);
   }
 
-  .hero-info__container {
-    top: calc(10rem + var(--height-desktop));
-    left: 0;
-    position: absolute;
+  .hero-texts {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: start;
+    align-items: center;
     gap: 2rem;
-    width: 20rem;
-    z-index: 1;
-    display: none;
+    order: 1;
   }
-  .h1 {
-    font-size: 1rem;
+
+  /* ================= ANIMACIÓN HERO TEXT ================= */
+
+  .hero-texts > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeUp 1.8s ease forwards;
+    will-change: opacity, transform;
   }
-  .hero-info__container p {
-    font-size: 1.5rem;
-    font-weight: bold;
+
+  .hero-texts .title-general {
+    animation-delay: 0.2s;
   }
+
+  .hero-texts .subtitle-general:nth-of-type(1) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-texts .subtitle-general:nth-of-type(2) {
+    animation-delay: 0.8s;
+  }
+
+  .hero-texts .btn-container {
+    animation-delay: 1.15s;
+  }
+
+  .subtitle-general span {
+    display: inline-block;
+    font-weight: 900;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: heroPopIn 0.45s ease forwards;
+    animation-delay: 1.05s;
+    will-change: opacity, transform;
+  }
+
+  @keyframes heroFadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroPopIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ================= IMAGEN ================= */
 
   .hero-img__container {
     position: relative;
     width: min(90%, 500px);
     height: auto;
+    order: 0;
+
+    opacity: 0;
+    transform: translateY(-80px);
+    animation: heroImageDrop 1.8s ease-out forwards;
+    animation-delay: 0.2s;
+    will-change: opacity, transform;
   }
 
   .hero-img {
     height: auto;
     width: 100%;
   }
-  .btn-container {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 
-  /* =========================
-   HUMO
-========================= */
-
-  .steam {
-    position: absolute;
-    left: 50%;
-    bottom: 52%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 180px;
-    z-index: 3;
-    pointer-events: none;
-
-    /* temporal para debug */
-    /* background: rgba(255, 0, 0, 0.08); */
-  }
-
-  .steam-line {
-    position: absolute;
-    bottom: 0;
-    width: 26px;
-    height: 110px;
-    background: rgba(199, 197, 197, 0.65);
-    border-radius: 999px;
-    filter: blur(12px);
-    opacity: 0;
-    animation: steamFloat 3.6s ease-in-out infinite;
-  }
-
-  .steam-1 {
-    left: 10px;
-    animation-delay: 0s;
-  }
-
-  .steam-2 {
-    left: 45px;
-    animation-delay: 1s;
-  }
-
-  .steam-3 {
-    left: 80px;
-    animation-delay: 2s;
-  }
-
-  @keyframes steamFloat {
+  @keyframes heroImageDrop {
     0% {
       opacity: 0;
-      transform: translateY(0) translateX(0) scale(0.9);
+      transform: translateY(-80px);
     }
 
-    20% {
-      opacity: 0.6;
+    60% {
+      opacity: 1;
+      transform: translateY(10px);
     }
 
-    50% {
-      opacity: 0.45;
-      transform: translateY(-40px) translateX(10px) scale(1.1);
+    80% {
+      transform: translateY(-4px);
     }
 
     100% {
-      opacity: 0;
-      transform: translateY(-95px) translateX(-8px) scale(1.35);
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ================= TEXTOS ================= */
+
+  .title-general {
+    font-size: clamp(1rem, 6vw, 2.5rem);
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .subtitle-general {
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  /* ================= BOTÓN ================= */
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ================= ACCESIBILIDAD ================= */
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-texts > *,
+    .subtitle-general span,
+    .hero-img__container {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  /* ================= DESKTOP ================= */
+
+  @media (min-width: 1024px) {
+    .section-hero {
+      min-height: 800px;
+    }
+
+    .hero-container {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: start;
+      padding-top: 2rem;
+    }
+
+    .hero-texts {
+      order: 0;
+    }
+
+    .hero-img__container {
+      order: 1;
     }
   }
 </style>
