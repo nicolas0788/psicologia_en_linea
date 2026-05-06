@@ -1,10 +1,11 @@
 ---
+import { path } from "../utils/paths";
 const menuDesktop = [
   { href: "/", label: "Inicio", classLi: "" },
   { href: "/condicionesPro", label: "CondicionesPro", classLi: "" },
   { href: "/private", label: "Privacidad", classLi: "" },
   { href: "/preguntas-frecuentes", label: "Preguntas", classLi: "" },
-  { href: "/form", label: "Comenzar", classLi: "menu-desktop__cta" },
+  { href: "form", label: "Comenzar", classLi: "menu-desktop__cta" },
 ];
 
 const menuMobile = [
@@ -12,7 +13,7 @@ const menuMobile = [
   { href: "/condicionesPro", label: "Condiciones", classLi: "" },
   { href: "/private", label: "Privacidad", classLi: "" },
   { href: "/preguntas-frecuentes", label: "Preguntas", classLi: "" },
-  { href: "/form", label: "Comenzar", classLi: "menu-mobile__cta" },
+  { href: "form", label: "Comenzar", classLi: "menu-mobile__cta" },
 ];
 
 import { Image } from "astro:assets";
@@ -24,7 +25,7 @@ import logoImg from "../../src/assets/img/logo2.png";
     <a href="/" class="site-logo">
       <Image
         src={logoImg}
-        alt="Logo de Psicología en Linea"
+        alt="Logo de Psicología en Línea"
         class="site-logo--img"
       />
     </a>
@@ -34,7 +35,7 @@ import logoImg from "../../src/assets/img/logo2.png";
       {
         menuDesktop.map((item) => (
           <li class={item.classLi}>
-            <a href={item.href}>{item.label}</a>
+            <a href={path(`${item.href}`)}>{item.label}</a>
           </li>
         ))
       }

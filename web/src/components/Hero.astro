@@ -3,6 +3,7 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
 import Btn from "./assets/Btn.astro";
 import { Image } from "astro:assets";
 import heroImg from "../../src/assets/img/hero/heroImg3.png";
+import { path } from "../utils/paths";
 ---
 
 <section class="section-hero">
@@ -16,7 +17,7 @@ import heroImg from "../../src/assets/img/hero/heroImg3.png";
       <h2 class="subtitle-general">Lo hicimos <span>más simple</span></h2>
       <div class="hero-info__container"></div>
       <div class="btn-container">
-        <Btn href="/form" label="Comenzar ahora" />
+        <Btn href={path("form")} label="Comenzar ahora" />
       </div>
     </div>
 
