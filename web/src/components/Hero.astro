@@ -1,6 +1,8 @@
 ---
 import ArcoSuperior from "./assets/ArcoSuperior.astro";
 import Btn from "./assets/Btn.astro";
+import { Image } from "astro:assets";
+import heroImg from "../../assets/img/hero/heroImg3.png";
 ---
 
 <section class="section-hero">
@@ -19,11 +21,7 @@ import Btn from "./assets/Btn.astro";
     </div>
 
     <div class="hero-img__container">
-      <img
-        src="../../src/assets/img/hero/heroImg3.png"
-        alt="sdsd"
-        class="hero-img"
-      />
+      <Image src={heroImg} alt="Descripción de la imagen" />
     </div>
   </div>
 </section>
