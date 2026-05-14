@@ -3,21 +3,37 @@ import ArcoSuperior from "./assets/ArcoSuperior.astro";
 import Btn from "./assets/Btn.astro";
 import { Image } from "astro:assets";
 import heroImg from "../../src/assets/img/hero/heroImg3.png";
-import { path } from "../utils/paths";
 ---
 
 <section class="section-hero">
   <ArcoSuperior />
+
   <div class="container-general hero-container">
     <div class="hero-texts">
-      <h1 class="title-general">¿No sabés por dónde empezar?</h1>
-      <h2 class="subtitle-general">
-        Encontrar psicólogo/a puede sentirse difícil
-      </h2>
-      <h2 class="subtitle-general">Lo hicimos <span>más simple</span></h2>
+      <h1 class="titles-general">
+        Red de psicólogos en Argentina
+
+        <span class="title-secondary"> Online y presencial en CABA </span>
+      </h1>
+
+      <div class="title-extra">
+        <p class="subtitle-general">
+          Encontrar psicólogo/a puede sentirse difícil
+        </p>
+
+        <p class="subtitle-general">
+          Lo hicimos <span>simple</span>
+        </p>
+      </div>
+
       <div class="hero-info__container"></div>
+
       <div class="btn-container">
-        <Btn href={path("form")} label="Comenzar ahora" />
+        <Btn
+          href="/form"
+          label="Comenzar ahora"
+          fontSize="clamp(0.95rem, 0.8rem + 0.7vw, 1.4rem)"
+        />
       </div>
     </div>
 
@@ -34,69 +50,215 @@ import { path } from "../utils/paths";
 </section>
 
 <style is:global>
+  :root {
+    /* ================= HERO / LAYOUT ================= */
+
+    --hero-bg: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
+    --hero-width: 100%;
+    --hero-height: 100%;
+    --hero-min-height-mobile: max-content;
+    --hero-min-height-desktop: 800px;
+    --hero-overflow: hidden;
+
+    --hero-container-padding-top-mobile: min(5rem, 20vh);
+    --hero-container-padding-top-desktop: 2rem;
+    --hero-container-direction-mobile: column;
+    --hero-container-direction-desktop: row;
+    --hero-container-align-mobile: center;
+    --hero-container-align-desktop: start;
+    --hero-container-justify: center;
+
+    /* ================= TEXTOS ================= */
+
+    --hero-text-color: var(--color-text-dark);
+    --hero-title-size: clamp(1.8rem, 4vw, 3rem);
+    --hero-title-line-height: 1.5;
+    --hero-title-gap: 0.3em;
+    --hero-title-align: center;
+
+    --hero-title-secondary-size: clamp(0.8rem, 4vw, 1.5rem);
+    --hero-title-secondary-weight: 700;
+    --hero-title-secondary-line-height: 1.4;
+    --hero-title-secondary-letter-spacing: 0.1px;
+
+    --hero-subtitle-size: clamp(0.8rem, 4vw, 1.5rem);
+    --hero-subtitle-line-height: 1.4;
+    --hero-subtitle-highlight-weight: 900;
+
+    --hero-title-extra-margin-top: 2rem;
+    --hero-title-extra-margin-bottom: 3rem;
+    --hero-title-extra-gap: 0;
+
+    /* ================= IMAGEN ================= */
+
+    --hero-img-container-width: min(90%, 500px);
+    --hero-img-width: 100%;
+
+    /* ================= ANIMACIONES ================= */
+
+    --hero-text-animation-duration: 1.8s;
+    --hero-text-animation-easing: ease;
+    --hero-text-initial-y: 20px;
+
+    --hero-title-delay: 0.2s;
+    --hero-subtitle-1-delay: 0.5s;
+    --hero-subtitle-2-delay: 0.8s;
+    --hero-button-delay: 1.15s;
+
+    --hero-highlight-animation-duration: 0.45s;
+    --hero-highlight-animation-easing: ease;
+    --hero-highlight-delay: 1.05s;
+    --hero-highlight-initial-scale: 0.9;
+
+    --hero-image-animation-duration: 1.8s;
+    --hero-image-animation-easing: ease-out;
+    --hero-image-animation-delay: 0.2s;
+    --hero-image-initial-y: -80px;
+    --hero-image-bounce-y: 10px;
+    --hero-image-back-y: -4px;
+  }
+
+  /* ================= SECTION ================= */
+
   .section-hero {
-    width: 100%;
-    height: 100%;
-    min-height: max-content;
     position: relative;
+    width: var(--hero-width);
+    height: var(--hero-height);
+    min-height: var(--hero-min-height-mobile);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
-    overflow: hidden;
+    background: var(--hero-bg);
+    overflow: var(--hero-overflow);
   }
+
+  /* ================= CONTAINER ================= */
 
   .hero-container {
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: min(5rem, 20vh);
+    flex-direction: var(--hero-container-direction-mobile);
+    justify-content: var(--hero-container-justify);
+    align-items: var(--hero-container-align-mobile);
+    padding-top: var(--hero-container-padding-top-mobile);
   }
+
+  /* ================= TEXTOS ================= */
 
   .hero-texts {
+    order: 1;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
-    order: 1;
   }
 
-  /* ================= ANIMACIÓN HERO TEXT ================= */
-
-  .hero-texts > * {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: heroFadeUp 1.8s ease forwards;
-    will-change: opacity, transform;
+  .hero-texts .titles-general {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: var(--hero-title-gap);
+    color: var(--hero-text-color);
+    font-size: var(--hero-title-size);
+    line-height: var(--hero-title-line-height);
+    text-align: var(--hero-title-align);
   }
 
-  .hero-texts .title-general {
-    animation-delay: 0.2s;
+  .title-secondary {
+    color: var(--hero-text-color);
+    font-size: var(--hero-title-secondary-size);
+    font-weight: var(--hero-title-secondary-weight);
+    line-height: var(--hero-title-secondary-line-height);
+    letter-spacing: var(--hero-title-secondary-letter-spacing);
+    white-space: nowrap;
+    text-align: center;
   }
 
-  .hero-texts .subtitle-general:nth-of-type(1) {
-    animation-delay: 0.5s;
+  .title-extra {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--hero-title-extra-gap);
+    margin-top: var(--hero-title-extra-margin-top);
+    margin-bottom: var(--hero-title-extra-margin-bottom);
+    text-align: center;
   }
 
-  .hero-texts .subtitle-general:nth-of-type(2) {
-    animation-delay: 0.8s;
-  }
-
-  .hero-texts .btn-container {
-    animation-delay: 1.15s;
+  .subtitle-general {
+    font-size: var(--hero-subtitle-size);
+    line-height: var(--hero-subtitle-line-height);
+    white-space: nowrap;
   }
 
   .subtitle-general span {
     display: inline-block;
-    font-weight: 900;
+    font-weight: var(--hero-subtitle-highlight-weight);
+  }
+
+  /* ================= BOTÓN ================= */
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ================= IMAGEN ================= */
+
+  .hero-img__container {
+    position: relative;
+    order: 0;
+    width: var(--hero-img-container-width);
+    height: auto;
+  }
+
+  .hero-img {
+    width: var(--hero-img-width);
+    height: auto;
+  }
+
+  /* ================= ANIMACIONES ================= */
+
+  .hero-texts > * {
     opacity: 0;
-    transform: scale(0.9);
-    animation: heroPopIn 0.45s ease forwards;
-    animation-delay: 1.05s;
+    transform: translateY(var(--hero-text-initial-y));
+    animation: heroFadeUp var(--hero-text-animation-duration)
+      var(--hero-text-animation-easing) forwards;
+    will-change: opacity, transform;
+  }
+
+  .hero-texts .titles-general {
+    animation-delay: var(--hero-title-delay);
+  }
+
+  .hero-texts .subtitle-general:nth-of-type(1) {
+    animation-delay: var(--hero-subtitle-1-delay);
+  }
+
+  .hero-texts .subtitle-general:nth-of-type(2) {
+    animation-delay: var(--hero-subtitle-2-delay);
+  }
+
+  .hero-texts .btn-container {
+    animation-delay: var(--hero-button-delay);
+  }
+
+  .subtitle-general span {
+    opacity: 0;
+    transform: scale(var(--hero-highlight-initial-scale));
+    animation: heroPopIn var(--hero-highlight-animation-duration)
+      var(--hero-highlight-animation-easing) forwards;
+    animation-delay: var(--hero-highlight-delay);
+    will-change: opacity, transform;
+  }
+
+  .hero-img__container {
+    opacity: 0;
+    transform: translateY(var(--hero-image-initial-y));
+    animation: heroImageDrop var(--hero-image-animation-duration)
+      var(--hero-image-animation-easing) forwards;
+    animation-delay: var(--hero-image-animation-delay);
     will-change: opacity, transform;
   }
 
@@ -114,67 +276,25 @@ import { path } from "../utils/paths";
     }
   }
 
-  /* ================= IMAGEN ================= */
-
-  .hero-img__container {
-    position: relative;
-    width: min(90%, 500px);
-    height: auto;
-    order: 0;
-
-    opacity: 0;
-    transform: translateY(-80px);
-    animation: heroImageDrop 1.8s ease-out forwards;
-    animation-delay: 0.2s;
-    will-change: opacity, transform;
-  }
-
-  .hero-img {
-    height: auto;
-    width: 100%;
-  }
-
   @keyframes heroImageDrop {
     0% {
       opacity: 0;
-      transform: translateY(-80px);
+      transform: translateY(var(--hero-image-initial-y));
     }
 
     60% {
       opacity: 1;
-      transform: translateY(10px);
+      transform: translateY(var(--hero-image-bounce-y));
     }
 
     80% {
-      transform: translateY(-4px);
+      transform: translateY(var(--hero-image-back-y));
     }
 
     100% {
       opacity: 1;
       transform: translateY(0);
     }
-  }
-
-  /* ================= TEXTOS ================= */
-
-  .title-general {
-    font-size: clamp(1rem, 6vw, 2.5rem);
-    line-height: 1.5;
-    white-space: nowrap;
-  }
-
-  .subtitle-general {
-    font-size: clamp(0.8rem, 4vw, 1.5rem);
-    line-height: 1.4;
-    white-space: nowrap;
-  }
-
-  /* ================= BOTÓN ================= */
-
-  .btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   /* ================= ACCESIBILIDAD ================= */
@@ -193,16 +313,13 @@ import { path } from "../utils/paths";
 
   @media (min-width: 1024px) {
     .section-hero {
-      min-height: 800px;
+      min-height: var(--hero-min-height-desktop);
     }
 
     .hero-container {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: start;
-      padding-top: 2rem;
+      flex-direction: var(--hero-container-direction-desktop);
+      align-items: var(--hero-container-align-desktop);
+      padding-top: var(--hero-container-padding-top-desktop);
     }
 
     .hero-texts {

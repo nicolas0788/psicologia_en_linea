@@ -44,9 +44,11 @@ export class MenuController {
     this.overlay.addEventListener("click", this.handleOverlay);
     this.menu.addEventListener("click", this.handleLinkClick);
     this.mediaQuery.addEventListener("change", this.handleResize);
+
     window.addEventListener("scroll", this.handleNavOnScroll, {
       passive: true,
     });
+
     window.addEventListener("load", this.handleWindowLoad);
 
     this.resetImmediate();
@@ -123,6 +125,7 @@ export class MenuController {
 
   handleToggle() {
     if (this.isDesktop()) return;
+
     this.toggleMenu();
   }
 
@@ -145,6 +148,40 @@ export class MenuController {
   }
 
   handleLinkClick(e) {
+    const internalLink = e.target.closest("[data-internal-click]");
+
+    if (internalLink) {
+      e.preventDefault();
+
+      const targetId = internalLink.dataset.target;
+
+      if (!targetId) return;
+
+      const target = document.getElementById(targetId);
+
+      if (!target) return;
+
+      if (!this.isDesktop() && this.isOpen) {
+        this.close();
+
+        setTimeout(() => {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 300);
+
+        return;
+      }
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      return;
+    }
+
     if (e.target.closest("a")) {
       this.close();
     }
@@ -172,6 +209,7 @@ export class MenuController {
 
   updateAria(isOpen) {
     this.toggle.setAttribute("aria-expanded", String(isOpen));
+
     this.toggle.setAttribute(
       "aria-label",
       isOpen ? "Cerrar menú" : "Abrir menú",

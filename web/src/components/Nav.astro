@@ -1,18 +1,33 @@
 ---
-import { path } from "../utils/paths";
 const menuDesktop = [
-  { href: "/", label: "Inicio", classLi: "" },
-  { href: "condicionesPro", label: "CondicionesPro", classLi: "" },
-  { href: "private", label: "Privacidad", classLi: "" },
-  { href: "preguntas-frecuentes", label: "Preguntas", classLi: "" },
+  {
+    href: "#como-funciona",
+    label: "Cómo funciona",
+    classLi: "",
+    data: {
+      "data-internal-click": true,
+      "data-target": "como-funciona",
+    },
+  },
+  { href: "/quienesSomos", label: "¿Quiénes somos?", classLi: "" },
+  //{ href: "/", label: "Preguntas frecuentes", classLi: "" },
+  { href: "/", label: "Soy profesional", classLi: "" },
   { href: "form", label: "Comenzar", classLi: "menu-desktop__cta" },
 ];
 
 const menuMobile = [
-  { href: "/", label: "Inicio", classLi: "" },
-  { href: "condicionesPro", label: "Condiciones", classLi: "" },
-  { href: "private", label: "Privacidad", classLi: "" },
-  { href: "preguntas-frecuentes", label: "Preguntas", classLi: "" },
+  {
+    href: "#como-funciona",
+    label: "Cómo funciona",
+    classLi: "",
+    data: {
+      "data-internal-click": true,
+      "data-target": "como-funciona",
+    },
+  },
+  { href: "/quienesSomos", label: "¿Quiénes somos?", classLi: "" },
+  //{ href: "/", label: "Preguntas frecuentes", classLi: "" },
+  { href: "/", label: "Soy profesional", classLi: "" },
   { href: "form", label: "Comenzar", classLi: "menu-mobile__cta" },
 ];
 
@@ -35,7 +50,9 @@ import logoImg from "../../src/assets/img/logo2.png";
       {
         menuDesktop.map((item) => (
           <li class={item.classLi}>
-            <a href={path(`${item.href}`)}>{item.label}</a>
+            <a href={item.href} {...item.data}>
+              {item.label}
+            </a>
           </li>
         ))
       }
@@ -62,7 +79,9 @@ import logoImg from "../../src/assets/img/logo2.png";
       {
         menuMobile.map((item) => (
           <li class={item.classLi}>
-            <a href={item.href}>{item.label}</a>
+            <a href={item.href} {...item.data}>
+              {item.label}
+            </a>
           </li>
         ))
       }
@@ -128,11 +147,11 @@ import logoImg from "../../src/assets/img/logo2.png";
 
     /* ================= TOGGLE ================= */
     --nav-toggle-size: 28px;
-    --nav-toggle-line-width: 28px;
-    --nav-toggle-line-height: 4px;
-    --nav-toggle-gap: 5px;
+    --nav-toggle-line-width: 20px;
+    --nav-toggle-line-height: 2px;
+    --nav-toggle-gap: 4px;
     --nav-toggle-line-radius: 999px;
-    --nav-toggle-translate-y: 9px;
+    --nav-toggle-translate-y: 6px;
 
     /* ================= CAPAS Y ANIMACIONES ================= */
     --nav-layer-duration: 0.8s;

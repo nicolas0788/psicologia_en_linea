@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import aboutImg from "../../assets/img/quienes-somos/quienesSomos.png";
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+---
+
+<section class="section-general about-section" id="quienes-somos">
+  <ArcoSuperior />
+
+  <div class="container-general about-container">
+    <div class="about-media">
+      <Image
+        src={aboutImg}
+        alt="Equipo de Psicología en Línea"
+        class="about-image"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="about-content">
+      <h2 class="titles-general">¿Quiénes somos?</h2>
+
+      <p>
+        Psicología en Línea es una plataforma de derivación que conecta
+        consultantes con psicólogos y psicólogas con matrícula en Argentina.
+      </p>
+
+      <p>
+        Sabemos que empezar terapia puede generar dudas: a quién consultar, qué
+        orientación elegir o cómo encontrar una opción confiable. Por eso,
+        hacemos el proceso más simple.
+      </p>
+
+      <p>
+        Revisamos cada solicitud de forma individual y te acercamos una opción
+        profesional acorde a lo que nos compartís, la modalidad que buscás y tu
+        disponibilidad.
+      </p>
+
+      <p>
+        Podés acceder a atención online desde cualquier lugar o presencial en
+        CABA, según corresponda.
+      </p>
+
+      <p>
+        No hacemos asignaciones automáticas. Cada solicitud se revisa con
+        cuidado para que puedas dar el primer paso con más claridad, orientación
+        y confianza.
+      </p>
+
+      <p>
+        La atención psicológica es brindada exclusivamente por el/la profesional
+        interviniente, quien ejerce de manera independiente.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  :root {
+    --about-bg: #fff4ed;
+    --about-text-color: var(--color-text-dark);
+    --about-gap: 2rem;
+    --about-image-radius: 2rem;
+    --about-image-width-mobile: min(100%, 26rem);
+    --about-image-width-desktop: 500px;
+  }
+  .about-section {
+    position: relative;
+    background: var(--about-bg);
+    overflow: hidden;
+  }
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--about-gap);
+    padding-top: 5rem;
+  }
+
+  .about-media {
+    width: var(--about-image-width-mobile);
+    margin-inline: auto;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--about-image-radius);
+    object-fit: cover;
+  }
+
+  .about-content {
+    width: 100%;
+    max-width: 38rem;
+  }
+
+  .about-content .titles-general {
+    color: var(--about-text-color);
+    text-align: center;
+  }
+
+  .about-content p {
+    margin-top: 1rem;
+    color: var(--about-text-color);
+    font-size: var(--font-size-small);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 1024px) {
+    .about-section {
+      --about-gap: clamp(3rem, 6vw, 5rem);
+    }
+
+    .about-container {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-media {
+      flex: 0 0 var(--about-image-width-desktop);
+      max-width: var(--about-image-width-desktop);
+      margin-inline: 0;
+    }
+
+    .about-content {
+      flex: 1;
+      max-width: 38rem;
+    }
+
+    .about-content .titles-general {
+      text-align: left;
+    }
+  }
+</style>

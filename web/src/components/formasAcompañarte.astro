@@ -1,0 +1,341 @@
+---
+import { Image } from "astro:assets";
+
+import icon1 from "../assets/img/aproaches/A.png";
+import icon2 from "../assets/img/aproaches/B.png";
+import icon3 from "../assets/img/aproaches/C.png";
+import icon4 from "../assets/img/aproaches/D.png";
+
+import stepImage from "../assets/img/formasAcom.png";
+
+const steps = [
+  {
+    icon: icon1,
+    title: "Enfoques terapéuticos",
+    text: "Psicoanálisis · TCC · ACT · DBT · Sistémica · Integrativa",
+  },
+  {
+    icon: icon2,
+    title: "Atención para distintas etapas",
+    text: "Niños · Adolescentes · Adultos · Parejas",
+  },
+  {
+    icon: icon3,
+    title: "Modalidades",
+    text: "Online estés donde estés · Presencial en CABA",
+  },
+  {
+    icon: icon4,
+    title: "Derivación personalizada",
+    text: "Cada consulta se revisa de forma individual",
+  },
+];
+---
+
+<section class="section-general aproaches-section" id="formas-acom">
+  <div class="container-general aproaches-container">
+    <header
+      class="aproaches-header scroll-reveal scroll-reveal--top"
+      data-scroll-reveal
+    >
+      <h2 class="titles-general aproaches-kicker-title">
+        Distintas formas de acompañarte
+      </h2>
+      <p class="overline aproaches-kicker">
+        Contamos con psicólogos matriculados, con distintas formaciones y
+        orientaciones terapéuticas, para acercarte una opción profesional acorde
+        a tu consulta, tu momento y la modalidad que necesitás.
+      </p>
+    </header>
+
+    <div class="aproaches-content">
+      <ol class="aproaches-steps" aria-label="Pasos para empezar terapia">
+        {
+          steps.map((step, index) => (
+            <li
+              class="aproaches-card scroll-reveal scroll-reveal--left"
+              data-scroll-reveal
+              style={`transition-delay:${index * 0.12}s`}
+            >
+              <div class="aproaches-icon-wrapper">
+                <Image
+                  src={step.icon}
+                  alt={step.title}
+                  class="aproaches-icon"
+                />
+              </div>
+
+              <div class="aproaches-card-text">
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <figure
+        class="aproaches-image-wrapper scroll-reveal scroll-reveal--right"
+        data-scroll-reveal
+      >
+        <Image
+          src={stepImage}
+          alt="Ilustración de una persona ingresando a una consulta terapéutica"
+          class="aproaches-image"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("formas-acom");
+
+    if (!container) return;
+
+    const revealElements = container.querySelectorAll("[data-scroll-reveal]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target;
+
+          if (entry.intersectionRatio >= 0.25) {
+            element.classList.add("is-visible");
+          }
+
+          if (entry.intersectionRatio <= 0.02) {
+            element.classList.remove("is-visible");
+          }
+        });
+      },
+      {
+        threshold: [0, 0.02, 0.25],
+        rootMargin: "0px",
+      },
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  });
+</script>
+
+<style is:global>
+  .aproaches-section {
+    --aproaches-bg: #383094;
+    --aproaches-bg-soft: #4d43ad;
+    --aproaches-card-bg: rgba(255, 255, 255, 0.1);
+    --aproaches-card-border: rgba(255, 255, 255, 0.12);
+    --aproaches-text: var(--color-text-light);
+    --aproaches-title: var(--color-text-light);
+    --aproaches-accent: #ffd21f;
+
+    background:
+      radial-gradient(
+        circle at 78% 18%,
+        rgba(115, 94, 214, 0.6),
+        transparent 32%
+      ),
+      linear-gradient(180deg, var(--aproaches-bg-soft), var(--aproaches-bg));
+
+    overflow: hidden;
+  }
+
+  .aproaches-container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .aproaches-header {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .aproaches-kicker {
+    color: var(--aproaches-title);
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+  }
+
+  .aproaches-kicker-title {
+    color: var(--aproaches-title);
+  }
+
+  .aproaches-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .aproaches-steps {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    order: 1;
+  }
+
+  .aproaches-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.5rem);
+
+    padding: clamp(1.4rem, 3vw, 2rem);
+
+    border-radius: 1.4rem;
+
+    background: var(--aproaches-card-bg);
+
+    border: 1px solid var(--aproaches-card-border);
+
+    backdrop-filter: blur(6px);
+  }
+  .aproaches-card p {
+    opacity: 0.8;
+  }
+
+  .aproaches-icon-wrapper {
+    width: clamp(3.5rem, 5vw, 4.5rem);
+
+    aspect-ratio: 1;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    flex: 0 0 auto;
+  }
+
+  .aproaches-icon {
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+  }
+
+  .aproaches-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .aproaches-card h3 {
+    margin: 0;
+
+    color: var(--aproaches-title);
+
+    font-size: var(--font-size-h4);
+
+    font-weight: 800;
+  }
+
+  .aproaches-card p {
+    margin: 0;
+
+    color: var(--aproaches-text);
+
+    font-size: var(--font-size-body);
+  }
+
+  .aproaches-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .aproaches-image {
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+  }
+
+  /* =========================
+     SCROLL REVEAL
+  ========================= */
+
+  .scroll-reveal {
+    opacity: 0;
+
+    transition:
+      opacity 1s ease,
+      transform 1s ease;
+
+    will-change: transform, opacity;
+  }
+
+  .scroll-reveal--left {
+    transform: translateX(-48px);
+  }
+
+  .scroll-reveal--right {
+    transform: translateX(48px);
+  }
+
+  .scroll-reveal--top {
+    transform: translateY(-40px);
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+
+    transform: translate(0, 0);
+  }
+
+  @media (max-width: 850px) {
+    .aproaches-content {
+      grid-template-columns: 1fr;
+    }
+
+    .aproaches-image-wrapper {
+      order: -1;
+    }
+
+    .aproaches-image {
+      width: min(100%, 360px);
+    }
+
+    .scroll-reveal--left,
+    .scroll-reveal--right {
+      transform: translateY(80px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .aproaches-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .aproaches-icon-wrapper {
+      width: 3.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

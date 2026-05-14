@@ -1,35 +1,113 @@
+---
+import { Image } from "astro:assets";
+
+import img1 from "../assets/img/ayudarte/1.png";
+import img2 from "../assets/img/ayudarte/2.png";
+import img3 from "../assets/img/ayudarte/3.png";
+import img4 from "../assets/img/ayudarte/4.png";
+import img5 from "../assets/img/ayudarte/5.png";
+import img6 from "../assets/img/ayudarte/6.png";
+import img7 from "../assets/img/ayudarte/7.png";
+import img8 from "../assets/img/ayudarte/8.png";
+import img9 from "../assets/img/ayudarte/9.png";
+import img10 from "../assets/img/ayudarte/10.png";
+import img11 from "../assets/img/ayudarte/11.png";
+import img12 from "../assets/img/ayudarte/12.png";
+
+const helpItems = [
+  { text: "Ansiedad", image: img1 },
+  { text: "Ataques de pánico", image: img2 },
+  { text: "Estrés", image: img3 },
+  { text: "Desánimo", image: img4 },
+  { text: "Autoestima", image: img5 },
+  { text: "Problemas de pareja", image: img6 },
+  { text: "Dificultades vinculares", image: img7 },
+  { text: "Dependencia emocional", image: img8 },
+  { text: "Duelos", image: img9 },
+  { text: "Insomnio", image: img10 },
+  { text: "Crisis personales", image: img11 },
+  { text: "Autoconocimiento", image: img12 },
+];
+
+const slides = [];
+
+for (let i = 0; i < helpItems.length; i += 3) {
+  slides.push(helpItems.slice(i, i + 3));
+}
+---
+
 <section
   class="section-general help-section"
   aria-labelledby="help-section-title"
 >
   <div class="container-general help-container">
     <div class="help-heading">
-      <h2 id="help-section-title">¿En qué podemos ayudarte?</h2>
-      <p>
-        Un espacio profesional y confidencial para acompañarte en los momentos
-        que hoy te están costando más.
-      </p>
+      <h2 class="titles-secondary" id="help-section-title">
+        En qué podemos ayudarte
+      </h2>
     </div>
 
-    <article class="help-card" aria-label="Motivos de consulta frecuentes">
-      <ul class="help-grid">
-        <li>Ansiedad y estrés</li>
-        <li>Ataques de pánico</li>
-        <li>Depresión o tristeza</li>
-        <li>Problemas para dormir</li>
-        <li>Problemas de pareja</li>
-        <li>Baja autoestima e inseguridad</li>
-        <li>Estrés laboral o agotamiento</li>
-        <li>Conflictos familiares</li>
-        <li>Sentirte abrumado/a</li>
-      </ul>
+    <article
+      class="help-card"
+      aria-label="Motivos de consulta frecuentes"
+      data-help-carousel
+    >
+      <div class="help-carousel">
+        <ul class="help-track" data-help-track>
+          {
+            slides.map((slide) => (
+              <li class="help-slide">
+                <ul class="help-grid">
+                  {slide.map((item) => (
+                    <li>
+                      <div class="help-image">
+                        <Image
+                          src={item.image}
+                          alt={item.text}
+                          width={100}
+                          height={100}
+                          loading="lazy"
+                          class="help-image-img"
+                        />
+                      </div>
+
+                      <span>{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </article>
   </div>
 </section>
 
-<style>
+<script>
+  const carousel = document.querySelector<HTMLElement>("[data-help-carousel]");
+  const track = document.querySelector<HTMLElement>("[data-help-track]");
+
+  if (carousel && track) {
+    const slides = Array.from(
+      track.querySelectorAll<HTMLElement>(".help-slide"),
+    );
+
+    let index = 0;
+    const intervalTime = 4500;
+
+    const moveCarousel = (): void => {
+      index = (index + 1) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+    };
+
+    window.setInterval(moveCarousel, intervalTime);
+  }
+</script>
+
+<style is:global>
   .help-section {
-    background: linear-gradient(180deg, #edf5f7 0%, #d1eef6 100%);
+    background: linear-gradient(180deg, #f8fbfd 0%, #8d9cdb 100%);
   }
 
   .help-container {
@@ -45,11 +123,12 @@
     text-align: center;
   }
 
-  .help-heading p {
-    color: var(--color-text-soft);
+  .help-heading .titles-secondary {
+    color: var(--color-text-dark);
   }
 
   .help-card {
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.84);
     border: 1px solid rgba(17, 24, 39, 0.08);
     border-radius: 1.5rem;
@@ -60,6 +139,24 @@
     padding: clamp(1.25rem, 2vw, 2rem);
   }
 
+  .help-carousel {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .help-track {
+    list-style: none;
+    display: flex;
+    width: 100%;
+    transition: transform 900ms ease;
+    will-change: transform;
+  }
+
+  .help-slide {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
   .help-grid {
     list-style: none;
     display: grid;
@@ -68,35 +165,37 @@
   }
 
   .help-grid li {
-    position: relative;
     display: flex;
     align-items: center;
-    min-height: 5.25rem;
-    padding: 1.1rem 1.15rem 1.1rem 3rem;
+    gap: 1rem;
+    min-height: 5.5rem;
+    padding: 1rem 1.1rem;
     background: linear-gradient(180deg, #ffffff 0%, #f9fcfd 100%);
     border: 1px solid rgba(17, 24, 39, 0.07);
     border-radius: 1rem;
-    box-shadow: 0 6px 18px rgba(17, 24, 39, 0.04);
-    color: var(--color-text);
+
+    color: --var(color-text-dark);
   }
 
-  .help-grid li::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(180deg, #8484d4 0%, #5858d8 100%);
-    box-shadow: 0 0 0 0.35rem rgba(143, 184, 199, 0.18);
+  .help-image {
+    flex-shrink: 0;
+    width: 3.4rem;
+    height: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.9rem;
+    background: linear-gradient(180deg, #eef2ff 0%, #dde5ff 100%);
   }
 
-  @media (max-width: 900px) {
-    .help-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .help-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .help-grid span {
+    line-height: 1.4;
   }
 
   @media (max-width: 640px) {

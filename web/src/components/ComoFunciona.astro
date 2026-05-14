@@ -1,0 +1,328 @@
+---
+import Btn from "./assets/Btn.astro";
+import { Image } from "astro:assets";
+
+import stepImage from "../assets/img/door.png";
+
+const steps = [
+  {
+    number: "1",
+    title: "Completá un formulario breve",
+    text: "Contanos qué necesitás, modalidad y disponibilidad",
+  },
+  {
+    number: "2",
+    title: "Recibí una opción personalizada",
+    text: "Revisamos tu consulta y te enviamos los datos de un/a psicólogo/a matriculado/a",
+  },
+  {
+    number: "3",
+    title: "Decidí si querés avanzar",
+    text: "Si continuás, el/la profesional coordinará con vos una videollamada breve, orientativa y sin costo",
+  },
+];
+---
+
+<section class="section-general how-section" id="como-funciona">
+  <div class="container-general how-container">
+    <header
+      class="how-header scroll-reveal scroll-reveal--top"
+      data-scroll-reveal
+    >
+      <p class="overline how-kicker">Simple y rápido</p>
+
+      <h2 class="titles-general how-kicker-title">¿Cómo funciona?</h2>
+    </header>
+
+    <div class="how-content">
+      <ol class="how-steps" aria-label="Pasos para empezar terapia">
+        {
+          steps.map((step, index) => (
+            <li
+              class="how-card scroll-reveal scroll-reveal--left"
+              data-scroll-reveal
+              style={`transition-delay:${index * 0.12}s`}
+            >
+              <span class="how-number">{step.number}</span>
+
+              <div class="how-card-text">
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))
+        }
+
+        <div
+          class="btn-container scroll-reveal scroll-reveal--left"
+          data-scroll-reveal
+          style="transition-delay:0.35s"
+        >
+          <Btn
+            href="/form"
+            label="Comenzar ahora"
+            fontSize="clamp(0.95rem, 0.8rem + 0.7vw, 1.4rem)"
+            bg="#b7c6fa"
+            color="#383094"
+          />
+        </div>
+      </ol>
+
+      <figure
+        class="how-image-wrapper scroll-reveal scroll-reveal--right"
+        data-scroll-reveal
+      >
+        <Image
+          src={stepImage}
+          alt="Ilustración de una persona ingresando a una consulta terapéutica"
+          class="how-image"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("como-funciona");
+
+    if (!container) return;
+
+    const revealElements = container.querySelectorAll("[data-scroll-reveal]");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const element = entry.target;
+
+          if (entry.intersectionRatio >= 0.25) {
+            element.classList.add("is-visible");
+          }
+
+          if (entry.intersectionRatio <= 0.02) {
+            element.classList.remove("is-visible");
+          }
+        });
+      },
+      {
+        threshold: [0, 0.02, 0.25],
+        rootMargin: "0px",
+      },
+    );
+
+    revealElements.forEach((element) => {
+      observer.observe(element);
+    });
+  });
+</script>
+
+<style is:global>
+  .how-section {
+    --how-bg: #383094;
+    --how-bg-soft: #4d43ad;
+    --how-card-bg: rgba(255, 255, 255, 0.1);
+    --how-card-border: rgba(255, 255, 255, 0.12);
+    --how-text: var(--color-text-light);
+    --how-title: var(--color-text-light);
+    --how-accent: #ffd21f;
+
+    background:
+      radial-gradient(
+        circle at 78% 18%,
+        rgba(115, 94, 214, 0.6),
+        transparent 32%
+      ),
+      linear-gradient(180deg, var(--how-bg-soft), var(--how-bg));
+
+    overflow: hidden;
+  }
+
+  .how-container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  .how-header {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .how-kicker {
+    color: var(--how-title);
+    margin-bottom: 0.75rem;
+  }
+
+  .how-kicker-title {
+    color: var(--how-title);
+  }
+
+  .how-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.78fr);
+    align-items: center;
+    gap: clamp(2.5rem, 7vw, 6rem);
+  }
+
+  .how-steps {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .how-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.5rem);
+
+    padding: clamp(1.4rem, 3vw, 2rem);
+
+    border-radius: 1.4rem;
+
+    background: var(--how-card-bg);
+
+    border: 1px solid var(--how-card-border);
+
+    backdrop-filter: blur(6px);
+  }
+
+  .how-card p {
+    opacity: 0.8;
+  }
+
+  .how-number {
+    width: clamp(3rem, 5vw, 4rem);
+
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: var(--how-accent);
+
+    color: #2d287c;
+
+    font-weight: 800;
+
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+
+    line-height: 1;
+
+    flex: 0 0 auto;
+  }
+
+  .how-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .how-card h3 {
+    margin: 0;
+
+    color: var(--how-title);
+
+    font-size: var(--font-size-h4);
+
+    font-weight: 800;
+  }
+
+  .how-card p {
+    margin: 0;
+
+    color: var(--how-text);
+
+    font-size: var(--font-size-body);
+  }
+
+  .how-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .how-image {
+    width: min(100%, 430px);
+
+    height: auto;
+
+    object-fit: contain;
+  }
+
+  /* =========================
+     SCROLL REVEAL
+  ========================= */
+
+  .scroll-reveal {
+    opacity: 0;
+
+    transition:
+      opacity 1s ease,
+      transform 1s ease;
+
+    will-change: transform, opacity;
+  }
+
+  .scroll-reveal--left {
+    transform: translateX(-48px);
+  }
+
+  .scroll-reveal--right {
+    transform: translateX(48px);
+  }
+
+  .scroll-reveal--top {
+    transform: translateY(-40px);
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+
+    transform: translate(0, 0);
+  }
+
+  @media (max-width: 850px) {
+    .how-content {
+      grid-template-columns: 1fr;
+    }
+
+    .how-image-wrapper {
+      order: -1;
+    }
+
+    .how-image {
+      width: min(100%, 360px);
+    }
+
+    .scroll-reveal--left,
+    .scroll-reveal--right {
+      transform: translateY(80px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .how-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .how-number {
+      width: 3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

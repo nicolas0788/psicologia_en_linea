@@ -1,61 +1,86 @@
 ---
-// TestimonialsCarousel.astro
+import { Image } from "astro:assets";
+
+import reviewBtn from "../assets/img/icons/mail.png";
 
 const testimonials = [
   {
-    name: "María L.",
+    name: "Sofía",
+    location: "Buenos Aires, Argentina",
     comment:
-      "Me ayudaron a encontrar una psicóloga con la que me sentí cómoda desde la primera consulta.",
-    image: "/img/testimonials/persona-1.jpg",
+      "Quería empezar terapia hacía tiempo, pero no sabía por dónde buscar. El formulario me ayudó a ordenar lo que necesitaba y después me enviaron una opción concreta.",
   },
   {
-    name: "Juan P.",
+    name: "Martín",
+    location: "Roma, Italia",
     comment:
-      "El proceso fue claro, rápido y muy cuidado. Me orientaron según lo que necesitaba.",
-    image: "/img/testimonials/persona-2.jpg",
+      "Vivo afuera y buscaba un psicólogo argentino, alguien con quien pudiera hablar en mi idioma y sentirme entendido. Me sirvió mucho que la atención pudiera ser online.",
   },
   {
-    name: "Camila R.",
+    name: "Laura",
+    location: "CABA, Argentina",
     comment:
-      "Pude empezar terapia online sin vueltas. La atención fue profesional y humana.",
-    image: "/img/testimonials/persona-3.jpg",
+      "Me dio tranquilidad recibir el nombre, la matrícula, la modalidad y los honorarios antes de avanzar. Sentí que no estaba eligiendo a ciegas.",
   },
   {
-    name: "Lato",
+    name: "Camila",
+    location: "Rosario, Argentina",
     comment:
-      "Pude empezar terapia online sin vueltas. La atención fue profesional y humana.",
-    image: "/img/testimonials/persona-3.jpg",
+      "Una amiga me recomendó psicología en línea. Yo venía postergando empezar terapia y el proceso me resultó simple, completé el formulario y me respondieron por whatsapp.",
+  },
+  {
+    name: "Nicolás",
+    location: "CABA, Argentina",
+    comment:
+      "Había buscado psicólogos por mi cuenta, pero terminaba confundido y no sabía qué orientación buscar. Acá me facilitaron todo.",
+  },
+  {
+    name: "Valentina",
+    location: "Montevideo, Uruguay",
+    comment:
+      "Me daba desconfianza empezar terapia online sin conocer a nadie. Que el proceso fuera claro y tener una videollamada previa con la profesional me ayudó a decidirme.",
+  },
+  {
+    name: "Mariana",
+    location: "CABA, Argentina",
+    comment:
+      "Necesitaba saber que el profesional estuviera matriculado. Que me pasaran esa información antes de avanzar me dio mucha confianza.",
+  },
+  {
+    name: "Julián",
+    location: "CABA, Argentina",
+    comment:
+      "Yo buscaba terapia presencial porque necesitaba un espacio fuera de casa. Comencé con un profesional por mi zona que ellos me sugirieron, todo bárbaro.",
+  },
+  {
+    name: "Agustina",
+    location: "Miami, Estados Unidos",
+    comment:
+      "Estando afuera, encontrar un psicólogo argentino no fue tan fácil. Me llegó una publicidad de Instagram y completé el formulario. Estoy muy contenta con la profesional a la que me derivaron.",
+  },
+  {
+    name: "Carolina",
+    location: "Buenos Aires, Argentina",
+    comment:
+      "Me gustó que no fuera automático. Sentí que habían leído lo que escribí y que la sugerencia tenía relación con mi situación. Recomendables.",
   },
 ];
 ---
 
 <section class="section-general testimonials-section">
   <div class="container-general testimonials-container">
-    <header class="testimonials-header">
-      <span>Experiencias reales</span>
-      <h2>Personas que confiaron en nosotros</h2>
-      <p>
-        Acompañamos cada consulta de forma personalizada para ayudarte a
-        encontrar el profesional adecuado.
-      </p>
-    </header>
-
     <div class="testimonial-carousel" data-testimonial-carousel>
       <div class="testimonial-track" data-testimonial-track>
         {
           testimonials.map((item) => (
             <div class="testimonial-slide">
               <article class="testimonial-card">
-                <img
-                  src={item.image}
-                  alt={`Foto de ${item.name}`}
-                  class="testimonial-img"
-                  loading="lazy"
-                />
-
                 <div class="testimonial-content">
                   <p class="testimonial-comment">“{item.comment}”</p>
-                  <strong>{item.name}</strong>
+
+                  <strong class="testimonial-name">{item.name}</strong>
+
+                  <span class="testimonial-location">{item.location}</span>
                 </div>
               </article>
             </div>
@@ -63,36 +88,41 @@ const testimonials = [
         }
       </div>
     </div>
+    <div class="testimonials-footer">
+      <h4 class="titles-secondary">
+        ¿Ya tuviste una experiencia con Psicología en Línea?
+      </h4>
+
+      <p>
+        Tu comentario puede ayudar a otras personas que todavía están buscando
+        por dónde empezar
+      </p>
+
+      <a
+        href="mailto:contacto@psicologiaenlinea.com.ar?subject=Comentario%20sobre%20el%20servicio"
+        class="testimonials-review-btn"
+        aria-label="Enviar comentario sobre el servicio"
+      >
+        <Image
+          src={reviewBtn}
+          alt="Enviar comentario"
+          class="testimonials-review-btn__img"
+          loading="lazy"
+        />
+      </a>
+    </div>
   </div>
 </section>
 
 <style>
   .testimonials-section {
-    background: linear-gradient(180deg, #f8fbfd 0%, #eef3fb 100%);
+    background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
     overflow: hidden;
   }
 
   .testimonials-container {
     display: grid;
     gap: clamp(2rem, 5vw, 4rem);
-  }
-
-  .testimonials-header {
-    max-width: 720px;
-    margin-inline: auto;
-    text-align: center;
-  }
-
-  .testimonials-header span {
-    display: inline-block;
-    margin-bottom: 0.75rem;
-    color: #6f7fc8;
-    font-weight: 700;
-  }
-
-  .testimonials-header p {
-    margin-top: 1rem;
-    color: #5f6b7a;
   }
 
   .testimonial-carousel {
@@ -117,54 +147,92 @@ const testimonials = [
   .testimonial-card {
     width: 100%;
 
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
     align-items: center;
-    gap: clamp(1rem, 4vw, 2rem);
-    padding: 2rem clamp(1.5rem, 4vw, 3rem);
+    justify-content: center;
+
+    padding: clamp(2rem, 5vw, 3rem);
 
     background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(120, 135, 190, 0.2);
     border-radius: 2rem;
 
-    box-shadow: none;
-    overflow: hidden;
     box-sizing: border-box;
-  }
-
-  .testimonial-img {
-    width: clamp(72px, 12vw, 120px);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #ffffff;
-    box-shadow: 0 10px 24px rgba(40, 55, 90, 0.18);
   }
 
   .testimonial-content {
     display: grid;
     gap: 1rem;
+    text-align: center;
   }
 
   .testimonial-comment {
     color: #2f3a4a;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.8;
   }
 
-  .testimonial-content strong {
+  .testimonial-name {
     color: #6f7fc8;
+    font-size: 1rem;
     font-weight: 800;
   }
 
+  .testimonial-location {
+    color: #7b8794;
+    font-size: 0.92rem;
+  }
+
+  .testimonials-footer {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+
+    max-width: 720px;
+    margin-inline: auto;
+
+    text-align: center;
+  }
+
+  .testimonials-footer .titles-secondary {
+    color: var(--color-text-dark);
+  }
+
+  .testimonials-footer p {
+    color: var(--color-text-dark);
+    line-height: 1.7;
+    opacity: 0.8;
+  }
+
+  .testimonials-review-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 0.5rem;
+
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  .testimonials-review-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
+
+  .testimonials-review-btn__img {
+    width: 3rem;
+    height: auto;
+    display: block;
+  }
   @media (max-width: 520px) {
     .testimonial-slide {
       padding-inline: 1rem;
     }
 
     .testimonial-card {
-      min-height: 320px;
-      grid-template-columns: 1fr;
-      text-align: center;
-      justify-items: center;
+      min-height: 280px;
     }
   }
 </style>
@@ -183,6 +251,7 @@ const testimonials = [
 
     window.setInterval((): void => {
       index = (index + 1) % slides.length;
+
       track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
     }, 6000);
   }

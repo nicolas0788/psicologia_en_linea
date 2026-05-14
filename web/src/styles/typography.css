@@ -1,459 +1,359 @@
-/* =========================================
-   TIPOGRAFÍA GENERAL DEL PROYECTO
-   Base profesional, escalable y reutilizable
-========================================= */
+/* =========================================================
+   TIPOGRAFÍA GENERAL GLOBAL
+   Sistema pensado para:
+   - usar SOLO etiquetas HTML
+   - evitar clases innecesarias
+   - títulos protagonistas
+   - responsive profesional
+   - escalabilidad simple
+========================================================= */
 
 :root {
-  /* =========================
+  /* =====================================================
      FONT FAMILY
-  ========================= */
-  --font-family-base: "Nunito", sans-serif;
-  --font-family-heading: "Nunito", sans-serif;
+  ===================================================== */
 
-  /* =========================
+  --font-primary:
+    "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  /* =====================================================
      COLORS
-  ========================= */
+  ===================================================== */
+
   --color-text: #1f2937;
-  --color-text-soft: #4b5563;
-  --color-text-muted: #6b7280;
-  --color-heading: #111827;
-  --color-link: inherit;
 
-  /* =========================
+  --color-text-dark: #21183a;
+
+  --color-text-light: #fff;
+
+  --color-title: #111827;
+
+  --color-muted: #6b7280;
+
+  /* =====================================================
      FONT WEIGHTS
-  ========================= */
+  ===================================================== */
+
+  --font-weight-light: 300;
+
   --font-weight-regular: 400;
+
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
 
-  /* =========================
+  --font-weight-semibold: 700;
+
+  --font-weight-bold: 800;
+
+  --font-weight-extrabold: 900;
+
+  /* =====================================================
      LINE HEIGHTS
-  ========================= */
-  --line-height-tight: 1.1;
-  --line-height-heading: 1.15;
-  --line-height-body: 1.6;
-  --line-height-form: 1.4;
+  ===================================================== */
 
-  /* =========================
+  --line-height-tight: 0.95;
+
+  --line-height-title: 1.08;
+
+  --line-height-text: 1.6;
+
+  /* =====================================================
      LETTER SPACING
-  ========================= */
-  --letter-spacing-tight: -0.03em;
-  --letter-spacing-heading: -0.02em;
-  --letter-spacing-body: 0;
-  --letter-spacing-wide: 0.02em;
+  ===================================================== */
 
-  /* =========================
+  --letter-spacing-tight: -0.05em;
+
+  --letter-spacing-normal: -0.02em;
+
+  /* =====================================================
      RESPONSIVE SCALE
-     Base desktop target: 1024px aprox
-  ========================= */
-  --font-size-h1: clamp(2rem, calc(2rem + 1.2 * (100vw - 320px) / 704), 3.2rem);
+  ===================================================== */
+
+  --font-size-h1: clamp(3rem, calc(3rem + 2.8 * (100vw - 320px) / 704), 5.8rem);
+
   --font-size-h2: clamp(
-    1.6rem,
-    calc(1.6rem + 0.9 * (100vw - 320px) / 704),
-    2.5rem
+    2.3rem,
+    calc(2.3rem + 1.9 * (100vw - 320px) / 704),
+    4.2rem
   );
+
   --font-size-h3: clamp(
-    1.35rem,
-    calc(1.35rem + 0.65 * (100vw - 320px) / 704),
-    2rem
+    1.8rem,
+    calc(1.8rem + 1.1 * (100vw - 320px) / 704),
+    2.9rem
   );
+
   --font-size-h4: clamp(
-    1.15rem,
-    calc(1.15rem + 0.45 * (100vw - 320px) / 704),
-    1.55rem
+    1.35rem,
+    calc(1.35rem + 0.55 * (100vw - 320px) / 704),
+    1.9rem
   );
+
   --font-size-h5: clamp(
-    1rem,
-    calc(1rem + 0.3 * (100vw - 320px) / 704),
-    1.25rem
+    1.1rem,
+    calc(1.1rem + 0.3 * (100vw - 320px) / 704),
+    1.4rem
   );
+
   --font-size-h6: clamp(
-    0.95rem,
-    calc(0.95rem + 0.2 * (100vw - 320px) / 704),
-    1.1rem
+    1rem,
+    calc(1rem + 0.15 * (100vw - 320px) / 704),
+    1.15rem
   );
 
-  --font-size-body-lg: clamp(
-    1.05rem,
-    calc(1.05rem + 0.2 * (100vw - 320px) / 704),
-    1.25rem
-  );
-  --font-size-body: clamp(
+  --font-size-text: clamp(
     1rem,
-    calc(1rem + 0.14 * (100vw - 320px) / 704),
-    1.125rem
+    calc(1rem + 0.35 * (100vw - 320px) / 704),
+    1.35rem
   );
-  --font-size-body-sm: clamp(
-    0.92rem,
-    calc(0.92rem + 0.08 * (100vw - 320px) / 704),
+
+  --font-size-small: clamp(
+    0.9rem,
+    calc(0.9rem + 0.15 * (100vw - 320px) / 704),
     1rem
   );
-
-  --font-size-label: clamp(
-    0.95rem,
-    calc(0.95rem + 0.08 * (100vw - 320px) / 704),
-    1rem
-  );
-  --font-size-input: clamp(
-    1rem,
-    calc(1rem + 0.08 * (100vw - 320px) / 704),
-    1.05rem
-  );
-  --font-size-button: clamp(
-    0.98rem,
-    calc(0.98rem + 0.12 * (100vw - 320px) / 704),
-    1.05rem
-  );
-  --font-size-caption: clamp(
-    0.82rem,
-    calc(0.82rem + 0.08 * (100vw - 320px) / 704),
-    0.92rem
-  );
-
-  /* =========================
-     OPTIONAL SPECIAL SIZES
-  ========================= */
-  --font-size-overline: clamp(
-    0.75rem,
-    calc(0.75rem + 0.08 * (100vw - 320px) / 704),
-    0.85rem
-  );
-  --font-size-small: var(--font-size-body-sm);
 }
 
-/* =========================================
-   RESET TIPOGRÁFICO GLOBAL
-========================================= */
-
-html {
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-body);
-  color: var(--color-text);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* =========================================================
+   RESET TIPOGRÁFICO
+========================================================= */
 
 h1,
-.h1,
 h2,
-.h2,
 h3,
-.h3,
 h4,
-.h4,
 h5,
-.h5,
 h6,
-.h6,
 p,
-.p,
-ul,
-.ol,
-ol,
 li,
-.li,
 a,
-.a,
-span,
-.span,
-small,
-.small,
-strong,
-.strong,
-em,
-.em,
-label,
-.label,
-legend,
-.legend,
-blockquote,
-.blockquote,
-cite,
-.cite,
-figcaption,
-.figcaption,
-input,
-.input,
-textarea,
-.textarea,
-select,
-.select,
 button,
-.button {
+input,
+textarea,
+label,
+span {
   margin: 0;
+
+  padding: 0;
+
+  font-family: var(--font-primary);
+
+  color: var(--color-text);
 }
 
-/* =========================================
+/* =========================================================
    HEADINGS
-========================================= */
-
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-  font-family: var(--font-family-heading);
-  color: var(--color-heading);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-heading);
-  letter-spacing: var(--letter-spacing-heading);
-  text-wrap: balance;
-}
+========================================================= */
 
 h1,
 .h1 {
   font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-bold);
+
   line-height: var(--line-height-tight);
+
+  font-weight: var(--font-weight-extrabold);
+
   letter-spacing: var(--letter-spacing-tight);
+
+  color: var(--color-title);
+
+  text-wrap: balance;
 }
 
 h2,
 .h2 {
   font-size: var(--font-size-h2);
+
+  line-height: var(--line-height-title);
+
+  font-weight: var(--font-weight-bold);
+
+  letter-spacing: var(--letter-spacing-tight);
+
+  color: var(--color-title);
+
+  text-wrap: balance;
 }
 
 h3,
 .h3 {
   font-size: var(--font-size-h3);
+
+  line-height: 1.12;
+
+  font-weight: var(--font-weight-bold);
+
+  letter-spacing: var(--letter-spacing-normal);
+
+  color: var(--color-title);
+
+  text-wrap: balance;
 }
 
 h4,
 .h4 {
   font-size: var(--font-size-h4);
+
+  line-height: 1.2;
+
+  font-weight: var(--font-weight-semibold);
+
+  letter-spacing: var(--letter-spacing-normal);
+
+  color: var(--color-title);
+
+  text-wrap: balance;
 }
 
 h5,
 .h5 {
   font-size: var(--font-size-h5);
+
+  line-height: 1.3;
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--color-title);
 }
 
 h6,
 .h6 {
   font-size: var(--font-size-h6);
-  font-weight: var(--font-weight-medium);
+
+  line-height: 1.35;
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--color-title);
 }
 
-/* =========================================
-   BODY TEXT
-========================================= */
+/* =========================================================
+   TEXTOS
+========================================================= */
 
 p,
 .p,
 li,
 .li,
-blockquote,
-.blockquote {
-  font-size: var(--font-size-body);
+a,
+.a,
+label,
+.label,
+input,
+.input,
+textarea,
+.textarea,
+button,
+.button {
+  font-size: var(--font-size-text);
+
+  line-height: var(--line-height-text);
+
   font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-body);
+
   color: var(--color-text);
-  text-wrap: pretty;
 }
+
+/* =========================================================
+   SMALL TEXT
+========================================================= */
 
 small,
-.small,
-figcaption,
-.figcaption {
-  font-size: var(--font-size-caption);
+.small {
+  font-size: var(--font-size-small);
+
   line-height: 1.5;
-  color: var(--color-text-muted);
+
+  color: var(--color-muted);
 }
 
-strong,
-.strong {
-  font-weight: var(--font-weight-semibold);
-}
-
-em,
-.em,
-cite,
-.cite {
-  font-style: italic;
-}
-
-/* =========================================
-   LISTS
-========================================= */
-
-ul,
-.ol,
-ol {
-  padding: 0;
-  list-style-position: inside;
-}
-
-li,
-.li {
-  list-style: inherit;
-}
-
-/* =========================================
+/* =========================================================
    LINKS
-========================================= */
+========================================================= */
 
 a,
 .a {
-  color: var(--color-link);
   text-decoration: none;
-  font: inherit;
+
+  color: inherit;
 }
 
-/* =========================================
-   LABELS Y TEXTOS DE FORMULARIO
-========================================= */
-
-label,
-.label,
-legend,
-.legend {
-  display: inline-block;
-  font-size: var(--font-size-label);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.4;
-  color: var(--color-heading);
-}
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
 
 input,
-.input,
 textarea,
-.textarea,
-select,
-.select,
-button,
-.button {
-  font-family: inherit;
-}
-
-/* =========================================
-   INPUTS / TEXTAREA / SELECT
-========================================= */
-
-input,
-.input,
-textarea,
-.textarea,
-select,
-.select {
-  font-size: var(--font-size-input);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-form);
-  letter-spacing: var(--letter-spacing-body);
-  color: var(--color-text);
-}
-
-input::placeholder,
-.input::placeholder,
-textarea::placeholder,
-.textarea::placeholder {
-  color: var(--color-text-muted);
-  opacity: 1;
-}
-
-/* Evita estilos raros del navegador */
-input,
-textarea,
-select,
 button {
-  border-radius: 0;
-}
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-button,
-.button {
-  font-size: var(--font-size-button);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  color: inherit;
-  background: none;
   border: none;
+
+  outline: none;
+
+  background: none;
 }
 
-/* =========================================
-   ELEMENTOS INLINE ÚTILES
-========================================= */
+/* =========================================================
+   LISTS
+========================================================= */
 
-span,
-.span {
-  font: inherit;
-  color: inherit;
+ul,
+ol {
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
 }
 
-code,
-pre,
-kbd,
-samp {
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    monospace;
+/* =========================================================
+   STRONG
+========================================================= */
+
+strong,
+b {
+  font-weight: var(--font-weight-bold);
 }
 
-/* =========================================
-   CLASES UTILITARIAS TIPOGRÁFICAS
-   para casos especiales
-========================================= */
+/* =========================================================
+   ITALIC
+========================================================= */
 
-.text-lg {
-  font-size: var(--font-size-body-lg);
-  line-height: var(--line-height-body);
+em,
+i {
+  font-style: italic;
 }
 
-.text-base {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: rgba(141, 156, 219, 0.2);
 }
 
-.text-sm {
-  font-size: var(--font-size-body-sm);
-  line-height: 1.5;
+/* =========================================================
+   RESPONSIVE SAFETY
+========================================================= */
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+
+  height: auto;
+
+  display: block;
 }
 
-.caption {
-  font-size: var(--font-size-caption);
-  line-height: 1.45;
-  color: var(--color-text-muted);
+.titles-general {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1rem;
 }
 
-.overline {
-  font-size: var(--font-size-overline);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.3;
-}
-
-.text-soft {
-  color: var(--color-text-soft);
-}
-
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-heading {
-  color: var(--color-heading);
+.titles-secondary {
+  font-size: var(--font-size-h4);
+  font-weight: 800;
 }
