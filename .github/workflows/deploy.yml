@@ -1,40 +1,43 @@
-name: Deploy Astro to GitHub Pages
+name: Deploy Astro to Hostinger
 
 on:
   push:
-    branches: [main]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./web
+        working-directory: web
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Instalar Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
 
-      - run: npm ci
+      - name: Instalar dependencias
+        run: npm ci
 
-      - run: npm run build
+      - name: Build Astro
+        run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./web/dist
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/hostinger_key
+          chmod 600 ~/.ssh/hostinger_key
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy con rsync
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/hostinger_key -p ${{ secrets.SSH_PORT }}" \
+            ./dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/domains/rosybrown-lyrebird-889600.hostingersite.com/public_html/
