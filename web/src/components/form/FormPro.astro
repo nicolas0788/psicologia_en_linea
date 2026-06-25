@@ -1,0 +1,528 @@
+---
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+import Btn from "../assets/Btn.astro";
+
+const clinicalTopicsOptions = [
+  "Abuso sexual",
+  "Adicciones y consumo problemático",
+  "Ansiedad",
+  "Ataques de pánico",
+  "Autoestima",
+  "Depresión",
+  "Duelo",
+  "Estrés",
+  "Fobias",
+  "Problemas de pareja",
+  "Trastornos del sueño",
+  "Violencia de género",
+  "Trauma",
+  "TDAH",
+  "TEA",
+  "TOC",
+  "TCA",
+  "Orientación a padres",
+  "Orientación laboral",
+  "Otra",
+];
+
+const modalityOptions = ["Virtual", "Presencial"];
+
+const frameworkOptions = [
+  "Psicoanálisis",
+  "TCC",
+  "DBT",
+  "Sistémica",
+  "Integrativa",
+  "Otra",
+];
+---
+
+<section
+  class="section-general form-section"
+  aria-labelledby="professional-form-title"
+>
+  <ArcoSuperior />
+
+  <div class="container-general form-shell">
+    <form
+      id="professionalForm"
+      class="form-card"
+      action="/backend/send-professional-form.php"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <header class="form-header">
+        <h1 id="professional-form-title" class="form-title">
+          Formulario para profesionales
+        </h1>
+
+        <p class="form-intro">
+          Completá tus datos profesionales para evaluar la incorporación a la
+          red.
+        </p>
+      </header>
+
+      <div class="form-grid">
+        <div class="form-field form-field--half">
+          <label class="form-label" for="nombre-apellido">
+            Nombre y apellido completo <span aria-hidden="true">*</span>
+          </label>
+
+          <input
+            id="nombre-apellido"
+            name="nombre_apellido"
+            type="text"
+            required
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="email">
+            Email <span aria-hidden="true">*</span>
+          </label>
+
+          <input id="email" name="email" type="email" required />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="whatsapp">
+            WhatsApp <span aria-hidden="true">*</span>
+          </label>
+
+          <input id="whatsapp" name="whatsapp" type="tel" required />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="ciudad-pais">
+            Ciudad y país de residencia <span aria-hidden="true">*</span>
+          </label>
+
+          <input id="ciudad-pais" name="ciudad_pais" type="text" required />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="matricula">
+            Matrícula Nacional Argentina <span aria-hidden="true">*</span>
+          </label>
+
+          <input id="matricula" name="matricula" type="text" required />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="experiencia">
+            Experiencia clínica en meses <span aria-hidden="true">*</span>
+          </label>
+
+          <input
+            id="experiencia"
+            name="experiencia"
+            type="number"
+            min="0"
+            required
+          />
+        </div>
+
+        <fieldset class="form-field form-field--half">
+          <legend class="form-label">
+            Marco teórico con el que trabajás <span aria-hidden="true">*</span>
+          </legend>
+
+          <div class="choice-group">
+            {
+              frameworkOptions.map((option) => (
+                <label class="choice-card">
+                  <input
+                    type="checkbox"
+                    name="marco_teorico[]"
+                    value={option}
+                  />
+
+                  <span class="choice-card__box" aria-hidden="true" />
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="form-field form-field--half">
+          <legend class="form-label">
+            Modalidad de atención <span aria-hidden="true">*</span>
+          </legend>
+
+          <div class="choice-group">
+            {
+              modalityOptions.map((option) => (
+                <label class="choice-card">
+                  <input type="checkbox" name="modalidad[]" value={option} />
+
+                  <span class="choice-card__box" aria-hidden="true" />
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <div class="form-field">
+          <label class="form-label" for="consultorio">
+            Si atendés presencial, indicá ubicación del consultorio
+          </label>
+
+          <textarea id="consultorio" name="consultorio" rows="4"></textarea>
+        </div>
+
+        <fieldset class="form-field">
+          <legend class="form-label">
+            Indicá las temáticas clínicas con las que trabajás
+            <span aria-hidden="true">*</span>
+          </legend>
+
+          <p class="form-helper">Podés seleccionar una o más opciones.</p>
+
+          <div class="choice-group--topics">
+            {
+              clinicalTopicsOptions.map((option) => (
+                <label class="choice-card choice-card--topic">
+                  <input
+                    type="checkbox"
+                    name="tematicas_clinicas[]"
+                    value={option}
+                  />
+
+                  <span class="choice-card__box" aria-hidden="true" />
+                  <span class="choice-card__text">{option}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <div class="form-field">
+          <label class="form-label" for="info-extra">
+            Información adicional
+          </label>
+
+          <textarea id="info-extra" name="info_extra" rows="5"></textarea>
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="seguro-archivo">
+            Seguro de responsabilidad profesional vigente <span
+              aria-hidden="true">*</span
+            >
+          </label>
+
+          <input
+            class="form-file"
+            id="seguro-archivo"
+            name="seguro_archivo"
+            type="file"
+            required
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="matricula-archivo">
+            Matrícula profesional (ambos lados) <span aria-hidden="true">*</span
+            >
+          </label>
+
+          <input
+            class="form-file"
+            id="matricula-archivo"
+            name="matricula_archivo"
+            type="file"
+            required
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="dni-archivo">
+            Foto del DNI o pasaporte (ambos lados) <span aria-hidden="true"
+              >*</span
+            >
+          </label>
+
+          <input
+            class="form-file"
+            id="dni-archivo"
+            name="dni_archivo"
+            type="file"
+            required
+          />
+        </div>
+
+        <div class="form-field form-field--half">
+          <label class="form-label" for="titulo-archivo">
+            Foto del título habilitante (ambos lados) <span aria-hidden="true"
+              >*</span
+            >
+          </label>
+
+          <input
+            class="form-file"
+            id="titulo-archivo"
+            name="titulo_archivo"
+            type="file"
+            required
+          />
+        </div>
+
+        <div class="form-field form-field--notice">
+          <a href="/condiciones-profesionales">Ver términos y condiciones</a>
+
+          <label class="checkbox-field">
+            <input type="checkbox" name="terms" required />
+            <span>Acepto los términos y condiciones para profesionales.</span>
+          </label>
+
+          <div class="form-actions">
+            <Btn type="submit" label="Enviar postulación" bg="#3C329C" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<script src="../../scripts/forms/formPro.js"></script>
+<style>
+  .form-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: linear-gradient(180deg, #8d9cdb 0%, #edf5f7 100%);
+    color: var(--color-text);
+  }
+
+  .form-shell {
+    max-width: 980px;
+    margin-top: 9rem;
+  }
+
+  .form-card {
+    position: relative;
+    padding: clamp(1.25rem, 2.4vw, 2rem) clamp(1rem, 2vw, 1.5rem);
+    background: #f3f2fc;
+    border: 1px solid #e5e7eb;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+  }
+
+  .form-header {
+    display: grid;
+    gap: 0.95rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .form-title {
+    color: var(--color-text-dark);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .form-intro {
+    max-width: 40rem;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .form-field {
+    display: grid;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .form-field--half {
+    max-width: min(460px, 100%);
+    margin-inline: auto;
+  }
+
+  .form-label {
+    color: var(--color-text-dark);
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.35;
+  }
+
+  .form-helper {
+    margin: -0.15rem 0 0;
+    color: #7b8190;
+    font-size: var(--font-size-caption);
+    line-height: 1.5;
+  }
+
+  .form-field input[type="text"],
+  .form-field input[type="email"],
+  .form-field input[type="tel"],
+  .form-field input[type="number"],
+  .form-field input[type="date"],
+  .form-field textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    border-radius: 0.65rem;
+    color: var(--color-text);
+  }
+
+  .form-field
+    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+    min-height: 2.9rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .form-field textarea {
+    min-height: 7rem;
+    padding: 0.85rem 0.9rem;
+    resize: vertical;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus {
+    outline: none;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+  }
+
+  .form-file {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px dashed #d1d5db;
+    background: #ffffff;
+    border-radius: 0.65rem;
+  }
+
+  .form-field--notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .form-field--notice a {
+    font-weight: bold;
+  }
+  .choice-group {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .choice-group--topics {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .choice-card {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 2.2rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .choice-card--topic {
+    align-items: flex-start;
+  }
+
+  .choice-card input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .choice-card__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 0.25rem;
+    background: #f3f4f6;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: var(--font-weight-bold);
+    flex-shrink: 0;
+  }
+
+  .choice-card__text {
+    font-size: var(--font-size-body-sm);
+    line-height: 1.3;
+  }
+
+  .choice-card:has(input:checked) {
+    background: #f8f7ff;
+    border-color: #8b5cf6;
+  }
+
+  .choice-card:has(input:checked) .choice-card__box {
+    background: #8b5cf6;
+  }
+
+  .choice-card input[type="checkbox"]:checked + .choice-card__box::after {
+    content: "✓";
+  }
+
+  .choice-card input[type="radio"]:checked + .choice-card__box::after {
+    content: "•";
+    font-size: 1rem;
+  }
+
+  .checkbox-field {
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    gap: 0.6rem;
+    font-size: var(--font-size-body-sm);
+    cursor: pointer;
+  }
+
+  .checkbox-field input {
+    width: 1rem;
+    height: 1rem;
+    accent-color: #8b5cf6;
+    flex-shrink: 0;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .form-card {
+      padding: 1.2rem 1rem;
+      border-radius: 1rem;
+    }
+
+    .form-field--half {
+      max-width: 100%;
+    }
+
+    .checkbox-field {
+      justify-self: stretch;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .choice-group--topics {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -101,17 +101,20 @@ const privacySections = [
   <ArcoSuperior />
   <div class="container-general legal-shell">
     <header class="legal-hero">
-      <h1 class="legal-hero-title">Términos y Condiciones – Profesionales</h1>
-      <h3 class="legal-update">
+      <h1 class="legal-hero-title legal-page-title">
+        Términos y Condiciones – Profesionales
+      </h1>
+      <h3 class="legal-update legal-page-subtitle">
         Política de privacidad y tratamiento de datos personales para
         profesionales
       </h3>
-      <p class="legal-update">Última actualización: marzo 2026</p>
     </header>
 
     <main class="legal-main">
       <article class="legal-card">
-        <h2>Política de Privacidad – Profesionales</h2>
+        <h2 class="legal-section-title">
+          Política de Privacidad – Profesionales
+        </h2>
         <p>
           El presente documento establece los Términos y Condiciones aplicables
           a los/as profesionales de la psicología que se postulan, registran y/o
@@ -127,7 +130,7 @@ const privacySections = [
         {
           privacySections.map((section) => (
             <section class="legal-section">
-              <h3>{section.title}</h3>
+              <h3 class="legal-section-subtitle">{section.title}</h3>
               {section.paragraphs.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
@@ -140,6 +143,7 @@ const privacySections = [
             >contacto@psicologiaenlinea.ar</a
           >
         </address>
+        <p class="legal-update">Última actualización: marzo 2026</p>
       </article>
     </main>
 
@@ -182,35 +186,6 @@ const privacySections = [
         --legal-list-gap: 0.5rem;
         --legal-hospital-gap: 0.9rem;
         --legal-hospital-padding: 1rem;
-
-        /* =========================================
-     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
-     Todas referencian al sistema general
-  ========================================= */
-
-        --legal-hero-title-font-weight: var(--font-weight-bold);
-
-        --legal-lead-font-size: var(--font-size-body-lg);
-        --legal-lead-line-height: var(--line-height-body);
-
-        --legal-update-font-size: var(--font-size-body-sm);
-        --legal-update-line-height: 1.5;
-
-        --legal-h2-font-size: var(--font-size-h2);
-        --legal-h2-font-weight: var(--font-weight-semibold);
-
-        --legal-h3-font-size: var(--font-size-h4);
-        --legal-h3-font-weight: var(--font-weight-semibold);
-
-        --legal-h4-font-size: var(--font-size-h5);
-        --legal-h4-font-weight: var(--font-weight-semibold);
-
-        --legal-eyebrow-font-size: var(--font-size-overline);
-        --legal-eyebrow-font-weight: var(--font-weight-semibold);
-        --legal-eyebrow-letter-spacing: 0.08em;
-
-        --legal-warning-font-size: var(--font-size-body);
-        --legal-warning-line-height: var(--line-height-body);
       }
 
       /* =========================================
@@ -243,29 +218,26 @@ const privacySections = [
 
       .legal-eyebrow {
         color: var(--legal-accent);
-        font-size: var(--legal-eyebrow-font-size);
-        font-weight: var(--legal-eyebrow-font-weight);
-        letter-spacing: var(--legal-eyebrow-letter-spacing);
         text-transform: uppercase;
       }
 
       .legal-hero-title {
         margin-bottom: 0.5rem;
-        font-weight: var(--legal-hero-title-font-weight);
       }
 
       .legal-lead {
         width: 100%;
         text-align: start;
         color: var(--legal-muted);
-        font-size: var(--legal-lead-font-size);
-        line-height: var(--legal-lead-line-height);
       }
 
       .legal-update {
         width: 100%;
-        text-align: start;
+        text-align: center;
         color: var(--legal-muted);
+      }
+      .legal-hero p {
+        text-align: start;
       }
 
       /* =========================================
@@ -308,22 +280,16 @@ const privacySections = [
       .legal-card .h2,
       .legal-card .subtitle-general {
         margin-bottom: 1rem;
-        font-size: var(--legal-h2-font-size);
-        font-weight: var(--legal-h2-font-weight);
       }
 
       .legal-section h3,
       .legal-section .h3 {
         margin-bottom: 0.75rem;
-        font-size: var(--legal-h3-font-size);
-        font-weight: var(--legal-h3-font-weight);
       }
 
       .hospital-item h4,
       .hospital-item .h4 {
         margin-bottom: 0.4rem;
-        font-size: var(--legal-h4-font-size);
-        font-weight: var(--legal-h4-font-weight);
       }
 
       /* =========================================
@@ -366,8 +332,6 @@ const privacySections = [
         background: var(--legal-warning-bg);
         border: 1px solid rgba(138, 111, 90, 0.18);
         border-radius: var(--legal-radius-sm);
-        font-size: var(--legal-warning-font-size);
-        line-height: var(--legal-warning-line-height);
       }
 
       /* =========================================

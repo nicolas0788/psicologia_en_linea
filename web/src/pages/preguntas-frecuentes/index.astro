@@ -1,8 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import PreguntasFrecuentes from "../../components/preguntas-frecuentes/PreguntasFrecuentes.astro";
+
+const SITE_URL = "https://psicologiaenlinea.com.ar";
+
+const title = "Preguntas frecuentes | Psicología en Línea";
+
+const description =
+  "Conocé las respuestas a las preguntas frecuentes sobre Psicología en Línea: cómo funciona la derivación, profesionales matriculados, modalidad online o presencial, honorarios, pagos y confidencialidad.";
+
+const canonical = `${SITE_URL}/preguntas-frecuentes`;
 ---
 
-<Layout>
+<Layout title={title} description={description} canonical={canonical}>
   <PreguntasFrecuentes />
 </Layout>

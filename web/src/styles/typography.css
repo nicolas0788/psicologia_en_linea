@@ -357,3 +357,69 @@ canvas {
   font-size: var(--font-size-h4);
   font-weight: 800;
 }
+
+/* =========================================================
+   LEGAL PAGES TYPOGRAPHY
+========================================================= */
+
+.legal-page-title {
+  font-size: clamp(1.9rem, 3vw, 3rem);
+
+  line-height: 1.1;
+
+  font-weight: var(--font-weight-extrabold);
+
+  letter-spacing: var(--letter-spacing-tight);
+
+  color: var(--color-title);
+
+  text-wrap: balance;
+}
+
+.legal-page-subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+
+  line-height: 1.25;
+
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-muted);
+
+  text-wrap: balance;
+}
+
+.legal-section-title {
+  font-size: clamp(1.35rem, 1.8vw, 2rem);
+
+  line-height: 1.15;
+
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-title);
+
+  margin-bottom: 1.25rem;
+
+  text-wrap: balance;
+}
+
+.legal-section-subtitle {
+  font-size: clamp(1.1rem, 1.3vw, 1.35rem);
+
+  line-height: 1.25;
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--color-title);
+
+  margin-bottom: 0.9rem;
+
+  text-wrap: balance;
+}
+
+.legal-text {
+  font-size: clamp(0.98rem, 1vw, 1.1rem);
+
+  line-height: 1.75;
+
+  color: var(--color-text);
+}

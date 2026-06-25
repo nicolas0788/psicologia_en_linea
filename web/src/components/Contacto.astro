@@ -1,0 +1,414 @@
+---
+// src/components/contacto/Contacto.astro
+
+import ArcoSuperior from "./assets/ArcoSuperior.astro";
+---
+
+<section class="contact-section section-general">
+  <ArcoSuperior />
+
+  <div class="contact-container container-general">
+    <aside class="contact-info">
+      <div class="contact-title-row">
+        <span></span>
+        <h1>Contacto</h1>
+      </div>
+
+      <p class="contact-subtitle">
+        Estamos para acompañarte en el primer paso.
+      </p>
+
+      <div class="contact-list">
+        <a
+          class="contact-item"
+          href="https://wa.me/5491149474689"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20 11.5A8.5 8.5 0 0 1 7.4 19L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5Z"
+              ></path>
+              <path
+                d="M8.8 8.5c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.4l.7 1.6c.1.3.1.5-.1.7l-.4.5c-.1.2-.2.3 0 .6.3.6 1.2 1.8 2.6 2.5.3.2.5.1.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.5.7c.3.1.5.3.4.6-.1.7-.7 1.6-1.4 1.8-.6.2-1.5.2-3-.4-2.6-1-4.3-3.6-4.4-3.7-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.8-2.1Z"
+              ></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>WhatsApp</strong>
+            <p>+54 9 11 4947-4689</p>
+            <small>Escribinos por WhatsApp</small>
+          </div>
+        </a>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"
+              ></path>
+              <circle cx="12" cy="9" r="2.5"></circle>
+            </svg>
+          </div>
+
+          <div>
+            <strong>Ciudad de Buenos Aires, Argentina</strong>
+          </div>
+        </div>
+
+        <a class="contact-item" href="mailto:contacto@psicologiaenlinea.ar">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6h16v12H4z"></path>
+              <path d="m4 7 8 6 8-6"></path>
+            </svg>
+          </div>
+
+          <div>
+            <strong>contacto@psicologiaenlinea.ar</strong>
+          </div>
+        </a>
+      </div>
+    </aside>
+
+    <div class="contact-form-panel">
+      <form
+        id="contactForm"
+        class="contact-form"
+        action="/send-contact.php"
+        method="POST"
+      >
+        <h2>Formulario de contacto</h2>
+
+        <div class="contact-tabs">
+          <label>
+            <input
+              type="radio"
+              name="tipo_contacto"
+              value="profesional"
+              checked
+            />
+            <span>Soy Profesional</span>
+          </label>
+
+          <label>
+            <input type="radio" name="tipo_contacto" value="consultante" />
+            <span>Soy Consultante</span>
+          </label>
+        </div>
+
+        <label class="field">
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre y apellido"
+            autocomplete="name"
+            required
+          />
+        </label>
+
+        <label class="field">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="email"
+            required
+          />
+        </label>
+
+        <label class="field textarea-field">
+          <textarea name="mensaje" placeholder="Mensaje" required></textarea>
+        </label>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</section>
+<script src="../sctipts/forms/contact-form.js"></script>
+<style>
+  .contact-section {
+    position: relative;
+    overflow: hidden;
+    background: #f8f1ef;
+  }
+
+  .contact-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    min-height: 720px;
+    border-radius: 2rem;
+    margin-top: 6rem;
+    overflow: hidden;
+  }
+
+  .contact-info,
+  .contact-form-panel {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2.5rem, 5vw, 5rem);
+    background: #f8f1ef;
+  }
+
+  .contact-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .contact-title-row span {
+    width: 3px;
+    height: 4rem;
+    background: #f4bd68;
+    border-radius: 999px;
+  }
+
+  .contact-title-row h1 {
+    color: #292064;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .contact-subtitle {
+    margin-top: 0.7rem;
+    color: #68619d;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.45;
+  }
+
+  .contact-list {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 1.2rem;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(41, 32, 100, 0.15);
+  }
+
+  .contact-item:last-child {
+    border-bottom: none;
+  }
+
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: 1.1rem;
+    background: #ffe3a8;
+  }
+
+  .contact-icon svg {
+    width: 28px;
+    fill: none;
+    stroke: #292064;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .contact-item strong {
+    display: block;
+    color: #292064;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .contact-item p,
+  .contact-item small {
+    color: #68619d;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .contact-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2.5rem, 5vw, 5rem);
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 255, 255, 0.08),
+        transparent 30%
+      ),
+      linear-gradient(135deg, #4b4386, #292064);
+  }
+
+  .contact-form {
+    width: min(100%, 590px);
+  }
+
+  .contact-form h2 {
+    margin-bottom: 1.7rem;
+    color: #fff;
+    text-align: center;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+  }
+
+  .contact-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 1.4rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .contact-tabs input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact-tabs span {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #292064;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .contact-tabs input:checked + span {
+    background: linear-gradient(135deg, #ffe8ad, #ffd57d);
+  }
+
+  .field {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 1.2rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    color: #292064;
+    font-size: 1rem;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: #7a72aa;
+  }
+
+  .textarea-field {
+    min-height: 135px;
+    align-items: flex-start;
+    padding-top: 1.2rem;
+  }
+
+  .textarea-field textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .contact-form button {
+    min-width: 180px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.4rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #ffe8ad, #ffd57d);
+    color: #292064;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .contact-container {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .contact-info,
+    .contact-form-panel {
+      width: 100%;
+      flex: initial;
+    }
+
+    .contact-info {
+      text-align: center;
+    }
+
+    .contact-title-row {
+      justify-content: center;
+    }
+
+    .contact-list {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact-container {
+      border-radius: 1.4rem;
+    }
+
+    .contact-info,
+    .contact-form-panel {
+      padding: 2.5rem 1.25rem;
+    }
+
+    .contact-title-row {
+      gap: 1rem;
+    }
+
+    .contact-title-row span {
+      height: 3rem;
+    }
+
+    .contact-tabs {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-tabs span {
+      min-height: 58px;
+      font-size: 1rem;
+    }
+
+    .contact-item {
+      grid-template-columns: 48px 1fr;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .contact-form button {
+      width: 100%;
+    }
+  }
+</style>

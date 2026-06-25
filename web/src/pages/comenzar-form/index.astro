@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Form from "../../components/form/Form.astro";
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+
+  name: "Derivación psicológica online",
+
+  provider: {
+    "@type": "Organization",
+    name: "Psicología en Línea",
+  },
+
+  areaServed: {
+    "@type": "Country",
+    name: "Argentina",
+  },
+
+  serviceType: "Orientación y derivación psicológica",
+
+  description:
+    "Servicio para encontrar psicólogos y psicólogas matriculadas según la situación y preferencias del consultante.",
+};
+---
+
+<Layout
+  title="Formulario para encontrar psicólogo online | Psicología en Línea"
+  description="Indicá qué estás buscando y te ayudamos a encontrar un psicólogo acorde a tu situación emocional, necesidades y preferencias."
+  canonical="https://tudominio.com/formulario"
+>
+  <Form />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(serviceSchema)}
+  />
+</Layout>

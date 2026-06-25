@@ -1,0 +1,198 @@
+---
+/*
+============================================================
+CounterStat.astro
+============================================================
+
+Contador animado:
+- inicia en 0
+- llega al número definido
+- duración configurable
+- comienza cuando entra en pantalla
+- TypeScript incluido
+- sin librerías externas
+
+============================================================
+PROPS
+============================================================
+
+label       -> texto descriptivo
+target      -> número final
+duration    -> duración en ms
+
+============================================================
+EJEMPLO
+============================================================
+
+<CounterStat
+  label="Personas acompañadas"
+  target={70}
+  duration={3000}
+/>
+
+============================================================
+*/
+
+interface Props {
+  label: string;
+  target?: number;
+  duration?: number;
+}
+
+const { label, target = 70, duration = 3000 } = Astro.props as Props;
+---
+
+<div class="container-counter-card">
+  <div
+    class="counter-card"
+    data-counter
+    data-target={target}
+    data-duration={duration}
+  >
+    <div class="counter-card__value" aria-live="polite">
+      <span class="counter-card__plus">+</span>
+      <span class="counter-card__number">0</span>
+    </div>
+
+    <p class="counter-card__label">
+      {label}
+    </p>
+  </div>
+</div>
+
+<script>
+  const counters = document.querySelectorAll<HTMLElement>("[data-counter]");
+
+  counters.forEach((counter) => {
+    const numberElement = counter.querySelector<HTMLElement>(
+      ".counter-card__number",
+    );
+
+    if (!numberElement) return;
+
+    const target = Number(counter.dataset.target ?? 0);
+
+    const duration = Number(counter.dataset.duration ?? 3000);
+
+    let started = false;
+
+    const animateCounter = () => {
+      if (started) return;
+
+      started = true;
+
+      const startTime = performance.now();
+
+      const updateCounter = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+
+        const progress = Math.min(elapsed / duration, 1);
+
+        const currentValue = Math.floor(progress * target);
+
+        numberElement.textContent = currentValue.toString();
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter();
+
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.4,
+      },
+    );
+
+    observer.observe(counter);
+  });
+</script>
+
+<style>
+  .container-counter-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .counter-card {
+    width: min(100%, 320px);
+
+    padding: 2rem 1.5rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    border-radius: 1.5rem;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    box-shadow: 0 20px 50px rgba(31, 27, 75, 0.08);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.9rem;
+
+    text-align: center;
+  }
+
+  .counter-card__value {
+    display: inline-flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 0.15rem;
+
+    color: #21183a;
+  }
+
+  .counter-card__number {
+    font-size: clamp(3.4rem, 8vw, 5.8rem);
+
+    line-height: 0.9;
+
+    font-weight: 800;
+  }
+
+  .counter-card__plus {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    margin-top: 0.2rem;
+  }
+
+  .counter-card__label {
+    margin: 0;
+
+    max-width: 26ch;
+
+    color: #55556b;
+
+    font-size: clamp(1rem, 2vw, 1.2rem);
+
+    line-height: 1.5;
+
+    font-weight: 500;
+  }
+</style>

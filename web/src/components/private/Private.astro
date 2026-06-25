@@ -153,17 +153,20 @@ const hospitals = [
   <ArcoSuperior />
   <div class="container-general legal-shell">
     <header class="legal-hero">
-      <h1 class="legal-hero-title">Privacidad y Condiciones</h1>
-      <h3 class="legal-lead">
+      <h1 class="legal-hero-title legal-page-title">
+        Privacidad y Condiciones
+      </h1>
+      <h3 class="legal-lead legal-page-subtitle">
         Política de privacidad y tratamiento de datos personales para usuarios y
         consultantes.
       </h3>
-      <p class="legal-update">Última actualización: febrero 2026</p>
     </header>
 
     <main class="legal-main">
       <article class="legal-card">
-        <h2>Política de Privacidad – Consultantes</h2>
+        <h2 class="legal-section-title">
+          Política de Privacidad – Consultantes
+        </h2>
         <p>
           La presente Política de Privacidad regula el tratamiento de los datos
           personales brindados por las personas que utilizan la plataforma
@@ -179,7 +182,7 @@ const hospitals = [
         {
           privacySections.map((section) => (
             <section class="legal-section">
-              <h3>{section.title}</h3>
+              <h3 class="legal-section-subtitle">{section.title}</h3>
               {section.paragraphs.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
@@ -195,7 +198,9 @@ const hospitals = [
       </article>
 
       <article class="legal-card legal-card--emergency">
-        <h2>Información de Emergencia (Argentina)</h2>
+        <h2 class="legal-section-title">
+          Información de Emergencia (Argentina)
+        </h2>
         <p class="legal-warning">
           Psicología en Línea no es un servicio de urgencias ni reemplaza la
           atención médica o de emergencia. Ante una situación de riesgo o
@@ -206,7 +211,7 @@ const hospitals = [
         {
           emergencyLines.map((group) => (
             <section class="legal-section">
-              <h3>{group.title}</h3>
+              <h3 class="legal-section-subtitle">{group.title}</h3>
               <ul class="legal-list">
                 {group.items.map((item) => (
                   <li>{item}</li>
@@ -217,7 +222,7 @@ const hospitals = [
         }
 
         <section class="legal-section">
-          <h3>Asistencia al Suicida</h3>
+          <h3 class="legal-section-subtitle">Asistencia al Suicida</h3>
           <p>
             <a
               href="https://www.asistenciaalsuicida.org.ar/ayuda"
@@ -230,12 +235,14 @@ const hospitals = [
         </section>
 
         <section class="legal-section">
-          <h3>Hospitales y dispositivos de urgencia en salud mental (CABA)</h3>
+          <h3 class="legal-section-title">
+            Hospitales y dispositivos de urgencia en salud mental (CABA)
+          </h3>
           <div class="hospital-list">
             {
               hospitals.map((hospital) => (
                 <article class="hospital-item">
-                  <h4>{hospital.name}</h4>
+                  <h4 class="legal-section-subtitle">{hospital.name}</h4>
                   <p>{hospital.address}</p>
                   <p>{hospital.detail}</p>
                 </article>
@@ -245,13 +252,14 @@ const hospitals = [
         </section>
 
         <section class="legal-section">
-          <h3>Información orientativa</h3>
+          <h3 class="legal-section-title">Información orientativa</h3>
           <p>
             Los números de emergencia listados corresponden a servicios
             oficiales de atención en Argentina y se brindan con fines
             informativos.
           </p>
         </section>
+        <p class="legal-update">Última actualización: febrero 2026</p>
       </article>
     </main>
   </div>
@@ -296,35 +304,6 @@ const hospitals = [
     --legal-list-gap: 0.5rem;
     --legal-hospital-gap: 0.9rem;
     --legal-hospital-padding: 1rem;
-
-    /* =========================================
-     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
-     Todas referencian al sistema general
-  ========================================= */
-
-    --legal-hero-title-font-weight: var(--font-weight-bold);
-
-    --legal-lead-font-size: var(--font-size-body-lg);
-    --legal-lead-line-height: var(--line-height-body);
-
-    --legal-update-font-size: var(--font-size-body-sm);
-    --legal-update-line-height: 1.5;
-
-    --legal-h2-font-size: var(--font-size-h2);
-    --legal-h2-font-weight: var(--font-weight-semibold);
-
-    --legal-h3-font-size: var(--font-size-h4);
-    --legal-h3-font-weight: var(--font-weight-semibold);
-
-    --legal-h4-font-size: var(--font-size-h5);
-    --legal-h4-font-weight: var(--font-weight-semibold);
-
-    --legal-eyebrow-font-size: var(--font-size-overline);
-    --legal-eyebrow-font-weight: var(--font-weight-semibold);
-    --legal-eyebrow-letter-spacing: 0.08em;
-
-    --legal-warning-font-size: var(--font-size-body);
-    --legal-warning-line-height: var(--line-height-body);
   }
 
   /* =========================================
@@ -357,20 +336,16 @@ const hospitals = [
 
   .legal-eyebrow {
     color: var(--legal-accent);
-    font-size: var(--legal-eyebrow-font-size);
-    font-weight: var(--legal-eyebrow-font-weight);
-    letter-spacing: var(--legal-eyebrow-letter-spacing);
     text-transform: uppercase;
   }
 
   .legal-hero-title {
     margin-bottom: 0.5rem;
-    font-weight: var(--legal-hero-title-font-weight);
   }
 
   .legal-lead {
     width: 100%;
-    text-align: start;
+    text-align: center;
     color: var(--legal-muted);
   }
 
@@ -420,22 +395,16 @@ const hospitals = [
   .legal-card .h2,
   .legal-card .subtitle-general {
     margin-bottom: 1rem;
-    font-size: var(--legal-h2-font-size);
-    font-weight: var(--legal-h2-font-weight);
   }
 
   .legal-section h3,
   .legal-section .h3 {
     margin-bottom: 0.75rem;
-    font-size: var(--legal-h3-font-size);
-    font-weight: var(--legal-h3-font-weight);
   }
 
   .hospital-item h4,
   .hospital-item .h4 {
     margin-bottom: 0.4rem;
-    font-size: var(--legal-h4-font-size);
-    font-weight: var(--legal-h4-font-weight);
   }
 
   /* =========================================
@@ -478,8 +447,6 @@ const hospitals = [
     background: var(--legal-warning-bg);
     border: 1px solid rgba(138, 111, 90, 0.18);
     border-radius: var(--legal-radius-sm);
-    font-size: var(--legal-warning-font-size);
-    line-height: var(--legal-warning-line-height);
   }
 
   /* =========================================
@@ -537,6 +504,11 @@ const hospitals = [
 
   .legal-meta li {
     color: var(--legal-text);
+  }
+
+  .legal-update {
+    margin-top: 3rem;
+    text-align: center;
   }
 
   /* =========================================

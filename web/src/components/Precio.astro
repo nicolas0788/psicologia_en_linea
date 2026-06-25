@@ -1,0 +1,231 @@
+---
+import { Image } from "astro:assets";
+
+import individualIcon from "../assets/img/precios/ind.png";
+import parejaIcon from "../assets/img/precios/par.png";
+
+const mes = "junio";
+const anio = "2026";
+
+const precioIndividual = "25.000";
+const precioPareja = "35.000";
+
+const modalidad = "presencial / virtual";
+const vigenciaDias = 60;
+---
+
+<section class="price-section">
+  <article class="price-card">
+    <div class="price-header">
+      <p class="price-date">Honorarios vigentes - {mes} {anio}</p>
+      <h2 class="price-title">Valor por sesión</h2>
+      <p class="price-mode">Modalidad {modalidad}</p>
+    </div>
+
+    <div class="price-list">
+      <div class="price-item">
+        <div class="price-icon" aria-hidden="true">
+          <Image
+            src={individualIcon}
+            alt="Icono para sesiones indivisuales"
+            width={64}
+            height={64}
+            loading="eager"
+            class="price-icon-img"
+          />
+        </div>
+
+        <strong>Terapia individual</strong>
+        <span>ARS ${precioIndividual}</span>
+      </div>
+
+      <div class="price-item">
+        <div class="price-icon" aria-hidden="true">
+          <Image
+            src={parejaIcon}
+            alt="Icono para sesiones de pareja"
+            width={64}
+            height={64}
+            loading="eager"
+            class="price-icon-img"
+          />
+        </div>
+
+        <strong>Terapia de pareja</strong>
+        <span>ARS ${precioPareja}</span>
+      </div>
+    </div>
+
+    <div class="price-note">
+      <span class="price-note-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M20 13 13 20 4 11V4h7l9 9Z"></path>
+          <circle cx="8.5" cy="8.5" r="1.2"></circle>
+        </svg>
+      </span>
+
+      <p>
+        Iniciá tus sesiones y mantené este valor por
+        <strong>{vigenciaDias} días</strong>
+      </p>
+    </div>
+  </article>
+</section>
+
+<style>
+  .price-section {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .price-card {
+    width: min(100%, 620px);
+    padding: clamp(1.1rem, 3vw, 1.7rem);
+    border-radius: 1.5rem;
+    background: linear-gradient(145deg, #fbf8ff 0%, #f3edf8 100%);
+    box-shadow: 0 0.8rem 1.8rem rgba(47, 36, 56, 0.14);
+    color: #25145f;
+  }
+
+  .price-header {
+    text-align: center;
+  }
+
+  .price-date {
+    margin: 0 0 0.45rem;
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-weight: 700;
+    color: #33226d;
+  }
+
+  .price-title {
+    margin: 0;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .price-mode {
+    margin: 0.65rem 0 0;
+    font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+    font-weight: 700;
+    color: #4d427c;
+  }
+
+  .price-list {
+    margin-top: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .price-item {
+    min-height: 7.2rem;
+    padding: 1rem 0.8rem;
+    border-radius: 1.1rem;
+    background: rgba(238, 230, 246, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    text-align: center;
+  }
+
+  .price-icon {
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f7f1fb;
+    overflow: hidden;
+  }
+
+  .price-icon-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .price-note-icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    stroke: #2b176b;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .price-item strong {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: #28155f;
+  }
+
+  .price-item span {
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    font-weight: 900;
+    line-height: 1;
+    color: #25145f;
+  }
+
+  .price-note {
+    margin-top: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: #e9e0f2;
+    text-align: center;
+  }
+
+  .price-note p {
+    margin: 0;
+    font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+    font-weight: 700;
+    color: #31206d;
+  }
+
+  .price-note-icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+  }
+
+  @media (max-width: 430px) {
+    .price-card {
+      border-radius: 1.2rem;
+    }
+
+    .price-list {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+
+    .price-item {
+      min-height: auto;
+      padding: 0.8rem;
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .price-item strong,
+    .price-item span {
+      flex: 1 1 100%;
+    }
+
+    .price-note {
+      border-radius: 1rem;
+      align-items: flex-start;
+    }
+  }
+</style>

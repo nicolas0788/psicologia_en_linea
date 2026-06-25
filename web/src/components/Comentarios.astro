@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import reviewBtn from "../assets/img/icons/mail.png";
+import Contador from "../components/assets/Contador.astro";
 
 const testimonials = [
   {
@@ -99,7 +100,7 @@ const testimonials = [
       </p>
 
       <a
-        href="mailto:contacto@psicologiaenlinea.com.ar?subject=Comentario%20sobre%20el%20servicio"
+        href="/contacto"
         class="testimonials-review-btn"
         aria-label="Enviar comentario sobre el servicio"
       >
@@ -111,6 +112,7 @@ const testimonials = [
         />
       </a>
     </div>
+    <Contador label="Personas iniciaron terapia" target={137} />
   </div>
 </section>
 

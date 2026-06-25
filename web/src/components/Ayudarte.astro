@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Precio from "./Precio.astro";
 
 import img1 from "../assets/img/ayudarte/1.png";
 import img2 from "../assets/img/ayudarte/2.png";
@@ -39,8 +40,10 @@ for (let i = 0; i < helpItems.length; i += 3) {
 <section
   class="section-general help-section"
   aria-labelledby="help-section-title"
+  id="precios"
 >
   <div class="container-general help-container">
+    <Precio />
     <div class="help-heading">
       <h2 class="titles-secondary" id="help-section-title">
         En qué podemos ayudarte

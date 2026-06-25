@@ -1,6 +1,10 @@
 ---
+import { Image } from "astro:assets";
+
 import ArcoSuperior from "./../assets/ArcoSuperior.astro";
 import Btn from "./../assets/Btn.astro";
+
+import formDecorativeImg from "../../../src/assets/img/form/form-decorative.png";
 
 const therapyOptions = ["Individual", "Pareja"];
 
@@ -18,117 +22,130 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
 <section class="section-general intake-section" aria-labelledby="intake-title">
   <ArcoSuperior />
+
   <div class="container-general intake-shell">
-    <form class="intake-form" action="#" method="post">
-      <div class="intake-decorative">
-        <img
-          src="../../../src/assets/img/form/form-decorative.png"
-          alt="Imagen decorativa"
-        />
-      </div>
+    <form
+      class="intake-form"
+      data-intake-form
+      action="/send-intake.php"
+      method="post"
+    >
       <header class="intake-header">
-        <h1 id="intake-title" class="intake-title">Comenzá tu proceso</h1>
+        <p class="intake-kicker">Atención psicológica online y presencial</p>
 
-        <p class="caption intake-alert">
-          <span class="intake-alert__icon" aria-hidden="true">⛔</span>
-          <span>Este servicio no atiende urgencias ni emergencias.</span>
+        <h1 id="intake-title" class="intake-title">Encontrá tu psicólogo</h1>
+
+        <p class="intake-description">
+          Este formulario permite sugerirte un profesional matriculado acorde a
+          la información que compartas.
         </p>
-
-        <p class="text-sm intake-description">
-          Este formulario permite sugerirte un/a <strong
-            >psicólogo/a matriculado/a</strong
-          >
-          acorde a la información que compartas.
-        </p>
-
-        <ul
-          class="text-sm intake-highlights"
-          aria-label="Características del servicio"
-        >
-          <li>Confidencial</li>
-          <li>Atención online (Argentina y exterior)</li>
-          <li>Atención presencial en CABA</li>
-          <li>Honorario por sesión (abril 2026): $30.000 ARS</li>
-          <li>Terapia de pareja: $45.000 ARS</li>
-        </ul>
       </header>
 
-      <div class="form-grid">
-        <div class="form-field">
-          <label class="form-label" for="tipo-consulta">
-            Tipo de consulta <span aria-hidden="true">*</span>
-          </label>
+      <div class="intake-container-form-grid form-grid">
+        <div class="intake-decorative">
+          <Image
+            src={formDecorativeImg}
+            alt="Imagen decorativa"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
 
-          <div class="choice-group choice-group--compact" id="tipo-consulta">
+        <fieldset class="form-field">
+          <legend class="form-label">
+            Tipo de consulta <span aria-hidden="true">*</span>
+          </legend>
+
+          <div
+            class="choice-group choice-group--compact"
+            role="radiogroup"
+            aria-label="Tipo de consulta"
+          >
             {
               therapyOptions.map((option, index) => (
-                <label class="choice-card choice-card--compact">
+                <label class="choice-card choice-card--compact-init">
                   <input
                     type="radio"
                     name="tipo_consulta"
                     value={option}
                     checked={index === 0}
+                    required={index === 0}
                   />
+
                   <span class="choice-card__box" aria-hidden="true">
                     {String.fromCharCode(65 + index)}
                   </span>
+
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
-        </div>
+        </fieldset>
 
-        <div class="form-field">
-          <label class="form-label" for="preferencia-modalidad">
+        <fieldset class="form-field">
+          <legend class="form-label">
             Preferencia de modalidad <span aria-hidden="true">*</span>
-          </label>
+          </legend>
 
-          <div class="choice-group" id="preferencia-modalidad">
+          <div
+            class="choice-group"
+            role="radiogroup"
+            aria-label="Preferencia de modalidad"
+          >
             {
               modalityOptions.map((option, index) => (
-                <label class="choice-card choice-card--full">
+                <label class="choice-card choice-card--full-init">
                   <input
                     type="radio"
                     name="modalidad"
                     value={option}
                     checked={index === 0}
+                    required={index === 0}
                   />
+
                   <span class="choice-card__box" aria-hidden="true">
                     {String.fromCharCode(65 + index)}
                   </span>
+
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
-        </div>
+        </fieldset>
 
         <div class="form-field">
           <label class="form-label" for="zona-referencia">
-            Zona de referencia (sólo para atención presencial)
+            Zona de referencia, solo para atención presencial
           </label>
-          <p class="form-helper">
-            Zona cercana que te resulte cómoda (barrio o referencia)
-          </p>
+
+          <p class="form-helper">Barrio, ciudad o zona aproximada.</p>
+
           <textarea
             id="zona-referencia"
             name="zona_referencia"
             rows="4"
-            placeholder="Ej.: Microcentro - Recoleta"></textarea>
+            autocomplete="street-address"
+            maxlength="300"
+            placeholder="Ej.: Recoleta, CABA / Centro de Córdoba / Zona norte de Buenos Aires"
+          ></textarea>
         </div>
 
         <div class="form-field">
           <label class="form-label" for="motivo-consulta">
-            ¿Qué te trae a consultar en este momento? <span aria-hidden="true"
-              >*</span
-            >
+            ¿Qué te trae a consultar en este momento?
+            <span aria-hidden="true">*</span>
           </label>
+
           <textarea
             id="motivo-consulta"
             name="motivo_consulta"
             rows="4"
-            placeholder="Podés escribir una frase breve si te resulta más cómodo."
+            required
+            minlength="5"
+            maxlength="1200"
+            placeholder="Contanos brevemente qué te gustaría trabajar en terapia. Ej.: ansiedad, estrés, tristeza, vínculos, pareja, autoestima o una situación puntual."
           ></textarea>
         </div>
 
@@ -136,11 +153,15 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           <label class="form-label" for="ciudad-pais">
             Ciudad y país de residencia <span aria-hidden="true">*</span>
           </label>
+
           <input
             type="text"
             id="ciudad-pais"
             name="ciudad_pais"
-            placeholder="Buenos Aires, Argentina"
+            autocomplete="address-level2"
+            required
+            maxlength="120"
+            placeholder="Ej.: Buenos Aires, Argentina"
           />
         </div>
 
@@ -148,27 +169,37 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           <label class="form-label" for="disponibilidad">
             Disponibilidad horaria <span aria-hidden="true">*</span>
           </label>
+
           <p class="form-helper">
             Indicá días y horarios habituales según el horario de tu lugar de
             residencia actual.
           </p>
+
           <textarea
             id="disponibilidad"
             name="disponibilidad"
             rows="4"
-            placeholder="Ej.: lunes a viernes de 9 a 18 hs. (hora local)"
+            required
+            minlength="5"
+            maxlength="500"
+            placeholder="Ej.: lunes a viernes de 9 a 18 hs. / martes y jueves por la tarde / fines de semana por la mañana"
           ></textarea>
         </div>
 
         <div class="form-field form-field--half">
           <label class="form-label" for="nombre-apellido">
-            Nombre y Apellido <span aria-hidden="true">*</span>
+            Nombre y apellido <span aria-hidden="true">*</span>
           </label>
+
           <input
             type="text"
             id="nombre-apellido"
             name="nombre_apellido"
             autocomplete="name"
+            required
+            minlength="3"
+            maxlength="120"
+            placeholder="Ej.: María González"
           />
         </div>
 
@@ -176,13 +207,17 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           <label class="form-label" for="edad">
             Edad <span aria-hidden="true">*</span>
           </label>
+
           <input
             type="number"
             id="edad"
             name="edad"
-            min="1"
+            autocomplete="off"
+            min="18"
             max="120"
             inputmode="numeric"
+            required
+            placeholder="Ej.: 32"
           />
         </div>
 
@@ -190,35 +225,46 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           <label class="form-label" for="email">
             Email <span aria-hidden="true">*</span>
           </label>
+
           <input
             type="email"
             id="email"
             name="email"
             autocomplete="email"
-            placeholder="tucorreo@email.com"
+            required
+            maxlength="160"
+            placeholder="Ej.: tucorreo@email.com"
           />
         </div>
 
         <div class="form-field form-field--half">
           <label class="form-label" for="whatsapp">
-            WhatsApp (con prefijo internacional). <span aria-hidden="true"
-              >*</span
-            >
+            WhatsApp con prefijo internacional
+            <span aria-hidden="true">*</span>
           </label>
-          <p class="form-helper">Ej.: +54 9 11 4947-4689</p>
-          <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" />
+
+          <input
+            type="tel"
+            id="whatsapp"
+            name="whatsapp"
+            autocomplete="tel"
+            inputmode="tel"
+            maxlength="30"
+            placeholder="Ej.: +54 9 11 4947-4689"
+            required
+          />
         </div>
 
-        <div class="form-field">
-          <label class="form-label" for="preferencia-terapia">
-            Preferencia respecto del tipo de terapia <span aria-hidden="true"
-              >*</span
-            >
-          </label>
+        <fieldset class="form-field">
+          <legend class="form-label">
+            Preferencia respecto del tipo de terapia
+            <span aria-hidden="true">*</span>
+          </legend>
 
           <div
             class="choice-group choice-group--compact"
-            id="preferencia-terapia"
+            role="radiogroup"
+            aria-label="Preferencia respecto del tipo de terapia"
           >
             {
               orientationOptions.map((option, index) => (
@@ -228,10 +274,13 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
                     name="tipo_terapia"
                     value={option}
                     checked={index === 0}
+                    required={index === 0}
                   />
+
                   <span class="choice-card__box" aria-hidden="true">
                     {String.fromCharCode(65 + index)}
                   </span>
+
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
@@ -242,20 +291,22 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
             class="input-conditional"
             type="text"
             name="tipo_terapia_otra"
-            placeholder="¿Cuál?"
+            autocomplete="off"
+            maxlength="120"
+            placeholder="Ej.: terapia sistémica, integrativa u otra orientación"
           />
-        </div>
+        </fieldset>
 
-        <div class="form-field">
-          <label class="form-label" for="genero-profesional">
-            Preferencia respecto al género del/la profesional <span
-              aria-hidden="true">*</span
-            >
-          </label>
+        <fieldset class="form-field">
+          <legend class="form-label">
+            Preferencia respecto al género del/la profesional
+            <span aria-hidden="true">*</span>
+          </legend>
 
           <div
             class="choice-group choice-group--compact"
-            id="genero-profesional"
+            role="radiogroup"
+            aria-label="Preferencia respecto al género del profesional"
           >
             {
               genderOptions.map((option, index) => (
@@ -265,45 +316,54 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
                     name="genero_profesional"
                     value={option}
                     checked={index === 0}
+                    required={index === 0}
                   />
+
                   <span class="choice-card__box" aria-hidden="true">
                     {String.fromCharCode(65 + index)}
                   </span>
+
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
-        </div>
+        </fieldset>
 
         <div class="form-field form-field--notice">
           <p>
-            Uso exclusivo para gestionar la derivación. Ver <a href="/private"
-              >Política de Privacidad</a
-            >
+            Uso exclusivo para gestionar la derivación. Ver
+            <a href="/politica-de-privacidad">Política de Privacidad</a>
           </p>
 
           <label class="checkbox-field">
             <input type="checkbox" name="privacy_policy" required />
-            <span>Acepto la Política de Privacidad</span>
+
+            <span>
+              Acepto la Política de Privacidad y comprendo que no atienden
+              urgencias ni emergencias.
+            </span>
           </label>
         </div>
 
         <div class="form-actions">
+          <input
+            class="form-hidden"
+            type="text"
+            name="website"
+            autocomplete="off"
+            tabindex="-1"
+          />
           <Btn type="submit" label="Enviar solicitud" bg="#3C329C" />
         </div>
       </div>
     </form>
   </div>
 </section>
+<script src="../../scripts/forms/formUser.js"></script>
 
 <style>
   :root {
-    /* =========================================
-     INTAKE | TOKENS DE COMPONENTE
-     Solo layout, color, superficie y excepciones
-  ========================================= */
-
     --intake-section-bg: linear-gradient(180deg, #8d9cdb 0%, #edf5f7 100%);
     --intake-card-bg: #f3f2fc;
     --intake-card-border: #e5e7eb;
@@ -320,18 +380,10 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     --intake-field-gap: 0.5rem;
     --intake-notice-gap: 0.75rem;
 
-    --intake-title-color: var(--color-heading);
+    --intake-title-color: var(--color-text-dark);
     --intake-text-color: var(--color-text);
-    --intake-muted-color: var(--color-text-muted);
     --intake-helper-color: #7b8190;
     --intake-link-color: #4f46e5;
-
-    --intake-danger-color: #ef476f;
-    --intake-accent-color: #f59e0b;
-
-    --intake-button-bg: #111111;
-    --intake-button-bg-hover: #222222;
-    --intake-button-color: #ffffff;
 
     --intake-input-bg: #ffffff;
     --intake-input-border: #d1d5db;
@@ -354,16 +406,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     --intake-choice-padding-y: 0.45rem;
     --intake-choice-padding-x: 0.7rem;
 
-    --intake-highlight-dot-size: 0.45rem;
-    --intake-highlight-dot-color: #6b7280;
-    --intake-highlight-gap: 0.6rem;
-
     --intake-transition: 180ms ease;
-
-    /* =========================================
-     EXCEPCIONES TIPOGRÁFICAS DEL COMPONENTE
-     Referencian al sistema global
-  ========================================= */
 
     --intake-title-font-weight: var(--font-weight-bold);
 
@@ -380,17 +423,8 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     --intake-choice-box-font-size: 0.7rem;
     --intake-choice-box-font-weight: var(--font-weight-bold);
 
-    --intake-alert-font-size: var(--font-size-body-sm);
-    --intake-alert-font-weight: var(--font-weight-semibold);
-
     --intake-checkbox-font-size: var(--font-size-body-sm);
-    --intake-submit-font-size: var(--font-size-button);
-    --intake-submit-font-weight: var(--font-weight-semibold);
   }
-
-  /* =========================================
-   SECTION
-========================================= */
 
   .intake-section {
     position: relative;
@@ -405,17 +439,13 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     margin-top: var(--intake-margin-top);
   }
 
-  /* =========================================
-   FORM CARD
-========================================= */
-
   .intake-form {
+    position: relative;
+    padding: var(--intake-padding-block) var(--intake-padding-inline);
     background: var(--intake-card-bg);
     border: 1px solid var(--intake-card-border);
     border-radius: var(--intake-card-radius);
     box-shadow: var(--intake-card-shadow);
-    padding: var(--intake-padding-block) var(--intake-padding-inline);
-    position: relative;
   }
 
   .intake-header {
@@ -424,80 +454,28 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     margin-bottom: 1.5rem;
   }
 
-  /* =========================================
-   TYPOGRAPHY INSIDE COMPONENT
-   Solo excepciones locales
-========================================= */
-
+  .intake-container-form-grid {
+    position: relative;
+  }
   .intake-title {
     color: var(--intake-title-color);
     font-weight: var(--intake-title-font-weight);
     text-align: center;
   }
 
-  .intake-alert {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--intake-title-color);
-    font-size: var(--intake-alert-font-size);
-    font-weight: var(--intake-alert-font-weight);
-  }
-
-  .intake-alert__icon {
-    color: var(--intake-danger-color);
-    font-size: 0.92rem;
-  }
-
-  .intake-description {
-    color: var(--intake-text-color);
-  }
-
-  .intake-highlights {
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.45rem;
-    color: var(--intake-text-color);
-  }
-
-  .intake-highlights li {
-    position: relative;
-    padding-left: calc(
-      var(--intake-highlight-dot-size) + var(--intake-highlight-gap)
-    );
-  }
-
-  .intake-highlights li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: var(--intake-highlight-dot-size);
-    height: var(--intake-highlight-dot-size);
-    border-radius: 50%;
-    background-color: var(--intake-highlight-dot-color);
-  }
-
-  /* =========================================
-   img decorativa
-========================================= */
-
   .intake-decorative {
     position: absolute;
-    top: 8rem;
+    top: 0;
     right: 0;
     width: min(90%, 19rem);
+    pointer-events: none;
   }
 
   .intake-decorative img {
-    height: auto;
+    display: block;
     width: 100%;
+    height: auto;
   }
-
-  /* =========================================
-   GRID
-========================================= */
 
   .form-grid {
     display: grid;
@@ -507,6 +485,9 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   .form-field {
     display: grid;
     gap: var(--intake-field-gap);
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .form-field--half {
@@ -517,12 +498,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     gap: var(--intake-notice-gap);
   }
 
-  /* =========================================
-   LABELS / HELPERS
-========================================= */
-
-  .form-label,
-  .subheading {
+  .form-label {
     color: var(--intake-title-color);
     font-size: var(--intake-label-font-size);
     font-weight: var(--intake-label-font-weight);
@@ -530,16 +506,11 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   }
 
   .form-helper {
-    margin-top: -0.15rem;
+    margin: -0.15rem 0 0;
     color: var(--intake-helper-color);
     font-size: var(--intake-helper-font-size);
     line-height: var(--intake-helper-line-height);
   }
-
-  /* =========================================
-   INPUTS / TEXTAREAS
-   La tipografía base ya viene de tu hoja global
-========================================= */
 
   input[type="text"],
   input[type="email"],
@@ -583,12 +554,9 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
   }
 
-  /* =========================================
-   CHOICE GROUPS
-========================================= */
-
   .choice-group {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 0.7rem;
   }
@@ -608,19 +576,24 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     background: var(--intake-choice-bg);
     border-radius: var(--intake-choice-radius);
     cursor: pointer;
+    user-select: none;
     transition:
       border-color var(--intake-transition),
       background-color var(--intake-transition),
       transform var(--intake-transition);
-    user-select: none;
   }
 
-  .choice-card--compact {
-    width: fit-content;
+  .choice-card--compact,
+  .choice-card--full {
+    width: min(100%, 22.5rem);
+  }
+
+  .choice-card--compact-init,
+  .choice-card--full-init {
+    width: min(100%, 16rem);
   }
 
   .choice-card--full {
-    width: 100%;
     justify-content: flex-start;
   }
 
@@ -666,15 +639,12 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   }
 
   .input-conditional {
-    max-width: 320px;
+    width: min(100%, 22.5rem);
     margin-top: 0.15rem;
   }
 
-  /* =========================================
-   NOTICE / LEGAL / EMERGENCY
-========================================= */
-
   .form-field--notice p {
+    margin: 0;
     color: var(--intake-text-color);
   }
 
@@ -684,18 +654,8 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     text-underline-offset: 0.14em;
   }
 
-  .form-emergency,
-  .form-emergency-lines {
-    color: var(--intake-muted-color);
-  }
-
-  /* =========================================
-   CHECKBOX
-========================================= */
-
   .checkbox-field {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
     gap: 0.6rem;
     margin-top: 0.2rem;
@@ -708,20 +668,19 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
     width: 1rem;
     height: 1rem;
     accent-color: var(--intake-input-border-focus);
+    flex: 0 0 auto;
   }
-
-  /* =========================================
-   ACTIONS
-========================================= */
 
   .form-actions {
     display: flex;
     justify-content: center;
   }
-
-  /* =========================================
-   RESPONSIVE
-========================================= */
+  .form-hidden {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
 
   @media (max-width: 640px) {
     .intake-form {
@@ -733,6 +692,13 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
       max-width: 100%;
     }
 
+    .choice-card--compact,
+    .choice-card--full,
+    .choice-card--compact-init,
+    .choice-card--full-init {
+      width: 100%;
+    }
+
     .choice-card--full {
       min-height: 2.7rem;
     }
@@ -741,6 +707,12 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
       position: static;
       display: flex;
       justify-content: center;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .intake-decorative img {
+      width: min(90%, 19rem);
     }
   }
 </style>

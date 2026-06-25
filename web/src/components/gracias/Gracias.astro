@@ -1,0 +1,215 @@
+---
+import { Image } from "astro:assets";
+import graciasImg from "../../assets/img/gracias/gracias.png";
+import ArcoSuperior from "../assets/ArcoSuperior.astro";
+---
+
+<section class="thanks-section">
+  <ArcoSuperior />
+
+  <div class="thanks-container">
+    <Image
+      src={graciasImg}
+      alt="Formulario recibido correctamente"
+      class="thanks-image"
+      loading="eager"
+      decoding="async"
+    />
+
+    <div class="thanks-content">
+      <h1>Muchas gracias</h1>
+
+      <p class="thanks-subtitle">Recibimos tu formulario</p>
+
+      <div class="thanks-whatsapp">
+        <span class="thanks-whatsapp-icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path
+              d="M16 3C8.8 3 3 8.7 3 15.8c0 2.4.7 4.7 1.9 6.7L3.6 29l6.7-1.8c1.8 1 3.8 1.5 5.9 1.5 7.2 0 13-5.7 13-12.8C29.2 8.7 23.3 3 16 3Zm0 23.5c-1.9 0-3.7-.5-5.3-1.5l-.4-.2-4 1.1 1.1-3.9-.3-.4c-1.1-1.7-1.7-3.7-1.7-5.8 0-5.8 4.8-10.6 10.7-10.6s10.7 4.8 10.7 10.6S21.9 26.5 16 26.5Zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.5-.5.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5 0-.2-.2-.3-.5-.4Z"
+            ></path>
+          </svg>
+        </span>
+
+        <div>
+          <p>Te vamos a contactar por WhatsApp desde:</p>
+          <strong>+54 9 11 4947-4689</strong>
+        </div>
+      </div>
+
+      <div class="thanks-note">
+        <span aria-hidden="true">✓</span>
+        <p>No hace falta que vuelvas a completar el formulario.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .thanks-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100dvh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: max(7rem, 14vh) 1.25rem clamp(2rem, 5vw, 3.5rem);
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(143, 118, 255, 0.1),
+        transparent 30rem
+      ),
+      #ffffff;
+  }
+
+  .thanks-container {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 550px);
+    margin: 0 auto;
+    padding-top: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+  }
+
+  .thanks-image {
+    width: min(100%, 340px);
+    margin: 0 auto clamp(1rem, 3vw, 1.5rem);
+    filter: drop-shadow(0 1rem 1.4rem rgba(91, 73, 206, 0.14));
+  }
+
+  .thanks-content {
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .thanks-content h1 {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: -0.055em;
+    color: #20149f;
+    margin-bottom: 0.4rem;
+  }
+
+  .thanks-subtitle {
+    font-size: clamp(1.25rem, 3.8vw, 1.9rem);
+    line-height: 1.05;
+    font-weight: 800;
+    color: #20149f;
+    margin-bottom: clamp(1.2rem, 3vw, 1.8rem);
+  }
+
+  .thanks-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.8rem, 3vw, 1.2rem);
+    margin-bottom: clamp(1.1rem, 3vw, 1.6rem);
+  }
+
+  .thanks-whatsapp-icon {
+    flex: 0 0 auto;
+    width: clamp(3.2rem, 9vw, 4rem);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #ffffff;
+    background: linear-gradient(145deg, #bfa7ff, #4d38cb);
+    box-shadow: 0 0.55rem 1rem rgba(77, 56, 203, 0.24);
+  }
+
+  .thanks-whatsapp-icon svg {
+    width: 62%;
+    fill: currentColor;
+  }
+
+  .thanks-whatsapp p {
+    font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+    line-height: 1.2;
+    font-weight: 700;
+    color: #20149f;
+    margin-bottom: 0.35rem;
+  }
+
+  .thanks-whatsapp strong {
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border-radius: 0.7rem;
+    font-size: clamp(1.15rem, 3.8vw, 1.7rem);
+    line-height: 1.1;
+    font-weight: 900;
+    color: #20149f;
+    background: #f2efff;
+    box-shadow:
+      inset 0 0 0 1px rgba(90, 69, 205, 0.12),
+      0 0.3rem 0.7rem rgba(90, 69, 205, 0.1);
+  }
+
+  .thanks-note {
+    width: min(100%, 460px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid rgba(126, 98, 241, 0.22);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  .thanks-note span {
+    flex: 0 0 auto;
+    width: 2rem;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff;
+    background: linear-gradient(145deg, #bfa7ff, #4d38cb);
+  }
+
+  .thanks-note p {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    line-height: 1.3;
+    font-weight: 800;
+    color: #20149f;
+  }
+
+  @media (max-width: 520px) {
+    .thanks-section {
+      padding-top: max(7.5rem, 18vh);
+    }
+
+    .thanks-container {
+      width: min(100%, 380px);
+    }
+
+    .thanks-image {
+      width: min(100%, 280px);
+    }
+
+    .thanks-whatsapp {
+      flex-direction: column;
+    }
+
+    .thanks-note {
+      width: 100%;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+    }
+  }
+
+  @media (max-height: 720px) {
+    .thanks-section {
+      padding-top: max(6rem, 12vh);
+    }
+
+    .thanks-image {
+      width: min(100%, 280px);
+    }
+  }
+</style>
