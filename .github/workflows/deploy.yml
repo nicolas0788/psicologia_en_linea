@@ -33,33 +33,12 @@ jobs:
       - name: Configurar SSH
         run: |
           mkdir -p ~/.ssh
-
           printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/hostinger_key
           chmod 600 ~/.ssh/hostinger_key
-
-          for intento in 1 2 3 4 5; do
-            if ssh-keyscan \
-              -H \
-              -p "${{ secrets.SSH_PORT }}" \
-              "${{ secrets.SSH_HOST }}" \
-              >> ~/.ssh/known_hosts; then
-              break
-            fi
-
-            if [ "$intento" -eq 5 ]; then
-              echo "No se pudo obtener la clave pública del servidor SSH."
-              exit 1
-            fi
-
-            echo "Intento SSH $intento fallido. Reintentando..."
-            sleep 5
-          done
-
-          chmod 600 ~/.ssh/known_hosts
 
       - name: Deploy con rsync
         run: |
           rsync -avz --delete \
-            -e "ssh -i ~/.ssh/hostinger_key -p ${{ secrets.SSH_PORT }}" \
+            -e "ssh -i ~/.ssh/hostinger_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             ./dist/ \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/domains/rosybrown-lyrebird-889600.hostingersite.com/public_html/
