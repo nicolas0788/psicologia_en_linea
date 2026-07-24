@@ -41,4 +41,4 @@ jobs:
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/hostinger_key -p ${{ secrets.SSH_PORT }} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             ./dist/ \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/domains/rosybrown-lyrebird-889600.hostingersite.com/public_html/
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/${{ secrets.SSH_USER }}/domains/psicologiaenlinea.com.ar/public_html/
