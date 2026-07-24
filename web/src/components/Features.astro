@@ -60,7 +60,7 @@ const features = [
               />
             </div>
 
-            <h3>{item.title}</h3>
+            <h3 class="features-card__text-title">{item.title}</h3>
             <p>{item.text}</p>
           </article>
         ))
@@ -82,6 +82,17 @@ const features = [
     display: grid;
     grid-template-columns: 1fr;
     gap: clamp(0.5rem, 2vw, 1rem);
+  }
+  .features-card__text-title {
+    font-size: clamp(
+      1.2rem,
+      calc(1.2rem + 1.7 * (100vw - 320px) / 704),
+      2.9rem
+    );
+    line-height: 1.1;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 
   /* >= 300px → 2 columnas */

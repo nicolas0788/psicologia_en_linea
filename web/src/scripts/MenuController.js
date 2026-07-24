@@ -42,7 +42,7 @@ export class MenuController {
     this.toggle.addEventListener("click", this.handleToggle);
     document.addEventListener("keydown", this.handleKey);
     this.overlay.addEventListener("click", this.handleOverlay);
-    this.menu.addEventListener("click", this.handleLinkClick);
+    this.header.addEventListener("click", this.handleLinkClick);
     this.mediaQuery.addEventListener("change", this.handleResize);
 
     window.addEventListener("scroll", this.handleNavOnScroll, {
@@ -53,13 +53,7 @@ export class MenuController {
 
     this.resetImmediate();
     this.handleNavOnScroll();
-
-    requestAnimationFrame(() => {
-      this.handleNavOnScroll();
-    });
   }
-
-  /* ================= CORE ================= */
 
   open() {
     if (this.isAnimating || this.isDesktop()) return;
@@ -83,7 +77,7 @@ export class MenuController {
   }
 
   close() {
-    if (this.isAnimating) return;
+    if (!this.isOpen) return;
 
     this.isAnimating = true;
     this.isOpen = false;
@@ -104,10 +98,6 @@ export class MenuController {
     this.isOpen ? this.close() : this.open();
   }
 
-  reset() {
-    this.close();
-  }
-
   resetImmediate() {
     this.isOpen = false;
     this.isAnimating = false;
@@ -120,8 +110,6 @@ export class MenuController {
 
     this.updateAria(false);
   }
-
-  /* ================= EVENTS ================= */
 
   handleToggle() {
     if (this.isDesktop()) return;
@@ -148,41 +136,11 @@ export class MenuController {
   }
 
   handleLinkClick(e) {
-    const internalLink = e.target.closest("[data-internal-click]");
+    const link = e.target.closest("a");
 
-    if (internalLink) {
-      e.preventDefault();
+    if (!link) return;
 
-      const targetId = internalLink.dataset.target;
-
-      if (!targetId) return;
-
-      const target = document.getElementById(targetId);
-
-      if (!target) return;
-
-      if (!this.isDesktop() && this.isOpen) {
-        this.close();
-
-        setTimeout(() => {
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 300);
-
-        return;
-      }
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
-      return;
-    }
-
-    if (e.target.closest("a")) {
+    if (!this.isDesktop() && this.isOpen) {
       this.close();
     }
   }
@@ -195,13 +153,7 @@ export class MenuController {
 
   handleWindowLoad() {
     this.handleNavOnScroll();
-
-    requestAnimationFrame(() => {
-      this.handleNavOnScroll();
-    });
   }
-
-  /* ================= HELPERS ================= */
 
   isDesktop() {
     return this.mediaQuery.matches;

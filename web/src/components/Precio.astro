@@ -7,53 +7,76 @@ import parejaIcon from "../assets/img/precios/par.png";
 const mes = "junio";
 const anio = "2026";
 
-const precioIndividual = "25.000";
-const precioPareja = "35.000";
+const precioIndividualPresencial = "25.000";
+const precioIndividualVirtual = "25.000";
 
-const modalidad = "presencial / virtual";
+const precioParejaPresencial = "35.000";
+const precioParejaVirtual = "35.000";
+
 const vigenciaDias = 60;
 ---
 
 <section class="price-section">
   <article class="price-card">
-    <div class="price-header">
-      <p class="price-date">Honorarios vigentes - {mes} {anio}</p>
+    <header class="price-header">
+      <p class="price-date">
+        Honorarios vigentes - {mes}
+        {anio}
+      </p>
+
       <h2 class="price-title">Valor por sesión</h2>
-      <p class="price-mode">Modalidad {modalidad}</p>
-    </div>
+    </header>
 
     <div class="price-list">
-      <div class="price-item">
-        <div class="price-icon" aria-hidden="true">
+      <article class="price-item">
+        <div class="price-icon">
           <Image
             src={individualIcon}
-            alt="Icono para sesiones indivisuales"
-            width={64}
-            height={64}
+            alt="Ícono de terapia individual"
+            width={48}
+            height={48}
             loading="eager"
             class="price-icon-img"
           />
         </div>
 
-        <strong>Terapia individual</strong>
-        <span>ARS ${precioIndividual}</span>
-      </div>
+        <div class="price-options">
+          <div class="price-option">
+            <strong>Individual presencial</strong>
+            <span>ARS ${precioIndividualPresencial}</span>
+          </div>
 
-      <div class="price-item">
-        <div class="price-icon" aria-hidden="true">
+          <div class="price-option">
+            <strong>Individual virtual</strong>
+            <span>ARS ${precioIndividualVirtual}</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="price-item">
+        <div class="price-icon">
           <Image
             src={parejaIcon}
-            alt="Icono para sesiones de pareja"
-            width={64}
-            height={64}
+            alt="Ícono de terapia de pareja"
+            width={48}
+            height={48}
             loading="eager"
             class="price-icon-img"
           />
         </div>
 
-        <strong>Terapia de pareja</strong>
-        <span>ARS ${precioPareja}</span>
-      </div>
+        <div class="price-options">
+          <div class="price-option">
+            <strong>Pareja presencial</strong>
+            <span>ARS ${precioParejaPresencial}</span>
+          </div>
+
+          <div class="price-option">
+            <strong>Pareja virtual</strong>
+            <span>ARS ${precioParejaVirtual}</span>
+          </div>
+        </div>
+      </article>
     </div>
 
     <div class="price-note">
@@ -66,7 +89,7 @@ const vigenciaDias = 60;
 
       <p>
         Iniciá tus sesiones y mantené este valor por
-        <strong>{vigenciaDias} días</strong>
+        <strong> {vigenciaDias} días</strong>
       </p>
     </div>
   </article>
@@ -75,6 +98,7 @@ const vigenciaDias = 60;
 <style>
   .price-section {
     width: 100%;
+    min-width: 0;
     padding: 1.5rem 1rem;
     display: flex;
     justify-content: center;
@@ -85,7 +109,6 @@ const vigenciaDias = 60;
     padding: clamp(1.1rem, 3vw, 1.7rem);
     border-radius: 1.5rem;
     background: linear-gradient(145deg, #fbf8ff 0%, #f3edf8 100%);
-    box-shadow: 0 0.8rem 1.8rem rgba(47, 36, 56, 0.14);
     color: #25145f;
   }
 
@@ -108,70 +131,86 @@ const vigenciaDias = 60;
     letter-spacing: -0.04em;
   }
 
-  .price-mode {
-    margin: 0.65rem 0 0;
-    font-size: clamp(0.9rem, 2.2vw, 1.15rem);
-    font-weight: 700;
-    color: #4d427c;
-  }
-
   .price-list {
-    margin-top: 1.1rem;
+    margin-top: 1.2rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.8rem;
   }
 
   .price-item {
-    min-height: 7.2rem;
-    padding: 1rem 0.8rem;
+    min-width: 0;
+    padding: 1.2rem 1rem;
     border-radius: 1.1rem;
     background: rgba(238, 230, 246, 0.75);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
+    justify-content: flex-start;
+    gap: 0.85rem;
+
     text-align: center;
   }
 
   .price-icon {
-    width: 2.7rem;
-    height: 2.7rem;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: #f7f1fb;
-    overflow: hidden;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
   }
 
   .price-icon-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    width: 2.75rem;
+    height: 2.75rem;
+    max-width: 100%;
+
     display: block;
+    object-fit: contain;
+
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .price-note-icon svg {
-    width: 1.15rem;
-    height: 1.15rem;
-    stroke: #2b176b;
-    stroke-width: 1.7;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .price-options {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .price-item strong {
+  .price-option {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .price-option strong {
     font-size: clamp(0.85rem, 2vw, 1rem);
     font-weight: 900;
-    line-height: 1.15;
+    line-height: 1.2;
     color: #28155f;
   }
 
-  .price-item span {
+  .price-option span {
     font-size: clamp(1rem, 2.4vw, 1.25rem);
-    font-weight: 900;
-    line-height: 1;
+    line-height: 1.1;
     color: #25145f;
   }
 
@@ -179,11 +218,13 @@ const vigenciaDias = 60;
     margin-top: 0.9rem;
     padding: 0.65rem 0.9rem;
     border-radius: 999px;
+    background: #e9e0f2;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.45rem;
-    background: #e9e0f2;
+
     text-align: center;
   }
 
@@ -200,32 +241,50 @@ const vigenciaDias = 60;
     place-items: center;
   }
 
-  @media (max-width: 430px) {
-    .price-card {
-      border-radius: 1.2rem;
-    }
+  .price-note-icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    stroke: #2b176b;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
+  @media (max-width: 600px) {
     .price-list {
       grid-template-columns: 1fr;
-      gap: 0.6rem;
+      gap: 0.7rem;
     }
 
     .price-item {
-      min-height: auto;
-      padding: 0.8rem;
-      flex-direction: row;
-      justify-content: flex-start;
-      text-align: left;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
     }
 
-    .price-item strong,
-    .price-item span {
-      flex: 1 1 100%;
+    .price-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      flex-basis: 2.75rem;
+    }
+
+    .price-icon-img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    .price-options {
+      flex-direction: column;
+    }
+
+    .price-option {
+      flex-direction: column;
+      text-align: center;
     }
 
     .price-note {
       border-radius: 1rem;
-      align-items: flex-start;
     }
   }
 </style>

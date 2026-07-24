@@ -4,15 +4,11 @@ const menuDesktop = [
     href: "/#como-funciona",
     label: "Cómo funciona",
     classLi: "",
-    data: {
-      "data-internal-click": true,
-      "data-target": "como-funciona",
-    },
   },
   { href: "/quienes-somos", label: "¿Quiénes somos?", classLi: "" },
-  //{ href: "/", label: "Preguntas frecuentes", classLi: "" },
+  // { href: "/", label: "Preguntas frecuentes", classLi: "" },
   { href: "/profesionales-form", label: "Soy profesional", classLi: "" },
-  { href: "comenzar-form", label: "Comenzar", classLi: "menu-desktop__cta" },
+  { href: "/comenzar-form", label: "Comenzar", classLi: "menu-desktop__cta" },
 ];
 
 const menuMobile = [
@@ -20,15 +16,11 @@ const menuMobile = [
     href: "/#como-funciona",
     label: "Cómo funciona",
     classLi: "",
-    data: {
-      "data-internal-click": true,
-      "data-target": "como-funciona",
-    },
   },
   { href: "/quienes-somos", label: "¿Quiénes somos?", classLi: "" },
-  //{ href: "/", label: "Preguntas frecuentes", classLi: "" },
+  // { href: "/", label: "Preguntas frecuentes", classLi: "" },
   { href: "/profesionales-form", label: "Soy profesional", classLi: "" },
-  { href: "comenzar-form", label: "Comenzar", classLi: "menu-mobile__cta" },
+  { href: "/comenzar-form", label: "Comenzar", classLi: "menu-mobile__cta" },
 ];
 
 import { Image } from "astro:assets";
@@ -50,9 +42,7 @@ import logoImg from "../../src/assets/img/logo2.png";
       {
         menuDesktop.map((item) => (
           <li class={item.classLi}>
-            <a href={item.href} {...item.data}>
-              {item.label}
-            </a>
+            <a href={item.href}>{item.label}</a>
           </li>
         ))
       }
@@ -79,9 +69,7 @@ import logoImg from "../../src/assets/img/logo2.png";
       {
         menuMobile.map((item) => (
           <li class={item.classLi}>
-            <a href={item.href} {...item.data}>
-              {item.label}
-            </a>
+            <a href={item.href}>{item.label}</a>
           </li>
         ))
       }
@@ -89,7 +77,6 @@ import logoImg from "../../src/assets/img/logo2.png";
   </div>
 </header>
 
-<!-- OVERLAY -->
 <div id="menu-overlay" class="menu-overlay" hidden></div>
 
 <style is:global>
