@@ -83,6 +83,7 @@ export class FormManager {
           Accept: "application/json",
         },
         body: formData,
+        redirect: "manual",
       });
 
       const data: unknown = await response.json();
