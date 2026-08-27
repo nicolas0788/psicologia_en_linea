@@ -77,7 +77,7 @@ export class FormManager {
     }
 
     try {
-      const response = await fetch(normalizedUrl, {
+      const response = await fetch("/forms.php", {
         method: "POST",
         headers: {
           Accept: "application/json",
