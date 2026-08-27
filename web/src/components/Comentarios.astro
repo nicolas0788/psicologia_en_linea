@@ -1,8 +1,6 @@
 ---
-import { Image } from "astro:assets";
-
-import reviewBtn from "../assets/img/icons/mail.png";
 import Contador from "../components/assets/Contador.astro";
+import Btn from "./assets/Btn.astro";
 
 const testimonials = [
   {
@@ -27,7 +25,7 @@ const testimonials = [
     name: "Camila",
     location: "Rosario, Argentina",
     comment:
-      "Una amiga me recomendó psicología en línea. Yo venía postergando empezar terapia y el proceso me resultó simple, completé el formulario y me respondieron por whatsapp.",
+      "Una amiga me recomendó psicología en línea. Yo venía postergando empezar terapia y el proceso me resultó simple, completé el formulario y me respondieron por WhatsApp.",
   },
   {
     name: "Nicolás",
@@ -70,7 +68,11 @@ const testimonials = [
 
 <section class="section-general testimonials-section">
   <div class="container-general testimonials-container">
-    <div class="testimonial-carousel" data-testimonial-carousel>
+    <div
+      class="testimonial-carousel"
+      data-testimonial-carousel
+      aria-label="Experiencias de personas que utilizaron el servicio"
+    >
       <div class="testimonial-track" data-testimonial-track>
         {
           testimonials.map((item) => (
@@ -89,6 +91,7 @@ const testimonials = [
         }
       </div>
     </div>
+
     <div class="testimonials-footer">
       <h4 class="titles-secondary">
         ¿Ya tuviste una experiencia con Psicología en Línea?
@@ -96,30 +99,26 @@ const testimonials = [
 
       <p>
         Tu comentario puede ayudar a otras personas que todavía están buscando
-        por dónde empezar
+        por dónde empezar.
       </p>
 
-      <a
-        href="/contacto"
-        class="testimonials-review-btn"
-        aria-label="Enviar comentario sobre el servicio"
-      >
-        <Image
-          src={reviewBtn}
-          alt="Enviar comentario"
-          class="testimonials-review-btn__img"
-          loading="lazy"
+      <div class="btn-container">
+        <Btn
+          href="/contacto"
+          label="Contactate"
+          fontSize="clamp(0.95rem, 0.8rem + 0.7vw, 1.4rem)"
         />
-      </a>
+      </div>
     </div>
-    <Contador label="Personas iniciaron terapia" target={137} />
+
+    <Contador label="Personas iniciaron terapia" target={137} duration={1500} />
   </div>
 </section>
 
 <style>
   .testimonials-section {
-    background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
     overflow: hidden;
+    background: linear-gradient(180deg, #8d9cdb 0%, #f8fbfd 100%);
   }
 
   .testimonials-container {
@@ -148,17 +147,13 @@ const testimonials = [
 
   .testimonial-card {
     width: 100%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: clamp(2rem, 5vw, 3rem);
-
-    background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(120, 135, 190, 0.2);
     border-radius: 2rem;
-
+    background: rgba(255, 255, 255, 0.94);
     box-sizing: border-box;
   }
 
@@ -186,13 +181,11 @@ const testimonials = [
   }
 
   .testimonials-footer {
+    max-width: 720px;
     display: grid;
     justify-items: center;
     gap: 1rem;
-
-    max-width: 720px;
     margin-inline: auto;
-
     text-align: center;
   }
 
@@ -206,28 +199,6 @@ const testimonials = [
     opacity: 0.8;
   }
 
-  .testimonials-review-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 0.5rem;
-
-    transition:
-      transform 0.25s ease,
-      opacity 0.25s ease;
-  }
-
-  .testimonials-review-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.92;
-  }
-
-  .testimonials-review-btn__img {
-    width: 3rem;
-    height: auto;
-    display: block;
-  }
   @media (max-width: 520px) {
     .testimonial-slide {
       padding-inline: 1rem;
@@ -240,21 +211,35 @@ const testimonials = [
 </style>
 
 <script>
-  const carousel = document.querySelector<HTMLElement>(
+  const carousels = document.querySelectorAll<HTMLElement>(
     "[data-testimonial-carousel]",
   );
 
-  const track = document.querySelector<HTMLElement>("[data-testimonial-track]");
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
-  if (carousel && track) {
+  carousels.forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>(
+      "[data-testimonial-track]",
+    );
+
+    if (!track || reducedMotion) {
+      return;
+    }
+
     const slides = track.children as HTMLCollectionOf<HTMLElement>;
 
-    let index: number = 0;
+    if (slides.length <= 1) {
+      return;
+    }
 
-    window.setInterval((): void => {
+    let index = 0;
+
+    window.setInterval(() => {
       index = (index + 1) % slides.length;
 
       track.style.transform = `translate3d(-${index * 100}%, 0, 0)`;
     }, 6000);
-  }
+  });
 </script>

@@ -101,10 +101,8 @@ const privacySections = [
   <ArcoSuperior />
   <div class="container-general legal-shell">
     <header class="legal-hero">
-      <h1 class="legal-hero-title legal-page-title">
-        Términos y Condiciones – Profesionales
-      </h1>
-      <h3 class="legal-update legal-page-subtitle">
+      <h1 class="titles-general legal-hero-title">Términos y Condiciones</h1>
+      <h3 class="description-general legal-update">
         Política de privacidad y tratamiento de datos personales para
         profesionales
       </h3>
@@ -112,8 +110,8 @@ const privacySections = [
 
     <main class="legal-main">
       <article class="legal-card">
-        <h2 class="legal-section-title">
-          Política de Privacidad – Profesionales
+        <h2 class="subtitles-general">
+          Política de Privacidad para rofesionales
         </h2>
         <p>
           El presente documento establece los Términos y Condiciones aplicables
@@ -130,7 +128,7 @@ const privacySections = [
         {
           privacySections.map((section) => (
             <section class="legal-section">
-              <h3 class="legal-section-subtitle">{section.title}</h3>
+              <h3 class="subtitles-general">{section.title}</h3>
               {section.paragraphs.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
@@ -266,6 +264,7 @@ const privacySections = [
         border-radius: var(--legal-radius);
         padding: var(--legal-card-padding);
         box-shadow: var(--legal-shadow);
+        min-height: 0;
       }
 
       .legal-card--emergency {
@@ -389,6 +388,10 @@ const privacySections = [
 
       .legal-meta li {
         color: var(--legal-text);
+      }
+
+      .legal-page-title {
+        text-align: center;
       }
 
       /* =========================================

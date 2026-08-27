@@ -1,0 +1,184 @@
+---
+// src/components/form/FormMessage.astro
+
+// Uso
+
+/*
+import FormMessage from "../form/FormMessage.astro";
+
+
+<FormMessage
+  id="submit-messages"
+  class="contact-form-message"
+/>
+*/
+
+// Ejemplo de estilos del padre
+
+/*
+ :global(.contact-form-message-container:has(> .form-message.is-success)),
+.contact-form-message-container {
+  display: none;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+:global(
+  .contact-form-message-container:has(> .form-message.is-success)
+),
+:global(
+  .contact-form-message-container:has(> .form-message.is-error)
+) {
+  display: block;
+}
+
+:global(.contact-form-message-container > .form-message) {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid transparent;
+  border-left-width: 4px;
+  border-radius: 0.75rem;
+
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+*/
+
+interface Props {
+  id?: string;
+  class?: string;
+  ariaLive?: "polite" | "assertive";
+}
+
+const {
+  id = "submit-messages",
+  class: className,
+  ariaLive = "polite",
+} = Astro.props;
+---
+
+<p
+  id={id}
+  class:list={["form-message", className]}
+  role="status"
+  aria-live={ariaLive}
+  aria-atomic="true"
+  hidden
+>
+</p>
+
+<style is:global>
+  /*
+   * Colores y elementos visuales propios del componente.
+   *
+   * No se definen:
+   * - width
+   * - margin
+   * - padding
+   * - border-radius
+   * - font-size
+   * - font-weight
+   *
+   * Esas propiedades pertenecen al contenedor que utiliza
+   * el componente.
+   */
+
+  .form-message {
+    /*
+     * Estado de éxito
+     */
+
+    --form-message-success-color: #185b39;
+    --form-message-success-accent: #25794e;
+    --form-message-success-background: #eefaf3;
+    --form-message-success-border: rgb(37 121 78 / 30%);
+
+    /*
+     * Estado de error
+     */
+
+    --form-message-error-color: #7e1b2b;
+    --form-message-error-accent: #b4233b;
+    --form-message-error-background: #fff0f2;
+    --form-message-error-border: rgb(180 35 59 / 30%);
+
+    /*
+     * Icono
+     */
+
+    --form-message-icon-size: 1.35rem;
+    --form-message-icon-color: #ffffff;
+
+    box-sizing: border-box;
+    max-width: 100%;
+    align-items: flex-start;
+    gap: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+
+  /*
+   * El componente solamente se muestra cuando recibe
+   * una clase de estado.
+   */
+
+  .form-message:not(.is-success):not(.is-error) {
+    display: none;
+  }
+
+  .form-message.is-success,
+  .form-message.is-error {
+    display: flex;
+  }
+
+  /*
+   * Icono común
+   */
+
+  .form-message::before {
+    width: var(--form-message-icon-size);
+    height: var(--form-message-icon-size);
+    flex: 0 0 var(--form-message-icon-size);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.02rem;
+    border-radius: 50%;
+    color: var(--form-message-icon-color);
+    font-size: calc(var(--form-message-icon-size) * 0.63);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  /*
+   * Estado de éxito
+   */
+
+  .form-message.is-success {
+    border-color: var(--form-message-success-border);
+    border-left-color: var(--form-message-success-accent);
+    background: var(--form-message-success-background);
+    color: var(--form-message-success-color);
+  }
+
+  .form-message.is-success::before {
+    content: "✓";
+    background: var(--form-message-success-accent);
+  }
+
+  /*
+   * Estado de error
+   */
+
+  .form-message.is-error {
+    border-color: var(--form-message-error-border);
+    border-left-color: var(--form-message-error-accent);
+    background: var(--form-message-error-background);
+    color: var(--form-message-error-color);
+  }
+
+  .form-message.is-error::before {
+    content: "!";
+    background: var(--form-message-error-accent);
+  }
+</style>

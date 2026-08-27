@@ -97,8 +97,8 @@ const faqItems = [
   <ArcoSuperior />
   <div class="container-general faq-container">
     <div class="faq-heading">
-      <h1 id="faq-title">Preguntas frecuentes</h1>
-      <p>
+      <h1 class="titles-general" id="faq-title">Preguntas frecuentes</h1>
+      <p class="description-general">
         Respuestas claras sobre cómo funciona la derivación, la modalidad de
         atención y aspectos prácticos del proceso.
       </p>
@@ -112,7 +112,7 @@ const faqItems = [
             open={index === 0}
           >
             <summary>
-              <h3>{item.question}</h3>
+              <h3 class="subtitles-general">{item.question}</h3>
               <span class="faq-icon" aria-hidden="true" />
             </summary>
 
@@ -142,7 +142,7 @@ const faqItems = [
       }
     </div>
     <div class="btn-container">
-      <Btn href="/form" label="Comenzar ahora" />
+      <Btn href="/comenzar-form" label="Comenzar ahora" />
     </div>
   </div>
 </section>

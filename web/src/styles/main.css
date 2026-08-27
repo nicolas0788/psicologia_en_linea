@@ -5,6 +5,9 @@
 /* 1. Reset */
 @import "./reset.css";
 
+/* 1. Global */
+/*@import "./global.css";*/
+
 /* 2. Layout */
 @import "./layout.css";
 

@@ -1,7 +1,8 @@
 ---
 import ArcoSuperior from "../assets/ArcoSuperior.astro";
 import Btn from "../assets/Btn.astro";
-
+import HoneyPot from "../assets/HoneyPot.astro";
+import FormMessage from "../assets/FormMessage.astro";
 const clinicalTopicsOptions = [
   "Abuso sexual",
   "Adicciones y consumo problemático",
@@ -24,9 +25,7 @@ const clinicalTopicsOptions = [
   "Orientación laboral",
   "Otra",
 ];
-
 const modalityOptions = ["Virtual", "Presencial"];
-
 const frameworkOptions = [
   "Psicoanálisis",
   "TCC",
@@ -42,91 +41,112 @@ const frameworkOptions = [
   aria-labelledby="professional-form-title"
 >
   <ArcoSuperior />
-
   <div class="container-general form-shell">
     <form
-      id="professionalForm"
+      id="pro-form"
       class="form-card"
-      action="/backend/send-professional-form.php"
       method="post"
       enctype="multipart/form-data"
     >
+      <input type="hidden" name="formName" value="pro-form" />
       <header class="form-header">
-        <h1 id="professional-form-title" class="form-title">
+        <h1 id="professional-form-title" class="titles-general form-title">
           Formulario para profesionales
         </h1>
-
-        <p class="form-intro">
+        <p class="description-general form-intro">
           Completá tus datos profesionales para evaluar la incorporación a la
           red.
         </p>
       </header>
-
       <div class="form-grid">
         <div class="form-field form-field--half">
-          <label class="form-label" for="nombre-apellido">
-            Nombre y apellido completo <span aria-hidden="true">*</span>
+          <label class="form-label" for="pro-form-name">
+            Nombre y apellido completo
+            <span aria-hidden="true">*</span>
           </label>
-
           <input
-            id="nombre-apellido"
-            name="nombre_apellido"
+            id="pro-form-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+          />
+        </div>
+        <div class="form-field form-field--half">
+          <label class="form-label" for="pro-form-email">
+            Email
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="pro-form-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <div class="form-field form-field--half">
+          <label class="form-label" for="pro-form-whatsapp">
+            WhatsApp
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="pro-form-whatsapp"
+            name="whatsapp"
+            type="tel"
+            autocomplete="tel"
+            required
+          />
+        </div>
+        <div class="form-field form-field--half">
+          <label class="form-label" for="pro-form-ciudad">
+            Ciudad y país de residencia
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="pro-form-ciudad"
+            name="ciudad_pais"
+            type="text"
+            autocomplete="address-level2"
+            required
+          />
+        </div>
+        <div class="form-field form-field--half">
+          <label class="form-label" for="pro-form-matricula">
+            Matrícula Nacional Argentina
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="pro-form-matricula"
+            name="matricula"
             type="text"
             required
           />
         </div>
-
         <div class="form-field form-field--half">
-          <label class="form-label" for="email">
-            Email <span aria-hidden="true">*</span>
+          <label class="form-label" for="pro-form-experiencia">
+            Experiencia clínica en meses
+            <span aria-hidden="true">*</span>
           </label>
-
-          <input id="email" name="email" type="email" required />
-        </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="whatsapp">
-            WhatsApp <span aria-hidden="true">*</span>
-          </label>
-
-          <input id="whatsapp" name="whatsapp" type="tel" required />
-        </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="ciudad-pais">
-            Ciudad y país de residencia <span aria-hidden="true">*</span>
-          </label>
-
-          <input id="ciudad-pais" name="ciudad_pais" type="text" required />
-        </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="matricula">
-            Matrícula Nacional Argentina <span aria-hidden="true">*</span>
-          </label>
-
-          <input id="matricula" name="matricula" type="text" required />
-        </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="experiencia">
-            Experiencia clínica en meses <span aria-hidden="true">*</span>
-          </label>
-
           <input
-            id="experiencia"
+            id="pro-form-experiencia"
             name="experiencia"
             type="number"
             min="0"
+            step="1"
+            inputmode="numeric"
             required
           />
         </div>
-
-        <fieldset class="form-field form-field--half">
+        <fieldset
+          class="form-field form-field--half"
+          id="framework-options"
+          aria-required="true"
+        >
           <legend class="form-label">
-            Marco teórico con el que trabajás <span aria-hidden="true">*</span>
+            Marco teórico con el que trabajás
+            <span aria-hidden="true">*</span>
           </legend>
-
           <div class="choice-group">
             {
               frameworkOptions.map((option) => (
@@ -136,50 +156,85 @@ const frameworkOptions = [
                     name="marco_teorico[]"
                     value={option}
                   />
-
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+          <div
+            class="form-field form-field--conditional"
+            id="framework-other-field"
+            hidden
+          >
+            <label class="form-label" for="framework-other-input">
+              Especificá el marco teórico
+              <span aria-hidden="true">*</span>
+            </label>
+            <input
+              class="input-conditional"
+              id="framework-other-input"
+              type="text"
+              name="marco_teorico_otro"
+              autocomplete="off"
+              minlength="2"
+              maxlength="120"
+              disabled
+            />
+          </div>
         </fieldset>
-
-        <fieldset class="form-field form-field--half">
+        <fieldset
+          class="form-field form-field--half"
+          id="modality-form-pro"
+          aria-required="true"
+        >
           <legend class="form-label">
-            Modalidad de atención <span aria-hidden="true">*</span>
+            Modalidad de atención
+            <span aria-hidden="true">*</span>
           </legend>
-
           <div class="choice-group">
             {
               modalityOptions.map((option) => (
                 <label class="choice-card">
                   <input type="checkbox" name="modalidad[]" value={option} />
-
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+          <div
+            class="form-field form-field--conditional"
+            id="pro-form-consultorio-field"
+            hidden
+          >
+            <label class="form-label" for="pro-form-consultorio-input">
+              Indicá la ubicación del consultorio
+              <span aria-hidden="true">*</span>
+            </label>
+            <input
+              class="input-conditional"
+              id="pro-form-consultorio-input"
+              type="text"
+              name="consultorio_ubi"
+              autocomplete="street-address"
+              minlength="5"
+              maxlength="120"
+              placeholder="Barrio, ciudad o zona aproximada."
+              disabled
+            />
+          </div>
         </fieldset>
-
-        <div class="form-field">
-          <label class="form-label" for="consultorio">
-            Si atendés presencial, indicá ubicación del consultorio
-          </label>
-
-          <textarea id="consultorio" name="consultorio" rows="4"></textarea>
-        </div>
-
-        <fieldset class="form-field">
+        <fieldset
+          class="form-field"
+          id="clinical-topics-options"
+          aria-required="true"
+        >
           <legend class="form-label">
             Indicá las temáticas clínicas con las que trabajás
             <span aria-hidden="true">*</span>
           </legend>
-
           <p class="form-helper">Podés seleccionar una o más opciones.</p>
-
           <div class="choice-group--topics">
             {
               clinicalTopicsOptions.map((option) => (
@@ -189,177 +244,516 @@ const frameworkOptions = [
                     name="tematicas_clinicas[]"
                     value={option}
                   />
-
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+          <div
+            class="form-field form-field--conditional form-field--half"
+            id="clinical-topic-other-field"
+            hidden
+          >
+            <label class="form-label" for="clinical-topic-other-input">
+              Especificá la temática clínica
+              <span aria-hidden="true">*</span>
+            </label>
+            <input
+              class="input-conditional"
+              id="clinical-topic-other-input"
+              type="text"
+              name="tematica_clinica_otra"
+              autocomplete="off"
+              minlength="2"
+              maxlength="120"
+              disabled
+            />
+          </div>
         </fieldset>
-
         <div class="form-field">
-          <label class="form-label" for="info-extra">
+          <label class="form-label" for="pro-form-info-extra">
             Información adicional
           </label>
-
-          <textarea id="info-extra" name="info_extra" rows="5"></textarea>
+          <textarea id="pro-form-info-extra" name="info_extra" rows="5"
+          ></textarea>
         </div>
-
         <div class="form-field form-field--half">
-          <label class="form-label" for="seguro-archivo">
-            Seguro de responsabilidad profesional vigente <span
-              aria-hidden="true">*</span
-            >
+          <label class="form-label" for="pro-form-seguro-file">
+            Seguro de responsabilidad profesional vigente
+            <span aria-hidden="true">*</span>
           </label>
-
           <input
             class="form-file"
-            id="seguro-archivo"
+            id="pro-form-seguro-file"
             name="seguro_archivo"
             type="file"
+            accept="image/jpeg,image/png,image/webp"
             required
           />
+          <FormMessage id="form-pro-message-seguro" />
         </div>
-
         <div class="form-field form-field--half">
-          <label class="form-label" for="matricula-archivo">
-            Matrícula profesional (ambos lados) <span aria-hidden="true">*</span
-            >
+          <label class="form-label" for="pro-form-matricula-file">
+            Foto de la matrícula profesional
+            <span aria-hidden="true">*</span>
           </label>
-
           <input
             class="form-file"
-            id="matricula-archivo"
+            id="pro-form-matricula-file"
             name="matricula_archivo"
             type="file"
+            accept="image/jpeg,image/png,image/webp"
             required
           />
+          <FormMessage id="form-pro-message-matricula" />
         </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="dni-archivo">
-            Foto del DNI o pasaporte (ambos lados) <span aria-hidden="true"
-              >*</span
-            >
-          </label>
-
-          <input
-            class="form-file"
-            id="dni-archivo"
-            name="dni_archivo"
-            type="file"
-            required
-          />
-        </div>
-
-        <div class="form-field form-field--half">
-          <label class="form-label" for="titulo-archivo">
-            Foto del título habilitante (ambos lados) <span aria-hidden="true"
-              >*</span
-            >
-          </label>
-
-          <input
-            class="form-file"
-            id="titulo-archivo"
-            name="titulo_archivo"
-            type="file"
-            required
-          />
-        </div>
-
-        <div class="form-field form-field--notice">
-          <a href="/condiciones-profesionales">Ver términos y condiciones</a>
-
-          <label class="checkbox-field">
-            <input type="checkbox" name="terms" required />
-            <span>Acepto los términos y condiciones para profesionales.</span>
-          </label>
-
-          <div class="form-actions">
-            <Btn type="submit" label="Enviar postulación" bg="#3C329C" />
+        <fieldset
+          id="pro-form-type-doc"
+          class="form-field form-field--half document-type-field"
+          aria-describedby="document-type-helper"
+        >
+          <legend class="form-label">
+            Documento de identidad
+            <span aria-hidden="true">*</span>
+          </legend>
+          <p id="document-type-helper" class="form-helper">
+            Seleccioná el documento que vas a presentar.
+          </p>
+          <div class="choice-group choice-group--document">
+            <label class="choice-card">
+              <input
+                type="radio"
+                name="tipo_documento"
+                value="dni"
+                aria-controls="dni-document-fields"
+                checked
+                required
+              />
+              <span class="choice-card__box" aria-hidden="true"></span>
+              <span class="choice-card__text"> DNI </span>
+            </label>
+            <label class="choice-card">
+              <input
+                type="radio"
+                name="tipo_documento"
+                value="pasaporte"
+                aria-controls="passport-document-field"
+                required
+              />
+              <span class="choice-card__box" aria-hidden="true"></span>
+              <span class="choice-card__text"> Pasaporte </span>
+            </label>
+          </div>
+        </fieldset>
+        <!-- DNI visible inicialmente porque su radio tiene checked. -->
+        <div id="dni-document-fields" class="document-fields">
+          <div
+            class="form-field form-field--half document-file-field"
+            data-document-field="dni"
+          >
+            <label class="form-label" for="pro-form-dni-front-file">
+              Frente del DNI
+              <span aria-hidden="true">*</span>
+            </label>
+            <input
+              class="form-file"
+              id="pro-form-dni-front-file"
+              name="dni_frente_archivo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+            <FormMessage id="form-pro-message-dni-frente" />
+          </div>
+          <div
+            class="form-field form-field--half document-file-field"
+            data-document-field="dni"
+          >
+            <label class="form-label" for="pro-form-dni-back-file">
+              Dorso del DNI
+              <span aria-hidden="true">*</span>
+            </label>
+            <input
+              class="form-file"
+              id="pro-form-dni-back-file"
+              name="dni_dorso_archivo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+            <FormMessage id="form-pro-message-dni-dorso" />
           </div>
         </div>
+        <!-- Pasaporte oculto inicialmente. -->
+        <div
+          id="passport-document-field"
+          class="form-field form-field--half document-file-field"
+          data-document-field="pasaporte"
+          hidden
+        >
+          <label class="form-label" for="pro-form-passport-file">
+            Página del pasaporte con foto y datos personales
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            class="form-file"
+            id="pro-form-passport-file"
+            name="pasaporte_archivo"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            disabled
+          />
+          <FormMessage id="form-pro-message-passport" />
+        </div>
+        <div class="form-field form-field--half">
+          <label class="form-label" for="pro-form-titulo">
+            Foto del título habilitante
+            <span aria-hidden="true">*</span>
+          </label>
+          <input
+            class="form-file"
+            id="pro-form-titulo"
+            name="titulo_archivo"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            required
+          />
+          <FormMessage id="form-pro-message-titulo" />
+        </div>
+        <div class="form-field form-field--notice">
+          <a href="/condiciones-profesionales"> Ver términos y condiciones </a>
+          <label class="checkbox-field">
+            <input type="checkbox" name="terms" value="accepted" required />
+            <span> Acepto los términos y condiciones para profesionales. </span>
+          </label>
+        </div>
+        <HoneyPot name="form-pro-web" />
+        <div class="form-actions">
+          <Btn
+            type="submit"
+            label="Enviar postulación"
+            bg="#3C329C"
+            id="form-pro-submit"
+          />
+        </div>
+        <FormMessage id="form-pro-message" />
       </div>
     </form>
   </div>
 </section>
-<script src="../../scripts/forms/formPro.js"></script>
+<script>
+  import { FormManager } from "../../scripts/form/FormManager";
+  import { radioControlledElementsAction } from "../../scripts/form/actions/radioControlledElementsAction";
+  import { redirectAction } from "../../scripts/form/actions/redirectAction";
+  import { showElementWhenValueAction } from "../../scripts/form/actions/showElementWhenValueAction";
+  import { imageFilePolicy } from "../../scripts/form/policys/imageFilePolicy";
+
+  const formManager = new FormManager("pro-form");
+  const messageElement = formManager.registerElement("#form-pro-message");
+  const messageElementTitulo = formManager.registerElement(
+    "#form-pro-message-titulo",
+  );
+  const messageElementSeguro = formManager.registerElement(
+    "#form-pro-message-seguro",
+  );
+  const messageElementMatricula = formManager.registerElement(
+    "#form-pro-message-matricula",
+  );
+  const messageElementDniFrente = formManager.registerElement(
+    "#form-pro-message-dni-frente",
+  );
+  const messageElementDniDorso = formManager.registerElement(
+    "#form-pro-message-dni-dorso",
+  );
+  const messageElementPassport = formManager.registerElement(
+    "#form-pro-message-passport",
+  );
+  const fileTitle = formManager.registerElement(
+    "#pro-form-titulo",
+  ) as HTMLInputElement;
+  const fileSeguro = formManager.registerElement(
+    "#pro-form-seguro-file",
+  ) as HTMLInputElement;
+  const fileMatricula = formManager.registerElement(
+    "#pro-form-matricula-file",
+  ) as HTMLInputElement;
+  const dniDorso = formManager.registerElement(
+    "#pro-form-dni-back-file",
+  ) as HTMLInputElement;
+  const dniFrente = formManager.registerElement(
+    "#pro-form-dni-front-file",
+  ) as HTMLInputElement;
+  const filePassport = formManager.registerElement(
+    "#pro-form-passport-file",
+  ) as HTMLInputElement;
+  const radioControlFiles = formManager.registerElement("#pro-form-type-doc");
+  const modality = formManager.registerElement("#modality-form-pro");
+  const modalityUbiText = formManager.registerElement(
+    "#pro-form-consultorio-field",
+  );
+  const frameworkOptionsElement =
+    formManager.registerElement("#framework-options");
+  const clinicalTopicsElement = formManager.registerElement(
+    "#clinical-topics-options",
+  );
+  const frameworkOtherField = formManager.registerElement(
+    "#framework-other-field",
+  );
+  const clinicalTopicOtherField = formManager.registerElement(
+    "#clinical-topic-other-field",
+  );
+
+  function requireOneCheckbox(container: HTMLElement, message: string): void {
+    const checkboxes = Array.from(
+      container.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
+    );
+    if (checkboxes.length === 0) {
+      return;
+    }
+    const updateValidity = (): void => {
+      const hasSelection = checkboxes.some((checkbox) => checkbox.checked);
+      checkboxes[0].setCustomValidity(hasSelection ? "" : message);
+    };
+    for (const checkbox of checkboxes) {
+      checkbox.addEventListener("change", updateValidity);
+    }
+    updateValidity();
+  }
+  if (frameworkOptionsElement) {
+    requireOneCheckbox(
+      frameworkOptionsElement,
+      "Seleccioná al menos un marco teórico.",
+    );
+  }
+  if (modality) {
+    requireOneCheckbox(
+      modality,
+      "Seleccioná al menos una modalidad de atención.",
+    );
+  }
+  if (clinicalTopicsElement) {
+    requireOneCheckbox(
+      clinicalTopicsElement,
+      "Seleccioná al menos una temática clínica.",
+    );
+  }
+  if (frameworkOptionsElement && frameworkOtherField) {
+    showElementWhenValueAction(
+      frameworkOptionsElement,
+      "Otra",
+      frameworkOtherField,
+      true,
+    );
+  }
+  if (clinicalTopicsElement && clinicalTopicOtherField) {
+    showElementWhenValueAction(
+      clinicalTopicsElement,
+      "Otra",
+      clinicalTopicOtherField,
+      true,
+    );
+  }
+  if (modality && modalityUbiText) {
+    showElementWhenValueAction(modality, "Presencial", modalityUbiText, true);
+  }
+  if (radioControlFiles) {
+    radioControlledElementsAction(radioControlFiles);
+  }
+
+  if (fileTitle instanceof HTMLInputElement) {
+    imageFilePolicy(fileTitle, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementTitulo);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementTitulo, response.message);
+    });
+  }
+
+  if (fileSeguro instanceof HTMLInputElement) {
+    imageFilePolicy(fileSeguro, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementSeguro);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementSeguro, response.message);
+    });
+  }
+
+  if (fileMatricula instanceof HTMLInputElement) {
+    imageFilePolicy(fileMatricula, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementMatricula);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementMatricula, response.message);
+    });
+  }
+
+  if (dniFrente instanceof HTMLInputElement) {
+    imageFilePolicy(dniFrente, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementDniFrente);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementDniFrente, response.message);
+    });
+  }
+
+  if (dniDorso instanceof HTMLInputElement) {
+    imageFilePolicy(dniDorso, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementDniDorso);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementDniDorso, response.message);
+    });
+  }
+
+  if (filePassport instanceof HTMLInputElement) {
+    imageFilePolicy(filePassport, 5 * 1024 * 1024, (response) => {
+      if (response.success) {
+        formManager.clearMessage(messageElementPassport);
+
+        return;
+      }
+
+      formManager.errorMessage(messageElementPassport, response.message);
+    });
+  }
+
+  let submitting = false;
+  formManager.form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitting) {
+      return;
+    }
+    submitting = true;
+    formManager.clearMessage(messageElement);
+    try {
+      const formData = new FormData(formManager.form);
+      const response = await formManager.sendFormData("/forms.php", formData);
+      if (!response.success) {
+        formManager.errorMessage(messageElement, response.message);
+        return;
+      }
+      formManager.form.reset();
+      modality?.dispatchEvent(new Event("change", { bubbles: true }));
+      frameworkOptionsElement?.dispatchEvent(
+        new Event("change", { bubbles: true }),
+      );
+      clinicalTopicsElement?.dispatchEvent(
+        new Event("change", { bubbles: true }),
+      );
+      radioControlFiles?.dispatchEvent(new Event("change", { bubbles: true }));
+      formManager.successMessage(messageElement, "Gracias por contactarte");
+      await redirectAction({
+        url: "/gracias",
+        delayMilliseconds: 2500,
+      });
+    } finally {
+      submitting = false;
+    }
+  });
+</script>
 <style>
+  /*
+   * Root local del componente.
+   */
   .form-section {
+    --form-card-background: #f3f2fc;
+    --form-control-background: #ffffff;
+    --form-control-border: #d1d5db;
+    --form-control-radius: 0.65rem;
+    --form-control-focus: #8b5cf6;
+    --form-control-focus-shadow: rgba(139, 92, 246, 0.12);
+    --form-choice-selected-background: #f8f7ff;
+    --form-disabled-background: #ececf2;
+    --form-disabled-color: #8b8e99;
+    --form-field-half-width: 28.75rem;
     position: relative;
     overflow: hidden;
     width: 100%;
+    min-height: 0;
     background: linear-gradient(180deg, #8d9cdb 0%, #edf5f7 100%);
     color: var(--color-text);
   }
-
+  /*
+   * Esta regla debe aparecer después de cualquier regla
+   * que aplique display: grid, flex o block.
+   */
+  .form-section [hidden] {
+    display: none !important;
+  }
   .form-shell {
-    max-width: 980px;
+    max-width: 61.25rem;
     margin-top: 9rem;
   }
-
   .form-card {
     position: relative;
-    padding: clamp(1.25rem, 2.4vw, 2rem) clamp(1rem, 2vw, 1.5rem);
-    background: #f3f2fc;
+    padding: 1.2rem 1rem;
+    background: var(--form-card-background);
     border: 1px solid #e5e7eb;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
   }
-
   .form-header {
     display: grid;
     gap: 0.95rem;
+    min-height: 0;
     margin-bottom: 1.5rem;
     text-align: center;
   }
-
   .form-title {
     color: var(--color-text-dark);
-    font-weight: var(--font-weight-bold);
   }
-
   .form-intro {
-    max-width: 40rem;
-    margin: 0 auto;
-    line-height: 1.6;
+    text-align: left;
   }
-
   .form-grid {
     display: grid;
     gap: 1.25rem;
   }
-
   .form-field {
     display: grid;
     gap: 0.5rem;
     width: 100%;
+    min-width: 0;
     margin: 0;
     padding: 0;
     border: 0;
   }
-
   .form-field--half {
-    max-width: min(460px, 100%);
+    width: 100%;
+    max-width: min(var(--form-field-half-width), 100%);
     margin-inline: auto;
   }
-
   .form-label {
     color: var(--color-text-dark);
     font-size: var(--font-size-label);
     font-weight: var(--font-weight-semibold);
     line-height: 1.35;
   }
-
+  .form-label span[aria-hidden="true"] {
+    color: #b42318;
+  }
   .form-helper {
     margin: -0.15rem 0 0;
     color: #7b8190;
     font-size: var(--font-size-caption);
     line-height: 1.5;
   }
-
   .form-field input[type="text"],
   .form-field input[type="email"],
   .form-field input[type="tel"],
@@ -367,86 +761,110 @@ const frameworkOptions = [
   .form-field input[type="date"],
   .form-field textarea {
     width: 100%;
-    border: 1px solid #d1d5db;
-    background: #ffffff;
-    border-radius: 0.65rem;
+    border: 1px solid var(--form-control-border);
+    background: var(--form-control-background);
+    border-radius: var(--form-control-radius);
     color: var(--color-text);
   }
-
   .form-field
     input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
     min-height: 2.9rem;
     padding: 0.75rem 0.9rem;
   }
-
   .form-field textarea {
     min-height: 7rem;
     padding: 0.85rem 0.9rem;
     resize: vertical;
   }
-
-  .form-field input:focus,
-  .form-field textarea:focus {
+  .form-field input:focus-visible,
+  .form-field textarea:focus-visible {
     outline: none;
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+    border-color: var(--form-control-focus);
+    box-shadow: 0 0 0 4px var(--form-control-focus-shadow);
   }
-
+  /*
+   * Archivos.
+   */
   .form-file {
     width: 100%;
+    min-width: 0;
     padding: 0.85rem;
-    border: 1px dashed #d1d5db;
-    background: #ffffff;
-    border-radius: 0.65rem;
+    border: 1px dashed var(--form-control-border);
+    background: var(--form-control-background);
+    border-radius: var(--form-control-radius);
+    color: var(--color-text);
   }
-
-  .form-field--notice {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  .form-file::file-selector-button {
+    margin-right: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border: 0;
+    background: #ebe9ff;
+    border-radius: 0.45rem;
+    color: #3c329c;
+    font: inherit;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
   }
-
-  .form-field--notice a {
-    font-weight: bold;
+  .form-file:focus-visible {
+    outline: none;
+    border-color: var(--form-control-focus);
+    box-shadow: 0 0 0 4px var(--form-control-focus-shadow);
   }
+  /*
+   * Selector y campos de documento.
+   */
+  .document-type-field {
+    padding-block: 0.25rem;
+  }
+  .choice-group--document {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .document-fields {
+    display: grid;
+    gap: 1.25rem;
+    width: 100%;
+  }
+  .document-file-field {
+    transition:
+      opacity 180ms ease,
+      filter 180ms ease;
+  }
+  /*
+   * Opciones checkbox y radio.
+   */
   .choice-group {
     display: grid;
     gap: 0.55rem;
   }
-
   .choice-group--topics {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.6rem;
   }
-
   .choice-card {
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     width: 100%;
+    min-width: 0;
     min-height: 2.2rem;
     padding: 0.45rem 0.7rem;
-    border: 1px solid #d1d5db;
-    background: #ffffff;
+    border: 1px solid var(--form-control-border);
+    background: var(--form-control-background);
     border-radius: 0.6rem;
     cursor: pointer;
     user-select: none;
   }
-
   .choice-card--topic {
     align-items: flex-start;
   }
-
   .choice-card input {
     position: absolute;
     inset: 0;
     opacity: 0;
-    pointer-events: none;
+    cursor: pointer;
   }
-
   .choice-card__box {
     display: inline-flex;
     align-items: center;
@@ -460,67 +878,77 @@ const frameworkOptions = [
     font-weight: var(--font-weight-bold);
     flex-shrink: 0;
   }
-
+  .choice-card:has(input[type="radio"]) .choice-card__box {
+    border-radius: 50%;
+  }
   .choice-card__text {
     font-size: var(--font-size-body-sm);
     line-height: 1.3;
   }
-
   .choice-card:has(input:checked) {
-    background: #f8f7ff;
-    border-color: #8b5cf6;
+    background: var(--form-choice-selected-background);
+    border-color: var(--form-control-focus);
   }
-
+  .choice-card:has(input:focus-visible) {
+    border-color: var(--form-control-focus);
+    box-shadow: 0 0 0 4px var(--form-control-focus-shadow);
+  }
   .choice-card:has(input:checked) .choice-card__box {
-    background: #8b5cf6;
+    background: var(--form-control-focus);
   }
-
   .choice-card input[type="checkbox"]:checked + .choice-card__box::after {
     content: "✓";
   }
-
   .choice-card input[type="radio"]:checked + .choice-card__box::after {
-    content: "•";
-    font-size: 1rem;
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    background: #ffffff;
+    border-radius: 50%;
   }
-
+  /*
+   * Términos y envío.
+   */
+  .form-field--notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .form-field--notice a {
+    font-weight: var(--font-weight-bold);
+  }
   .checkbox-field {
     display: inline-flex;
     align-items: center;
-    justify-self: center;
+    justify-self: stretch;
     gap: 0.6rem;
     font-size: var(--font-size-body-sm);
     cursor: pointer;
   }
-
   .checkbox-field input {
     width: 1rem;
     height: 1rem;
-    accent-color: #8b5cf6;
+    accent-color: var(--form-control-focus);
     flex-shrink: 0;
   }
-
   .form-actions {
     display: flex;
     justify-content: center;
   }
-
-  @media (max-width: 640px) {
+  /*
+   * Responsive mobile-first.
+   */
+  @media (min-width: 40rem) {
     .form-card {
-      padding: 1.2rem 1rem;
-      border-radius: 1rem;
+      padding: clamp(1.25rem, 2.4vw, 2rem) clamp(1rem, 2vw, 1.5rem);
+      border-radius: 1.5rem;
     }
-
-    .form-field--half {
-      max-width: 100%;
-    }
-
     .checkbox-field {
-      justify-self: stretch;
+      justify-self: center;
     }
   }
-
-  @media (min-width: 1024px) {
+  @media (min-width: 64rem) {
     .choice-group--topics {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }

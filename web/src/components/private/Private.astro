@@ -153,10 +153,8 @@ const hospitals = [
   <ArcoSuperior />
   <div class="container-general legal-shell">
     <header class="legal-hero">
-      <h1 class="legal-hero-title legal-page-title">
-        Privacidad y Condiciones
-      </h1>
-      <h3 class="legal-lead legal-page-subtitle">
+      <h1 class="titles-general">Privacidad y Condiciones</h1>
+      <h3 class="description-general">
         Política de privacidad y tratamiento de datos personales para usuarios y
         consultantes.
       </h3>
@@ -164,8 +162,8 @@ const hospitals = [
 
     <main class="legal-main">
       <article class="legal-card">
-        <h2 class="legal-section-title">
-          Política de Privacidad – Consultantes
+        <h2 class="subtitles-general">
+          Política de Privacidad para consultantes
         </h2>
         <p>
           La presente Política de Privacidad regula el tratamiento de los datos
@@ -182,7 +180,7 @@ const hospitals = [
         {
           privacySections.map((section) => (
             <section class="legal-section">
-              <h3 class="legal-section-subtitle">{section.title}</h3>
+              <h3 class="subtitles-general">{section.title}</h3>
               {section.paragraphs.map((paragraph) => (
                 <p>{paragraph}</p>
               ))}
@@ -198,9 +196,7 @@ const hospitals = [
       </article>
 
       <article class="legal-card legal-card--emergency">
-        <h2 class="legal-section-title">
-          Información de Emergencia (Argentina)
-        </h2>
+        <h2 class="subtitles-general">Información de Emergencia (Argentina)</h2>
         <p class="legal-warning">
           Psicología en Línea no es un servicio de urgencias ni reemplaza la
           atención médica o de emergencia. Ante una situación de riesgo o
@@ -211,7 +207,7 @@ const hospitals = [
         {
           emergencyLines.map((group) => (
             <section class="legal-section">
-              <h3 class="legal-section-subtitle">{group.title}</h3>
+              <h3 class="subtitles-general">{group.title}</h3>
               <ul class="legal-list">
                 {group.items.map((item) => (
                   <li>{item}</li>
@@ -222,7 +218,7 @@ const hospitals = [
         }
 
         <section class="legal-section">
-          <h3 class="legal-section-subtitle">Asistencia al Suicida</h3>
+          <h3 class="subtitles-general">Asistencia al Suicida</h3>
           <p>
             <a
               href="https://www.asistenciaalsuicida.org.ar/ayuda"
@@ -235,7 +231,7 @@ const hospitals = [
         </section>
 
         <section class="legal-section">
-          <h3 class="legal-section-title">
+          <h3 class="subtitles-general">
             Hospitales y dispositivos de urgencia en salud mental (CABA)
           </h3>
           <div class="hospital-list">
@@ -252,14 +248,14 @@ const hospitals = [
         </section>
 
         <section class="legal-section">
-          <h3 class="legal-section-title">Información orientativa</h3>
+          <h3 class="subtitles-general">Información orientativa</h3>
           <p>
             Los números de emergencia listados corresponden a servicios
             oficiales de atención en Argentina y se brindan con fines
             informativos.
           </p>
         </section>
-        <p class="legal-update">Última actualización: febrero 2026</p>
+        <p class="description-general">Última actualización: febrero 2026</p>
       </article>
     </main>
   </div>
@@ -381,6 +377,7 @@ const hospitals = [
     border-radius: var(--legal-radius);
     padding: var(--legal-card-padding);
     box-shadow: var(--legal-shadow);
+    min-width: 0;
   }
 
   .legal-card--emergency {
@@ -508,6 +505,10 @@ const hospitals = [
 
   .legal-update {
     margin-top: 3rem;
+    text-align: center;
+  }
+
+  .legal-page-title {
     text-align: center;
   }
 

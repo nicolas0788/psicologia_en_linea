@@ -2,40 +2,49 @@
 import { Image } from "astro:assets";
 
 import ArcoSuperior from "./../assets/ArcoSuperior.astro";
+
 import Btn from "./../assets/Btn.astro";
+
+import HoneyPot from "../assets/HoneyPot.astro";
+
+import FormMessage from "../assets/FormMessage.astro";
 
 import formDecorativeImg from "../../../src/assets/img/form/form-decorative.png";
 
 const therapyOptions = ["Individual", "Pareja"];
 
-const modalityOptions = ["Presencial", "Virtual", "Indistinto"];
+const modalityOptions = ["Virtual", "Presencial", "Indistinto"];
 
 const orientationOptions = [
   "No tengo preferencia",
+
   "Psicoanálisis",
+
   "Cognitivo conductual (TCC)",
+
   "Otra",
 ];
 
-const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
+const genderOptions = ["No binario", "Mujer", "Varón"];
 ---
 
 <section class="section-general intake-section" aria-labelledby="intake-title">
   <ArcoSuperior />
 
   <div class="container-general intake-shell">
-    <form
-      class="intake-form"
-      data-intake-form
-      action="/send-intake.php"
-      method="post"
-    >
+    <form class="intake-form" id="intake-form">
+      <input type="hidden" name="formName" value="intake" />
+
       <header class="intake-header">
-        <p class="intake-kicker">Atención psicológica online y presencial</p>
+        <p class="overline-general intake-kicker">
+          Atención psicológica online y presencial
+        </p>
 
-        <h1 id="intake-title" class="intake-title">Encontrá tu psicólogo</h1>
+        <h1 id="intake-title" class="titles-general intake-title">
+          Encontrá tu psicólogo
+        </h1>
 
-        <p class="intake-description">
+        <p class="description-general intake-description">
           Este formulario permite sugerirte un profesional matriculado acorde a
           la información que compartas.
         </p>
@@ -83,16 +92,14 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           </div>
         </fieldset>
 
-        <fieldset class="form-field">
+        <fieldset class="form-field" id="intake-form-modality">
           <legend class="form-label">
-            Preferencia de modalidad <span aria-hidden="true">*</span>
+            Preferencia de modalidad
+
+            <span aria-hidden="true">*</span>
           </legend>
 
-          <div
-            class="choice-group"
-            role="radiogroup"
-            aria-label="Preferencia de modalidad"
-          >
+          <div class="choice-group">
             {
               modalityOptions.map((option, index) => (
                 <label class="choice-card choice-card--full-init">
@@ -101,7 +108,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
                     name="modalidad"
                     value={option}
                     checked={index === 0}
-                    required={index === 0}
+                    required
                   />
 
                   <span class="choice-card__box" aria-hidden="true">
@@ -113,33 +120,40 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
               ))
             }
           </div>
+
+          <div
+            class="form-field form-field--conditional form-field--half"
+            id="intake-form-zona-ref-field"
+            hidden
+          >
+            <label class="form-label" for="intake-form-zona-ref-input">
+              Zona de referencia
+              <span aria-hidden="true">*</span>
+            </label>
+
+            <p class="form-helper">Barrio, ciudad o zona aproximada.</p>
+
+            <textarea
+              id="intake-form-zona-ref-input"
+              name="zona_referencia"
+              rows="4"
+              autocomplete="street-address"
+              minlength="5"
+              maxlength="300"
+              placeholder="Ej.: Recoleta, CABA / Centro de Córdoba / Zona norte de Buenos Aires"
+              disabled></textarea>
+          </div>
         </fieldset>
 
         <div class="form-field">
-          <label class="form-label" for="zona-referencia">
-            Zona de referencia, solo para atención presencial
-          </label>
-
-          <p class="form-helper">Barrio, ciudad o zona aproximada.</p>
-
-          <textarea
-            id="zona-referencia"
-            name="zona_referencia"
-            rows="4"
-            autocomplete="street-address"
-            maxlength="300"
-            placeholder="Ej.: Recoleta, CABA / Centro de Córdoba / Zona norte de Buenos Aires"
-          ></textarea>
-        </div>
-
-        <div class="form-field">
-          <label class="form-label" for="motivo-consulta">
+          <label class="form-label" for="intake-form-motivo-consulta">
             ¿Qué te trae a consultar en este momento?
+
             <span aria-hidden="true">*</span>
           </label>
 
           <textarea
-            id="motivo-consulta"
+            id="intake-form-motivo-consulta"
             name="motivo_consulta"
             rows="4"
             required
@@ -150,23 +164,24 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-field form-field--half">
-          <label class="form-label" for="ciudad-pais">
+          <label class="form-label" for="intake-form-ciudad">
             Ciudad y país de residencia <span aria-hidden="true">*</span>
           </label>
 
           <input
             type="text"
-            id="ciudad-pais"
+            id="intake-form-ciudad"
             name="ciudad_pais"
             autocomplete="address-level2"
             required
+            minlength="5"
             maxlength="120"
             placeholder="Ej.: Buenos Aires, Argentina"
           />
         </div>
 
         <div class="form-field">
-          <label class="form-label" for="disponibilidad">
+          <label class="form-label" for="intake-form-disponibilidad">
             Disponibilidad horaria <span aria-hidden="true">*</span>
           </label>
 
@@ -176,7 +191,7 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           </p>
 
           <textarea
-            id="disponibilidad"
+            id="intake-form-disponibilidad"
             name="disponibilidad"
             rows="4"
             required
@@ -187,30 +202,30 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-field form-field--half">
-          <label class="form-label" for="nombre-apellido">
+          <label class="form-label" for="intake-form-name">
             Nombre y apellido <span aria-hidden="true">*</span>
           </label>
 
           <input
             type="text"
-            id="nombre-apellido"
-            name="nombre_apellido"
+            id="intake-form-name"
+            name="name"
             autocomplete="name"
             required
-            minlength="3"
+            minlength="5"
             maxlength="120"
             placeholder="Ej.: María González"
           />
         </div>
 
         <div class="form-field form-field--half">
-          <label class="form-label" for="edad">
+          <label class="form-label" for="intake-form-age">
             Edad <span aria-hidden="true">*</span>
           </label>
 
           <input
             type="number"
-            id="edad"
+            id="intake-form-age"
             name="edad"
             autocomplete="off"
             min="18"
@@ -222,13 +237,13 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-field form-field--half">
-          <label class="form-label" for="email">
+          <label class="form-label" for="intake-form-email">
             Email <span aria-hidden="true">*</span>
           </label>
 
           <input
             type="email"
-            id="email"
+            id="intake-form-email"
             name="email"
             autocomplete="email"
             required
@@ -238,14 +253,15 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         </div>
 
         <div class="form-field form-field--half">
-          <label class="form-label" for="whatsapp">
+          <label class="form-label" for="intake-form-whatsapp">
             WhatsApp con prefijo internacional
+
             <span aria-hidden="true">*</span>
           </label>
 
           <input
             type="tel"
-            id="whatsapp"
+            id="intake-form-whatsapp"
             name="whatsapp"
             autocomplete="tel"
             inputmode="tel"
@@ -255,9 +271,10 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           />
         </div>
 
-        <fieldset class="form-field">
+        <fieldset class="form-field" id="form-field-tipo-terapia">
           <legend class="form-label">
             Preferencia respecto del tipo de terapia
+
             <span aria-hidden="true">*</span>
           </legend>
 
@@ -289,17 +306,21 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
           <input
             class="input-conditional"
+            id="form-tipo-terapia-text"
             type="text"
             name="tipo_terapia_otra"
             autocomplete="off"
             maxlength="120"
             placeholder="Ej.: terapia sistémica, integrativa u otra orientación"
+            hidden
+            disabled
           />
         </fieldset>
 
         <fieldset class="form-field">
           <legend class="form-label">
             Preferencia respecto al género del/la profesional
+
             <span aria-hidden="true">*</span>
           </legend>
 
@@ -333,7 +354,8 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
         <div class="form-field form-field--notice">
           <p>
             Uso exclusivo para gestionar la derivación. Ver
-            <a href="/politica-de-privacidad">Política de Privacidad</a>
+
+            <a href="/politica-de-privacidad"> Política de Privacidad</a>
           </p>
 
           <label class="checkbox-field">
@@ -346,81 +368,182 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
           </label>
         </div>
 
+        <HoneyPot name="form-web" />
+
         <div class="form-actions">
-          <input
-            class="form-hidden"
-            type="text"
-            name="website"
-            autocomplete="off"
-            tabindex="-1"
-          />
           <Btn type="submit" label="Enviar solicitud" bg="#3C329C" />
         </div>
+
+        <FormMessage id="form-message" />
       </div>
     </form>
   </div>
 </section>
-<script src="../../scripts/forms/formUser.js"></script>
+
+<script>
+  import { FormManager } from "../../scripts/form/FormManager";
+
+  import { showElementWhenValueAction } from "../../scripts/form/actions/showElementWhenValueAction";
+
+  import { redirectAction } from "../../scripts/form/actions/redirectAction";
+
+  const formManager = new FormManager("intake-form");
+
+  const messageElement = formManager.registerElement("#form-message");
+
+  const modality = formManager.registerElement("#intake-form-modality");
+
+  const modalityText = formManager.registerElement(
+    "#intake-form-zona-ref-field",
+  );
+
+  if (modality && modalityText) {
+    showElementWhenValueAction(
+      modality,
+
+      ["Presencial", "Indistinto"],
+
+      modalityText,
+
+      true,
+    );
+  }
+
+  const typeTherapy = formManager.registerElement("#form-field-tipo-terapia");
+
+  const therapyText = formManager.registerElement("#form-tipo-terapia-text");
+
+  if (typeTherapy && therapyText) {
+    showElementWhenValueAction(typeTherapy, "Otra", therapyText, true);
+  }
+
+  formManager.form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(formManager.form);
+
+    const response = await formManager.sendFormData(
+      "/forms.php",
+
+      formData,
+    );
+
+    if (response.success) {
+      formManager.form.reset();
+
+      formManager.successMessage(
+        messageElement,
+
+        "Gracias por contactarte",
+      );
+
+      await redirectAction({
+        url: "/gracias",
+        delayMilliseconds: 2500,
+      });
+
+      return;
+    }
+
+    formManager.errorMessage(messageElement, response.message);
+  });
+</script>
 
 <style>
   :root {
-    --intake-section-bg: linear-gradient(180deg, #8d9cdb 0%, #edf5f7 100%);
+    --intake-section-bg: linear-gradient(
+      180deg,
+      #8d9cdb 0%,
+
+      #edf5f7 100%
+    );
+
     --intake-card-bg: #f3f2fc;
+
     --intake-card-border: #e5e7eb;
+
     --intake-card-radius: 1.5rem;
+
     --intake-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 
     --intake-max-width: 760px;
+
     --intake-margin-top: 9rem;
 
     --intake-padding-inline: clamp(1rem, 2vw, 1.5rem);
+
     --intake-padding-block: clamp(1.25rem, 2.4vw, 2rem);
+
     --intake-gap: 1.25rem;
+
     --intake-header-gap: 0.95rem;
+
     --intake-field-gap: 0.5rem;
+
     --intake-notice-gap: 0.75rem;
 
     --intake-title-color: var(--color-text-dark);
+
     --intake-text-color: var(--color-text);
+
     --intake-helper-color: #7b8190;
+
     --intake-link-color: #4f46e5;
 
     --intake-input-bg: #ffffff;
+
     --intake-input-border: #d1d5db;
+
     --intake-input-border-focus: #8b5cf6;
+
     --intake-input-radius: 0.65rem;
+
     --intake-input-height: 2.9rem;
+
     --intake-textarea-min-height: 7rem;
 
     --intake-choice-bg: #ffffff;
+
     --intake-choice-border: #d1d5db;
+
     --intake-choice-hover-border: #9ca3af;
+
     --intake-choice-selected-bg: #f8f7ff;
+
     --intake-choice-selected-border: #8b5cf6;
 
     --intake-choice-box-bg: #f3f4f6;
+
     --intake-choice-box-color: #4b5563;
+
     --intake-choice-box-size: 1.15rem;
+
     --intake-choice-radius: 0.6rem;
+
     --intake-choice-min-height: 2.2rem;
+
     --intake-choice-padding-y: 0.45rem;
+
     --intake-choice-padding-x: 0.7rem;
 
     --intake-transition: 180ms ease;
 
-    --intake-title-font-weight: var(--font-weight-bold);
-
     --intake-label-font-size: var(--font-size-label);
+
     --intake-label-font-weight: var(--font-weight-semibold);
+
     --intake-label-line-height: 1.35;
 
     --intake-helper-font-size: var(--font-size-caption);
+
     --intake-helper-line-height: 1.5;
 
     --intake-choice-font-size: var(--font-size-body-sm);
+
     --intake-choice-line-height: 1.3;
 
     --intake-choice-box-font-size: 0.7rem;
+
     --intake-choice-box-font-weight: var(--font-weight-bold);
 
     --intake-checkbox-font-size: var(--font-size-body-sm);
@@ -428,66 +551,98 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .intake-section {
     position: relative;
+
     overflow: hidden;
+
     width: 100%;
+
     background: var(--intake-section-bg);
+
     color: var(--intake-text-color);
   }
 
   .intake-shell {
     max-width: var(--intake-max-width);
+
     margin-top: var(--intake-margin-top);
   }
 
   .intake-form {
     position: relative;
+
     padding: var(--intake-padding-block) var(--intake-padding-inline);
+
     background: var(--intake-card-bg);
+
     border: 1px solid var(--intake-card-border);
+
     border-radius: var(--intake-card-radius);
+
     box-shadow: var(--intake-card-shadow);
   }
 
   .intake-header {
     display: grid;
+
     gap: var(--intake-header-gap);
+
     margin-bottom: 1.5rem;
   }
 
   .intake-container-form-grid {
     position: relative;
   }
+
   .intake-title {
     color: var(--intake-title-color);
-    font-weight: var(--intake-title-font-weight);
+
     text-align: center;
   }
 
   .intake-decorative {
     position: absolute;
+
     top: 0;
+
     right: 0;
+
     width: min(90%, 19rem);
+
     pointer-events: none;
   }
 
   .intake-decorative img {
     display: block;
+
     width: 100%;
+
     height: auto;
   }
 
   .form-grid {
     display: grid;
+
     gap: var(--intake-gap);
   }
 
   .form-field {
     display: grid;
+
     gap: var(--intake-field-gap);
+
     margin: 0;
+
     padding: 0;
+
     border: 0;
+  }
+
+  /*
+         * Las reglas de display propias del componente no deben
+         * anular el atributo HTML hidden.
+         */
+  [hidden] {
+    display: none !important;
   }
 
   .form-field--half {
@@ -500,15 +655,21 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .form-label {
     color: var(--intake-title-color);
+
     font-size: var(--intake-label-font-size);
+
     font-weight: var(--intake-label-font-weight);
+
     line-height: var(--intake-label-line-height);
   }
 
   .form-helper {
     margin: -0.15rem 0 0;
+
     color: var(--intake-helper-color);
+
     font-size: var(--intake-helper-font-size);
+
     line-height: var(--intake-helper-line-height);
   }
 
@@ -518,10 +679,15 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   input[type="number"],
   textarea {
     width: 100%;
+
     border: 1px solid var(--intake-input-border);
+
     background: var(--intake-input-bg);
+
     border-radius: var(--intake-input-radius);
+
     color: var(--intake-text-color);
+
     transition:
       border-color var(--intake-transition),
       box-shadow var(--intake-transition),
@@ -533,12 +699,15 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   input[type="tel"],
   input[type="number"] {
     min-height: var(--intake-input-height);
+
     padding: 0.75rem 0.9rem;
   }
 
   textarea {
     min-height: var(--intake-textarea-min-height);
+
     padding: 0.85rem 0.9rem;
+
     resize: vertical;
   }
 
@@ -550,14 +719,19 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
   input:focus,
   textarea:focus {
     outline: none;
+
     border-color: var(--intake-input-border-focus);
+
     box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
   }
 
   .choice-group {
     display: flex;
+
     flex-direction: column;
+
     flex-wrap: wrap;
+
     gap: 0.7rem;
   }
 
@@ -567,16 +741,27 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .choice-card {
     position: relative;
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 0.5rem;
+
     min-height: var(--intake-choice-min-height);
+
     padding: var(--intake-choice-padding-y) var(--intake-choice-padding-x);
+
     border: 1px solid var(--intake-choice-border);
+
     background: var(--intake-choice-bg);
+
     border-radius: var(--intake-choice-radius);
+
     cursor: pointer;
+
     user-select: none;
+
     transition:
       border-color var(--intake-transition),
       background-color var(--intake-transition),
@@ -603,88 +788,114 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
   .choice-card input {
     position: absolute;
+
     inset: 0;
+
     opacity: 0;
+
     pointer-events: none;
   }
 
   .choice-card__box {
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
+
     width: var(--intake-choice-box-size);
+
     height: var(--intake-choice-box-size);
+
     border-radius: 0.25rem;
+
     background: var(--intake-choice-box-bg);
+
     color: var(--intake-choice-box-color);
+
     font-size: var(--intake-choice-box-font-size);
+
     font-weight: var(--intake-choice-box-font-weight);
+
     flex-shrink: 0;
   }
 
   .choice-card__text {
     color: var(--intake-text-color);
+
     font-size: var(--intake-choice-font-size);
+
     line-height: var(--intake-choice-line-height);
   }
 
   .choice-card:has(input:checked) {
     background: var(--intake-choice-selected-bg);
+
     border-color: var(--intake-choice-selected-border);
   }
 
   .choice-card:has(input:checked) .choice-card__box {
     background: var(--intake-choice-selected-border);
+
     color: #ffffff;
   }
 
   .input-conditional {
     width: min(100%, 22.5rem);
+
     margin-top: 0.15rem;
   }
 
   .form-field--notice p {
     margin: 0;
+
     color: var(--intake-text-color);
   }
 
   .form-field--notice a {
     color: var(--intake-link-color);
+
     text-decoration: underline;
+
     text-underline-offset: 0.14em;
   }
 
   .checkbox-field {
     display: inline-flex;
+
     align-items: center;
+
     gap: 0.6rem;
+
     margin-top: 0.2rem;
+
     color: var(--intake-text-color);
+
     cursor: pointer;
+
     font-size: var(--intake-checkbox-font-size);
   }
 
   .checkbox-field input {
     width: 1rem;
+
     height: 1rem;
+
     accent-color: var(--intake-input-border-focus);
+
     flex: 0 0 auto;
   }
 
   .form-actions {
     display: flex;
+
     justify-content: center;
-  }
-  .form-hidden {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-    pointer-events: none;
   }
 
   @media (max-width: 640px) {
     .intake-form {
       padding: 1.2rem 1rem;
+
       border-radius: 1rem;
     }
 
@@ -705,9 +916,13 @@ const genderOptions = ["No tengo preferencia", "Mujer", "Varón"];
 
     .intake-decorative {
       position: static;
+
       display: flex;
+
       justify-content: center;
+
       width: 100%;
+
       margin-bottom: 1rem;
     }
 

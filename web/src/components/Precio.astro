@@ -20,11 +20,10 @@ const vigenciaDias = 60;
   <article class="price-card">
     <header class="price-header">
       <p class="price-date">
-        Honorarios vigentes - {mes}
-        {anio}
+        Honorarios vigentes - {mes}&nbsp;{anio}
       </p>
 
-      <h2 class="price-title">Valor por sesión</h2>
+      <h2 class="titles-general">Valor por sesión</h2>
     </header>
 
     <div class="price-list">
@@ -42,13 +41,13 @@ const vigenciaDias = 60;
 
         <div class="price-options">
           <div class="price-option">
-            <strong>Individual presencial</strong>
-            <span>ARS ${precioIndividualPresencial}</span>
+            <strong>Individual virtual</strong>
+            <span>ARS ${precioIndividualVirtual}</span>
           </div>
 
           <div class="price-option">
-            <strong>Individual virtual</strong>
-            <span>ARS ${precioIndividualVirtual}</span>
+            <strong>Individual presencial</strong>
+            <span>ARS ${precioIndividualPresencial}</span>
           </div>
         </div>
       </article>
@@ -67,13 +66,13 @@ const vigenciaDias = 60;
 
         <div class="price-options">
           <div class="price-option">
-            <strong>Pareja presencial</strong>
-            <span>ARS ${precioParejaPresencial}</span>
+            <strong>Pareja virtual</strong>
+            <span>ARS ${precioParejaVirtual}</span>
           </div>
 
           <div class="price-option">
-            <strong>Pareja virtual</strong>
-            <span>ARS ${precioParejaVirtual}</span>
+            <strong>Pareja presencial</strong>
+            <span>ARS ${precioParejaPresencial}</span>
           </div>
         </div>
       </article>
@@ -121,14 +120,6 @@ const vigenciaDias = 60;
     font-size: clamp(0.85rem, 2vw, 1.05rem);
     font-weight: 700;
     color: #33226d;
-  }
-
-  .price-title {
-    margin: 0;
-    font-size: clamp(1.9rem, 5vw, 3rem);
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: -0.04em;
   }
 
   .price-list {

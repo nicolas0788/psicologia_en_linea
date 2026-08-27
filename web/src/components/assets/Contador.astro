@@ -4,11 +4,11 @@
 CounterStat.astro
 ============================================================
 
-Contador animado:
-- inicia en 0
-- llega al número definido
+Contador animado y compatible con SEO:
+- el HTML contiene inicialmente el número final
+- se anima desde 0 al entrar en pantalla
 - duración configurable
-- comienza cuando entra en pantalla
+- respeta prefers-reduced-motion
 - TypeScript incluido
 - sin librerías externas
 
@@ -40,18 +40,35 @@ interface Props {
 }
 
 const { label, target = 70, duration = 3000 } = Astro.props as Props;
+
+/*
+ * Se normalizan los valores para evitar números inválidos
+ * o negativos en el HTML.
+ */
+
+const safeTarget = Number.isFinite(target)
+  ? Math.max(0, Math.floor(target))
+  : 0;
+
+const safeDuration = Number.isFinite(duration) ? Math.max(0, duration) : 3000;
+
+const formattedTarget = safeTarget.toLocaleString("es-AR");
 ---
 
 <div class="container-counter-card">
   <div
     class="counter-card"
     data-counter
-    data-target={target}
-    data-duration={duration}
+    data-target={safeTarget}
+    data-duration={safeDuration}
   >
-    <div class="counter-card__value" aria-live="polite">
-      <span class="counter-card__plus">+</span>
-      <span class="counter-card__number">0</span>
+    <div class="counter-card__value">
+      <span class="counter-card__plus" aria-hidden="true">+</span>
+
+      <!-- El número real ya está presente en el HTML -->
+      <span class="counter-card__number" data-counter-number>
+        {formattedTarget}
+      </span>
     </div>
 
     <p class="counter-card__label">
@@ -63,51 +80,110 @@ const { label, target = 70, duration = 3000 } = Astro.props as Props;
 <script>
   const counters = document.querySelectorAll<HTMLElement>("[data-counter]");
 
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const formatNumber = (value: number): string => {
+    return value.toLocaleString("es-AR");
+  };
+
   counters.forEach((counter) => {
+    /*
+     * Evita registrar dos veces el mismo contador si Astro
+     * vuelve a ejecutar el script durante una navegación.
+     */
+
+    if (counter.dataset.initialized === "true") {
+      return;
+    }
+
+    counter.dataset.initialized = "true";
+
     const numberElement = counter.querySelector<HTMLElement>(
-      ".counter-card__number",
+      "[data-counter-number]",
     );
 
-    if (!numberElement) return;
+    if (!numberElement) {
+      return;
+    }
 
-    const target = Number(counter.dataset.target ?? 0);
+    const target = Number(counter.dataset.target);
+    const duration = Number(counter.dataset.duration);
 
-    const duration = Number(counter.dataset.duration ?? 3000);
+    if (!Number.isFinite(target) || !Number.isFinite(duration)) {
+      return;
+    }
 
     let started = false;
 
-    const animateCounter = () => {
-      if (started) return;
+    const showFinalValue = (): void => {
+      numberElement.textContent = formatNumber(target);
+    };
+
+    const animateCounter = (): void => {
+      if (started) {
+        return;
+      }
 
       started = true;
 
+      /*
+       * Si el usuario desactivó las animaciones, se conserva
+       * directamente el valor final que ya trae el HTML.
+       */
+
+      if (reducedMotion || duration <= 0 || target <= 0) {
+        showFinalValue();
+        return;
+      }
+
       const startTime = performance.now();
 
-      const updateCounter = (currentTime: number) => {
+      const updateCounter = (currentTime: number): void => {
         const elapsed = currentTime - startTime;
-
         const progress = Math.min(elapsed / duration, 1);
 
-        const currentValue = Math.floor(progress * target);
+        /*
+         * Curva suave: comienza rápido y desacelera
+         * al acercarse al número final.
+         */
 
-        numberElement.textContent = currentValue.toString();
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easedProgress * target);
+
+        numberElement.textContent = formatNumber(currentValue);
 
         if (progress < 1) {
-          requestAnimationFrame(updateCounter);
+          window.requestAnimationFrame(updateCounter);
+          return;
         }
+
+        /*
+         * Garantiza que el último valor sea exactamente
+         * el número definido en target.
+         */
+
+        showFinalValue();
       };
 
-      requestAnimationFrame(updateCounter);
+      window.requestAnimationFrame(updateCounter);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter();
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      showFinalValue();
+      return;
+    }
 
-            observer.disconnect();
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
           }
+
+          animateCounter();
+          currentObserver.unobserve(entry.target);
         });
       },
       {
@@ -128,71 +204,46 @@ const { label, target = 70, duration = 3000 } = Astro.props as Props;
 
   .counter-card {
     width: min(100%, 320px);
-
-    padding: 2rem 1.5rem;
-
-    border: 1px solid rgba(255, 255, 255, 0.7);
-
-    border-radius: 1.5rem;
-
-    background: rgba(255, 255, 255, 0.72);
-
-    box-shadow: 0 20px 50px rgba(31, 27, 75, 0.08);
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 0.9rem;
-
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 20px 50px rgba(31, 27, 75, 0.08);
     text-align: center;
   }
 
   .counter-card__value {
     display: inline-flex;
-
     align-items: flex-start;
-
     justify-content: center;
-
     gap: 0.15rem;
-
     color: #21183a;
   }
 
   .counter-card__number {
     font-size: clamp(3.4rem, 8vw, 5.8rem);
-
     line-height: 0.9;
-
     font-weight: 800;
   }
 
   .counter-card__plus {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-
-    line-height: 1;
-
-    font-weight: 800;
-
     margin-top: 0.2rem;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1;
+    font-weight: 800;
   }
 
   .counter-card__label {
-    margin: 0;
-
     max-width: 26ch;
-
+    margin: 0;
     color: #55556b;
-
     font-size: clamp(1rem, 2vw, 1.2rem);
-
     line-height: 1.5;
-
     font-weight: 500;
   }
 </style>

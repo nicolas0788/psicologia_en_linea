@@ -1,0 +1,39 @@
+---
+// src/components/form/HoneypotField.astro
+
+interface Props {
+  name?: string;
+  label?: string;
+}
+
+const { name = "website", label = "Dejá este campo vacío" } = Astro.props;
+---
+
+<div class="honeypot-field" aria-hidden="true">
+  <label for={`honeypot-${name}`}>{label}</label>
+
+  <input
+    id={`honeypot-${name}`}
+    type="text"
+    name={name}
+    value=""
+    autocomplete="off"
+    tabindex="-1"
+  />
+</div>
+
+<style>
+  .honeypot-field {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .honeypot-field input {
+    opacity: 0;
+  }
+</style>
