@@ -171,13 +171,17 @@ import HoneyPot from "./assets/HoneyPot.astro";
     const formManager = new FormManager("form-contact");
 
     const messageElement = formManager.registerElement("#contact-message");
+
     const submitButton = formManager.registerElement("#contact-submit");
 
     formManager.form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       formManager.clearMessage(messageElement);
+
       formManager.startPending(submitButton);
+
+      formManager.startPending(messageElement, "Enviando consulta...");
 
       try {
         const formData = new FormData(formManager.form);
@@ -195,6 +199,7 @@ import HoneyPot from "./assets/HoneyPot.astro";
         formManager.errorMessage(messageElement, response.message);
       } finally {
         formManager.stopPending(submitButton);
+        formManager.stopPending(messageElement);
       }
     });
   </script>
