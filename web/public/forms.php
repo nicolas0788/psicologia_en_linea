@@ -33,28 +33,28 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 
 // Security
 require_once __DIR__
-    . '../backend/security/IpRateLimiter.php';
+    . '/../backend/security/IpRateLimiter.php';
 
 // Composer
 require_once __DIR__
-    . '../backend/vendor/autoload.php';
+    . '/../backend/vendor/autoload.php';
 
 // Forms
 require_once __DIR__
-    . '../backend/forms/FormManager.php';
+    . '/../backend/forms/FormManager.php';
 
 // Form configurations
 require_once __DIR__
-    . '../backend/forms/configurations/contactForm.php';
+    . '/../backend/forms/configurations/contactForm.php';
 
 require_once __DIR__
-    . '../backend/forms/configurations/intakeForm.php';
+    . '/../backend/forms/configurations/intakeForm.php';
 
 require_once __DIR__
-    . '../backend/forms/configurations/intakeFormPro.php';
+    . '/../backend/forms/configurations/intakeFormPro.php';
 
 require_once __DIR__
-    . '../backend/forms/configurations/testFormConfiguration.php';
+    . '/../backend/forms/configurations/testFormConfiguration.php';
 
 
 
@@ -83,7 +83,7 @@ if (
 }
 
 $rateLimiter = new IpRateLimiter(
-    __DIR__ . '../backend/storage/rate-limit'
+    __DIR__ . '/../backend/storage/rate-limit'
 );
 
 try {

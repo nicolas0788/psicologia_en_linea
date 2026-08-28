@@ -107,6 +107,49 @@ export class FormManager {
     }
   }
 
+  /**
+   * Activa el estado pending de un elemento.
+   *
+   * Si el elemento es un botón, también lo deshabilita para evitar
+   * múltiples envíos mientras la petición está en curso.
+   */
+  public startPending(element: HTMLElement | null): void {
+    if (!element) {
+      logger.warn(
+        "No se pudo activar el estado pending porque el elemento no existe.",
+      );
+
+      return;
+    }
+
+    element.classList.add("is-pending");
+    element.setAttribute("aria-busy", "true");
+
+    if (element instanceof HTMLButtonElement) {
+      element.disabled = true;
+    }
+  }
+
+  /**
+   * Desactiva el estado pending de un elemento.
+   */
+  public stopPending(element: HTMLElement | null): void {
+    if (!element) {
+      logger.warn(
+        "No se pudo desactivar el estado pending porque el elemento no existe.",
+      );
+
+      return;
+    }
+
+    element.classList.remove("is-pending");
+    element.removeAttribute("aria-busy");
+
+    if (element instanceof HTMLButtonElement) {
+      element.disabled = false;
+    }
+  }
+
   /*
   CONTENEDORES DE MENSAJES DEBEN INICIAR ASI:
 
@@ -115,7 +158,7 @@ export class FormManager {
     class="contact-form-message"
     role="status"
     aria-live="polite"
-    hidden >
+    hidden>
   </p>
   */
 
@@ -132,8 +175,10 @@ export class FormManager {
     }
 
     container.textContent = message;
+
     container.classList.remove("is-error");
     container.classList.add("is-success");
+
     container.hidden = false;
   }
 
@@ -150,8 +195,10 @@ export class FormManager {
     }
 
     container.textContent = message;
+
     container.classList.remove("is-success");
     container.classList.add("is-error");
+
     container.hidden = false;
   }
 
@@ -168,7 +215,9 @@ export class FormManager {
     }
 
     container.textContent = "";
+
     container.classList.remove("is-success", "is-error");
+
     container.hidden = true;
   }
 }
