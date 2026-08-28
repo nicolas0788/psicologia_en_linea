@@ -158,9 +158,7 @@ import HoneyPot from "./assets/HoneyPot.astro";
 
         <button type="submit">Enviar</button>
 
-        <div class="contact-form-message-container">
-          <FormMessage id="contact-message" />
-        </div>
+        <FormMessage id="contact-message" />
       </form>
     </div>
   </div>
@@ -172,14 +170,10 @@ import HoneyPot from "./assets/HoneyPot.astro";
 
     const messageElement = formManager.registerElement("#contact-message");
 
-    const submitButton = formManager.registerElement("#contact-submit");
-
     formManager.form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
       formManager.clearMessage(messageElement);
-
-      formManager.startPending(submitButton);
 
       formManager.startPending(messageElement, "Enviando consulta...");
 
@@ -198,7 +192,6 @@ import HoneyPot from "./assets/HoneyPot.astro";
 
         formManager.errorMessage(messageElement, response.message);
       } finally {
-        formManager.stopPending(submitButton);
         formManager.stopPending(messageElement);
       }
     });
@@ -519,32 +512,6 @@ import HoneyPot from "./assets/HoneyPot.astro";
       cursor: wait;
       opacity: 0.65;
       transform: none;
-    }
-
-    /*
-     * Mensaje del formulario
-     */
-
-    .contact-form-message-container {
-      display: none;
-      width: 100%;
-      margin-top: 0.8rem;
-    }
-
-    :global(.contact-form-message-container:has(> .form-message.is-success)),
-    :global(.contact-form-message-container:has(> .form-message.is-error)) {
-      display: block;
-    }
-
-    :global(.contact-form-message-container > .form-message) {
-      width: 100%;
-      padding: 0.8rem 0.9rem;
-      border: 1px solid transparent;
-      border-left-width: 4px;
-      border-radius: 0.75rem;
-      font-size: 0.9rem;
-      font-weight: 700;
-      line-height: 1.4;
     }
 
     /*

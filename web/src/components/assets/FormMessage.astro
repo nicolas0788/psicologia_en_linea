@@ -6,29 +6,33 @@
 | FormMessage
 |--------------------------------------------------------------------------
 |
-| Componente reutilizable para mostrar los estados de un formulario:
+| Componente reutilizable para mostrar los estados visuales de un formulario.
 |
-| - Pending  -> .is-pending
-| - Success  -> .is-success
-| - Error    -> .is-error
+| Estados soportados:
 |
-| El componente comienza oculto mediante el atributo `hidden`.
+|   .is-pending  -> petición en proceso
+|   .is-success  -> operación finalizada correctamente
+|   .is-error    -> operación finalizada con error
 |
-| FormManager controla normalmente los estados finales mediante:
+| El componente controla SU PROPIA VISIBILIDAD mediante el atributo `hidden`.
 |
-|   formManager.successMessage(messageElement, message);
-|   formManager.errorMessage(messageElement, message);
-|   formManager.clearMessage(messageElement);
+| IMPORTANTE:
 |
-| El estado pending puede utilizarse cuando se quiera informar dentro
-| del propio contenedor que el formulario está siendo procesado.
+| NO es necesario ocultar el contenedor padre con:
 |
-| Si solamente se utiliza el pending sobre el botón de submit mediante:
+|   display: none;
 |
-|   formManager.startPending(submitButton);
-|   formManager.stopPending(submitButton);
+| De hecho, si el padre permanece con `display: none`, el estado pending,
+| success o error no podrá verse aunque FormManager quite `hidden`.
 |
-| no es obligatorio aplicar `.is-pending` a FormMessage.
+| El padre puede controlar:
+|
+| - width
+| - margin
+| - padding externo
+| - posición
+|
+| Pero debe permanecer visible.
 |
 |--------------------------------------------------------------------------
 | Uso básico
@@ -55,101 +59,33 @@
 | ></p>
 |
 |--------------------------------------------------------------------------
-| Estados
-|--------------------------------------------------------------------------
-|
-| PENDING
-|
-| element.hidden = false;
-| element.textContent = "Enviando...";
-| element.classList.add("is-pending");
-|
-|
-| SUCCESS
-|
-| element.hidden = false;
-| element.textContent = "Tu consulta fue enviada correctamente.";
-| element.classList.add("is-success");
-|
-|
-| ERROR
-|
-| element.hidden = false;
-| element.textContent = "No se pudo enviar el formulario.";
-| element.classList.add("is-error");
-|
-|
-| Para cambiar de estado siempre se recomienda eliminar previamente:
-|
-| element.classList.remove(
-|   "is-pending",
-|   "is-success",
-|   "is-error",
-| );
-|
-|--------------------------------------------------------------------------
-| Ejemplo recomendado con FormManager
+| Integración con FormManager
 |--------------------------------------------------------------------------
 |
 | const messageElement =
 |   formManager.registerElement("#contact-message");
 |
-| const submitButton =
-|   formManager.registerElement("#contact-submit");
+| El flujo recomendado es:
 |
-| formManager.form.addEventListener("submit", async (event) => {
-|   event.preventDefault();
+| 1. Limpiar mensaje anterior:
 |
 |   formManager.clearMessage(messageElement);
-|   formManager.startPending(submitButton);
 |
-|   try {
-|     const formData = new FormData(formManager.form);
+| 2. Mostrar pending:
 |
-|     const response = await formManager.sendFormData(
-|       "/forms.php",
-|       formData,
-|     );
+|   formManager.startPending(
+|     messageElement,
+|     "Enviando consulta...",
+|   );
 |
-|     if (response.success) {
-|       formManager.form.reset();
+| 3. Ejecutar petición:
 |
-|       formManager.successMessage(
-|         messageElement,
-|         response.message,
-|       );
-|
-|       return;
-|     }
-|
-|     formManager.errorMessage(
-|       messageElement,
-|       response.message,
-|     );
-|   } finally {
-|     formManager.stopPending(submitButton);
-|   }
-| });
-|
-|--------------------------------------------------------------------------
-| Ejemplo si también se quiere mostrar pending en FormMessage
-|--------------------------------------------------------------------------
-|
-| formManager.clearMessage(messageElement);
-|
-| if (messageElement) {
-|   messageElement.textContent = "Enviando...";
-|   messageElement.classList.add("is-pending");
-|   messageElement.hidden = false;
-| }
-|
-| formManager.startPending(submitButton);
-|
-| try {
 |   const response = await formManager.sendFormData(
 |     "/forms.php",
 |     new FormData(formManager.form),
 |   );
+|
+| 4. Reemplazar pending por success o error:
 |
 |   if (response.success) {
 |     formManager.successMessage(
@@ -164,50 +100,143 @@
 |     messageElement,
 |     response.message,
 |   );
-| } finally {
-|   formManager.stopPending(submitButton);
-| }
-|
-| IMPORTANTE:
-|
-| successMessage() y errorMessage() deben eliminar `.is-pending`
-| antes de aplicar su estado correspondiente si se utiliza este flujo.
 |
 |--------------------------------------------------------------------------
-| Estilos desde el componente padre
+| Ejemplo completo
 |--------------------------------------------------------------------------
 |
-| El componente define solamente:
+| const formManager = new FormManager("form-contact");
 |
-| - colores;
-| - iconos;
-| - spinner;
-| - comportamiento visual de estados.
+| const messageElement =
+|   formManager.registerElement("#contact-message");
 |
-| El padre puede controlar dimensiones, tipografía y espaciado.
+| formManager.form.addEventListener(
+|   "submit",
+|   async (event) => {
+|     event.preventDefault();
 |
-| Ejemplo:
+|     formManager.clearMessage(messageElement);
 |
-| :global(
-|   .contact-form-message-container:has(
-|     > .form-message.is-pending
-|   )
-| ),
-| :global(
-|   .contact-form-message-container:has(
-|     > .form-message.is-success
-|   )
-| ),
-| :global(
-|   .contact-form-message-container:has(
-|     > .form-message.is-error
-|   )
-| ) {
-|   display: block;
-| }
+|     formManager.startPending(
+|       messageElement,
+|       "Enviando consulta...",
+|     );
+|
+|     const formData =
+|       new FormData(formManager.form);
+|
+|     const response =
+|       await formManager.sendFormData(
+|         "/forms.php",
+|         formData,
+|       );
+|
+|     if (response.success) {
+|       formManager.form.reset();
+|
+|       formManager.successMessage(
+|         messageElement,
+|         "Gracias por contactarte",
+|       );
+|
+|       return;
+|     }
+|
+|     formManager.errorMessage(
+|       messageElement,
+|       response.message,
+|     );
+|   },
+| );
+|
+|--------------------------------------------------------------------------
+| Funcionamiento esperado de FormManager
+|--------------------------------------------------------------------------
+|
+| startPending():
+|
+|   element.classList.remove(
+|     "is-success",
+|     "is-error",
+|   );
+|
+|   element.classList.add("is-pending");
+|   element.setAttribute("aria-busy", "true");
+|   element.textContent = "Enviando...";
+|   element.hidden = false;
+|
+|
+| successMessage():
+|
+|   element.classList.remove(
+|     "is-pending",
+|     "is-error",
+|   );
+|
+|   element.classList.add("is-success");
+|   element.removeAttribute("aria-busy");
+|   element.hidden = false;
+|
+|
+| errorMessage():
+|
+|   element.classList.remove(
+|     "is-pending",
+|     "is-success",
+|   );
+|
+|   element.classList.add("is-error");
+|   element.removeAttribute("aria-busy");
+|   element.hidden = false;
+|
+|
+| clearMessage():
+|
+|   element.classList.remove(
+|     "is-pending",
+|     "is-success",
+|     "is-error",
+|   );
+|
+|   element.removeAttribute("aria-busy");
+|   element.textContent = "";
+|   element.hidden = true;
+|
+|--------------------------------------------------------------------------
+| Estados visuales
+|--------------------------------------------------------------------------
+|
+| PENDING
+|
+|   .is-pending
+|
+| Muestra un spinner animado junto al mensaje:
+|
+|   "Enviando consulta..."
+|
+|
+| SUCCESS
+|
+|   .is-success
+|
+| Muestra un icono ✓.
+|
+|
+| ERROR
+|
+|   .is-error
+|
+| Muestra un icono !.
+|
+|--------------------------------------------------------------------------
+| Estilos desde el padre
+|--------------------------------------------------------------------------
+|
+| El padre NO debe ocultar el contenedor del FormMessage.
+|
+| CORRECTO:
 |
 | .contact-form-message-container {
-|   display: none;
 |   width: 100%;
 |   margin-top: 1rem;
 | }
@@ -224,6 +253,16 @@
 |   font-weight: 700;
 |   line-height: 1.45;
 | }
+|
+|
+| INCORRECTO:
+|
+| .contact-form-message-container {
+|   display: none;
+| }
+|
+| No debe utilizarse `:has()` para mostrar u ocultar el padre.
+| FormMessage ya controla su propia visibilidad mediante `hidden`.
 |
 |--------------------------------------------------------------------------
 */
@@ -253,24 +292,20 @@ const {
 
 <style is:global>
   /*
-   * El componente solamente controla la representación visual
-   * de sus estados.
-   *
-   * No se definen:
-   *
-   * - width
-   * - margin
-   * - padding
-   * - border-radius
-   * - font-size
-   * - font-weight
-   *
-   * Estas propiedades deben ser definidas por el componente padre.
-   */
+  |--------------------------------------------------------------------------
+  | FormMessage
+  |--------------------------------------------------------------------------
+  |
+  | El propio componente controla su visibilidad.
+  |
+  | El componente padre puede definir dimensiones,
+  | separación y tipografía.
+  |
+  */
 
   .form-message {
     /*
-     * Estado pending
+     * Pending
      */
 
     --form-message-pending-color: #4a4675;
@@ -279,7 +314,7 @@ const {
     --form-message-pending-border: rgb(101 93 193 / 30%);
 
     /*
-     * Estado success
+     * Success
      */
 
     --form-message-success-color: #185b39;
@@ -288,7 +323,7 @@ const {
     --form-message-success-border: rgb(37 121 78 / 30%);
 
     /*
-     * Estado error
+     * Error
      */
 
     --form-message-error-color: #7e1b2b;
@@ -306,14 +341,35 @@ const {
     box-sizing: border-box;
     max-width: 100%;
 
-    align-items: flex-start;
+    align-items: center;
     gap: 0.75rem;
 
     overflow-wrap: anywhere;
   }
 
   /*
-   * Sin estado el componente permanece oculto.
+  |--------------------------------------------------------------------------
+  | Visibilidad
+  |--------------------------------------------------------------------------
+  |
+  | `hidden` es la fuente de verdad para determinar
+  | si el mensaje debe mostrarse.
+  |
+  */
+
+  .form-message[hidden] {
+    display: none !important;
+  }
+
+  .form-message:not([hidden]).is-pending,
+  .form-message:not([hidden]).is-success,
+  .form-message:not([hidden]).is-error {
+    display: flex;
+  }
+
+  /*
+   * Si por algún motivo el elemento está visible pero no tiene
+   * ningún estado reconocido, se mantiene oculto.
    */
 
   .form-message:not(.is-pending):not(.is-success):not(.is-error) {
@@ -321,18 +377,10 @@ const {
   }
 
   /*
-   * Estados visibles.
-   */
-
-  .form-message.is-pending,
-  .form-message.is-success,
-  .form-message.is-error {
-    display: flex;
-  }
-
-  /*
-   * Indicador común.
-   */
+  |--------------------------------------------------------------------------
+  | Indicador común
+  |--------------------------------------------------------------------------
+  */
 
   .form-message::before {
     width: var(--form-message-icon-size);
@@ -344,38 +392,38 @@ const {
     align-items: center;
     justify-content: center;
 
-    margin-top: 0.02rem;
+    box-sizing: border-box;
 
     border-radius: 50%;
 
     color: var(--form-message-icon-color);
 
     font-size: calc(var(--form-message-icon-size) * 0.63);
+
     font-weight: 900;
     line-height: 1;
   }
 
   /*
-   * =========================
-   * PENDING
-   * =========================
-   */
+  |--------------------------------------------------------------------------
+  | Pending
+  |--------------------------------------------------------------------------
+  */
 
   .form-message.is-pending {
     border-color: var(--form-message-pending-border);
+
     border-left-color: var(--form-message-pending-accent);
 
     background: var(--form-message-pending-background);
+
     color: var(--form-message-pending-color);
   }
 
   .form-message.is-pending::before {
     content: "";
 
-    box-sizing: border-box;
-
-    border: 2px solid
-      color-mix(in srgb, var(--form-message-pending-accent) 30%, transparent);
+    border: 2px solid rgb(101 93 193 / 25%);
 
     border-top-color: var(--form-message-pending-accent);
 
@@ -383,16 +431,18 @@ const {
   }
 
   /*
-   * =========================
-   * SUCCESS
-   * =========================
-   */
+  |--------------------------------------------------------------------------
+  | Success
+  |--------------------------------------------------------------------------
+  */
 
   .form-message.is-success {
     border-color: var(--form-message-success-border);
+
     border-left-color: var(--form-message-success-accent);
 
     background: var(--form-message-success-background);
+
     color: var(--form-message-success-color);
   }
 
@@ -403,16 +453,18 @@ const {
   }
 
   /*
-   * =========================
-   * ERROR
-   * =========================
-   */
+  |--------------------------------------------------------------------------
+  | Error
+  |--------------------------------------------------------------------------
+  */
 
   .form-message.is-error {
     border-color: var(--form-message-error-border);
+
     border-left-color: var(--form-message-error-accent);
 
     background: var(--form-message-error-background);
+
     color: var(--form-message-error-color);
   }
 
@@ -423,10 +475,10 @@ const {
   }
 
   /*
-   * =========================
-   * ANIMATIONS
-   * =========================
-   */
+  |--------------------------------------------------------------------------
+  | Animación
+  |--------------------------------------------------------------------------
+  */
 
   @keyframes form-message-spin {
     to {
@@ -435,12 +487,14 @@ const {
   }
 
   /*
-   * Respeta la preferencia del usuario de reducir animaciones.
-   */
+  |--------------------------------------------------------------------------
+  | Accesibilidad
+  |--------------------------------------------------------------------------
+  */
 
   @media (prefers-reduced-motion: reduce) {
     .form-message.is-pending::before {
-      animation: none;
+      animation-duration: 1.5s;
     }
   }
 </style>
