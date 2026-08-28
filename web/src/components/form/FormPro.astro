@@ -1214,6 +1214,34 @@ const frameworkOptions = [
   }
 
   /*
+ * =========================
+ * MENSAJES DEL FORMULARIO
+ * =========================
+ *
+ * Todos los FormMessage utilizados dentro de este
+ * formulario mantienen el mismo ancho que los
+ * campos principales y quedan centrados.
+ */
+
+  .form-grid :global(.form-message) {
+    width: 100%;
+    max-width: min(var(--form-field-half-width), 100%);
+
+    margin-inline: auto;
+
+    padding: 0.8rem 1rem;
+
+    border: 1px solid transparent;
+    border-left-width: 4px;
+    border-radius: var(--form-control-radius);
+
+    font-size: var(--font-size-body-sm);
+    line-height: 1.4;
+
+    box-sizing: border-box;
+  }
+
+  /*
    * =========================
    * RESPONSIVE
    * =========================
