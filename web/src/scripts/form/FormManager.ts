@@ -77,13 +77,12 @@ export class FormManager {
     }
 
     try {
-      const response = await fetch("/forms.php", {
+      const response = await fetch(normalizedUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
         },
         body: formData,
-        redirect: "manual",
       });
 
       const data: unknown = await response.json();
