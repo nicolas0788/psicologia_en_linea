@@ -25,7 +25,7 @@ const orientationOptions = [
   "Otra",
 ];
 
-const genderOptions = ["No binario", "Mujer", "Varón"];
+const genderOptions = ["Indistinto", "Mujer", "Varón"];
 ---
 
 <section class="section-general intake-section" aria-labelledby="intake-title">
@@ -419,6 +419,10 @@ const genderOptions = ["No binario", "Mujer", "Varón"];
 
   formManager.form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    formManager.clearMessage(messageElement);
+
+    formManager.startPending(messageElement, "Enviando consulta...");
 
     const formData = new FormData(formManager.form);
 

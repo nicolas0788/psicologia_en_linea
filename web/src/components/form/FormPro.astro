@@ -633,38 +633,34 @@ const frameworkOptions = [
     });
   }
 
-  let submitting = false;
   formManager.form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (submitting) {
-      return;
-    }
-    submitting = true;
+
     formManager.clearMessage(messageElement);
-    try {
-      const formData = new FormData(formManager.form);
-      const response = await formManager.sendFormData("/forms.php", formData);
-      if (!response.success) {
-        formManager.errorMessage(messageElement, response.message);
-        return;
-      }
+
+    formManager.startPending(messageElement, "Enviando consulta...");
+
+    const formData = new FormData(formManager.form);
+    const response = await formManager.sendFormData("/forms.php", formData);
+
+    if (response.success) {
       formManager.form.reset();
-      modality?.dispatchEvent(new Event("change", { bubbles: true }));
-      frameworkOptionsElement?.dispatchEvent(
-        new Event("change", { bubbles: true }),
+
+      formManager.successMessage(
+        messageElement,
+
+        "Gracias por contactarte",
       );
-      clinicalTopicsElement?.dispatchEvent(
-        new Event("change", { bubbles: true }),
-      );
-      radioControlFiles?.dispatchEvent(new Event("change", { bubbles: true }));
-      formManager.successMessage(messageElement, "Gracias por contactarte");
+
       await redirectAction({
         url: "/gracias",
         delayMilliseconds: 2500,
       });
-    } finally {
-      submitting = false;
+
+      return;
     }
+
+    formManager.errorMessage(messageElement, response.message);
   });
 </script>
 <style>
