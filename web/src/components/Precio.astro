@@ -4,23 +4,18 @@ import { Image } from "astro:assets";
 import individualIcon from "../assets/img/precios/ind.png";
 import parejaIcon from "../assets/img/precios/par.png";
 
-const mes = "Agosto";
-const anio = "2026";
-
 const precioIndividualPresencial = "40.000";
 const precioIndividualVirtual = "30.000";
 
 const precioParejaPresencial = "50.000";
 const precioParejaVirtual = "45.000";
-
-const vigenciaDias = 60;
 ---
 
 <section class="price-section">
   <article class="price-card">
     <header class="price-header">
       <p class="price-date">
-        Honorarios vigentes - {mes}&nbsp;{anio}
+        Honorarios - <span data-month></span>&nbsp;<span data-year></span>
       </p>
 
       <h2 class="titles-general">Valor por sesión</h2>
@@ -87,12 +82,35 @@ const vigenciaDias = 60;
       </span>
 
       <p>
-        Iniciá tus sesiones y mantené este valor por
-        <strong> {vigenciaDias} días</strong>
+        Al comenzar, mantenés el valor por
+        <strong> 60 días</strong>
       </p>
     </div>
   </article>
 </section>
+
+<script>
+  function getCurrentMonth(): string {
+    return new Date().toLocaleString("es-AR", {
+      month: "long",
+    });
+  }
+
+  function getCurrentYear(): number {
+    return new Date().getFullYear();
+  }
+
+  const monthElement = document.querySelector<HTMLElement>("[data-month]");
+  const yearElement = document.querySelector<HTMLElement>("[data-year]");
+
+  if (monthElement) {
+    monthElement.textContent = getCurrentMonth();
+  }
+
+  if (yearElement) {
+    yearElement.textContent = String(getCurrentYear());
+  }
+</script>
 
 <style>
   .price-section {

@@ -3,6 +3,7 @@ import ArcoSuperior from "../assets/ArcoSuperior.astro";
 import Btn from "../assets/Btn.astro";
 import HoneyPot from "../assets/HoneyPot.astro";
 import FormMessage from "../assets/FormMessage.astro";
+
 const clinicalTopicsOptions = [
   "Abuso sexual",
   "Adicciones y consumo problemático",
@@ -25,7 +26,9 @@ const clinicalTopicsOptions = [
   "Orientación laboral",
   "Otra",
 ];
+
 const modalityOptions = ["Virtual", "Presencial"];
+
 const frameworkOptions = [
   "Psicoanálisis",
   "TCC",
@@ -41,6 +44,7 @@ const frameworkOptions = [
   aria-labelledby="professional-form-title"
 >
   <ArcoSuperior />
+
   <div class="container-general form-shell">
     <form
       id="pro-form"
@@ -49,21 +53,25 @@ const frameworkOptions = [
       enctype="multipart/form-data"
     >
       <input type="hidden" name="formName" value="pro-form" />
+
       <header class="form-header">
         <h1 id="professional-form-title" class="titles-general form-title">
           Formulario para profesionales
         </h1>
+
         <p class="description-general form-intro">
           Completá tus datos profesionales para evaluar la incorporación a la
           red.
         </p>
       </header>
+
       <div class="form-grid">
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-name">
             Nombre y apellido completo
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-name"
             name="name"
@@ -72,11 +80,13 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-email">
             Email
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-email"
             name="email"
@@ -85,11 +95,13 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-whatsapp">
             WhatsApp
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-whatsapp"
             name="whatsapp"
@@ -98,11 +110,13 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-ciudad">
             Ciudad y país de residencia
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-ciudad"
             name="ciudad_pais"
@@ -111,11 +125,13 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-matricula">
             Matrícula Nacional Argentina
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-matricula"
             name="matricula"
@@ -123,11 +139,13 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-experiencia">
             Experiencia clínica en meses
             <span aria-hidden="true">*</span>
           </label>
+
           <input
             id="pro-form-experiencia"
             name="experiencia"
@@ -138,6 +156,7 @@ const frameworkOptions = [
             required
           />
         </div>
+
         <fieldset
           class="form-field form-field--half"
           id="framework-options"
@@ -147,6 +166,7 @@ const frameworkOptions = [
             Marco teórico con el que trabajás
             <span aria-hidden="true">*</span>
           </legend>
+
           <div class="choice-group">
             {
               frameworkOptions.map((option) => (
@@ -156,12 +176,14 @@ const frameworkOptions = [
                     name="marco_teorico[]"
                     value={option}
                   />
+
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+
           <div
             class="form-field form-field--conditional"
             id="framework-other-field"
@@ -171,6 +193,7 @@ const frameworkOptions = [
               Especificá el marco teórico
               <span aria-hidden="true">*</span>
             </label>
+
             <input
               class="input-conditional"
               id="framework-other-input"
@@ -183,6 +206,7 @@ const frameworkOptions = [
             />
           </div>
         </fieldset>
+
         <fieldset
           class="form-field form-field--half"
           id="modality-form-pro"
@@ -192,17 +216,20 @@ const frameworkOptions = [
             Modalidad de atención
             <span aria-hidden="true">*</span>
           </legend>
+
           <div class="choice-group">
             {
               modalityOptions.map((option) => (
                 <label class="choice-card">
                   <input type="checkbox" name="modalidad[]" value={option} />
+
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+
           <div
             class="form-field form-field--conditional"
             id="pro-form-consultorio-field"
@@ -212,6 +239,7 @@ const frameworkOptions = [
               Indicá la ubicación del consultorio
               <span aria-hidden="true">*</span>
             </label>
+
             <input
               class="input-conditional"
               id="pro-form-consultorio-input"
@@ -225,6 +253,7 @@ const frameworkOptions = [
             />
           </div>
         </fieldset>
+
         <fieldset
           class="form-field"
           id="clinical-topics-options"
@@ -234,7 +263,9 @@ const frameworkOptions = [
             Indicá las temáticas clínicas con las que trabajás
             <span aria-hidden="true">*</span>
           </legend>
+
           <p class="form-helper">Podés seleccionar una o más opciones.</p>
+
           <div class="choice-group--topics">
             {
               clinicalTopicsOptions.map((option) => (
@@ -244,12 +275,14 @@ const frameworkOptions = [
                     name="tematicas_clinicas[]"
                     value={option}
                   />
+
                   <span class="choice-card__box" aria-hidden="true" />
                   <span class="choice-card__text">{option}</span>
                 </label>
               ))
             }
           </div>
+
           <div
             class="form-field form-field--conditional form-field--half"
             id="clinical-topic-other-field"
@@ -259,6 +292,7 @@ const frameworkOptions = [
               Especificá la temática clínica
               <span aria-hidden="true">*</span>
             </label>
+
             <input
               class="input-conditional"
               id="clinical-topic-other-input"
@@ -271,82 +305,75 @@ const frameworkOptions = [
             />
           </div>
         </fieldset>
+
         <div class="form-field">
           <label class="form-label" for="pro-form-info-extra">
             Información adicional
           </label>
+
           <textarea id="pro-form-info-extra" name="info_extra" rows="5"
           ></textarea>
         </div>
+
+        <!-- SEGURO -->
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-seguro-file">
             Seguro de responsabilidad profesional vigente
             <span aria-hidden="true">*</span>
           </label>
-          <input
-            class="form-file"
-            id="pro-form-seguro-file"
-            name="seguro_archivo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          />
+
+          <div class="form-file-wrapper">
+            <input
+              class="form-file"
+              id="pro-form-seguro-file"
+              name="seguro_archivo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+
+            <label class="form-file-control" for="pro-form-seguro-file">
+              <span class="form-file-button"> Seleccionar archivo </span>
+
+              <span class="form-file-name" data-file-name>
+                Sin archivo seleccionado
+              </span>
+            </label>
+          </div>
+
           <FormMessage id="form-pro-message-seguro" />
         </div>
+
+        <!-- MATRÍCULA -->
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-matricula-file">
             Foto de la matrícula profesional
             <span aria-hidden="true">*</span>
           </label>
-          <input
-            class="form-file"
-            id="pro-form-matricula-file"
-            name="matricula_archivo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          />
-          <FormMessage id="form-pro-message-matricula" />
-        </div>
-        <fieldset
-          id="pro-form-type-doc"
-          class="form-field form-field--half document-type-field"
-          aria-describedby="document-type-helper"
-        >
-          <legend class="form-label">
-            Documento de identidad
-            <span aria-hidden="true">*</span>
-          </legend>
-          <p id="document-type-helper" class="form-helper">
-            Seleccioná el documento que vas a presentar.
-          </p>
-          <div class="choice-group choice-group--document">
-            <label class="choice-card">
-              <input
-                type="radio"
-                name="tipo_documento"
-                value="dni"
-                aria-controls="dni-document-fields"
-                checked
-                required
-              />
-              <span class="choice-card__box" aria-hidden="true"></span>
-              <span class="choice-card__text"> DNI </span>
-            </label>
-            <label class="choice-card">
-              <input
-                type="radio"
-                name="tipo_documento"
-                value="pasaporte"
-                aria-controls="passport-document-field"
-                required
-              />
-              <span class="choice-card__box" aria-hidden="true"></span>
-              <span class="choice-card__text"> Pasaporte </span>
+
+          <div class="form-file-wrapper">
+            <input
+              class="form-file"
+              id="pro-form-matricula-file"
+              name="matricula_archivo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+
+            <label class="form-file-control" for="pro-form-matricula-file">
+              <span class="form-file-button"> Seleccionar archivo </span>
+
+              <span class="form-file-name" data-file-name>
+                Sin archivo seleccionado
+              </span>
             </label>
           </div>
-        </fieldset>
-        <!-- DNI visible inicialmente porque su radio tiene checked. -->
+
+          <FormMessage id="form-pro-message-matricula" />
+        </div>
+
+        <!-- DNI -->
         <div id="dni-document-fields" class="document-fields">
           <div
             class="form-field form-field--half document-file-field"
@@ -356,16 +383,29 @@ const frameworkOptions = [
               Frente del DNI
               <span aria-hidden="true">*</span>
             </label>
-            <input
-              class="form-file"
-              id="pro-form-dni-front-file"
-              name="dni_frente_archivo"
-              type="file"
-              accept="image/jpeg,image/png,image/webp"
-              required
-            />
+
+            <div class="form-file-wrapper">
+              <input
+                class="form-file"
+                id="pro-form-dni-front-file"
+                name="dni_frente_archivo"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                required
+              />
+
+              <label class="form-file-control" for="pro-form-dni-front-file">
+                <span class="form-file-button"> Seleccionar archivo </span>
+
+                <span class="form-file-name" data-file-name>
+                  Sin archivo seleccionado
+                </span>
+              </label>
+            </div>
+
             <FormMessage id="form-pro-message-dni-frente" />
           </div>
+
           <div
             class="form-field form-field--half document-file-field"
             data-document-field="dni"
@@ -374,61 +414,72 @@ const frameworkOptions = [
               Dorso del DNI
               <span aria-hidden="true">*</span>
             </label>
-            <input
-              class="form-file"
-              id="pro-form-dni-back-file"
-              name="dni_dorso_archivo"
-              type="file"
-              accept="image/jpeg,image/png,image/webp"
-              required
-            />
+
+            <div class="form-file-wrapper">
+              <input
+                class="form-file"
+                id="pro-form-dni-back-file"
+                name="dni_dorso_archivo"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                required
+              />
+
+              <label class="form-file-control" for="pro-form-dni-back-file">
+                <span class="form-file-button"> Seleccionar archivo </span>
+
+                <span class="form-file-name" data-file-name>
+                  Sin archivo seleccionado
+                </span>
+              </label>
+            </div>
+
             <FormMessage id="form-pro-message-dni-dorso" />
           </div>
         </div>
-        <!-- Pasaporte oculto inicialmente. -->
-        <div
-          id="passport-document-field"
-          class="form-field form-field--half document-file-field"
-          data-document-field="pasaporte"
-          hidden
-        >
-          <label class="form-label" for="pro-form-passport-file">
-            Página del pasaporte con foto y datos personales
-            <span aria-hidden="true">*</span>
-          </label>
-          <input
-            class="form-file"
-            id="pro-form-passport-file"
-            name="pasaporte_archivo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            disabled
-          />
-          <FormMessage id="form-pro-message-passport" />
-        </div>
+
+        <!-- TÍTULO -->
         <div class="form-field form-field--half">
           <label class="form-label" for="pro-form-titulo">
             Foto del título habilitante
             <span aria-hidden="true">*</span>
           </label>
-          <input
-            class="form-file"
-            id="pro-form-titulo"
-            name="titulo_archivo"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            required
-          />
+
+          <div class="form-file-wrapper">
+            <input
+              class="form-file"
+              id="pro-form-titulo"
+              name="titulo_archivo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              required
+            />
+
+            <label class="form-file-control" for="pro-form-titulo">
+              <span class="form-file-button"> Seleccionar archivo </span>
+
+              <span class="form-file-name" data-file-name>
+                Sin archivo seleccionado
+              </span>
+            </label>
+          </div>
+
           <FormMessage id="form-pro-message-titulo" />
         </div>
+
+        <!-- TÉRMINOS -->
         <div class="form-field form-field--notice">
           <a href="/condiciones-profesionales"> Ver términos y condiciones </a>
+
           <label class="checkbox-field">
             <input type="checkbox" name="terms" value="accepted" required />
+
             <span> Acepto los términos y condiciones para profesionales. </span>
           </label>
         </div>
+
         <HoneyPot name="form-pro-web" />
+
         <div class="form-actions">
           <Btn
             type="submit"
@@ -437,11 +488,13 @@ const frameworkOptions = [
             id="form-pro-submit"
           />
         </div>
+
         <FormMessage id="form-pro-message" />
       </div>
     </form>
   </div>
 </section>
+
 <script>
   import { FormManager } from "../../scripts/form/FormManager";
   import { radioControlledElementsAction } from "../../scripts/form/actions/radioControlledElementsAction";
@@ -450,56 +503,66 @@ const frameworkOptions = [
   import { imageFilePolicy } from "../../scripts/form/policys/imageFilePolicy";
 
   const formManager = new FormManager("pro-form");
+
   const messageElement = formManager.registerElement("#form-pro-message");
+
   const messageElementTitulo = formManager.registerElement(
     "#form-pro-message-titulo",
   );
+
   const messageElementSeguro = formManager.registerElement(
     "#form-pro-message-seguro",
   );
+
   const messageElementMatricula = formManager.registerElement(
     "#form-pro-message-matricula",
   );
+
   const messageElementDniFrente = formManager.registerElement(
     "#form-pro-message-dni-frente",
   );
+
   const messageElementDniDorso = formManager.registerElement(
     "#form-pro-message-dni-dorso",
   );
-  const messageElementPassport = formManager.registerElement(
-    "#form-pro-message-passport",
-  );
+
   const fileTitle = formManager.registerElement(
     "#pro-form-titulo",
   ) as HTMLInputElement;
+
   const fileSeguro = formManager.registerElement(
     "#pro-form-seguro-file",
   ) as HTMLInputElement;
+
   const fileMatricula = formManager.registerElement(
     "#pro-form-matricula-file",
   ) as HTMLInputElement;
+
   const dniDorso = formManager.registerElement(
     "#pro-form-dni-back-file",
   ) as HTMLInputElement;
+
   const dniFrente = formManager.registerElement(
     "#pro-form-dni-front-file",
   ) as HTMLInputElement;
-  const filePassport = formManager.registerElement(
-    "#pro-form-passport-file",
-  ) as HTMLInputElement;
-  const radioControlFiles = formManager.registerElement("#pro-form-type-doc");
+
   const modality = formManager.registerElement("#modality-form-pro");
+
   const modalityUbiText = formManager.registerElement(
     "#pro-form-consultorio-field",
   );
+
   const frameworkOptionsElement =
     formManager.registerElement("#framework-options");
+
   const clinicalTopicsElement = formManager.registerElement(
     "#clinical-topics-options",
   );
+
   const frameworkOtherField = formManager.registerElement(
     "#framework-other-field",
   );
+
   const clinicalTopicOtherField = formManager.registerElement(
     "#clinical-topic-other-field",
   );
@@ -508,36 +571,99 @@ const frameworkOptions = [
     const checkboxes = Array.from(
       container.querySelectorAll<HTMLInputElement>('input[type="checkbox"]'),
     );
+
     if (checkboxes.length === 0) {
       return;
     }
+
     const updateValidity = (): void => {
       const hasSelection = checkboxes.some((checkbox) => checkbox.checked);
+
       checkboxes[0].setCustomValidity(hasSelection ? "" : message);
     };
+
     for (const checkbox of checkboxes) {
       checkbox.addEventListener("change", updateValidity);
     }
+
     updateValidity();
   }
+
+  /*
+   * =========================
+   * NOMBRES DE ARCHIVOS
+   * =========================
+   */
+
+  function initializeFileNames(): void {
+    const fileInputs =
+      formManager.form.querySelectorAll<HTMLInputElement>(".form-file");
+
+    for (const input of fileInputs) {
+      const wrapper = input.closest(".form-file-wrapper");
+
+      const fileName = wrapper?.querySelector<HTMLElement>("[data-file-name]");
+
+      if (!fileName) {
+        continue;
+      }
+
+      const updateFileName = (): void => {
+        const file = input.files?.[0];
+
+        fileName.textContent = file?.name ?? "Sin archivo seleccionado";
+      };
+
+      input.addEventListener("change", updateFileName);
+
+      updateFileName();
+    }
+  }
+
+  function resetFileNames(): void {
+    const fileNames =
+      formManager.form.querySelectorAll<HTMLElement>("[data-file-name]");
+
+    for (const fileName of fileNames) {
+      fileName.textContent = "Sin archivo seleccionado";
+    }
+  }
+
+  initializeFileNames();
+
+  /*
+   * =========================
+   * CHECKBOX OBLIGATORIOS
+   * =========================
+   */
+
   if (frameworkOptionsElement) {
     requireOneCheckbox(
       frameworkOptionsElement,
       "Seleccioná al menos un marco teórico.",
     );
   }
+
   if (modality) {
     requireOneCheckbox(
       modality,
       "Seleccioná al menos una modalidad de atención.",
     );
   }
+
   if (clinicalTopicsElement) {
     requireOneCheckbox(
       clinicalTopicsElement,
       "Seleccioná al menos una temática clínica.",
     );
   }
+
+  /*
+   * =========================
+   * CAMPOS CONDICIONALES
+   * =========================
+   */
+
   if (frameworkOptionsElement && frameworkOtherField) {
     showElementWhenValueAction(
       frameworkOptionsElement,
@@ -546,6 +672,7 @@ const frameworkOptions = [
       true,
     );
   }
+
   if (clinicalTopicsElement && clinicalTopicOtherField) {
     showElementWhenValueAction(
       clinicalTopicsElement,
@@ -554,12 +681,16 @@ const frameworkOptions = [
       true,
     );
   }
+
   if (modality && modalityUbiText) {
     showElementWhenValueAction(modality, "Presencial", modalityUbiText, true);
   }
-  if (radioControlFiles) {
-    radioControlledElementsAction(radioControlFiles);
-  }
+
+  /*
+   * =========================
+   * VALIDACIÓN DE IMÁGENES
+   * =========================
+   */
 
   if (fileTitle instanceof HTMLInputElement) {
     imageFilePolicy(fileTitle, 5 * 1024 * 1024, (response) => {
@@ -621,17 +752,11 @@ const frameworkOptions = [
     });
   }
 
-  if (filePassport instanceof HTMLInputElement) {
-    imageFilePolicy(filePassport, 5 * 1024 * 1024, (response) => {
-      if (response.success) {
-        formManager.clearMessage(messageElementPassport);
-
-        return;
-      }
-
-      formManager.errorMessage(messageElementPassport, response.message);
-    });
-  }
+  /*
+   * =========================
+   * SUBMIT
+   * =========================
+   */
 
   formManager.form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -641,16 +766,15 @@ const frameworkOptions = [
     formManager.startPending(messageElement, "Enviando consulta...");
 
     const formData = new FormData(formManager.form);
+
     const response = await formManager.sendFormData("/forms.php", formData);
 
     if (response.success) {
       formManager.form.reset();
 
-      formManager.successMessage(
-        messageElement,
+      resetFileNames();
 
-        "Gracias por contactarte",
-      );
+      formManager.successMessage(messageElement, "Gracias por contactarte");
 
       await redirectAction({
         url: "/gracias",
@@ -663,11 +787,8 @@ const frameworkOptions = [
     formManager.errorMessage(messageElement, response.message);
   });
 </script>
-<style>
-  /*
-   * Root local del componente.
-   */
 
+<style>
   .form-section {
     --form-card-background: #f3f2fc;
     --form-control-background: #ffffff;
@@ -679,9 +800,6 @@ const frameworkOptions = [
     --form-disabled-background: #ececf2;
     --form-disabled-color: #8b8e99;
 
-    /*
-     * Ancho estándar para los campos principales.
-     */
     --form-field-half-width: 28.75rem;
 
     position: relative;
@@ -696,27 +814,14 @@ const frameworkOptions = [
     color: var(--color-text);
   }
 
-  /*
-   * Respeta el atributo hidden aunque alguna regla posterior
-   * aplique display flex/grid/block.
-   */
-
   .form-section [hidden] {
     display: none !important;
   }
-
-  /*
-   * Contenedor general.
-   */
 
   .form-shell {
     max-width: 61.25rem;
     margin-top: 9rem;
   }
-
-  /*
-   * Tarjeta principal.
-   */
 
   .form-card {
     position: relative;
@@ -730,10 +835,6 @@ const frameworkOptions = [
 
     box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
   }
-
-  /*
-   * Header.
-   */
 
   .form-header {
     display: grid;
@@ -754,18 +855,10 @@ const frameworkOptions = [
     text-align: center;
   }
 
-  /*
-   * Grid principal.
-   */
-
   .form-grid {
     display: grid;
     gap: 1.25rem;
   }
-
-  /*
-   * Campo genérico.
-   */
 
   .form-field {
     display: grid;
@@ -780,23 +873,13 @@ const frameworkOptions = [
     border: 0;
   }
 
-  /*
-   * Campos de ancho estándar.
-   *
-   * Se utilizan en los controles que deben quedar centrados
-   * y mantener una anchura visual consistente.
-   */
-
   .form-field--half {
     width: 100%;
+
     max-width: min(var(--form-field-half-width), 100%);
 
     margin-inline: auto;
   }
-
-  /*
-   * Labels.
-   */
 
   .form-label {
     color: var(--color-text-dark);
@@ -810,10 +893,6 @@ const frameworkOptions = [
     color: #b42318;
   }
 
-  /*
-   * Textos auxiliares.
-   */
-
   .form-helper {
     margin: -0.15rem 0 0;
 
@@ -822,10 +901,6 @@ const frameworkOptions = [
     font-size: var(--font-size-caption);
     line-height: 1.5;
   }
-
-  /*
-   * Inputs y textarea.
-   */
 
   .form-field input[type="text"],
   .form-field input[type="email"],
@@ -842,6 +917,8 @@ const frameworkOptions = [
     border-radius: var(--form-control-radius);
 
     color: var(--color-text);
+
+    box-sizing: border-box;
   }
 
   .form-field
@@ -872,10 +949,6 @@ const frameworkOptions = [
    * =========================
    * INFORMACIÓN ADICIONAL
    * =========================
-   *
-   * Aunque no tenga la clase --half en el HTML,
-   * se fuerza el mismo ancho visual de los campos
-   * inferiores.
    */
 
   .form-field:has(> #pro-form-info-extra) {
@@ -888,7 +961,6 @@ const frameworkOptions = [
 
   #pro-form-info-extra {
     width: 100%;
-
     min-height: 10rem;
 
     box-sizing: border-box;
@@ -900,7 +972,50 @@ const frameworkOptions = [
    * =========================
    */
 
+  .form-file-wrapper {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+  }
+
+  /*
+   * Input real.
+   *
+   * Sigue funcionando para FormData,
+   * required, policies y backend,
+   * pero queda oculto visualmente.
+   */
   .form-file {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+
+    white-space: nowrap;
+
+    border: 0;
+  }
+
+  /*
+   * Selector visual.
+   */
+  .form-file-control {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.65rem;
+
     width: 100%;
     min-width: 0;
 
@@ -912,17 +1027,30 @@ const frameworkOptions = [
 
     border-radius: var(--form-control-radius);
 
-    color: var(--color-text);
-
     box-sizing: border-box;
+
+    cursor: pointer;
+
+    text-align: center;
+
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      background-color 160ms ease;
   }
 
-  .form-file::file-selector-button {
-    margin-right: 0.75rem;
+  /*
+   * Botón.
+   */
+  .form-file-button {
+    display: inline-flex;
 
-    padding: 0.55rem 0.75rem;
+    align-items: center;
+    justify-content: center;
 
-    border: 0;
+    min-height: 2.3rem;
+
+    padding: 0.55rem 0.8rem;
 
     background: #ebe9ff;
 
@@ -933,15 +1061,74 @@ const frameworkOptions = [
     font: inherit;
     font-weight: var(--font-weight-semibold);
 
+    line-height: 1.2;
+
+    cursor: pointer;
+
+    transition: background-color 160ms ease;
+  }
+
+  .form-file-control:hover .form-file-button {
+    background: #dedaff;
+  }
+
+  /*
+   * Nombre del archivo.
+   *
+   * Queda siempre debajo del botón.
+   */
+  .form-file-name {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    color: #7b8190;
+
+    font-size: var(--font-size-caption);
+
+    line-height: 1.4;
+
+    text-align: center;
+    overflow-wrap: anywhere;
+
     cursor: pointer;
   }
 
-  .form-file:focus-visible {
-    outline: none;
-
+  /*
+   * Focus accesible.
+   */
+  .form-file:focus-visible + .form-file-control {
     border-color: var(--form-control-focus);
 
     box-shadow: 0 0 0 4px var(--form-control-focus-shadow);
+  }
+
+  /*
+   * Input deshabilitado.
+   */
+  .form-file:disabled + .form-file-control {
+    background: var(--form-disabled-background);
+
+    color: var(--form-disabled-color);
+
+    cursor: not-allowed;
+
+    opacity: 0.7;
+  }
+
+  .form-file:disabled + .form-file-control .form-file-button {
+    background: #dddde5;
+
+    color: var(--form-disabled-color);
+
+    cursor: not-allowed;
+  }
+
+  .form-file:disabled + .form-file-control .form-file-name {
+    color: var(--form-disabled-color);
+
+    cursor: not-allowed;
   }
 
   /*
@@ -980,6 +1167,7 @@ const frameworkOptions = [
 
   .choice-group {
     display: grid;
+
     gap: 0.55rem;
   }
 
@@ -987,6 +1175,7 @@ const frameworkOptions = [
     position: relative;
 
     display: inline-flex;
+
     align-items: center;
 
     gap: 0.5rem;
@@ -1011,6 +1200,7 @@ const frameworkOptions = [
 
   .choice-card input {
     position: absolute;
+
     inset: 0;
 
     opacity: 0;
@@ -1020,6 +1210,7 @@ const frameworkOptions = [
 
   .choice-card__box {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1085,12 +1276,6 @@ const frameworkOptions = [
    * =========================
    * TEMÁTICAS CLÍNICAS
    * =========================
-   *
-   * El fieldset completo puede aprovechar todo
-   * el ancho de la tarjeta.
-   *
-   * Sin embargo, legend + helper quedan alineados
-   * con los demás campos de ancho estándar.
    */
 
   #clinical-topics-options {
@@ -1117,11 +1302,6 @@ const frameworkOptions = [
     box-sizing: border-box;
   }
 
-  /*
-   * Las opciones sí pueden utilizar
-   * un área más grande.
-   */
-
   .choice-group--topics {
     display: grid;
 
@@ -1138,25 +1318,15 @@ const frameworkOptions = [
     min-height: 2.35rem;
   }
 
-  /*
-   * Campo "Otra" de temáticas.
-   *
-   * Mantiene el mismo ancho estándar
-   * de los demás inputs.
-   */
-
   #clinical-topic-other-field {
     width: 100%;
 
     max-width: min(var(--form-field-half-width), 100%);
 
     margin-inline: auto;
+
     margin-top: 0.35rem;
   }
-
-  /*
-   * Campo condicional de framework.
-   */
 
   .form-field--conditional {
     margin-top: 0.35rem;
@@ -1170,6 +1340,7 @@ const frameworkOptions = [
 
   .form-field--notice {
     display: flex;
+
     flex-direction: column;
     align-items: center;
 
@@ -1182,6 +1353,7 @@ const frameworkOptions = [
 
   .checkbox-field {
     display: inline-flex;
+
     align-items: center;
 
     justify-self: stretch;
@@ -1210,21 +1382,19 @@ const frameworkOptions = [
 
   .form-actions {
     display: flex;
+
     justify-content: center;
   }
 
   /*
- * =========================
- * MENSAJES DEL FORMULARIO
- * =========================
- *
- * Todos los FormMessage utilizados dentro de este
- * formulario mantienen el mismo ancho que los
- * campos principales y quedan centrados.
- */
+   * =========================
+   * MENSAJES
+   * =========================
+   */
 
   .form-grid :global(.form-message) {
     width: 100%;
+
     max-width: min(var(--form-field-half-width), 100%);
 
     margin-inline: auto;
@@ -1233,9 +1403,11 @@ const frameworkOptions = [
 
     border: 1px solid transparent;
     border-left-width: 4px;
+
     border-radius: var(--form-control-radius);
 
     font-size: var(--font-size-body-sm);
+
     line-height: 1.4;
 
     box-sizing: border-box;
@@ -1258,12 +1430,6 @@ const frameworkOptions = [
       justify-self: center;
     }
   }
-
-  /*
-   * En escritorio las temáticas utilizan 3 columnas,
-   * pero el título y helper continúan limitados
-   * al ancho estándar.
-   */
 
   @media (min-width: 64rem) {
     .choice-group--topics {
