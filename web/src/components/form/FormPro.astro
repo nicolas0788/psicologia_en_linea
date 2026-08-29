@@ -328,7 +328,7 @@ const frameworkOptions = [
               id="pro-form-seguro-file"
               name="seguro_archivo"
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/jpeg,image/png,image/webp,application/pdf"
               required
             />
 
@@ -357,7 +357,7 @@ const frameworkOptions = [
               id="pro-form-matricula-file"
               name="matricula_archivo"
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/jpeg,image/png,image/webp,application/pdf"
               required
             />
 
@@ -390,7 +390,7 @@ const frameworkOptions = [
                 id="pro-form-dni-front-file"
                 name="dni_frente_archivo"
                 type="file"
-                accept="image/jpeg,image/png,image/webp"
+                accept="image/jpeg,image/png,image/webp,application/pdf"
                 required
               />
 
@@ -421,7 +421,7 @@ const frameworkOptions = [
                 id="pro-form-dni-back-file"
                 name="dni_dorso_archivo"
                 type="file"
-                accept="image/jpeg,image/png,image/webp"
+                accept="image/jpeg,image/png,image/webp,application/pdf"
                 required
               />
 
@@ -451,7 +451,7 @@ const frameworkOptions = [
               id="pro-form-titulo"
               name="titulo_archivo"
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/jpeg,image/png,image/webp,application/pdf"
               required
             />
 
@@ -497,10 +497,9 @@ const frameworkOptions = [
 
 <script>
   import { FormManager } from "../../scripts/form/FormManager";
-  import { radioControlledElementsAction } from "../../scripts/form/actions/radioControlledElementsAction";
   import { redirectAction } from "../../scripts/form/actions/redirectAction";
   import { showElementWhenValueAction } from "../../scripts/form/actions/showElementWhenValueAction";
-  import { imageFilePolicy } from "../../scripts/form/policys/imageFilePolicy";
+  import { documentFilePolicy } from "../../scripts/form/policys/documentFilePolicy";
 
   const formManager = new FormManager("pro-form");
 
@@ -693,7 +692,7 @@ const frameworkOptions = [
    */
 
   if (fileTitle instanceof HTMLInputElement) {
-    imageFilePolicy(fileTitle, 5 * 1024 * 1024, (response) => {
+    documentFilePolicy(fileTitle, 5 * 1024 * 1024, (response) => {
       if (response.success) {
         formManager.clearMessage(messageElementTitulo);
 
@@ -705,7 +704,7 @@ const frameworkOptions = [
   }
 
   if (fileSeguro instanceof HTMLInputElement) {
-    imageFilePolicy(fileSeguro, 5 * 1024 * 1024, (response) => {
+    documentFilePolicy(fileSeguro, 5 * 1024 * 1024, (response) => {
       if (response.success) {
         formManager.clearMessage(messageElementSeguro);
 
@@ -717,7 +716,7 @@ const frameworkOptions = [
   }
 
   if (fileMatricula instanceof HTMLInputElement) {
-    imageFilePolicy(fileMatricula, 5 * 1024 * 1024, (response) => {
+    documentFilePolicy(fileMatricula, 5 * 1024 * 1024, (response) => {
       if (response.success) {
         formManager.clearMessage(messageElementMatricula);
 
@@ -729,7 +728,7 @@ const frameworkOptions = [
   }
 
   if (dniFrente instanceof HTMLInputElement) {
-    imageFilePolicy(dniFrente, 5 * 1024 * 1024, (response) => {
+    documentFilePolicy(dniFrente, 5 * 1024 * 1024, (response) => {
       if (response.success) {
         formManager.clearMessage(messageElementDniFrente);
 
@@ -741,7 +740,7 @@ const frameworkOptions = [
   }
 
   if (dniDorso instanceof HTMLInputElement) {
-    imageFilePolicy(dniDorso, 5 * 1024 * 1024, (response) => {
+    documentFilePolicy(dniDorso, 5 * 1024 * 1024, (response) => {
       if (response.success) {
         formManager.clearMessage(messageElementDniDorso);
 
