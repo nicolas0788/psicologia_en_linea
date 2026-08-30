@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Dominio alternativo → dominio principal
+# Conserva la ruta completa.
+RewriteCond %{HTTP_HOST} ^(www\.)?psicologiaenlinea\.ar$ [NC]
+RewriteRule ^(.*)$ https://psicologiaenlinea.com.ar/$1 [R=301,L]
