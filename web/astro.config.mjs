@@ -3,9 +3,18 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://psicologiaenlinea.com.ar",
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        ![
+          "https://psicologiaenlinea.com.ar/condiciones-profesionales/",
+          "https://psicologiaenlinea.com.ar/gracias-prof/",
+          "https://psicologiaenlinea.com.ar/gracias/",
+          "https://psicologiaenlinea.com.ar/politica-de-privacidad/",
+        ].includes(page),
+    }),
+  ],
 });
