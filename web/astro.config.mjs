@@ -14,6 +14,7 @@ export default defineConfig({
           "https://psicologiaenlinea.com.ar/gracias-prof/",
           "https://psicologiaenlinea.com.ar/gracias/",
           "https://psicologiaenlinea.com.ar/politica-de-privacidad/",
+          "https://psicologiaenlinea.com.ar/profesionales-form/",
         ].includes(page),
     }),
   ],

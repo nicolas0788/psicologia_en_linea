@@ -12,38 +12,58 @@ interface Props {
 }
 
 const SITE_URL = "https://psicologiaenlinea.com.ar";
-const siteName = "Psicología en Línea";
+const SITE_NAME = "Psicología en Línea";
+
+const INSTAGRAM_URL = "https://instagram.com/psicologiaenlinea.ar";
+const FACEBOOK_URL = "https://facebook.com/psicologiaenlinea.ar";
 
 const {
   title = "Psicología en Línea | Encontrá un psicólogo acorde a tu situación",
   description = "Plataforma de derivación psicológica online en Argentina. Te ayudamos a encontrar un psicólogo o psicóloga matriculada según tu situación, necesidad y disponibilidad.",
-  canonical = `${SITE_URL}/`,
+  canonical,
   image = `${SITE_URL}/og-image.jpg`,
   noindex = false,
 } = Astro.props;
 
+/*
+ * Canonical automático:
+ * cada página apunta por defecto a su propia URL dentro del dominio oficial.
+ *
+ * Ejemplo:
+ * /contacto/ → https://psicologiaenlinea.com.ar/contacto/
+ *
+ * Si una página necesita un canonical diferente, todavía puede enviarlo
+ * mediante la prop `canonical`.
+ */
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, SITE_URL).href;
+
+/*
+ * Datos estructurados de la organización.
+ */
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: siteName,
+  name: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
-  sameAs: [
-    "https://www.instagram.com/tuusuario",
-    "https://www.facebook.com/tuusuario",
-  ],
+  sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "Atención a consultantes",
+    email: "contacto@psicologiaenlinea.com.ar",
+    telephone: "+54 9 11 4947-4689",
     areaServed: "AR",
     availableLanguage: "es",
   },
 };
 
+/*
+ * Datos estructurados generales del sitio web.
+ */
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: siteName,
+  name: SITE_NAME,
   url: SITE_URL,
   inLanguage: "es-AR",
 };
@@ -53,21 +73,34 @@ const websiteSchema = {
 <html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{title}</title>
+
     <meta name="description" content={description} />
+
+    <!--
+      Las páginas públicas son indexables por defecto.
+      Las páginas funcionales pueden usar noindex={true}.
+    -->
     <meta
       name="robots"
-      content={noindex ? "noindex, nofollow" : "index, follow"}
+      content={noindex ? "noindex, follow" : "index, follow"}
     />
-    <link rel="canonical" href={canonical} />
 
+    <!-- URL canónica -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Navegador -->
     <meta name="theme-color" content="#ffffff" />
 
+    <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
 
+    <!-- Fuente principal -->
     <link
       rel="preload"
       href="/fonts/nunito/Nunito-Regular.woff2"
@@ -76,23 +109,36 @@ const websiteSchema = {
       crossorigin
     />
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:site_name" content={siteName} />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+
     <meta property="og:title" content={title} />
+
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+
+    <meta property="og:url" content={canonicalURL} />
+
     <meta property="og:image" content={image} />
 
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+
     <meta name="twitter:title" content={title} />
+
     <meta name="twitter:description" content={description} />
+
     <meta name="twitter:image" content={image} />
 
+    <!-- Datos estructurados -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify(organizationSchema)}
     />
+
     <script
       type="application/ld+json"
       set:html={JSON.stringify(websiteSchema)}
