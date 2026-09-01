@@ -4,6 +4,9 @@ RewriteEngine On
 # REDIRECCIONES ESPECÍFICAS
 # ============================================================
 
+# Comenzar formulario viejo → Comenzar nuevo
+RewriteRule ^comenzar-form/?$ https://psicologiaenlinea.com.ar/comenzar [R=301,L]
+
 # Quiénes somos viejo → Quiénes somos nuevo
 RewriteCond %{THE_REQUEST} \s/+qui%C3%A9nes-somos(?:[/?\s]) [NC]
 RewriteRule ^ https://psicologiaenlinea.com.ar/quienes-somos [R=301,L]
