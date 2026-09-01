@@ -1,12 +1,26 @@
 RewriteEngine On
 
-# URLs específicas → inicio
-RewriteCond %{THE_REQUEST} \s/+profesionales(?:[/?\s]) [NC,OR]
-RewriteCond %{THE_REQUEST} \s/+qui%C3%A9nes-somos(?:[/?\s]) [NC,OR]
+# ============================================================
+# REDIRECCIONES ESPECÍFICAS
+# ============================================================
+
+# Quiénes somos viejo → Quiénes somos nuevo
+RewriteCond %{THE_REQUEST} \s/+qui%C3%A9nes-somos(?:[/?\s]) [NC]
+RewriteRule ^ https://psicologiaenlinea.com.ar/quienes-somos [R=301,L]
+
+# Profesionales viejo → inicio
+RewriteCond %{THE_REQUEST} \s/+profesionales(?:[/?\s]) [NC]
+RewriteRule ^ https://psicologiaenlinea.com.ar/ [R=301,L]
+
+# Cómo trabajamos viejo → inicio
 RewriteCond %{THE_REQUEST} \s/+c%C3%B3mo-trabajamos(?:[/?\s]) [NC]
 RewriteRule ^ https://psicologiaenlinea.com.ar/ [R=301,L]
 
-# Dominio alternativo → dominio principal
-# Conserva la ruta completa.
+
+# ============================================================
+# DOMINIO VIEJO .AR → DOMINIO NUEVO .COM.AR
+# ============================================================
+
+# Cualquier otra URL del dominio viejo → inicio
 RewriteCond %{HTTP_HOST} ^(www\.)?psicologiaenlinea\.ar$ [NC]
-RewriteRule ^(.*)$ https://psicologiaenlinea.com.ar/$1 [R=301,L]
+RewriteRule ^ https://psicologiaenlinea.com.ar/ [R=301,L]
