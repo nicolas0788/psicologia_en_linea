@@ -1,5 +1,11 @@
 RewriteEngine On
 
+# URLs específicas → inicio
+RewriteCond %{THE_REQUEST} \s/+profesionales(?:[/?\s]) [NC,OR]
+RewriteCond %{THE_REQUEST} \s/+qui%C3%A9nes-somos(?:[/?\s]) [NC,OR]
+RewriteCond %{THE_REQUEST} \s/+c%C3%B3mo-trabajamos(?:[/?\s]) [NC]
+RewriteRule ^ https://psicologiaenlinea.com.ar/ [R=301,L]
+
 # Dominio alternativo → dominio principal
 # Conserva la ruta completa.
 RewriteCond %{HTTP_HOST} ^(www\.)?psicologiaenlinea\.ar$ [NC]
