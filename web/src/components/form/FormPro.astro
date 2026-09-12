@@ -759,8 +759,7 @@ const frameworkOptions = [
 
   formManager.form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
-    formManager.clearMessage(messageElement);
+    formManager.form.noValidate = true;
 
     formManager.startPending(messageElement, "Enviando formulario...");
 

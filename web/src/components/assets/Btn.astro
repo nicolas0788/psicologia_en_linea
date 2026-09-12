@@ -460,6 +460,8 @@ interface Props {
 
   id?: string;
   ariaLabel?: string;
+
+  noValidate?: string;
 }
 
 const {
@@ -473,6 +475,8 @@ const {
 
   fullWidth = false,
   disabled = false,
+
+  noValidate = false,
 
   className = "",
 
@@ -568,6 +572,7 @@ const styleVars = `
       disabled={disabled}
       class={`btn btn--${variant} ${fullWidth ? "btn--full" : ""} ${className}`}
       style={styleVars}
+      formnovalidate={noValidate}
     >
       <slot>{label}</slot>
     </button>
