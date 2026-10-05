@@ -53,10 +53,6 @@ require_once __DIR__
 require_once __DIR__
     . '/../backend/forms/configurations/intakeFormPro.php';
 
-require_once __DIR__
-    . '/../backend/forms/configurations/testFormConfiguration.php';
-
-
 
 
 
@@ -202,12 +198,6 @@ switch ($formType) {
         );
         break;
 
-    case 'test':
-        configureTestForm(
-            $form,
-            $data
-        );
-        break;
 
     case 'intake':
         configureIntakeForm(
